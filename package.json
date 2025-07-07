@@ -1,6 +1,7 @@
 {
   "name": "@lucitra/react-components",
   "version": "0.1.1",
+  "type": "module",
   "description": "A comprehensive React component library for modern web applications",
   "author": "Lucitra",
   "license": "MIT",
@@ -98,10 +99,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/lucitra/react-components.git"
+    "url": "https://github.com/lucitra/lucitra-react-components.git"
   },
-  "homepage": "https://github.com/lucitra/react-components#readme",
+  "homepage": "https://github.com/lucitra/lucitra-react-components#readme",
   "bugs": {
-    "url": "https://github.com/lucitra/react-components/issues"
+    "url": "https://github.com/lucitra/lucitra-react-components/issues"
   }
 }
