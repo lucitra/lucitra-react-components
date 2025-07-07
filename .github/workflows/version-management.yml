@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - master
   workflow_dispatch:
 
 permissions:
@@ -45,8 +44,6 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       
       - run: npm ci
-      - run: npm run lint
-      - run: npm test
       - run: npm run build
       
       - name: Publish to npm

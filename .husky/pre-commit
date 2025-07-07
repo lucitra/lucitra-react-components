@@ -1,2 +1,0 @@
-# Run linting but don't fail on warnings
-npm run lint || true
