@@ -1,0 +1,107 @@
+{
+  "name": "@lucitra/react-components",
+  "version": "1.0.0",
+  "description": "A comprehensive React component library for modern web applications",
+  "author": "Lucitra",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint src/ --ext .js,.jsx,.ts,.tsx --fix",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "prepublishOnly": "npm run build",
+    "prepare": "husky"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react-i18next": {
+      "optional": true
+    },
+    "lucide-react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "@babel/preset-react": "^7.23.0",
+    "@commitlint/cli": "19.8.1",
+    "@commitlint/config-conventional": "19.8.1",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@storybook/addon-a11y": "^7.6.0",
+    "@storybook/addon-docs": "^7.6.0",
+    "@storybook/addon-essentials": "^7.6.0",
+    "@storybook/addon-interactions": "^7.6.0",
+    "@storybook/addon-links": "^7.6.0",
+    "@storybook/react": "^7.6.0",
+    "@storybook/react-vite": "^7.6.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.33.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-storybook": "^0.6.15",
+    "husky": "9.1.7",
+    "lucide-react": "^0.300.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^13.5.0",
+    "rollup": "^4.9.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "storybook": "^7.6.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.1.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.8.1"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "ui",
+    "design-system",
+    "accessibility",
+    "i18n",
+    "internationalization",
+    "navigation",
+    "forms",
+    "layout",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucitra/react-components.git"
+  },
+  "homepage": "https://github.com/lucitra/react-components#readme",
+  "bugs": {
+    "url": "https://github.com/lucitra/react-components/issues"
+  }
+}
