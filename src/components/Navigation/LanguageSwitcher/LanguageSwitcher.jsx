@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import { useClickOutside } from '../../../hooks/useClickOutside'
 import { DEFAULT_LANGUAGES, DEFAULT_THEME } from '../../../utils/defaultConfigs'
 
-// Default icons (fallback if lucide-react is not available)
+// --- Icon Components ---
+
+// Default (fallback) icons
 const DefaultGlobeIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
     <circle cx="12" cy="12" r="10"/>
@@ -28,12 +30,43 @@ const DefaultChevronIcon = ({ isOpen }) => (
     <polyline points="6,9 12,15 18,9"/>
   </svg>
 )
+DefaultChevronIcon.propTypes = {
+  isOpen: PropTypes.bool
+}
 
 const DefaultCheckIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
     <polyline points="20,6 9,17 4,12"/>
   </svg>
 )
+
+// Lucide-react icons (loaded dynamically)
+let LucideGlobe, LucideChevron, LucideCheck;
+try {
+  const lucide = require('lucide-react');
+  const LucideGlobeComponent = () => <lucide.Globe size={16} />;
+  LucideGlobeComponent.displayName = 'LucideGlobe';
+  LucideGlobe = LucideGlobeComponent;
+
+  const LucideChevronComponent = ({ isOpen }) => (
+    <lucide.ChevronDown size={16} style={{ 
+      transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+      transition: 'transform 0.2s ease'
+    }} />
+  );
+  LucideChevronComponent.displayName = 'LucideChevron';
+  LucideChevronComponent.propTypes = {
+    isOpen: PropTypes.bool
+  };
+  LucideChevron = LucideChevronComponent;
+
+  const LucideCheckComponent = () => <lucide.Check size={16} />;
+  LucideCheckComponent.displayName = 'LucideCheck';
+  LucideCheck = LucideCheckComponent;
+} catch (error) {
+  // lucide-react is not installed, defaults will be used.
+}
+
 
 const LanguageSwitcher = ({
   languages = DEFAULT_LANGUAGES,
@@ -48,6 +81,7 @@ const LanguageSwitcher = ({
   ariaLabel = 'Select language',
   icon: Icon,
   renderLanguage,
+  showCurrentSelection = false,
   renderDropdownItem,
   // i18next integration props
   useI18next = false,
@@ -65,7 +99,7 @@ const LanguageSwitcher = ({
     if (useI18next && i18nInstance) {
       setInternalCurrentLanguage(i18nInstance.language)
     }
-  }, [useI18next, i18nInstance?.language])
+  }, [useI18next, i18nInstance])
 
   const currentLang = languages.find(lang => lang.code === (currentLanguage || internalCurrentLanguage)) || languages[0]
 
@@ -107,25 +141,9 @@ const LanguageSwitcher = ({
   const isRtl = currentLang?.dir === 'rtl'
 
   // Icon handling
-  let GlobeIcon = DefaultGlobeIcon
-  let ChevronIcon = DefaultChevronIcon
-  let CheckIcon = DefaultCheckIcon
-
-  // Try to import lucide-react icons if available
-  try {
-    if (!Icon) {
-      const { Globe } = require('lucide-react')
-      GlobeIcon = () => <Globe size={16} />
-    }
-    const { ChevronDown, Check } = require('lucide-react')
-    ChevronIcon = ({ isOpen }) => <ChevronDown size={16} style={{ 
-      transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-      transition: 'transform 0.2s ease'
-    }} />
-    CheckIcon = () => <Check size={16} />
-  } catch (error) {
-    // lucide-react not available, use defaults
-  }
+  const GlobeIcon = Icon || (LucideGlobe || DefaultGlobeIcon);
+  const ChevronIcon = LucideChevron || DefaultChevronIcon;
+  const CheckIcon = LucideCheck || DefaultCheckIcon;
 
   return (
     <div 
@@ -154,10 +172,6 @@ const LanguageSwitcher = ({
           transition: `all ${theme.transition.normal}`,
           boxShadow: isOpen ? `0 0 0 3px ${theme.colors.borderFocus}33` : 'none',
           opacity: disabled ? 0.6 : 1,
-          ':hover': !disabled && {
-            backgroundColor: theme.colors.backgroundHover,
-            borderColor: theme.colors.borderHover
-          }
         }}
         onMouseEnter={(e) => {
           if (!disabled) {
@@ -172,11 +186,15 @@ const LanguageSwitcher = ({
           }
         }}
       >
-        {Icon ? <Icon /> : <GlobeIcon />}
-        <span>
-          {renderLanguage ? renderLanguage(currentLang) : currentLang.name}
-        </span>
-        <ChevronIcon isOpen={isOpen} />
+        <GlobeIcon />
+        {showCurrentSelection && (
+          <>
+            <span>
+              {renderLanguage ? renderLanguage(currentLang) : currentLang.name}
+            </span>
+            <ChevronIcon isOpen={isOpen} />
+          </>
+        )}
       </button>
 
       {isOpen && (
@@ -257,6 +275,7 @@ LanguageSwitcher.propTypes = {
   icon: PropTypes.elementType,
   renderLanguage: PropTypes.func,
   renderDropdownItem: PropTypes.func,
+  showCurrentSelection: PropTypes.bool,
   useI18next: PropTypes.bool,
   i18nInstance: PropTypes.object
 }

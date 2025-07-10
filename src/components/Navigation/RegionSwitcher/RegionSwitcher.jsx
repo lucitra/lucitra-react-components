@@ -3,36 +3,71 @@ import PropTypes from 'prop-types'
 import { useClickOutside } from '../../../hooks/useClickOutside'
 import { DEFAULT_REGIONS, DEFAULT_THEME } from '../../../utils/defaultConfigs'
 
-// Default icons (fallback if lucide-react is not available)
-const DefaultMapPinIcon = () => (
+// --- Icon Components ---
+
+// Default (fallback) icons
+const DefaultGlobeIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-    <circle cx="12" cy="10" r="3"/>
+    <circle cx="12" cy="12" r="10"/>
+    <line x1="2" y1="12" x2="22" y2="12"/>
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
   </svg>
 )
 
-const DefaultChevronIcon = ({ isOpen }) => (
-  <svg 
-    width="16" 
-    height="16" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2"
-    style={{ 
+function DefaultChevronIcon({ isOpen }) {
+  return (
+    <svg 
+      width="16" 
+      height="16" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth="2"
+      style={{ 
+        transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+        transition: 'transform 0.2s ease'
+      }}
+    >
+      <polyline points="6,9 12,15 18,9"/>
+    </svg>
+  )
+}
+DefaultChevronIcon.propTypes = {
+  isOpen: PropTypes.bool
+}
+
+function DefaultCheckIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <polyline points="20,6 9,17 4,12"/>
+    </svg>
+  )
+}
+
+// Lucide-react icons (loaded dynamically)
+let LucideGlobe, LucideChevron, LucideCheck;
+try {
+  const lucide = require('lucide-react');
+  LucideGlobe = () => <lucide.Globe size={16} />;
+  LucideGlobe.displayName = 'LucideGlobe';
+
+  LucideChevron = ({ isOpen }) => (
+    <lucide.ChevronDown size={16} style={{ 
       transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
       transition: 'transform 0.2s ease'
-    }}
-  >
-    <polyline points="6,9 12,15 18,9"/>
-  </svg>
-)
+    }} />
+  );
+  LucideChevron.displayName = 'LucideChevron';
+  LucideChevron.propTypes = {
+    isOpen: PropTypes.bool
+  };
 
-const DefaultCheckIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <polyline points="20,6 9,17 4,12"/>
-  </svg>
-)
+  LucideCheck = () => <lucide.Check size={16} />;
+  LucideCheck.displayName = 'LucideCheck';
+} catch (error) {
+  // lucide-react is not installed, defaults will be used.
+}
+
 
 const RegionSwitcher = ({
   regions = DEFAULT_REGIONS,
@@ -42,11 +77,12 @@ const RegionSwitcher = ({
   className = '',
   style = {},
   disabled = false,
-  placement = 'bottom-right',
+  placement,
   closeOnSelect = true,
   ariaLabel = 'Select region',
   icons = {},
   renderRegion,
+  showCurrentSelection = false,
   renderDropdownItem,
   // Language integration props
   syncWithLanguage = false,
@@ -75,7 +111,7 @@ const RegionSwitcher = ({
         setInternalCurrentRegion(regionForLanguage)
       }
     }
-  }, [syncWithLanguage, useI18next, i18nInstance?.language, regions, internalCurrentRegion?.code])
+  }, [syncWithLanguage, useI18next, i18nInstance, regions, internalCurrentRegion?.code])
 
   const currentReg = currentRegion || internalCurrentRegion
 
@@ -111,7 +147,10 @@ const RegionSwitcher = ({
   }
 
   const getDropdownPosition = () => {
-    const [vertical, horizontal] = placement.split('-')
+    const isRtlDoc = typeof document !== 'undefined' && document.documentElement.dir === 'rtl'
+    const effectivePlacement = placement || (isRtlDoc ? 'bottom-right' : 'bottom-left')
+    const [vertical, horizontal] = effectivePlacement.split('-')
+    
     return {
       top: vertical === 'top' ? 'auto' : '100%',
       bottom: vertical === 'top' ? '100%' : 'auto',
@@ -125,30 +164,9 @@ const RegionSwitcher = ({
   const isRtl = currentReg?.language === 'ar' || currentReg?.language === 'he' || currentReg?.language === 'fa'
 
   // Icon handling
-  let MapPinIcon = icons.region || DefaultMapPinIcon
-  let ChevronIcon = icons.chevron || DefaultChevronIcon
-  let CheckIcon = icons.check || DefaultCheckIcon
-
-  // Try to import lucide-react icons if available
-  try {
-    if (!icons.region) {
-      const { MapPin } = require('lucide-react')
-      MapPinIcon = () => <MapPin size={16} />
-    }
-    if (!icons.chevron) {
-      const { ChevronDown } = require('lucide-react')
-      ChevronIcon = ({ isOpen }) => <ChevronDown size={16} style={{ 
-        transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-        transition: 'transform 0.2s ease'
-      }} />
-    }
-    if (!icons.check) {
-      const { Check } = require('lucide-react')
-      CheckIcon = () => <Check size={16} />
-    }
-  } catch (error) {
-    // lucide-react not available, use defaults or provided icons
-  }
+  const RegionIcon = icons.region || (LucideGlobe || DefaultGlobeIcon);
+  const ChevronIcon = icons.chevron || (LucideChevron || DefaultChevronIcon);
+  const CheckIcon = icons.check || (LucideCheck || DefaultCheckIcon);
 
   return (
     <div 
@@ -191,12 +209,15 @@ const RegionSwitcher = ({
           }
         }}
       >
-        <MapPinIcon />
-        <span style={{ fontSize: '16px' }}>{currentReg?.flag}</span>
-        <span>
-          {renderRegion ? renderRegion(currentReg) : currentReg?.name}
-        </span>
-        <ChevronIcon isOpen={isOpen} />
+        <RegionIcon />
+        {showCurrentSelection && (
+          <>
+            <span>
+              {renderRegion ? renderRegion(currentReg) : currentReg?.name}
+            </span>
+            <ChevronIcon isOpen={isOpen} />
+          </>
+        )}
       </button>
 
       {isOpen && (
@@ -206,54 +227,74 @@ const RegionSwitcher = ({
           style={{
             position: 'absolute',
             ...getDropdownPosition(),
-            minWidth: '200px',
+            minWidth: '240px',
             backgroundColor: theme.colors.background,
             border: `1px solid ${theme.colors.border}`,
             borderRadius: theme.borderRadius,
             boxShadow: theme.boxShadow.md,
             zIndex: theme.zIndex.dropdown,
-            maxHeight: '300px',
-            overflowY: 'auto',
+            maxHeight: '320px',
+            display: 'flex',
+            flexDirection: 'column',
             direction: isRtl ? 'rtl' : 'ltr'
           }}
         >
-          {regions.map((region) => (
-            <div
-              key={region.code}
-              role="option"
-              aria-selected={currentReg?.code === region.code}
-              onClick={() => handleRegionChange(region)}
-              onMouseEnter={() => setHoveredRegion(region.code)}
-              onMouseLeave={() => setHoveredRegion(null)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: `${theme.spacing.md} ${theme.spacing.lg}`,
-                backgroundColor: hoveredRegion === region.code ? theme.colors.backgroundHover : 'transparent',
-                cursor: 'pointer',
-                fontSize: '14px',
-                color: theme.colors.text,
-                textAlign: isRtl ? 'right' : 'left',
-                transition: `background-color ${theme.transition.normal}`,
-                borderRadius: '4px',
-                margin: '2px'
-              }}
-            >
+          {currentReg && (
+            <div style={{
+              padding: `${theme.spacing.md} ${theme.spacing.lg}`,
+              borderBottom: `1px solid ${theme.colors.border}`,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexShrink: 0
+            }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: theme.spacing.md }}>
-                <span style={{ fontSize: '16px' }}>{region.flag}</span>
-                <span>
-                  {renderDropdownItem ? 
-                    renderDropdownItem(region, currentReg?.code === region.code) :
-                    region.name
-                  }
+                <span style={{ fontSize: '16px' }}>{currentReg.flag}</span>
+                <span style={{ fontWeight: 'bold' }}>
+                  {renderRegion ? renderRegion(currentReg) : currentReg.name}
                 </span>
               </div>
-              {currentReg?.code === region.code && (
-                <CheckIcon style={{ color: theme.colors.primary }} />
-              )}
+              <CheckIcon style={{ color: theme.colors.primary }} />
             </div>
-          ))}
+          )}
+          <div style={{ overflowY: 'auto' }}>
+            {regions
+              .filter(region => !currentReg || region.code !== currentReg.code)
+              .map((region) => (
+              <div
+                key={region.code}
+                role="option"
+                aria-selected={false}
+                onClick={() => handleRegionChange(region)}
+                onMouseEnter={() => setHoveredRegion(region.code)}
+                onMouseLeave={() => setHoveredRegion(null)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: `${theme.spacing.md} ${theme.spacing.lg}`,
+                  backgroundColor: hoveredRegion === region.code ? theme.colors.backgroundHover : 'transparent',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  color: theme.colors.text,
+                  textAlign: isRtl ? 'right' : 'left',
+                  transition: `background-color ${theme.transition.normal}`,
+                  borderRadius: '4px',
+                  margin: '2px'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: theme.spacing.md }}>
+                  <span style={{ fontSize: '16px' }}>{region.flag}</span>
+                  <span>
+                    {renderDropdownItem ? 
+                      renderDropdownItem(region, false) :
+                      region.name
+                    }
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
@@ -285,6 +326,7 @@ RegionSwitcher.propTypes = {
   }),
   renderRegion: PropTypes.func,
   renderDropdownItem: PropTypes.func,
+  showCurrentSelection: PropTypes.bool,
   syncWithLanguage: PropTypes.bool,
   updateDocumentDirection: PropTypes.bool,
   onLanguageChange: PropTypes.func,

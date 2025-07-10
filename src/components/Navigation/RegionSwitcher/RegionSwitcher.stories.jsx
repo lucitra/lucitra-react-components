@@ -8,7 +8,7 @@ export default {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A dropdown component for selecting regions/countries with automatic language synchronization and RTL support.',
+        component: 'A dropdown component for selecting regions/countries with automatic language synchronization and RTL support. The component now features a globe icon and a redesigned dropdown menu showing the current selection prominently.',
       },
     },
   },
@@ -48,7 +48,7 @@ export default {
     placement: {
       control: 'select',
       options: ['bottom-right', 'bottom-left', 'top-right', 'top-left'],
-      description: 'Dropdown placement',
+      description: 'Dropdown placement. If not set, it will auto-detect based on document direction.',
     },
     ariaLabel: {
       control: 'text',
@@ -63,12 +63,19 @@ export const Default = {
     currentRegion: DEFAULT_REGIONS[0], // US
     regions: DEFAULT_REGIONS.slice(0, 5), // Show first 5 regions
     theme: DEFAULT_THEME,
-    placement: 'bottom-right',
     ariaLabel: 'Select region',
     syncWithLanguage: false,
     updateDocumentDirection: false,
   },
 }
+
+// With current selection shown
+export const ShowCurrentSelection = {
+  args: {
+    ...Default.args,
+    showCurrentSelection: true,
+  },
+};
 
 // With all regions
 export const AllRegions = {
@@ -115,7 +122,7 @@ export const RTLRegion = {
   parameters: {
     docs: {
       description: {
-        story: 'Component with RTL region selected, showing proper text direction handling.',
+        story: 'Component with RTL region selected, showing proper text direction handling and automatic placement adjustment.',
       },
     },
   },

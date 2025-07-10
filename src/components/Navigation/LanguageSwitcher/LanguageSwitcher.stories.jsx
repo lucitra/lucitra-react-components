@@ -1,3 +1,4 @@
+
 import LanguageSwitcher from './LanguageSwitcher'
 import { DEFAULT_LANGUAGES, DEFAULT_THEME } from '../../../utils/defaultConfigs'
 
@@ -55,6 +56,14 @@ export const Default = {
     ariaLabel: 'Select language',
   },
 }
+
+// With current selection shown
+export const ShowCurrentSelection = {
+  args: {
+    ...Default.args,
+    showCurrentSelection: true,
+  },
+};
 
 // With all languages
 export const AllLanguages = {
@@ -145,8 +154,5 @@ export const MinimalExample = {
 export const Interactive = {
   args: {
     ...Default.args,
-  },
-  play: async ({ args, canvasElement }) => {
-    // This could include interaction tests using @storybook/test
   },
 }
