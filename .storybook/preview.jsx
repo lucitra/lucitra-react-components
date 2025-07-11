@@ -1,4 +1,5 @@
 import { DEFAULT_THEME } from '../src/utils/defaultConfigs'
+import '../src/index.css';
 
 /** @type { import('@storybook/react').Preview } */
 const preview = {

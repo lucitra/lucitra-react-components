@@ -40,9 +40,12 @@ export default {
       babelHelpers: 'bundled'
     }),
     postcss({
-      extract: false,
+      config: {
+        path: './postcss.config.cjs'
+      },
+      extract: 'index.css',
       inject: false,
-      modules: false
+      minimize: true
     }),
     terser()
   ],

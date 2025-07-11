@@ -18,6 +18,15 @@ const config = {
   typescript: {
     reactDocgen: 'react-docgen',
   },
+  async viteFinal(config) {
+    // Ensure PostCSS is configured
+    return {
+      ...config,
+      css: {
+        postcss: './postcss.config.cjs',
+      },
+    }
+  },
 }
 
 export default config

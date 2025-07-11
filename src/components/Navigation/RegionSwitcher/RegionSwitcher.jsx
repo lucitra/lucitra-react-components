@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useClickOutside } from '../../../hooks/useClickOutside'
-import { DEFAULT_REGIONS, DEFAULT_THEME } from '../../../utils/defaultConfigs'
+import { DEFAULT_REGIONS } from '../../../utils/defaultConfigs'
 
 // --- Icon Components ---
 
@@ -14,35 +14,27 @@ const DefaultGlobeIcon = () => (
   </svg>
 )
 
-function DefaultChevronIcon({ isOpen }) {
-  return (
-    <svg 
-      width="16" 
-      height="16" 
-      viewBox="0 0 24 24" 
-      fill="none" 
-      stroke="currentColor" 
-      strokeWidth="2"
-      style={{ 
-        transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-        transition: 'transform 0.2s ease'
-      }}
-    >
-      <polyline points="6,9 12,15 18,9"/>
-    </svg>
-  )
-}
+const DefaultChevronIcon = ({ isOpen }) => (
+  <svg 
+    width="16" 
+    height="16" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2"
+    className={`transform transition-transform duration-200 ease-in-out ${isOpen ? 'rotate-180' : 'rotate-0'}`}>
+    <polyline points="6,9 12,15 18,9"/>
+  </svg>
+)
 DefaultChevronIcon.propTypes = {
   isOpen: PropTypes.bool
 }
 
-function DefaultCheckIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <polyline points="20,6 9,17 4,12"/>
-    </svg>
-  )
-}
+const DefaultCheckIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <polyline points="20,6 9,17 4,12"/>
+  </svg>
+)
 
 // Lucide-react icons (loaded dynamically)
 let LucideGlobe, LucideChevron, LucideCheck;
@@ -52,10 +44,7 @@ try {
   LucideGlobe.displayName = 'LucideGlobe';
 
   LucideChevron = ({ isOpen }) => (
-    <lucide.ChevronDown size={16} style={{ 
-      transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-      transition: 'transform 0.2s ease'
-    }} />
+    <lucide.ChevronDown size={16} className={`transform transition-transform duration-200 ease-in-out ${isOpen ? 'rotate-180' : 'rotate-0'}`} />
   );
   LucideChevron.displayName = 'LucideChevron';
   LucideChevron.propTypes = {
@@ -73,7 +62,6 @@ const RegionSwitcher = ({
   regions = DEFAULT_REGIONS,
   currentRegion,
   onRegionChange,
-  theme = DEFAULT_THEME,
   className = '',
   style = {},
   disabled = false,
@@ -147,17 +135,17 @@ const RegionSwitcher = ({
   }
 
   const getDropdownPosition = () => {
-    const isRtlDoc = typeof document !== 'undefined' && document.documentElement.dir === 'rtl'
-    const effectivePlacement = placement || (isRtlDoc ? 'bottom-right' : 'bottom-left')
-    const [vertical, horizontal] = effectivePlacement.split('-')
+    const isRtlDoc = typeof document !== 'undefined' && document.documentElement.dir === 'rtl';
+    const effectivePlacement = placement || (isRtlDoc ? 'bottom-left' : 'bottom-right');
+    const [vertical, horizontal] = effectivePlacement.split('-');
     
     return {
       top: vertical === 'top' ? 'auto' : '100%',
       bottom: vertical === 'top' ? '100%' : 'auto',
       left: horizontal === 'left' ? '0' : 'auto',
       right: horizontal === 'right' ? '0' : 'auto',
-      marginTop: vertical === 'bottom' ? '4px' : '0',
-      marginBottom: vertical === 'top' ? '4px' : '0'
+      marginTop: vertical === 'bottom' ? '0.25rem' : '0',
+      marginBottom: vertical === 'top' ? '0.25rem' : '0'
     }
   }
 
@@ -170,8 +158,8 @@ const RegionSwitcher = ({
 
   return (
     <div 
-      style={{ position: 'relative', ...style }} 
-      className={className}
+      className={`relative ${className}`}
+      style={style}
       ref={dropdownRef}
       {...props}
     >
@@ -181,33 +169,9 @@ const RegionSwitcher = ({
         aria-label={ariaLabel}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: theme.spacing.sm,
-          padding: `${theme.spacing.sm} ${theme.spacing.md}`,
-          backgroundColor: theme.colors.background,
-          border: `1px solid ${isOpen ? theme.colors.borderFocus : theme.colors.border}`,
-          borderRadius: theme.borderRadius,
-          cursor: disabled ? 'not-allowed' : 'pointer',
-          fontSize: '14px',
-          color: disabled ? theme.colors.textSecondary : theme.colors.text,
-          transition: `all ${theme.transition.normal}`,
-          boxShadow: isOpen ? `0 0 0 3px ${theme.colors.borderFocus}33` : 'none',
-          opacity: disabled ? 0.6 : 1
-        }}
-        onMouseEnter={(e) => {
-          if (!disabled) {
-            e.target.style.backgroundColor = theme.colors.backgroundHover
-            e.target.style.borderColor = isOpen ? theme.colors.borderFocus : theme.colors.borderHover
-          }
-        }}
-        onMouseLeave={(e) => {
-          if (!disabled) {
-            e.target.style.backgroundColor = theme.colors.background
-            e.target.style.borderColor = isOpen ? theme.colors.borderFocus : theme.colors.border
-          }
-        }}
+        className={`flex items-center gap-2 px-3 py-2 bg-white border rounded-md text-sm transition-all duration-200
+          ${disabled ? 'cursor-not-allowed opacity-60' : 'cursor-pointer hover:bg-gray-100 hover:border-gray-300'}
+          ${isOpen ? 'border-blue-500 ring-2 ring-blue-500 ring-opacity-50' : 'border-gray-200'}`}
       >
         <RegionIcon />
         {showCurrentSelection && (
@@ -224,40 +188,21 @@ const RegionSwitcher = ({
         <div
           role="listbox"
           aria-label={ariaLabel}
-          style={{
-            position: 'absolute',
-            ...getDropdownPosition(),
-            minWidth: '240px',
-            backgroundColor: theme.colors.background,
-            border: `1px solid ${theme.colors.border}`,
-            borderRadius: theme.borderRadius,
-            boxShadow: theme.boxShadow.md,
-            zIndex: theme.zIndex.dropdown,
-            maxHeight: '320px',
-            display: 'flex',
-            flexDirection: 'column',
-            direction: isRtl ? 'rtl' : 'ltr'
-          }}
+          className="absolute z-10 min-w-[240px] bg-white border border-gray-200 rounded-md shadow-lg max-h-80 flex flex-col"
+          style={getDropdownPosition()}
         >
           {currentReg && (
-            <div style={{
-              padding: `${theme.spacing.md} ${theme.spacing.lg}`,
-              borderBottom: `1px solid ${theme.colors.border}`,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              flexShrink: 0
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: theme.spacing.md }}>
-                <span style={{ fontSize: '16px' }}>{currentReg.flag}</span>
-                <span style={{ fontWeight: 'bold' }}>
+            <div className="flex items-center justify-between px-4 py-2 border-b border-gray-200 flex-shrink-0">
+              <div className="flex items-center gap-2">
+                <span className="text-base">{currentReg.flag}</span>
+                <span className="font-bold">
                   {renderRegion ? renderRegion(currentReg) : currentReg.name}
                 </span>
               </div>
-              <CheckIcon style={{ color: theme.colors.primary }} />
+              <CheckIcon className="text-blue-500" />
             </div>
           )}
-          <div style={{ overflowY: 'auto' }}>
+          <div className="overflow-y-auto">
             {regions
               .filter(region => !currentReg || region.code !== currentReg.code)
               .map((region) => (
@@ -268,23 +213,10 @@ const RegionSwitcher = ({
                 onClick={() => handleRegionChange(region)}
                 onMouseEnter={() => setHoveredRegion(region.code)}
                 onMouseLeave={() => setHoveredRegion(null)}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: `${theme.spacing.md} ${theme.spacing.lg}`,
-                  backgroundColor: hoveredRegion === region.code ? theme.colors.backgroundHover : 'transparent',
-                  cursor: 'pointer',
-                  fontSize: '14px',
-                  color: theme.colors.text,
-                  textAlign: isRtl ? 'right' : 'left',
-                  transition: `background-color ${theme.transition.normal}`,
-                  borderRadius: '4px',
-                  margin: '2px'
-                }}
+                className={`block px-4 py-2 text-sm ${hoveredRegion === region.code ? 'bg-gray-100 text-gray-900' : 'text-gray-700'} ${isRtl ? 'text-right' : 'text-left'}`}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: theme.spacing.md }}>
-                  <span style={{ fontSize: '16px' }}>{region.flag}</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-base">{region.flag}</span>
                   <span>
                     {renderDropdownItem ? 
                       renderDropdownItem(region, false) :
@@ -312,7 +244,6 @@ RegionSwitcher.propTypes = {
   ),
   currentRegion: PropTypes.object,
   onRegionChange: PropTypes.func,
-  theme: PropTypes.object,
   className: PropTypes.string,
   style: PropTypes.object,
   disabled: PropTypes.bool,
