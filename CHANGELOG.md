@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.2.0...react-components-v0.3.0) (2025-07-11)
+
+
+### Features
+
+* enhance LanguageSwitcher and RegionSwitcher with smart positioning ([a021543](https://github.com/lucitra/lucitra-react-components/commit/a021543acb1a000a90acf8ae731003529ebc7fe3))
+
+
+### Miscellaneous Chores
+
+* integrate Tailwind CSS and PostCSS into the project ([336ccbc](https://github.com/lucitra/lucitra-react-components/commit/336ccbc904dd15544bd84f65200844e8ef23755b))
+* update Tailwind CSS integration and configuration ([9cd85f2](https://github.com/lucitra/lucitra-react-components/commit/9cd85f22bbb0cf712e7df7440872058c1bf5df30))
+
 ## [0.2.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.1.2...react-components-v0.2.0) (2025-07-10)
 
 
