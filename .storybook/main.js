@@ -19,9 +19,12 @@ const config = {
     reactDocgen: 'react-docgen',
   },
   async viteFinal(config) {
-    // Ensure PostCSS is configured
+    // Add Tailwind CSS Vite plugin
+    const tailwindcss = (await import('@tailwindcss/vite')).default;
+    
     return {
       ...config,
+      plugins: [...(config.plugins || []), tailwindcss()],
       css: {
         postcss: './postcss.config.cjs',
       },
