@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useClickOutside } from '../../../hooks/useClickOutside'
+import { useSmartPositioning } from '../../../hooks/useSmartPositioning'
 import { DEFAULT_LANGUAGES } from '../../../utils/defaultConfigs'
 
 // --- Icon Components ---
@@ -84,7 +85,21 @@ const LanguageSwitcher = ({
   const [hoveredLanguage, setHoveredLanguage] = useState(null)
   const [internalCurrentLanguage, setInternalCurrentLanguage] = useState(currentLanguage || languages[0]?.code)
   
-  const dropdownRef = useClickOutside(() => setIsOpen(false), isOpen)
+  const triggerRef = useRef(null)
+  const dropdownRef = useRef(null)
+  
+  // Use click outside hook with the container ref
+  const containerRef = useClickOutside(() => setIsOpen(false), isOpen)
+  
+  // Get smart positioning
+  const isRtl = typeof document !== 'undefined' && document.documentElement.dir === 'rtl'
+  const defaultPlacement = placement || (isRtl ? 'bottom-left' : 'bottom-right')
+  const { styles: positionStyles } = useSmartPositioning(
+    triggerRef,
+    dropdownRef,
+    isOpen,
+    defaultPlacement
+  )
 
   // Handle i18next integration
   useEffect(() => {
@@ -118,22 +133,7 @@ const LanguageSwitcher = ({
     }
   }
 
-  const getDropdownPosition = () => {
-    const isRtlDoc = typeof document !== 'undefined' && document.documentElement.dir === 'rtl';
-    const effectivePlacement = placement || (isRtlDoc ? 'bottom-left' : 'bottom-right');
-    const [vertical, horizontal] = effectivePlacement.split('-');
-    
-    return {
-      top: vertical === 'top' ? 'auto' : '100%',
-      bottom: vertical === 'top' ? '100%' : 'auto',
-      left: horizontal === 'left' ? '0' : 'auto',
-      right: horizontal === 'right' ? '0' : 'auto',
-      marginTop: vertical === 'bottom' ? '0.25rem' : '0',
-      marginBottom: vertical === 'top' ? '0.25rem' : '0'
-    }
-  }
-
-  const isRtl = currentLang?.dir === 'rtl'
+  const isLangRtl = currentLang?.dir === 'rtl'
 
   // Icon handling
   const GlobeIcon = Icon || (LucideGlobe || DefaultGlobeIcon);
@@ -144,10 +144,11 @@ const LanguageSwitcher = ({
     <div 
       className={`relative ${className}`}
       style={style}
-      ref={dropdownRef}
+      ref={containerRef}
       {...props}
     >
       <button
+        ref={triggerRef}
         onClick={() => !disabled && setIsOpen(!isOpen)}
         disabled={disabled}
         aria-label={ariaLabel}
@@ -170,10 +171,11 @@ const LanguageSwitcher = ({
 
       {isOpen && (
         <div
+          ref={dropdownRef}
           role="listbox"
           aria-label={ariaLabel}
-          className="absolute z-10 min-w-[200px] bg-white border border-gray-200 rounded-md shadow-lg max-h-72 overflow-y-auto"
-          style={getDropdownPosition()}
+          className="min-w-[200px] bg-white border border-gray-200 rounded-md shadow-lg max-h-72 overflow-y-auto"
+          style={positionStyles}
         >
           {languages.map((language) => (
             <div
@@ -183,7 +185,7 @@ const LanguageSwitcher = ({
               onClick={() => handleLanguageChange(language)}
               onMouseEnter={() => setHoveredLanguage(language.code)}
               onMouseLeave={() => setHoveredLanguage(null)}
-              className={`block px-4 py-2 text-sm ${hoveredLanguage === language.code ? 'bg-gray-100 text-gray-900' : 'text-gray-700'} ${isRtl ? 'text-right' : 'text-left'}`}
+              className={`block px-4 py-2 text-sm ${hoveredLanguage === language.code ? 'bg-gray-100 text-gray-900' : 'text-gray-700'} ${isLangRtl ? 'text-right' : 'text-left'}`}
             >
               <span>
                 {renderDropdownItem ? 
