@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.4](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.3.3...react-components-v0.3.4) (2025-07-12)
+
+
+### Code Refactoring
+
+* remove React import from LanguageSwitcher, RegionSwitcher ([6e6f506](https://github.com/lucitra/lucitra-react-components/commit/6e6f506cf64d36d551c0aadc6ba42e994cf025e5))
+
 ## [0.3.3](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.3.2...react-components-v0.3.3) (2025-07-12)
 
 
