@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.1](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.4.0...react-components-v0.4.1) (2025-07-12)
+
+
+### Bug Fixes
+
+* update DevTools default positioning to y: 300 ([3ee3258](https://github.com/lucitra/lucitra-react-components/commit/3ee3258cf0f43569ae2a77efa130af319e61e690))
+* update DevTools default positioning to y: 450 ([18c6077](https://github.com/lucitra/lucitra-react-components/commit/18c60778dee4d9c87a33d9d1f4a0fe92b3a29351))
+
 ## [0.4.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.3.4...react-components-v0.4.0) (2025-07-12)
 
 
