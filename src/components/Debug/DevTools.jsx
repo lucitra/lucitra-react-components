@@ -46,13 +46,13 @@ const DevTools = ({
   onRefresh,
   onClearCache,
   showInProduction = false,
-  initialPosition = { side: 'right', y: 100 }
+  initialPosition = { side: 'right', y: 300 }
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [position, setPosition] = useState(initialPosition)
   const [isDragging, setIsDragging] = useState(false)
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
-  const [initialPos, setInitialPos] = useState({ side: 'right', y: 100 })
+  const [initialPos, setInitialPos] = useState({ side: 'right', y: 300 })
   const widgetRef = useRef(null)
   
   // Check if we should show in current environment
