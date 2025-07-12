@@ -1,1 +1,4 @@
-@import "tailwindcss";
+/* Component-specific base styles */
+.lucitra-component-base {
+  box-sizing: border-box;
+}

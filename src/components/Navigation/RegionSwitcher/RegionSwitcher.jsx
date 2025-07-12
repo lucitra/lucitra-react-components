@@ -64,7 +64,6 @@ const RegionSwitcher = ({
   currentRegion,
   onRegionChange,
   className = '',
-  style = {},
   disabled = false,
   placement,
   closeOnSelect = true,
@@ -160,7 +159,6 @@ const RegionSwitcher = ({
   return (
     <div 
       className={`relative ${className}`}
-      style={style}
       ref={containerRef}
       {...props}
     >
@@ -191,7 +189,7 @@ const RegionSwitcher = ({
           ref={dropdownRef}
           role="listbox"
           aria-label={ariaLabel}
-          className="min-w-[240px] bg-white border border-gray-200 rounded-md shadow-lg max-h-80 flex flex-col overflow-hidden"
+          className="min-w-[240px] bg-white border border-gray-200 rounded-md shadow-lg max-h-80 flex flex-col overflow-hidden z-50 absolute"
           style={positionStyles}
         >
           {currentReg && (
@@ -216,7 +214,7 @@ const RegionSwitcher = ({
                 onClick={() => handleRegionChange(region)}
                 onMouseEnter={() => setHoveredRegion(region.code)}
                 onMouseLeave={() => setHoveredRegion(null)}
-                className={`block px-4 py-2 text-sm ${hoveredRegion === region.code ? 'bg-gray-100 text-gray-900' : 'text-gray-700'} ${isRegionRtl ? 'text-right' : 'text-left'}`}
+                className={`block px-4 py-2 text-sm cursor-pointer ${hoveredRegion === region.code ? 'bg-gray-100 text-gray-900' : 'text-gray-700'} ${isRegionRtl ? 'text-right' : 'text-left'}`}
               >
                 <div className="flex items-center gap-2">
                   <span className="text-base">{region.flag}</span>
@@ -248,7 +246,6 @@ RegionSwitcher.propTypes = {
   currentRegion: PropTypes.object,
   onRegionChange: PropTypes.func,
   className: PropTypes.string,
-  style: PropTypes.object,
   disabled: PropTypes.bool,
   placement: PropTypes.oneOf(['bottom-right', 'bottom-left', 'top-right', 'top-left']),
   closeOnSelect: PropTypes.bool,
