@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useClickOutside } from '../../../hooks/useClickOutside'
-import { useSmartPositioning } from '../../../hooks/useSmartPositioning'
 import { DEFAULT_REGIONS } from '../../../utils/defaultConfigs'
 
 // --- Icon Components ---
@@ -93,15 +92,8 @@ const RegionSwitcher = ({
   // Use click outside hook with the container ref
   const containerRef = useClickOutside(() => setIsOpen(false), isOpen)
   
-  // Get smart positioning
+  // RTL-aware positioning with Tailwind classes
   const isRtl = typeof document !== 'undefined' && document.documentElement.dir === 'rtl'
-  const defaultPlacement = placement || (isRtl ? 'bottom-left' : 'bottom-right')
-  const { styles: positionStyles } = useSmartPositioning(
-    triggerRef,
-    dropdownRef,
-    isOpen,
-    defaultPlacement
-  )
 
   // Handle i18next integration and language sync
   useEffect(() => {
@@ -189,8 +181,9 @@ const RegionSwitcher = ({
           ref={dropdownRef}
           role="listbox"
           aria-label={ariaLabel}
-          className="min-w-[240px] bg-white border border-gray-200 rounded-md shadow-lg max-h-80 flex flex-col overflow-hidden z-50 absolute"
-          style={positionStyles}
+          className={`min-w-[240px] bg-white border border-gray-200 rounded-md shadow-lg max-h-80 flex flex-col overflow-hidden z-50 absolute top-full mt-1 ${
+            isRtl ? 'left-0' : 'right-0'
+          }`}
         >
           {currentReg && (
             <div className="flex items-center justify-between px-4 py-2 border-b border-gray-200 flex-shrink-0">

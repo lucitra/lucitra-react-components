@@ -1,0 +1,1 @@
+export { default as LucitraIcon } from './LucitraIcon.jsx'

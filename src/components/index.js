@@ -1,6 +1,12 @@
 // Navigation Components
 export { LanguageSwitcher, RegionSwitcher } from './Navigation'
 
+// Debug Components
+export * from './Debug'
+
+// Icon Components  
+export * from './Icons'
+
 // Form Components
 export * from './Forms'
 
