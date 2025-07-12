@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.3.4...react-components-v0.4.0) (2025-07-12)
+
+
+### Features
+
+* add DevTools and LucitraIcon components ([1febc71](https://github.com/lucitra/lucitra-react-components/commit/1febc71f825b09feca89f434e571518ad2b315d9))
+
 ## [0.3.4](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.3.3...react-components-v0.3.4) (2025-07-12)
 
 
