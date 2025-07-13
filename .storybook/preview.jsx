@@ -1,10 +1,11 @@
-import { DEFAULT_THEME } from '../src/utils/defaultConfigs'
-import '../src/index.css';
+import { MantineProvider } from '@mantine/core'
+import '@mantine/core/styles.css'
+import mantineTheme from '../src/theme/mantineTheme'
+import '../src/index.css'
 
 /** @type { import('@storybook/react').Preview } */
 const preview = {
   parameters: {
-    actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -18,16 +19,16 @@ const preview = {
     },
   },
   globalTypes: {
-    theme: {
-      description: 'Global theme for components',
-      defaultValue: 'default',
+    colorScheme: {
+      description: 'Mantine color scheme',
+      defaultValue: 'light',
       toolbar: {
-        title: 'Theme',
+        title: 'Color Scheme',
         icon: 'paintbrush',
         items: [
-          { value: 'default', title: 'Default' },
+          { value: 'light', title: 'Light' },
           { value: 'dark', title: 'Dark' },
-          { value: 'high-contrast', title: 'High Contrast' },
+          { value: 'auto', title: 'Auto' },
         ],
         showName: true,
       },
@@ -49,47 +50,23 @@ const preview = {
   },
   decorators: [
     (Story, context) => {
-      const { theme, locale } = context.globals
-      
-      // Apply theme to story container
-      const themeStyles = {
-        default: DEFAULT_THEME,
-        dark: {
-          ...DEFAULT_THEME,
-          colors: {
-            ...DEFAULT_THEME.colors,
-            background: '#1f2937',
-            text: '#f9fafb',
-            border: '#374151',
-          }
-        },
-        'high-contrast': {
-          ...DEFAULT_THEME,
-          colors: {
-            ...DEFAULT_THEME.colors,
-            primary: '#000000',
-            background: '#ffffff',
-            text: '#000000',
-            border: '#000000',
-          }
-        }
-      }
+      const { colorScheme, locale } = context.globals
       
       // Apply locale direction
       const direction = locale === 'ar' ? 'rtl' : 'ltr'
       
       return (
-        <div 
-          style={{ 
-            padding: '20px',
-            backgroundColor: themeStyles[theme].colors.background,
-            color: themeStyles[theme].colors.text,
-            direction: direction,
-            minHeight: '100vh'
-          }}
-        >
-          <Story />
-        </div>
+        <MantineProvider theme={mantineTheme} defaultColorScheme={colorScheme}>
+          <div 
+            style={{ 
+              padding: '20px',
+              direction: direction,
+              minHeight: '100vh'
+            }}
+          >
+            <Story />
+          </div>
+        </MantineProvider>
       )
     },
   ],

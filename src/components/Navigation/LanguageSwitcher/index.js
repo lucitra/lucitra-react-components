@@ -1,1 +1,1 @@
-export { default } from './LanguageSwitcher.jsx'
+export { default, default as LanguageSwitcher } from './LanguageSwitcherMantine.jsx'

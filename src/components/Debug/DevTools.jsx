@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { ActionIcon, Paper, Text, Button, Group, Stack, Divider, Tooltip } from '@mantine/core'
+import { IconRefresh, IconTrash, IconX, IconGripVertical } from '@tabler/icons-react'
 import LucitraIcon from '../Icons/LucitraIcon.jsx'
 
 /**
@@ -169,119 +171,142 @@ const DevTools = ({
   return (
     <>
       {/* Floating Tab - Always visible */}
-      <button
-        ref={widgetRef}
-        onMouseDown={handleTabMouseDown}
-        onClick={handleTabClick}
-        className="fixed bg-transparent hover:opacity-80 shadow-xl transition-all duration-200 select-none z-[9999] rounded-full"
-        style={{
-          position: 'fixed',
-          [position.side]: '0px',
-          top: `${position.y}px`,
-          cursor: isDragging ? 'grabbing' : 'grab',
-          transition: isDragging ? 'none' : 'all 0.2s ease',
-          backgroundColor: '#3b82f6',
-          width: '56px',
-          height: '56px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          border: '3px solid white',
-          zIndex: 9999
-        }}
-        title="Dev Tools - Click to open, drag to move"
-      >
-        <LucitraIcon size={28} />
-      </button>
+      <Tooltip label="Dev Tools - Click to open, drag to move" position="left">
+        <ActionIcon
+          ref={widgetRef}
+          onMouseDown={handleTabMouseDown}
+          onClick={handleTabClick}
+          size="lg"
+          radius="xl"
+          variant="filled"
+          color="gray"
+          style={{
+            position: 'fixed',
+            [position.side]: '0px',
+            top: `${position.y}px`,
+            cursor: isDragging ? 'grabbing' : 'grab',
+            transition: isDragging ? 'none' : 'all 0.2s ease',
+            zIndex: 9999,
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+          }}
+        >
+          <LucitraIcon size={24} />
+        </ActionIcon>
+      </Tooltip>
 
       {/* Content Panel - Only visible when open */}
       {isOpen && (
-        <div
-          className="fixed bg-white border border-gray-300 rounded-lg shadow-xl w-80 max-h-96 overflow-hidden select-none z-[9998]"
+        <Paper
+          shadow="xl"
+          radius="md"
+          p={0}
           style={{
-            [position.side]: '70px',
+            position: 'fixed',
+            [position.side]: '60px',
             top: `${Math.min(position.y, (typeof window !== 'undefined' ? window.innerHeight : 800) - 400)}px`,
-            transition: isDragging ? 'none' : 'all 0.2s ease'
+            transition: isDragging ? 'none' : 'all 0.2s ease',
+            width: '320px',
+            maxHeight: '400px',
+            zIndex: 9998,
+            overflow: 'hidden'
           }}
         >
           {/* Header with drag handle */}
-          <div 
-            className="bg-blue-600 text-white p-4 cursor-move flex justify-between items-center"
+          <Group
+            justify="space-between"
+            p="md"
+            bg="blue.6"
+            c="white"
+            style={{ cursor: 'move' }}
             onMouseDown={handlePanelMouseDown}
           >
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-semibold">Dev Tools</span>
-              <span className="text-xs opacity-75">v{packageInfo.version || '0.0.0'}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs opacity-75">⇅</span>
-              <button
+            <Group gap="xs">
+              <Text fw={600} size="sm">Dev Tools</Text>
+              <Text size="xs" opacity={0.8}>v{packageInfo.version || '0.0.0'}</Text>
+            </Group>
+            <Group gap="xs">
+              <IconGripVertical size={16} opacity={0.7} />
+              <ActionIcon
+                variant="transparent"
+                c="white"
+                size="sm"
                 onClick={(e) => {
                   e.stopPropagation()
                   setIsOpen(false)
                 }}
-                className="text-white hover:text-gray-200 text-lg leading-none"
-                title="Close"
               >
-                ×
-              </button>
-            </div>
-          </div>
+                <IconX size={16} />
+              </ActionIcon>
+            </Group>
+          </Group>
           
           {/* Content */}
-          <div className="p-5 max-h-80 overflow-y-auto">
+          <Stack p="md" gap="md" style={{ maxHeight: '320px', overflowY: 'auto' }}>
             {Object.keys(cleanPackages).length > 0 && (
-              <div className="space-y-4 mb-6">
-                <h4 className="font-semibold text-sm text-gray-700">Package Versions:</h4>
-                <div className="space-y-2">
-                  {Object.entries(cleanPackages).map(([name, version]) => (
-                    <div key={name} className="flex justify-between text-xs py-1">
-                      <span className="text-gray-600">{name}:</span>
-                      <span className="font-mono text-blue-600 text-right ml-3">{version}</span>
-                    </div>
-                  ))}
+              <>
+                <div>
+                  <Text fw={600} size="sm" c="dimmed" mb="xs">Package Versions:</Text>
+                  <Stack gap="xs">
+                    {Object.entries(cleanPackages).map(([name, version]) => (
+                      <Group key={name} justify="space-between">
+                        <Text size="xs" c="dimmed">{name}:</Text>
+                        <Text size="xs" ff="monospace" c="blue.6" ta="right">{version}</Text>
+                      </Group>
+                    ))}
+                  </Stack>
                 </div>
-              </div>
+                <Divider />
+              </>
             )}
 
-            <div className="space-y-4 mb-6">
-              <h4 className="font-semibold text-sm text-gray-700">Environment:</h4>
-              <div className="space-y-2">
+            <div>
+              <Text fw={600} size="sm" c="dimmed" mb="xs">Environment:</Text>
+              <Stack gap="xs">
                 {environment.mode && (
-                  <div className="flex justify-between text-xs py-1">
-                    <span className="text-gray-600">Mode:</span>
-                    <span className="font-mono text-green-600">{environment.mode}</span>
-                  </div>
+                  <Group justify="space-between">
+                    <Text size="xs" c="dimmed">Mode:</Text>
+                    <Text size="xs" ff="monospace" c="green.6">{environment.mode}</Text>
+                  </Group>
                 )}
                 {environment.baseUrl && (
-                  <div className="flex justify-between text-xs py-1">
-                    <span className="text-gray-600">Base URL:</span>
-                    <span className="font-mono text-green-600">{environment.baseUrl}</span>
-                  </div>
+                  <Group justify="space-between">
+                    <Text size="xs" c="dimmed">Base URL:</Text>
+                    <Text size="xs" ff="monospace" c="green.6">{environment.baseUrl}</Text>
+                  </Group>
                 )}
-                <div className="flex justify-between text-xs py-1">
-                  <span className="text-gray-600">Position:</span>
-                  <span className="font-mono text-purple-600 capitalize">{position.side}, {Math.round(position.y)}</span>
-                </div>
-              </div>
+                <Group justify="space-between">
+                  <Text size="xs" c="dimmed">Position:</Text>
+                  <Text size="xs" ff="monospace" c="violet.6" tt="capitalize">{position.side}, {Math.round(position.y)}</Text>
+                </Group>
+              </Stack>
             </div>
 
-            <div className="space-y-3">
-              <button
+            <Divider />
+
+            <Stack gap="xs">
+              <Button
+                leftSection={<IconRefresh size={14} />}
                 onClick={onRefresh || defaultRefresh}
-                className="w-full bg-green-500 hover:bg-green-600 text-white py-3 px-4 rounded text-sm transition-colors font-medium"
+                color="green"
+                variant="filled"
+                size="sm"
+                fullWidth
               >
-                🔄 Refresh Page
-              </button>
-              <button
+                Refresh Page
+              </Button>
+              <Button
+                leftSection={<IconTrash size={14} />}
                 onClick={onClearCache || defaultClearCache}
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-4 rounded text-sm transition-colors font-medium"
+                color="orange"
+                variant="filled"
+                size="sm"
+                fullWidth
               >
-                🧹 Clear Cache & Reload
-              </button>
-            </div>
-          </div>
-        </div>
+                Clear Cache & Reload
+              </Button>
+            </Stack>
+          </Stack>
+        </Paper>
       )}
     </>
   )

@@ -1,1 +1,1 @@
-export { default } from './RegionSwitcher.jsx'
+export { default, default as RegionSwitcher } from './RegionSwitcherMantine.jsx'

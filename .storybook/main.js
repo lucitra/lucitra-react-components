@@ -19,15 +19,9 @@ const config = {
     reactDocgen: 'react-docgen',
   },
   async viteFinal(config) {
-    // Add Tailwind CSS Vite plugin
-    const tailwindcss = (await import('@tailwindcss/vite')).default;
-    
     return {
       ...config,
-      plugins: [...(config.plugins || []), tailwindcss()],
-      css: {
-        postcss: './postcss.config.cjs',
-      },
+      // Mantine works out of the box with Vite, no special configuration needed
     }
   },
 }

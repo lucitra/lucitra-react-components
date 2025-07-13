@@ -5,6 +5,41 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.4.5...react-components-v0.5.0) (2025-07-13)
+
+### ⚠ BREAKING CHANGES
+
+* **ui-framework**: Migrated from Tailwind CSS to Mantine UI framework
+* **dependencies**: Mantine packages are now peer dependencies requiring installation in consuming projects
+
+### Features
+
+* **mantine**: Complete migration to Mantine UI framework for all components ([#migration](https://github.com/lucitra/lucitra-react-components/pull/migration))
+* **styling**: All components now use Mantine's design system and theming
+* **storybook**: Updated Storybook configuration to support Mantine styling in isolation
+* **components**: Migrated RegionSwitcher and LanguageSwitcher to use Mantine Select components
+* **devtools**: Updated DevTools component to use Mantine components and styling
+
+### Bug Fixes
+
+* **context**: Fixed MantineProvider context isolation issues by moving to peer dependencies
+* **theme**: Removed deprecated globalStyles configuration for Mantine v8 compatibility
+* **storybook**: Fixed missing styles in Storybook by properly configuring Mantine CSS imports
+
+### BREAKING CHANGES
+
+* **Peer Dependencies**: Projects using this library must now install `@mantine/core` and `@mantine/hooks` as dependencies
+* **CSS Import**: Projects must import `@mantine/core/styles.css` in their main CSS file
+* **Theme System**: Custom theming now uses Mantine's theme system instead of CSS variables
+* **Component APIs**: Some prop names may have changed to align with Mantine conventions
+
+### Migration Guide
+
+1. Install Mantine dependencies: `npm install @mantine/core @mantine/hooks`
+2. Import Mantine CSS in your main CSS file: `@import '@mantine/core/styles.css';`
+3. Wrap your app with MantineProvider: `<MantineProvider theme={yourTheme}><App /></MantineProvider>`
+4. Update any custom styling to use Mantine's theme system
+
 ## [0.4.5](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.4.4...react-components-v0.4.5) (2025-07-13)
 
 

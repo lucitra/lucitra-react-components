@@ -1,5 +1,5 @@
 
-import LanguageSwitcher from './LanguageSwitcher'
+import LanguageSwitcher from './LanguageSwitcherMantine'
 import { DEFAULT_LANGUAGES, DEFAULT_THEME } from '../../../utils/defaultConfigs'
 
 export default {

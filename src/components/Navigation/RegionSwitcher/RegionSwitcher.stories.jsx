@@ -1,4 +1,4 @@
-import RegionSwitcher from './RegionSwitcher'
+import RegionSwitcher from './RegionSwitcherMantine'
 import { DEFAULT_REGIONS, DEFAULT_THEME } from '../../../utils/defaultConfigs'
 
 export default {
