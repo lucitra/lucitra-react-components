@@ -1,5 +1,24 @@
+import { useState } from 'react'
 import RegionSwitcher from './RegionSwitcherMantine'
 import { DEFAULT_REGIONS, DEFAULT_THEME } from '../../../utils/defaultConfigs'
+
+// Wrapper component to handle state in Storybook
+const RegionSwitcherWithState = (args) => {
+  const [currentRegion, setCurrentRegion] = useState(args.currentRegion || null)
+  
+  const handleRegionChange = (region) => {
+    setCurrentRegion(region.code)
+    args.onRegionChange?.(region)
+  }
+  
+  return (
+    <RegionSwitcher 
+      {...args} 
+      currentRegion={currentRegion}
+      onRegionChange={handleRegionChange}
+    />
+  )
+}
 
 export default {
   title: 'Navigation/RegionSwitcher',
@@ -8,7 +27,7 @@ export default {
     layout: 'centered',
     docs: {
       description: {
-        component: 'A dropdown component for selecting regions/countries with automatic language synchronization and RTL support. The component now features a globe icon and a redesigned dropdown menu showing the current selection prominently.',
+        component: 'An icon-only dropdown button for selecting regions/countries. Features a square button with globe icon (IBM.com-inspired), dark dropdown panel, and automatic language synchronization with RTL support.',
       },
     },
   },
@@ -18,8 +37,8 @@ export default {
       description: 'Array of available regions',
     },
     currentRegion: {
-      control: 'object',
-      description: 'Currently selected region object',
+      control: 'text',
+      description: 'Currently selected region code',
     },
     onRegionChange: {
       action: 'region-changed',
@@ -37,48 +56,54 @@ export default {
       action: 'language-changed',
       description: 'Callback when region changes language',
     },
-    theme: {
-      control: 'object',
-      description: 'Theme configuration object',
-    },
     disabled: {
       control: 'boolean',
       description: 'Disable the component',
     },
-    placement: {
+    displayMode: {
       control: 'select',
-      options: ['bottom-right', 'bottom-left', 'top-right', 'top-left'],
-      description: 'Dropdown placement. If not set, it will auto-detect based on document direction.',
+      options: ['icon', 'text'],
+      description: 'Display mode: icon-only button or icon with text',
     },
-    ariaLabel: {
-      control: 'text',
-      description: 'ARIA label for accessibility',
+    borderRadius: {
+      control: 'number',
+      description: 'Border radius in pixels (0 for square, >0 for rounded)',
     },
   },
 }
 
 // Default story
 export const Default = {
+  render: (args) => <RegionSwitcherWithState {...args} />,
   args: {
-    currentRegion: DEFAULT_REGIONS[0], // US
+    currentRegion: 'US',
     regions: DEFAULT_REGIONS.slice(0, 5), // Show first 5 regions
-    theme: DEFAULT_THEME,
-    ariaLabel: 'Select region',
     syncWithLanguage: false,
     updateDocumentDirection: false,
+    showCurrentSelection: true,
+    displayMode: 'icon',
   },
 }
 
-// With current selection shown
-export const ShowCurrentSelection = {
+// Text display mode
+export const TextDisplay = {
+  render: (args) => <RegionSwitcherWithState {...args} />,
   args: {
     ...Default.args,
-    showCurrentSelection: true,
+    displayMode: 'text',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Region switcher with text display mode showing both icon and current region text.',
+      },
+    },
   },
 };
 
 // With all regions
 export const AllRegions = {
+  render: (args) => <RegionSwitcherWithState {...args} />,
   args: {
     ...Default.args,
     regions: DEFAULT_REGIONS,
@@ -87,6 +112,7 @@ export const AllRegions = {
 
 // With language synchronization
 export const WithLanguageSync = {
+  render: (args) => <RegionSwitcherWithState {...args} />,
   args: {
     ...Default.args,
     syncWithLanguage: true,
@@ -109,9 +135,10 @@ export const WithLanguageSync = {
 
 // RTL Region selected
 export const RTLRegion = {
+  render: (args) => <RegionSwitcherWithState {...args} />,
   args: {
     ...Default.args,
-    currentRegion: { code: 'AE', name: 'United Arab Emirates', flag: '🇦🇪', language: 'ar' },
+    currentRegion: 'AE',
     regions: [
       { code: 'AE', name: 'United Arab Emirates', flag: '🇦🇪', language: 'ar' },
       { code: 'SA', name: 'Saudi Arabia', flag: '🇸🇦', language: 'ar' },
@@ -130,6 +157,7 @@ export const RTLRegion = {
 
 // Disabled state
 export const Disabled = {
+  render: (args) => <RegionSwitcherWithState {...args} />,
   args: {
     ...Default.args,
     disabled: true,
@@ -138,6 +166,7 @@ export const Disabled = {
 
 // Different placements
 export const TopLeft = {
+  render: (args) => <RegionSwitcherWithState {...args} />,
   args: {
     ...Default.args,
     placement: 'top-left',
@@ -145,6 +174,7 @@ export const TopLeft = {
 }
 
 export const BottomLeft = {
+  render: (args) => <RegionSwitcherWithState {...args} />,
   args: {
     ...Default.args,
     placement: 'bottom-left',
@@ -153,6 +183,7 @@ export const BottomLeft = {
 
 // Custom theme
 export const CustomTheme = {
+  render: (args) => <RegionSwitcherWithState {...args} />,
   args: {
     ...Default.args,
     theme: {
@@ -169,8 +200,9 @@ export const CustomTheme = {
 
 // Minimal regions
 export const MinimalExample = {
+  render: (args) => <RegionSwitcherWithState {...args} />,
   args: {
-    currentRegion: { code: 'US', name: 'US', flag: '🇺🇸', language: 'en' },
+    currentRegion: 'US',
     regions: [
       { code: 'US', name: 'US', flag: '🇺🇸', language: 'en' },
       { code: 'CA', name: 'CA', flag: '🇨🇦', language: 'en' },
@@ -187,6 +219,7 @@ export const MinimalExample = {
 
 // No current region selected
 export const NoSelection = {
+  render: (args) => <RegionSwitcherWithState {...args} />,
   args: {
     ...Default.args,
     currentRegion: null,
@@ -195,6 +228,77 @@ export const NoSelection = {
     docs: {
       description: {
         story: 'Component with no region initially selected.',
+      },
+    },
+  },
+}
+
+// Rounded Corners
+export const RoundedCorners = {
+  render: (args) => <RegionSwitcherWithState {...args} />,
+  args: {
+    ...Default.args,
+    borderRadius: 8,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Region switcher with rounded corners (8px border radius).',
+      },
+    },
+  },
+}
+
+// Keyboard Focus Demo
+export const KeyboardFocus = {
+  render: (args) => (
+    <div style={{ padding: '20px' }}>
+      <p style={{ marginBottom: '16px', fontSize: '14px', color: '#666' }}>
+        Use Tab key to focus the button and see the blue outline:
+      </p>
+      <RegionSwitcherWithState {...args} />
+    </div>
+  ),
+  args: {
+    ...Default.args,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demonstrates keyboard accessibility with blue focus outline when tabbing to the button.',
+      },
+    },
+  },
+}
+
+// IBM.com Style example
+export const IBMStyle = {
+  render: (args) => <RegionSwitcherWithState {...args} />,
+  args: {
+    currentRegion: 'US',
+    regions: [
+      { code: 'US', name: 'United States – English (English)', flag: '🇺🇸', language: 'en' },
+      { code: 'AU', name: 'Australia – English (English)', flag: '🇦🇺', language: 'en' },
+      { code: 'BR', name: 'Brazil – Português (Portuguese)', flag: '🇧🇷', language: 'pt' },
+      { code: 'CA-EN', name: 'Canada – English (English)', flag: '🇨🇦', language: 'en' },
+      { code: 'CA-FR', name: 'Canada – Français (French)', flag: '🇨🇦', language: 'fr' },
+      { code: 'CN', name: 'China – 中文 (Simplified Chinese)', flag: '🇨🇳', language: 'zh' },
+      { code: 'FR', name: 'France – Français (French)', flag: '🇫🇷', language: 'fr' },
+      { code: 'DE', name: 'Germany – Deutsch (German)', flag: '🇩🇪', language: 'de' },
+      { code: 'IN', name: 'India – English (English)', flag: '🇮🇳', language: 'en' },
+      { code: 'ID', name: 'Indonesia – Bahasa (Indonesian)', flag: '🇮🇩', language: 'id' },
+      { code: 'IT', name: 'Italy – Italiano (Italian)', flag: '🇮🇹', language: 'it' },
+      { code: 'JP', name: 'Japan – 日本語 (Japanese)', flag: '🇯🇵', language: 'ja' },
+      { code: 'MX', name: 'Mexico – Español (Spanish)', flag: '🇲🇽', language: 'es' },
+      { code: 'QA', name: 'Qatar – العربية (Arabic)', flag: '🇶🇦', language: 'ar' },
+      { code: 'SA', name: 'Saudi Arabia – العربية (Arabic)', flag: '🇸🇦', language: 'ar' },
+    ],
+    showCurrentSelection: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'IBM.com-inspired styling with dark dropdown, clean typography, and comprehensive region list formatted like IBM.com.',
       },
     },
   },
