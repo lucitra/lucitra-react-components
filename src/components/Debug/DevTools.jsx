@@ -173,7 +173,7 @@ const DevTools = ({
         ref={widgetRef}
         onMouseDown={handleTabMouseDown}
         onClick={handleTabClick}
-        className={`fixed bg-transparent hover:opacity-80 shadow-lg transition-all duration-200 select-none z-[9999] py-3 px-2 ${
+        className={`fixed bg-transparent hover:opacity-80 shadow-lg transition-all duration-200 select-none z-[9999] py-4 px-3 ${
           position.side === 'left' ? 'rounded-r-xl' : 'rounded-l-xl'
         }`}
         style={{
@@ -202,7 +202,7 @@ const DevTools = ({
         >
           {/* Header with drag handle */}
           <div 
-            className="bg-blue-600 text-white p-3 cursor-move flex justify-between items-center"
+            className="bg-blue-600 text-white p-4 cursor-move flex justify-between items-center"
             onMouseDown={handlePanelMouseDown}
           >
             <div className="flex items-center gap-2">
@@ -225,49 +225,53 @@ const DevTools = ({
           </div>
           
           {/* Content */}
-          <div className="p-4 max-h-80 overflow-y-auto">
+          <div className="p-5 max-h-80 overflow-y-auto">
             {Object.keys(cleanPackages).length > 0 && (
-              <div className="space-y-3 mb-4">
+              <div className="space-y-4 mb-6">
                 <h4 className="font-semibold text-sm text-gray-700">Package Versions:</h4>
-                {Object.entries(cleanPackages).map(([name, version]) => (
-                  <div key={name} className="flex justify-between text-xs">
-                    <span className="text-gray-600">{name}:</span>
-                    <span className="font-mono text-blue-600 text-right ml-2">{version}</span>
-                  </div>
-                ))}
+                <div className="space-y-2">
+                  {Object.entries(cleanPackages).map(([name, version]) => (
+                    <div key={name} className="flex justify-between text-xs py-1">
+                      <span className="text-gray-600">{name}:</span>
+                      <span className="font-mono text-blue-600 text-right ml-3">{version}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
 
-            <div className="space-y-2 mb-4">
+            <div className="space-y-4 mb-6">
               <h4 className="font-semibold text-sm text-gray-700">Environment:</h4>
-              {environment.mode && (
-                <div className="flex justify-between text-xs">
-                  <span className="text-gray-600">Mode:</span>
-                  <span className="font-mono text-green-600">{environment.mode}</span>
+              <div className="space-y-2">
+                {environment.mode && (
+                  <div className="flex justify-between text-xs py-1">
+                    <span className="text-gray-600">Mode:</span>
+                    <span className="font-mono text-green-600">{environment.mode}</span>
+                  </div>
+                )}
+                {environment.baseUrl && (
+                  <div className="flex justify-between text-xs py-1">
+                    <span className="text-gray-600">Base URL:</span>
+                    <span className="font-mono text-green-600">{environment.baseUrl}</span>
+                  </div>
+                )}
+                <div className="flex justify-between text-xs py-1">
+                  <span className="text-gray-600">Position:</span>
+                  <span className="font-mono text-purple-600 capitalize">{position.side}, {Math.round(position.y)}</span>
                 </div>
-              )}
-              {environment.baseUrl && (
-                <div className="flex justify-between text-xs">
-                  <span className="text-gray-600">Base URL:</span>
-                  <span className="font-mono text-green-600">{environment.baseUrl}</span>
-                </div>
-              )}
-              <div className="flex justify-between text-xs">
-                <span className="text-gray-600">Position:</span>
-                <span className="font-mono text-purple-600 capitalize">{position.side}, {Math.round(position.y)}</span>
               </div>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-3">
               <button
                 onClick={onRefresh || defaultRefresh}
-                className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded text-sm transition-colors"
+                className="w-full bg-green-500 hover:bg-green-600 text-white py-3 px-4 rounded text-sm transition-colors font-medium"
               >
                 🔄 Refresh Page
               </button>
               <button
                 onClick={onClearCache || defaultClearCache}
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-3 rounded text-sm transition-colors"
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-4 rounded text-sm transition-colors font-medium"
               >
                 🧹 Clear Cache & Reload
               </button>
