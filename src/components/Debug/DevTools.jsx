@@ -60,6 +60,34 @@ const DevTools = ({
   
   // Check if we should show in current environment
   const isProduction = environment.mode === 'production' || process.env.NODE_ENV === 'production'
+  
+  useEffect(() => {
+    if (!isDragging) return
+    
+    const handleMouseMove = (e) => {
+      if (!isDragging || typeof window === 'undefined') return
+
+      const deltaY = e.clientY - dragStart.y
+      const newY = Math.max(0, Math.min(window.innerHeight - 30, initialPos.y + deltaY))
+      
+      // Determine which side based on mouse position
+      const newSide = e.clientX < window.innerWidth / 2 ? 'left' : 'right'
+      
+      setPosition({ side: newSide, y: newY })
+    }
+
+    const handleMouseUp = () => {
+      setIsDragging(false)
+    }
+    
+    document.addEventListener('mousemove', handleMouseMove)
+    document.addEventListener('mouseup', handleMouseUp)
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('mouseup', handleMouseUp)
+    }
+  }, [isDragging, dragStart.y, initialPos.y])
+  
   if (isProduction && !showInProduction) {
     return null
   }
@@ -135,34 +163,7 @@ const DevTools = ({
     e.preventDefault()
   }
 
-  const handleMouseMove = (e) => {
-    if (!isDragging || typeof window === 'undefined') return
-
-    const deltaY = e.clientY - dragStart.y
-    const newY = Math.max(0, Math.min(window.innerHeight - 30, initialPos.y + deltaY))
-    
-    // Determine which side based on mouse position
-    const newSide = e.clientX < window.innerWidth / 2 ? 'left' : 'right'
-    
-    setPosition({ side: newSide, y: newY })
-  }
-
-  const handleMouseUp = () => {
-    setIsDragging(false)
-  }
-
-  useEffect(() => {
-    if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove)
-      document.addEventListener('mouseup', handleMouseUp)
-      return () => {
-        document.removeEventListener('mousemove', handleMouseMove)
-        document.removeEventListener('mouseup', handleMouseUp)
-      }
-    }
-  }, [isDragging, dragStart, initialPos])
-
-  const handleTabClick = (e) => {
+  const handleTabClick = () => {
     if (!isDragging) {
       setIsOpen(!isOpen)
     }

@@ -57,7 +57,7 @@ const RegionSwitcher = ({
     if (currentRegion !== selectedRegion) {
       setSelectedRegion(currentRegion)
     }
-  }, [currentRegion])
+  }, [currentRegion, selectedRegion])
 
   // Handle i18next language changes
   useEffect(() => {
@@ -121,7 +121,7 @@ const RegionSwitcher = ({
   }))
 
   // Custom item renderer to show flags
-  const renderSelectOption = ({ option, checked }) => (
+  const renderSelectOption = ({ option }) => (
     <Group gap="sm" wrap="nowrap">
       {option.flag && (
         <Text size="lg" style={{ lineHeight: 1 }}>
@@ -132,7 +132,6 @@ const RegionSwitcher = ({
     </Group>
   )
 
-  const currentRegionData = regions.find(r => r.code === selectedRegion)
 
   return (
     <Select

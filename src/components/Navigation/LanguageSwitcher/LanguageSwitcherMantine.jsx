@@ -54,7 +54,7 @@ const LanguageSwitcher = ({
     if (currentLanguage !== selectedLanguage) {
       setSelectedLanguage(currentLanguage)
     }
-  }, [currentLanguage])
+  }, [currentLanguage, selectedLanguage])
 
   // Initialize with i18next current language
   useEffect(() => {
@@ -118,7 +118,7 @@ const LanguageSwitcher = ({
   }))
 
   // Custom item renderer to show native names
-  const renderSelectOption = ({ option, checked }) => (
+  const renderSelectOption = ({ option }) => (
     <Group gap="sm" wrap="nowrap">
       <div>
         <Text size="sm">{option.label}</Text>
