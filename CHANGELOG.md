@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.2](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.4.1...react-components-v0.4.2) (2025-07-13)
+
+
+### Bug Fixes
+
+* devtools initialPos now uses initialPosition prop ([1162739](https://github.com/lucitra/lucitra-react-components/commit/116273989a9e1cd3afac03019c277981302e0e7f))
+
 ## [0.4.1](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.4.0...react-components-v0.4.1) (2025-07-12)
 
 
