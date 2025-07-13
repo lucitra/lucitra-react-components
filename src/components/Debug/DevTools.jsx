@@ -52,7 +52,7 @@ const DevTools = ({
   const [position, setPosition] = useState(initialPosition)
   const [isDragging, setIsDragging] = useState(false)
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
-  const [initialPos, setInitialPos] = useState({ side: 'right', y: 450 })
+  const [initialPos, setInitialPos] = useState(initialPosition)
   const widgetRef = useRef(null)
   
   // Check if we should show in current environment
