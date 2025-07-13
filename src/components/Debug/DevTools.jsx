@@ -173,16 +173,20 @@ const DevTools = ({
         ref={widgetRef}
         onMouseDown={handleTabMouseDown}
         onClick={handleTabClick}
-        className={`fixed bg-transparent hover:opacity-80 shadow-lg transition-all duration-200 select-none z-[9999] py-4 px-3 ${
-          position.side === 'left' ? 'rounded-r-xl' : 'rounded-l-xl'
-        }`}
+        className="fixed bg-transparent hover:opacity-80 shadow-xl transition-all duration-200 select-none z-[9999] rounded-full"
         style={{
           position: 'fixed',
           [position.side]: '0px',
           top: `${position.y}px`,
           cursor: isDragging ? 'grabbing' : 'grab',
           transition: isDragging ? 'none' : 'all 0.2s ease',
-          backgroundColor: '#000000',
+          backgroundColor: '#3b82f6',
+          width: '56px',
+          height: '56px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          border: '3px solid white',
           zIndex: 9999
         }}
         title="Dev Tools - Click to open, drag to move"
@@ -195,7 +199,7 @@ const DevTools = ({
         <div
           className="fixed bg-white border border-gray-300 rounded-lg shadow-xl w-80 max-h-96 overflow-hidden select-none z-[9998]"
           style={{
-            [position.side]: '45px',
+            [position.side]: '70px',
             top: `${Math.min(position.y, (typeof window !== 'undefined' ? window.innerHeight : 800) - 400)}px`,
             transition: isDragging ? 'none' : 'all 0.2s ease'
           }}
