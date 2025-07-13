@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.4](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.4.3...react-components-v0.4.4) (2025-07-13)
+
+
+### Styles
+
+* improve DevTools padding and spacing ([39d956d](https://github.com/lucitra/lucitra-react-components/commit/39d956d3d5a3e89dcb6c185c49945b2f69c90336))
+
 ## [0.4.3](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.4.2...react-components-v0.4.3) (2025-07-13)
 
 
