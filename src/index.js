@@ -14,9 +14,14 @@ export {
   DEFAULT_THEME 
 } from './utils/defaultConfigs'
 
+// Design System
+export { DESIGN_TOKENS } from './design-system/tokens'
+export { BaseButton } from './design-system/components/BaseButton'
+
 // Component Categories (for organized imports)
 export * as Navigation from './components/Navigation'
 export * as Forms from './components/Forms'
 export * as Layout from './components/Layout'
 export * as Feedback from './components/Feedback'
 export * as DataDisplay from './components/DataDisplay'
+export * as DesignSystem from './design-system/components'

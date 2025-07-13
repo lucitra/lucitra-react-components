@@ -104,14 +104,17 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
       - name: Install dependencies
         run: npm ci
 
       - name: Build Storybook
         run: npm run build-storybook
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+        with:
+          # Enable Pages if not already enabled
+          enablement: true
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
