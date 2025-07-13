@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.7](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.4.6...react-components-v0.4.7) (2025-07-13)
+
+
+### Bug Fixes
+
+* correct package.json exports configuration for v0.5.1 ([0ea27c9](https://github.com/lucitra/lucitra-react-components/commit/0ea27c90c018b8e05ae95090984575ef129a97a8))
+
 ## [0.4.6](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.4.5...react-components-v0.4.6) (2025-07-13)
 
 
