@@ -50,6 +50,7 @@ const DevTools = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [position, setPosition] = useState(initialPosition)
+  
   const [isDragging, setIsDragging] = useState(false)
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
   const [initialPos, setInitialPos] = useState(initialPosition)
@@ -176,11 +177,13 @@ const DevTools = ({
           position.side === 'left' ? 'rounded-r-xl' : 'rounded-l-xl'
         }`}
         style={{
+          position: 'fixed',
           [position.side]: '0px',
           top: `${position.y}px`,
           cursor: isDragging ? 'grabbing' : 'grab',
           transition: isDragging ? 'none' : 'all 0.2s ease',
-          backgroundColor: '#000000'
+          backgroundColor: '#000000',
+          zIndex: 9999
         }}
         title="Dev Tools - Click to open, drag to move"
       >
