@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.6](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.4.5...react-components-v0.4.6) (2025-07-13)
+
+
+### Bug Fixes
+
+* resolve ESLint errors for v0.5.0 deployment ([1be52e5](https://github.com/lucitra/lucitra-react-components/commit/1be52e5ef4deb0d35b726d31014b63a1a029ede5))
+
+
+### Miscellaneous Chores
+
+* **main:** release react-components 0.5.0 ([bc1421f](https://github.com/lucitra/lucitra-react-components/commit/bc1421f72521b931f7cd7cf476e80800f6080cce))
+
 ## [0.5.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.4.5...react-components-v0.5.0) (2025-07-13)
 
 ### ⚠ BREAKING CHANGES
