@@ -1,1 +1,1 @@
-export { default } from './NavLanguageSwitcher'
+export { default } from './NavLanguageSwitcher.jsx'

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import NavButton from '../NavButton/NavButton'
+import NavButton from '../NavButton/NavButton.jsx'
 import { LanguageSwitcher } from '../LanguageSwitcher'
 
 /**

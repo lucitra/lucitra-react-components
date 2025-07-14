@@ -1,1 +1,1 @@
-export { default } from './NavRegionSwitcher'
+export { default } from './NavRegionSwitcher.jsx'
