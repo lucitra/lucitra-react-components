@@ -41,6 +41,7 @@ const RegionSwitcher = ({
   disabled = false,
   displayMode = 'icon', // 'icon' or 'text'
   borderRadius = 0, // 0 for square, or number for rounded corners
+  variant = 'dark', // 'dark' (for light backgrounds) or 'light' (for dark backgrounds)
   style = {},
   className = ''
 }) => {
@@ -167,7 +168,7 @@ const RegionSwitcher = ({
           }}
           onMouseEnter={(e) => {
             if (!disabled) {
-              e.currentTarget.style.backgroundColor = '#f4f4f4'
+              e.currentTarget.style.backgroundColor = variant === 'light' ? 'rgba(255, 255, 255, 0.1)' : '#f4f4f4'
             }
           }}
           onMouseLeave={(e) => {
@@ -185,9 +186,9 @@ const RegionSwitcher = ({
           }}
           aria-label={`Select region. Current region: ${currentRegionData ? formatRegionName(currentRegionData) : 'None'}`}
         >
-          <IconGlobe size={displayMode === 'icon' ? 20 : 16} style={{ color: '#161616' }} />
+          <IconGlobe size={displayMode === 'icon' ? 20 : 16} style={{ color: variant === 'light' ? '#ffffff' : '#161616' }} />
           {displayMode === 'text' && (
-            <Text size="sm" c="#161616" style={{ lineHeight: 1 }}>
+            <Text size="sm" c={variant === 'light' ? '#ffffff' : '#161616'} style={{ lineHeight: 1 }}>
               {currentRegionData ? formatRegionName(currentRegionData) : 'Select region'}
             </Text>
           )}
