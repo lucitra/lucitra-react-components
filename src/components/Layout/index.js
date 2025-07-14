@@ -1,5 +1,6 @@
 export { default as Hero } from './Hero'
-// Layout components will be added here
-// export { default as Container } from './Container'
+export { default as Container } from './Container'
+export { default as WelcomeSection } from './WelcomeSection'
+export { default as Footer } from './Footer'
 // export { default as Grid } from './Grid'
 // export { default as Card } from './Card'

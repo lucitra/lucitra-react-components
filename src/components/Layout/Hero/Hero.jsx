@@ -20,7 +20,7 @@ const Hero = ({
   return (
     <Box style={{ backgroundColor }} className={className} {...props}>
       <Box 
-        component=\"div\"
+        component="div"
         style={{
           position: 'relative',
           isolation: 'isolate',
@@ -31,7 +31,7 @@ const Hero = ({
         {/* Background image */}
         {backgroundImage && (
           <Box
-            component=\"img\"
+            component="img"
             src={backgroundImage}
             style={{
               position: 'absolute',
@@ -126,7 +126,7 @@ const Hero = ({
                       {announcement.text}{' '}
                       {announcement.link && (
                         <Box
-                          component=\"a\"
+                          component="a"
                           href={announcement.link.href}
                           style={{
                             fontWeight: 600,
@@ -191,7 +191,7 @@ const Hero = ({
                   {primaryAction && (
                     React.isValidElement(primaryAction) ? primaryAction : (
                       <Button
-                        component=\"a\"
+                        component="a"
                         href={primaryAction.href || '#'}
                         onClick={primaryAction.onClick}
                         style={{
@@ -220,10 +220,10 @@ const Hero = ({
                   {secondaryAction && (
                     React.isValidElement(secondaryAction) ? secondaryAction : (
                       <Button
-                        component=\"a\"
+                        component="a"
                         href={secondaryAction.href || '#'}
                         onClick={secondaryAction.onClick}
-                        variant=\"transparent\"
+                        variant="transparent"
                         style={{
                           fontSize: rem(14),
                           lineHeight: 1.5,

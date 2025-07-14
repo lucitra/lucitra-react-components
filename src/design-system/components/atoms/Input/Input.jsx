@@ -221,4 +221,5 @@ Input.propTypes = {
   className: PropTypes.string,
 }
 
+export { Input }
 export default Input
