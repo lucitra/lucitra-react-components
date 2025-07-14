@@ -184,7 +184,8 @@ const RegionSwitcher = ({
             e.currentTarget.style.outline = 'none'
             e.currentTarget.style.outlineOffset = '0'
           }}
-          aria-label={`Select region. Current region: ${currentRegionData ? formatRegionName(currentRegionData) : 'None'}`}
+          aria-label="Select a region"
+          title="Select a region"
         >
           <IconGlobe size={displayMode === 'icon' ? 20 : 16} style={{ color: variant === 'light' ? '#ffffff' : '#161616' }} />
           {displayMode === 'text' && (

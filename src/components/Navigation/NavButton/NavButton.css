@@ -14,11 +14,13 @@
 }
 
 .nav-button:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .nav-button:focus {
-  border-color: #007bff;
+  border-color: #0056b3;
+  outline: 2px solid #0056b3;
+  outline-offset: 2px;
 }
 
 .nav-button--disabled {

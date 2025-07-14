@@ -172,7 +172,8 @@ const LanguageSwitcher = ({
             e.currentTarget.style.outline = 'none'
             e.currentTarget.style.outlineOffset = '0'
           }}
-          aria-label={`Select language. Current language: ${currentLanguageData ? formatLanguageName(currentLanguageData) : 'None'}`}
+          aria-label="Select a language"
+          title="Select a language"
         >
           <IconLanguage size={displayMode === 'icon' ? 20 : 16} style={{ color: '#161616' }} />
           {displayMode === 'text' && (
