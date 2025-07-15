@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.9.1...react-components-v0.10.0) (2025-07-15)
+
+
+### Features
+
+* add CookieConsent component with GDPR compliance ([c0f3452](https://github.com/lucitra/lucitra-react-components/commit/c0f3452170c31d9d916185a9b5ddb2b9afcca0fe))
+* improve NavButton accessibility and contrast ([978218e](https://github.com/lucitra/lucitra-react-components/commit/978218e3f5d440d714434e5199c409842b1189a6))
+* migrate to Apache License and enhance Privacy components ([f6c984e](https://github.com/lucitra/lucitra-react-components/commit/f6c984ee3fe5f3e3dc2a92287986c51ef079cb1a))
+
 ## [0.9.1](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.9.0...react-components-v0.9.1) (2025-07-14)
 
 
