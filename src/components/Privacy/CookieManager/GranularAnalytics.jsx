@@ -332,12 +332,8 @@ export const GranularAnalyticsProvider = ({ children, config }) => {
   const [consentSettings, setConsentSettings] = useState(analytics.consentSettings);
   const [showConsentModal, setShowConsentModal] = useState(false);
   
-  useEffect(() => {
-    // Show consent modal if no choice made
-    if (!consentSettings.timestamp) {
-      setShowConsentModal(true);
-    }
-  }, [consentSettings.timestamp]);
+  // Modal should only open when user clicks "Customize" in the banner
+  // Not automatically when there's no consent
   
   const updateConsent = (newSettings) => {
     const success = analytics.saveConsentSettings(newSettings);

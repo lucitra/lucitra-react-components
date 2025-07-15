@@ -79,12 +79,13 @@ export function CookieConsentBanner({
   autoShow = true,
   position = 'bottom',
   minimal = false,
+  cookieConfig = {},
   ...rest
 }) {
   const { 
     cookieManager, 
     setConsent 
-  } = useCookieManager();
+  } = useCookieManager(cookieConfig);
   
   const [showBanner, setShowBanner] = useState(false);
   const [preferences, setPreferences] = useState({
@@ -640,7 +641,8 @@ CookieConsentBanner.propTypes = {
   }),
   autoShow: PropTypes.bool,
   position: PropTypes.oneOf(['top', 'bottom']),
-  minimal: PropTypes.bool
+  minimal: PropTypes.bool,
+  cookieConfig: PropTypes.object
 };
 
 CookieConsentBanner.displayName = 'CookieConsentBanner';

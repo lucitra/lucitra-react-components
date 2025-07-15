@@ -15,14 +15,14 @@ export const COOKIE_CONFIG = {
   DEFAULT_SAME_SITE: 'Lax',
   DEFAULT_SECURE: typeof window !== 'undefined' ? window.location.protocol === 'https:' : false,
   
-  // Cookie names
+  // Cookie names (configurable prefix)
   NAMES: {
-    CONSENT: 'lucitra_consent',
-    SESSION: 'lucitra_session',
-    PREFERENCES: 'lucitra_preferences',
-    ANALYTICS: 'lucitra_analytics_consent',
-    MARKETING: 'lucitra_marketing_consent',
-    AI_TRAINING: 'lucitra_ai_training_consent'
+    CONSENT: 'app_consent',
+    SESSION: 'app_session',
+    PREFERENCES: 'app_preferences',
+    ANALYTICS: 'app_analytics_consent',
+    MARKETING: 'app_marketing_consent',
+    AI_TRAINING: 'app_ai_training_consent'
   },
   
   // Expiry times (in days)
@@ -35,16 +35,11 @@ export const COOKIE_CONFIG = {
     AI_TRAINING: 730 // 2 years
   },
   
-  // Cross-domain settings
+  // Cross-domain settings - DISABLED by default for public use
   CROSS_DOMAIN: {
-    ENABLE: true,
-    ROOT_DOMAIN: '.lucitra.ai', // Share across all Lucitra subdomains
-    SUBDOMAINS: [
-      'app.lucitra.ai',
-      'docs.lucitra.ai', 
-      'blog.lucitra.ai',
-      'marketplace.lucitra.ai'
-    ]
+    ENABLE: false, // Disabled by default for generic use
+    ROOT_DOMAIN: '', // Will be set to current domain if enabled
+    SUBDOMAINS: []
   }
 };
 
@@ -59,7 +54,14 @@ export class LucitraCookieManager {
     };
     
     this.isServer = typeof window === 'undefined';
-    this.domain = this.config.CROSS_DOMAIN.ENABLE ? this.config.CROSS_DOMAIN.ROOT_DOMAIN : this.config.DEFAULT_DOMAIN;
+    
+    // Set domain based on cross-domain configuration
+    if (this.config.CROSS_DOMAIN.ENABLE && this.config.CROSS_DOMAIN.ROOT_DOMAIN) {
+      this.domain = this.config.CROSS_DOMAIN.ROOT_DOMAIN;
+    } else {
+      // For single domain use, don't set domain attribute (uses current domain)
+      this.domain = null;
+    }
     
     // Initialize consent state
     this.consentState = this.loadConsentState();
@@ -81,13 +83,17 @@ export class LucitraCookieManager {
     
     try {
       const cookieOptions = {
-        domain: this.domain,
         path: this.config.DEFAULT_PATH,
         sameSite: this.config.DEFAULT_SAME_SITE,
         secure: this.config.DEFAULT_SECURE,
         expires: null, // Will be calculated below
         ...options
       };
+      
+      // Only set domain if cross-domain is enabled
+      if (this.domain) {
+        cookieOptions.domain = this.domain;
+      }
       
       // Calculate expiry date
       if (options.maxAge) {
@@ -216,11 +222,22 @@ export class LucitraCookieManager {
     }
     
     try {
-      const testCookie = 'lucitra_cookie_test';
-      this.setCookie(testCookie, 'test', { days: 0 });
-      const enabled = this.getCookie(testCookie) === 'test';
-      this.deleteCookie(testCookie);
-      return enabled;
+      // Use a simple, direct cookie test without domain complications
+      const testName = 'test_cookie_' + Date.now();
+      const testValue = 'test';
+      
+      // Set a simple test cookie without any domain restrictions
+      document.cookie = `${testName}=${testValue}; path=/; SameSite=Lax`;
+      
+      // Check if we can read it back
+      const cookieExists = document.cookie.indexOf(`${testName}=${testValue}`) !== -1;
+      
+      // Clean up the test cookie
+      if (cookieExists) {
+        document.cookie = `${testName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+      }
+      
+      return cookieExists;
     } catch {
       return false;
     }
