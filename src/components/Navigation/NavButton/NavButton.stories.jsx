@@ -1,7 +1,7 @@
 import NavButton from './NavButton'
 
 export default {
-  title: 'Navigation/NavButton',
+  title: 'Components/Molecules/NavButton',
   component: NavButton,
   parameters: {
     layout: 'centered',

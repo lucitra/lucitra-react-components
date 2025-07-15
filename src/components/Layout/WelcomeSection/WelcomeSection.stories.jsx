@@ -1,7 +1,7 @@
 import WelcomeSection from './WelcomeSection'
 
 export default {
-  title: 'Layout/WelcomeSection',
+  title: 'Components/Organisms/Layout/WelcomeSection',
   component: WelcomeSection,
   parameters: {
     layout: 'centered',

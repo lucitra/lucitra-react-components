@@ -8,7 +8,7 @@ const ThrowError = ({ shouldThrow }) => {
 }
 
 export default {
-  title: 'Feedback/ErrorBoundary',
+  title: 'Components/Organisms/Feedback/ErrorBoundary',
   component: ErrorBoundary,
   parameters: {
     layout: 'fullscreen',

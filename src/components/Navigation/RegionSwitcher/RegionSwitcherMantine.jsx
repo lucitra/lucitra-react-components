@@ -9,7 +9,7 @@ import { DEFAULT_REGIONS } from '../../../utils/defaultConfigs'
  * 
  * An icon-only dropdown button for selecting regions/countries with automatic language 
  * synchronization and RTL support. Displays as a square button with globe icon, 
- * inspired by IBM.com's design.
+ * inspired by modern enterprise design patterns.
  * 
  * @component
  * @example

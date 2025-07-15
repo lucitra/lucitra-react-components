@@ -2,7 +2,7 @@ import { IconPlus, IconDownload, IconTrash, IconEdit, IconArrowRight, IconArrowL
 import Button from './Button'
 
 export default {
-  title: 'Design System/Atoms/Button',
+  title: 'Components/Atoms/Button',
   component: Button,
   parameters: {
     layout: 'centered',

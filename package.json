@@ -4,7 +4,7 @@
   "type": "module",
   "description": "A comprehensive React component library for modern web applications",
   "author": "Lucitra",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "files": [

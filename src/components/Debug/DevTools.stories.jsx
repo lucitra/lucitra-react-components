@@ -1,7 +1,7 @@
 import DevTools from './DevTools'
 
 export default {
-  title: 'Debug/DevTools',
+  title: 'Platform Tools/DevTools',
   component: DevTools,
   parameters: {
     layout: 'fullscreen',

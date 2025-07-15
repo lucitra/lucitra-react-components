@@ -8,7 +8,7 @@ import { DEFAULT_LANGUAGES } from '../../../utils/defaultConfigs'
  * LanguageSwitcher Component (Mantine Version)
  * 
  * An icon-only dropdown button for selecting languages with i18next integration.
- * Displays as a square button with language icon, inspired by IBM.com's design.
+ * Displays as a square button with language icon, inspired by modern enterprise design patterns.
  * 
  * @component
  * @example

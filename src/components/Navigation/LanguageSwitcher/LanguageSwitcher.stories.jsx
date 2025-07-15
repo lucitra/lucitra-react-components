@@ -21,13 +21,13 @@ const LanguageSwitcherWithState = (args) => {
 }
 
 export default {
-  title: 'Navigation/LanguageSwitcher',
+  title: 'Components/Organisms/Navigation/LanguageSwitcher',
   component: LanguageSwitcher,
   parameters: {
     layout: 'centered',
     docs: {
       description: {
-        component: 'An icon-only dropdown button for selecting languages. Features a square button with language icon (IBM.com-inspired), dark dropdown panel, and built-in RTL support with i18n integration.',
+        component: 'An icon-only dropdown button for selecting languages. Features a square button with language icon (modern enterprise-inspired), dark dropdown panel, and built-in RTL support with i18n integration.',
       },
     },
   },

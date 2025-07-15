@@ -21,13 +21,13 @@ const RegionSwitcherWithState = (args) => {
 }
 
 export default {
-  title: 'Navigation/RegionSwitcher',
+  title: 'Components/Organisms/Navigation/RegionSwitcher',
   component: RegionSwitcher,
   parameters: {
     layout: 'centered',
     docs: {
       description: {
-        component: 'An icon-only dropdown button for selecting regions/countries. Features a square button with globe icon (IBM.com-inspired), dark dropdown panel, and automatic language synchronization with RTL support.',
+        component: 'An icon-only dropdown button for selecting regions/countries. Features a square button with globe icon (modern enterprise-inspired), dark dropdown panel, and automatic language synchronization with RTL support.',
       },
     },
   },
@@ -271,8 +271,8 @@ export const KeyboardFocus = {
   },
 }
 
-// IBM.com Style example
-export const IBMStyle = {
+// Enterprise Style example
+export const EnterpriseStyle = {
   render: (args) => <RegionSwitcherWithState {...args} />,
   args: {
     currentRegion: 'US',
@@ -298,7 +298,7 @@ export const IBMStyle = {
   parameters: {
     docs: {
       description: {
-        story: 'IBM.com-inspired styling with dark dropdown, clean typography, and comprehensive region list formatted like IBM.com.',
+        story: 'Modern enterprise-inspired styling with dark dropdown, clean typography, and comprehensive region list formatted for professional applications.',
       },
     },
   },

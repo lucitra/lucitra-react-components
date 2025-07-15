@@ -2,7 +2,7 @@ import React from 'react'
 import { Input } from './Input'
 
 export default {
-  title: 'Design System/Atoms/Input',
+  title: 'Components/Atoms/Input',
   component: Input,
   parameters: {
     docs: {

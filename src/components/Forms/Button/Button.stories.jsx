@@ -1,7 +1,7 @@
 import Button from './Button'
 
 export default {
-  title: 'Forms/Button',
+  title: 'Components/Atoms/FormButton',
   component: Button,
   parameters: {
     layout: 'centered',

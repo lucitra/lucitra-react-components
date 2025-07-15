@@ -3,7 +3,7 @@ import BaseButton from './BaseButton'
 import { DESIGN_TOKENS } from '../../tokens'
 
 export default {
-  title: 'Design System/BaseButton',
+  title: 'Foundation/BaseButton',
   component: BaseButton,
   parameters: {
     layout: 'centered',

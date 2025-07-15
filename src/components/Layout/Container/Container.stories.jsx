@@ -1,7 +1,7 @@
 import Container from './Container'
 
 export default {
-  title: 'Layout/Container',
+  title: 'Components/Organisms/Layout/Container',
   component: Container,
   parameters: {
     layout: 'fullscreen',
