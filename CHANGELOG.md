@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.1](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.10.0...react-components-v0.10.1) (2025-07-15)
+
+
+### Bug Fixes
+
+* resolve cookie domain configuration for public use ([0f5826b](https://github.com/lucitra/lucitra-react-components/commit/0f5826b8ffbca2c38b1c713ec13fe9fa978fe736))
+
 ## [0.10.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.9.1...react-components-v0.10.0) (2025-07-15)
 
 
