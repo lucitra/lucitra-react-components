@@ -19,11 +19,19 @@ const config = {
     reactDocgen: 'react-docgen',
   },
   async viteFinal(config) {
-    return {
-      ...config,
-      // Mantine works out of the box with Vite, no special configuration needed
+    // Ensure proper handling of ES modules
+    config.optimizeDeps = {
+      ...config.optimizeDeps,
+      include: [
+        '@mantine/core',
+        '@mantine/hooks',
+        '@tabler/icons-react',
+        'prop-types'
+      ],
     }
+    return config
   },
+  staticDirs: ['../public'],
 }
 
 export default config
