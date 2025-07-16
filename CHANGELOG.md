@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.13.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.12.0...react-components-v0.13.0) (2025-07-16)
+
+
+### Features
+
+* enhance vite and storybook configuration ([be29b0f](https://github.com/lucitra/lucitra-react-components/commit/be29b0f0e7f23a505724a47993f33ce1a9d8c241))
+* implement pre-commit hook and remove Privacy components ([1216f4a](https://github.com/lucitra/lucitra-react-components/commit/1216f4acc63edf6d55eaea06e1c7304f970b2955))
+
 ## [0.12.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.11.0...react-components-v0.12.0) (2025-07-16)
 
 
