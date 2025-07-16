@@ -1,5 +1,5 @@
 // Navigation Components
-export { LanguageSwitcher, RegionSwitcher } from './Navigation'
+export { LanguageSwitcher, RegionSwitcher, NavButton } from './Navigation'
 
 // Debug Components
 export * from './Debug'
@@ -21,3 +21,6 @@ export * from './DataDisplay'
 
 // Privacy Enhancing Technology Components
 export * from './Privacy'
+
+// Typography Components
+export * from './Typography'

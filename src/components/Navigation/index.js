@@ -1,6 +1,6 @@
 export { default as LanguageSwitcher } from './LanguageSwitcher'
 export { default as RegionSwitcher } from './RegionSwitcher'
-export { default as NavButton } from './NavButton'
+export { NavButton } from './NavButton'
 export { default as NavLanguageSwitcher } from './NavLanguageSwitcher'
 export { default as NavRegionSwitcher } from './NavRegionSwitcher'
 // export { default as Navigation } from './Navigation'
