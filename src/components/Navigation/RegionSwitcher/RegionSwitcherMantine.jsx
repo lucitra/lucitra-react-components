@@ -321,6 +321,8 @@ RegionSwitcher.propTypes = {
   displayMode: PropTypes.oneOf(['icon', 'text']),
   /** Border radius in pixels (0 for square corners, >0 for rounded) */
   borderRadius: PropTypes.number,
+  /** The visual variant of the button */
+  variant: PropTypes.oneOf(['dark', 'light']),
   /** Custom styles */
   style: PropTypes.object,
   /** Custom CSS class */

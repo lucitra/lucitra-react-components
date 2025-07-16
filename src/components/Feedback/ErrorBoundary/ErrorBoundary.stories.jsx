@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import ErrorBoundary, { ErrorFallback } from './ErrorBoundary'
 
 const ThrowError = ({ shouldThrow }) => {
@@ -6,6 +7,10 @@ const ThrowError = ({ shouldThrow }) => {
   }
   return <div>This component is working normally</div>
 }
+
+ThrowError.propTypes = {
+  shouldThrow: PropTypes.bool
+};
 
 export default {
   title: 'Components/Organisms/Feedback/ErrorBoundary',

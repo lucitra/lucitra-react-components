@@ -1,1 +1,0 @@
-export { default as GamingPrivacyConsent } from './GamingPrivacyConsent.jsx'

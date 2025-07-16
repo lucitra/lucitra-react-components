@@ -146,7 +146,7 @@ export const BlogParagraph = {
         can now be achieved with modern frameworks and cloud services.
       </Text>
       <Text style={{ marginBottom: '1rem', lineHeight: 1.7 }}>
-        In this article, we'll explore the key technologies and patterns that 
+        In this article, we&apos;ll explore the key technologies and patterns that 
         define modern web development, from component-based architectures to 
         serverless deployments.
       </Text>

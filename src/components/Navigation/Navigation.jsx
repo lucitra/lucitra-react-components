@@ -74,21 +74,21 @@ const Navigation = ({
   }
 
   return (
-    <Box component=\"header\" style={headerStyles} className={className} {...props}>
-      <Group justify=\"space-between\" style={navigationStyles}>
+    <Box component="header" style={headerStyles} className={className} {...props}>
+      <Group justify="space-between" style={navigationStyles}>
         {/* Logo */}
         <Group style={{ flex: 1 }}>
           {React.isValidElement(logo) ? (
             logo
           ) : (
             <UnstyledButton 
-              component=\"a\" 
-              href=\"#\"
+              component="a" 
+              href="#"
               style={{ margin: rem(-6), padding: rem(6) }}
             >
               <Title 
                 order={1} 
-                size=\"h2\" 
+                size="h2" 
                 style={{ color: colors.text }}
               >
                 {logo}
@@ -98,7 +98,7 @@ const Navigation = ({
         </Group>
 
         {/* Mobile menu button */}
-        <Group hiddenFrom=\"lg\">
+        <Group hiddenFrom="lg">
           <UnstyledButton
             onClick={handleMobileMenuToggle}
             style={{
@@ -126,18 +126,18 @@ const Navigation = ({
             </span>
             <Burger 
               opened={mobileMenuOpen} 
-              size=\"sm\" 
+              size="sm" 
               color={variant === 'transparent' ? '#9CA3AF' : '#6B7280'} 
             />
           </UnstyledButton>
         </Group>
 
         {/* Desktop navigation */}
-        <Group gap={rem(48)} visibleFrom=\"lg\">
+        <Group gap={rem(48)} visibleFrom="lg">
           {navigation.map((item, index) => (
             <UnstyledButton
               key={item.key || item.name || index}
-              component=\"a\"
+              component="a"
               href={item.href || '#'}
               onClick={item.onClick}
               style={{
@@ -153,14 +153,14 @@ const Navigation = ({
         </Group>
 
         {/* Desktop right side actions */}
-        <Group style={{ flex: 1, justifyContent: 'flex-end' }} gap=\"md\" visibleFrom=\"lg\">
+        <Group style={{ flex: 1, justifyContent: 'flex-end' }} gap="md" visibleFrom="lg">
           {actions.map((action, index) => (
             React.isValidElement(action) ? (
               <Box key={index}>{action}</Box>
             ) : (
               <UnstyledButton
                 key={action.key || action.name || index}
-                component=\"a\"
+                component="a"
                 href={action.href || '#'}
                 onClick={action.onClick}
                 style={{
@@ -181,8 +181,8 @@ const Navigation = ({
       <Drawer
         opened={mobileMenuOpen}
         onClose={() => setMobileMenuOpen(false)}
-        position=\"right\"
-        size=\"100%\"
+        position="right"
+        size="100%"
         styles={{
           content: {
             '@media (min-width: 640px)': {
@@ -190,7 +190,7 @@ const Navigation = ({
             }
           }
         }}
-        hiddenFrom=\"lg\"
+        hiddenFrom="lg"
         style={{ zIndex: 50 }}
       >
         <Box 
@@ -205,14 +205,14 @@ const Navigation = ({
             padding: rem(24)
           }}
         >
-          <Group justify=\"space-between\" mb=\"xl\">
+          <Group justify="space-between" mb="xl">
             {React.isValidElement(logo) ? (
               logo
             ) : (
-              <UnstyledButton component=\"a\" href=\"#\" style={{ margin: rem(-6), padding: rem(6) }}>
+              <UnstyledButton component="a" href="#" style={{ margin: rem(-6), padding: rem(6) }}>
                 <Title 
                   order={1} 
-                  size=\"h2\" 
+                  size="h2" 
                   style={{ color: variant === 'transparent' ? 'white' : colors.text }}
                 >
                   {logo}
@@ -256,7 +256,7 @@ const Navigation = ({
                 {navigation.map((item, index) => (
                   <UnstyledButton
                     key={item.key || item.name || index}
-                    component=\"a\"
+                    component="a"
                     href={item.href || '#'}
                     onClick={(e) => {
                       if (item.onClick) item.onClick(e)
@@ -284,11 +284,11 @@ const Navigation = ({
             <Box py={rem(24)}>
               {actions.map((action, index) => (
                 React.isValidElement(action) ? (
-                  <Box key={index} mb=\"md\">{action}</Box>
+                  <Box key={index} mb="md">{action}</Box>
                 ) : (
                   <UnstyledButton
                     key={action.key || action.name || index}
-                    component=\"a\"
+                    component="a"
                     href={action.href || '#'}
                     onClick={(e) => {
                       if (action.onClick) action.onClick(e)

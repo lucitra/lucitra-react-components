@@ -19,8 +19,5 @@ export * from './Feedback'
 // Data Display Components
 export * from './DataDisplay'
 
-// Privacy Enhancing Technology Components
-export * from './Privacy'
-
 // Typography Components
 export * from './Typography'
