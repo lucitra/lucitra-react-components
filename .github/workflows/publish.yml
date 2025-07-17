@@ -47,9 +47,11 @@ jobs:
         run: |
           PACKAGE_NAME=$(node -p "require('./package.json').name")
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          # npm pack removes @ and / from scoped package names for the tarball filename
+          TARBALL_NAME=$(node -p "require('./package.json').name.replace('@', '').replace('/', '-')")
           echo "name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
           echo "version=$PACKAGE_VERSION" >> $GITHUB_OUTPUT
-          echo "tarball=${PACKAGE_NAME}-${PACKAGE_VERSION}.tgz" >> $GITHUB_OUTPUT
+          echo "tarball=${TARBALL_NAME}-${PACKAGE_VERSION}.tgz" >> $GITHUB_OUTPUT
           
       - name: Create package tarball
         run: npm pack
