@@ -42,46 +42,8 @@ jobs:
       - name: Build package
         run: npm run build
         
-      - name: Get package info
-        id: package-info
-        run: |
-          PACKAGE_NAME=$(node -p "require('./package.json').name")
-          PACKAGE_VERSION=$(node -p "require('./package.json').version")
-          # npm pack removes @ and / from scoped package names for the tarball filename
-          TARBALL_NAME=$(node -p "require('./package.json').name.replace('@', '').replace('/', '-')")
-          echo "DEBUG: Expected tarball name: ${TARBALL_NAME}-${PACKAGE_VERSION}.tgz"
-          echo "name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
-          echo "version=$PACKAGE_VERSION" >> $GITHUB_OUTPUT
-          echo "tarball=${TARBALL_NAME}-${PACKAGE_VERSION}.tgz" >> $GITHUB_OUTPUT
-          
-      - name: Create package tarball
-        run: |
-          npm pack
-          echo "Files created:"
-          ls -la *.tgz
-          echo "Expected file: ${{ steps.package-info.outputs.tarball }}"
         
       - name: Publish to NPM
-        run: npm publish --access public
+        run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          
-      - name: Generate build attestation
-        uses: actions/attest-build-provenance@v1
-        with:
-          subject-path: '${{ steps.package-info.outputs.tarball }}'
-          
-      - name: Generate SLSA attestation for built package
-        uses: actions/attest-sbom@v1
-        with:
-          subject-path: '${{ steps.package-info.outputs.tarball }}'
-          sbom-path: '${{ steps.package-info.outputs.tarball }}'
-          
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: package-artifacts
-          path: |
-            ${{ steps.package-info.outputs.tarball }}
-            dist/
-          retention-days: 30
