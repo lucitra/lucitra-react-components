@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.14.3](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.14.2...react-components-v0.14.3) (2025-07-17)
+
+
+### Miscellaneous Chores
+
+* simplify NPM publishing workflow by removing unnecessary steps ([0e5ee91](https://github.com/lucitra/lucitra-react-components/commit/0e5ee91ff6fbac1b3e9adb9c5e0e7c43c0067b9a))
+
 ## [0.14.2](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.14.1...react-components-v0.14.2) (2025-07-17)
 
 
