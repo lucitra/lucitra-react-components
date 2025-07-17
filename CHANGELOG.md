@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.14.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.13.0...react-components-v0.14.0) (2025-07-17)
+
+
+### Features
+
+* add NPM publishing workflow with build attestations ([6a4827d](https://github.com/lucitra/lucitra-react-components/commit/6a4827db9ee2e9b3960b5ee3ef4b6f59727da97d))
+
 ## [0.13.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.12.0...react-components-v0.13.0) (2025-07-16)
 
 
