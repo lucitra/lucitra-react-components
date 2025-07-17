@@ -47,39 +47,7 @@ jobs:
       - run: npm install --legacy-peer-deps
       - run: npm run build
       
-      - name: Get package info
-        id: package-info
-        run: |
-          PACKAGE_NAME=$(node -p "require('./package.json').name")
-          PACKAGE_VERSION=$(node -p "require('./package.json').version")
-          echo "name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
-          echo "version=$PACKAGE_VERSION" >> $GITHUB_OUTPUT
-          echo "tarball=${PACKAGE_NAME}-${PACKAGE_VERSION}.tgz" >> $GITHUB_OUTPUT
-          
-      - name: Create package tarball
-        run: npm pack
-      
       - name: Publish to npm
-        run: npm publish --access public
+        run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          
-      - name: Generate build attestation
-        uses: actions/attest-build-provenance@v1
-        with:
-          subject-path: '${{ steps.package-info.outputs.tarball }}'
-          
-      - name: Generate SLSA attestation for built package
-        uses: actions/attest-sbom@v1
-        with:
-          subject-path: '${{ steps.package-info.outputs.tarball }}'
-          sbom-path: '${{ steps.package-info.outputs.tarball }}'
-          
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: package-artifacts
-          path: |
-            ${{ steps.package-info.outputs.tarball }}
-            dist/
-          retention-days: 30
