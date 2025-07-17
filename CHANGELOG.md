@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.14.5](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.14.4...react-components-v0.14.5) (2025-07-17)
+
+
+### Miscellaneous Chores
+
+* update npm publish command by removing the --provenance flag ([4ea3a26](https://github.com/lucitra/lucitra-react-components/commit/4ea3a265d179e8f4f77c29c0e75d24fd83120765))
+* update npm publish command by removing the --provenance flag ([a9e49ea](https://github.com/lucitra/lucitra-react-components/commit/a9e49eafa20eced1f70aecbc938ae9a3eb4fa3ca))
+
 ## [0.14.4](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.14.3...react-components-v0.14.4) (2025-07-17)
 
 
