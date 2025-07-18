@@ -1,0 +1,106 @@
+/* Base Flex Component */
+.flex {
+  display: flex;
+  box-sizing: border-box;
+}
+
+.flex--inline {
+  display: inline-flex;
+}
+
+.flex--grow {
+  flex-grow: 1;
+}
+
+.flex--shrink {
+  flex-shrink: 1;
+}
+
+/* Flex Item Component */
+.flex-item {
+  box-sizing: border-box;
+}
+
+/* Utility Classes for Common Patterns */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.flex-evenly {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+/* Common flex item utilities */
+.flex-1 {
+  flex: 1;
+}
+
+.flex-auto {
+  flex: auto;
+}
+
+.flex-none {
+  flex: none;
+}
+
+.flex-grow-0 {
+  flex-grow: 0;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+.flex-shrink-1 {
+  flex-shrink: 1;
+}

@@ -1,0 +1,187 @@
+/* Input Container */
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.input-container--full-width {
+  width: 100%;
+}
+
+/* Input Label */
+.input-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.input-label--required {
+  color: #374151;
+}
+
+.input-label-required {
+  color: #ef4444;
+  margin-left: 2px;
+}
+
+/* Input Wrapper */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Base Input Styles */
+.input {
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #111827;
+  background-color: #ffffff;
+  border: 2px solid #d1d5db;
+  transition: all 0.15s ease;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Size Variants */
+.input--small {
+  padding: 6px 8px;
+  font-size: 12px;
+  min-height: 32px;
+}
+
+.input--medium {
+  padding: 8px 12px;
+  font-size: 14px;
+  min-height: 40px;
+}
+
+.input--large {
+  padding: 12px 16px;
+  font-size: 16px;
+  min-height: 48px;
+}
+
+/* Visual Variants */
+.input--outlined {
+  border: 2px solid #d1d5db;
+  border-radius: 0;
+  background-color: #ffffff;
+}
+
+.input--filled {
+  border: 2px solid transparent;
+  border-radius: 0;
+  background-color: #f9fafb;
+  border-bottom: 2px solid #d1d5db;
+}
+
+.input--standard {
+  border: none;
+  border-bottom: 2px solid #d1d5db;
+  border-radius: 0;
+  background-color: transparent;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Full Width */
+.input--full-width {
+  width: 100%;
+}
+
+/* Icon Styling */
+.input-icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.input-icon--start {
+  left: 12px;
+}
+
+.input-icon--end {
+  right: 12px;
+}
+
+.input--with-icons.input-icon--start ~ .input {
+  padding-left: 40px;
+}
+
+.input--with-icons.input-icon--end ~ .input {
+  padding-right: 40px;
+}
+
+/* States */
+.input:hover:not(:disabled):not(:read-only) {
+  border-color: #9ca3af;
+}
+
+.input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 1px #3b82f6;
+}
+
+.input:disabled {
+  background-color: #f3f4f6;
+  color: #6b7280;
+  cursor: not-allowed;
+  border-color: #e5e7eb;
+}
+
+.input:read-only {
+  background-color: #f9fafb;
+  border-color: #e5e7eb;
+}
+
+/* Error State */
+.input--error {
+  border-color: #ef4444;
+}
+
+.input--error:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 1px #ef4444;
+}
+
+/* Helper Text */
+.input-helper {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+/* Error Text */
+.input-error {
+  font-size: 12px;
+  color: #ef4444;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Placeholder */
+.input::placeholder {
+  color: #9ca3af;
+}
+
+.input:disabled::placeholder {
+  color: #d1d5db;
+}
+
+/* Focus Visible for Accessibility */
+.input:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}

@@ -1,0 +1,56 @@
+/* Base Grid Component */
+.grid {
+  display: grid;
+  box-sizing: border-box;
+}
+
+/* Responsive Grid Columns */
+.grid--responsive {
+  grid-template-columns: var(--grid-columns-xs, 1fr);
+}
+
+/* Breakpoint-specific columns */
+@media (min-width: 576px) {
+  .grid--responsive {
+    grid-template-columns: var(--grid-columns-sm, var(--grid-columns-xs, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .grid--responsive {
+    grid-template-columns: var(--grid-columns-md, var(--grid-columns-sm, var(--grid-columns-xs, 1fr)));
+  }
+}
+
+@media (min-width: 992px) {
+  .grid--responsive {
+    grid-template-columns: var(--grid-columns-lg, var(--grid-columns-md, var(--grid-columns-sm, var(--grid-columns-xs, 1fr))));
+  }
+}
+
+@media (min-width: 1200px) {
+  .grid--responsive {
+    grid-template-columns: var(--grid-columns-xl, var(--grid-columns-lg, var(--grid-columns-md, var(--grid-columns-sm, var(--grid-columns-xs, 1fr)))));
+  }
+}
+
+/* Grid Item Helper Classes */
+.grid-item {
+  box-sizing: border-box;
+}
+
+.grid-item--span-2 {
+  grid-column: span 2;
+}
+
+.grid-item--span-3 {
+  grid-column: span 3;
+}
+
+.grid-item--span-4 {
+  grid-column: span 4;
+}
+
+.grid-item--span-full {
+  grid-column: 1 / -1;
+}

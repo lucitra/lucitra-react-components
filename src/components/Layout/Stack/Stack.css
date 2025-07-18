@@ -1,0 +1,74 @@
+/* Base Stack Component */
+.stack {
+  display: flex;
+  box-sizing: border-box;
+}
+
+/* Direction Variants */
+.stack--column {
+  flex-direction: column;
+}
+
+.stack--row {
+  flex-direction: row;
+}
+
+.stack--column-reverse {
+  flex-direction: column-reverse;
+}
+
+.stack--row-reverse {
+  flex-direction: row-reverse;
+}
+
+/* Wrapping Variants */
+.stack--wrap-wrap {
+  flex-wrap: wrap;
+}
+
+.stack--wrap-wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+/* Stack Divider */
+.stack-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Row direction divider adjustments */
+.stack--row .stack-divider,
+.stack--row-reverse .stack-divider {
+  height: 100%;
+  margin: 0 !important;
+}
+
+/* Column direction divider adjustments */
+.stack--column .stack-divider,
+.stack--column-reverse .stack-divider {
+  width: 100%;
+  margin: 0 !important;
+}
+
+/* Common divider styles */
+.stack-divider hr {
+  border: none;
+  background-color: #e5e7eb;
+  margin: 0;
+}
+
+.stack--row .stack-divider hr,
+.stack--row-reverse .stack-divider hr {
+  width: 1px;
+  height: 100%;
+  min-height: 20px;
+}
+
+.stack--column .stack-divider hr,
+.stack--column-reverse .stack-divider hr {
+  height: 1px;
+  width: 100%;
+  min-width: 20px;
+}
