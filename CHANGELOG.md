@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.14.6](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.14.5...react-components-v0.14.6) (2025-07-18)
+
+
+### Styles
+
+* **NavButton:** center children and remove padding for better alignment ([ac0002a](https://github.com/lucitra/lucitra-react-components/commit/ac0002a270651b41955ac6dbc4c7d859780e802c))
+
+
+### Miscellaneous Chores
+
+* update commitlint configuration to enhance commit message guidelines ([70c2437](https://github.com/lucitra/lucitra-react-components/commit/70c243708826005781b7c57b394e5db148ee385b))
+
 ## [0.14.5](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.14.4...react-components-v0.14.5) (2025-07-17)
 
 
