@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.15.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.14.6...react-components-v0.15.0) (2025-07-18)
+
+
+### Features
+
+* add comprehensive form and layout components with storybook documentation ([f85b1e6](https://github.com/lucitra/lucitra-react-components/commit/f85b1e6abc05ccd4a010a111b9ab6035607ecaa7))
+
 ## [0.14.6](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.14.5...react-components-v0.14.6) (2025-07-18)
 
 
