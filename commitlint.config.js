@@ -5,21 +5,23 @@ export default {
       2,
       'always',
       [
-        'feat',
-        'fix',
-        'docs',
-        'style',
-        'refactor',
-        'perf',
-        'test',
-        'chore',
-        'revert',
-        'ci',
-        'build'
+        'feat',     // New feature
+        'fix',      // Bug fix
+        'docs',     // Documentation changes
+        'style',    // Code style changes (formatting, etc.)
+        'refactor', // Code refactoring
+        'perf',     // Performance improvements
+        'test',     // Test additions or modifications
+        'build',    // Build system changes
+        'ci',       // CI configuration changes
+        'chore',    // Other changes that don't modify src or test files
+        'revert'    // Revert previous commit
       ]
     ],
-    'subject-case': [2, 'never', ['sentence-case', 'start-case', 'pascal-case', 'upper-case']],
+    'subject-case': [2, 'always', 'lower-case'],
     'subject-full-stop': [2, 'never', '.'],
-    'header-max-length': [2, 'always', 72]
+    'subject-max-length': [2, 'always', 100],
+    'header-max-length': [2, 'always', 100],
+    'body-max-line-length': [2, 'always', 200]
   }
 };
