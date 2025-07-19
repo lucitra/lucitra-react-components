@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.16.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.15.0...react-components-v0.16.0) (2025-07-19)
+
+
+### Features
+
+* add new Badge and Table components with documentation ([24bf60f](https://github.com/lucitra/lucitra-react-components/commit/24bf60fbd45e0556b9f6c9d57f1a38a3e2e6e454))
+
 ## [0.15.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.14.6...react-components-v0.15.0) (2025-07-18)
 
 
