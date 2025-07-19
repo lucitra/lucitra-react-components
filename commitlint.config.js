@@ -18,10 +18,10 @@ export default {
         'revert'    // Revert previous commit
       ]
     ],
-    'subject-case': [2, 'always', 'lower-case'],
+    'subject-case': [0],  // Disabled - too restrictive for filenames and proper nouns
     'subject-full-stop': [2, 'never', '.'],
     'subject-max-length': [2, 'always', 100],
     'header-max-length': [2, 'always', 100],
     'body-max-line-length': [2, 'always', 200]
   }
-};
+}

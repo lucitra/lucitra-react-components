@@ -1,2 +1,2 @@
-export { default } from './Stack'
-export { default as Stack } from './Stack'
+export { default } from './Stack.jsx'
+export { default as Stack } from './Stack.jsx'

@@ -1,2 +1,2 @@
-export { default } from './Flex'
-export { default as Flex, FlexItem } from './Flex'
+export { default } from './Flex.jsx'
+export { default as Flex, FlexItem } from './Flex.jsx'
