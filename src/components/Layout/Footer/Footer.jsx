@@ -38,7 +38,7 @@ function Footer({
     : currentYear
 
   const copyrightText = useI18n && name
-    ? t(copyrightKey, copyrightFallback).replace('{year}', copyrightYears).replace('{name}', name)
+    ? t(copyrightKey, { year: copyrightYears, name: name })
     : copyrightFallback.replace('{year}', copyrightYears).replace('{name}', name || 'Your Name')
 
   const socialIcons = [
