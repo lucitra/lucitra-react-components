@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.16.1](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.16.0...react-components-v0.16.1) (2025-07-20)
+
+
+### Bug Fixes
+
+* **Footer:** simplify copyright text translation logic ([0042c74](https://github.com/lucitra/lucitra-react-components/commit/0042c7497d784e297429897e09431c000e069cbe))
+
 ## [0.16.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.15.0...react-components-v0.16.0) (2025-07-19)
 
 
