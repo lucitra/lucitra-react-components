@@ -154,6 +154,7 @@ The ResumeBuilder provides a unified interface to print all layout versions:
 - **Company Names**: 11pt + **Bold**
 - **Job Titles**: 11pt + *Italic*
 - **Dates & Locations**: 11pt + *Italic*
+- **Education**: Shows "Graduated [Year]" instead of date ranges
 - **Descriptions**: 11pt + Regular
 - **All text is pure black (#000000)**
 

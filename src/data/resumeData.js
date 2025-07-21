@@ -169,11 +169,13 @@ export const sampleResumeData = {
       studyType: "Master of Liberal Arts",
       location: "Cambridge, MA",
       startDate: "Dec 2020",
-      endDate: "Jul 2025",
+      endDate: "2025",
       visibility: { online: true, print: true },
-      details: [
-        "Capstone Projects: AI Clinical Trial Matching",
-        "Relevant Coursework: Wearable Devices and Computer Vision, Networks and Cloud Security, Advanced Cloud Technology Management, Cloud Services & Infrastructure, Programming Big Data Systems, User Experience Engineering, Artificial Intelligence Using Python, Intro to Blockchain: Bitcoin"
+      courses: [
+        "Capstone Projects: AI Clinical Trial Matching"
+      ],
+      relevantCoursework: [
+        "Computer Vision, Cloud Security, Programming Big Data Systems, User Experience Engineering, Artificial Intelligence Using Python"
       ]
     },
     {
@@ -182,7 +184,7 @@ export const sampleResumeData = {
       studyType: "Bachelor of Business Administration",
       location: "Austin, TX",
       startDate: "Jul 2003", 
-      endDate: "Apr 2008",
+      endDate: "2008",
       visibility: { online: true, print: true }
     }
   ],
@@ -192,12 +194,10 @@ export const sampleResumeData = {
       items: [
         "Python, TypeScript, Kotlin, Git",
         "Django, FastAPI, ReactJS, NextJS",
-        "AWS, Azure, GCP, Docker",
-        "Terraform, Kubernetes",
+        "AWS, Azure, GCP, Docker, Terraform, Kubernetes",
         "MySQL, PostgreSQL",
-        "Machine learning techniques",
-        "Software development methodologies",
-        "Data analysis skills"
+        "Machine learning",
+        "Data analysis"
       ]
     }
   ],

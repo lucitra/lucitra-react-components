@@ -40,7 +40,7 @@ const ResumeHeader = ({ basics, printMode = false }) => {
           display: flex;
           justify-content: center;
           flex-wrap: wrap;
-          gap: ${printMode ? '8px' : '16px'};
+          align-items: center;
           font-size: ${printMode ? resumeDesignSystem.typography.smallText.fontSize.print : resumeDesignSystem.typography.smallText.fontSize.screen};
           color: ${resumeDesignSystem.typography.smallText.color};
           margin: 0;
@@ -51,7 +51,12 @@ const ResumeHeader = ({ basics, printMode = false }) => {
         .contact-item {
           display: flex;
           align-items: center;
-          gap: 4px;
+        }
+        
+        .contact-separator {
+          margin: 0 ${printMode ? '8px' : '12px'};
+          color: ${resumeDesignSystem.colors.divider};
+          font-weight: normal;
         }
         
         .contact-link {
@@ -73,23 +78,29 @@ const ResumeHeader = ({ basics, printMode = false }) => {
           <div className="contact-item">
             <a href={`mailto:${email}`} className="contact-link">{email}</a>
           </div>
+          <span className="contact-separator">•</span>
           <div className="contact-item">
             <span>{phone}</span>
           </div>
+          <span className="contact-separator">•</span>
           <div className="contact-item">
             <span>{location}</span>
           </div>
+          <span className="contact-separator">•</span>
           <div className="contact-item">
             <a href={website} className="contact-link" target="_blank" rel="noopener noreferrer">
               Portfolio
             </a>
           </div>
           {profiles && profiles.map((profile, index) => (
-            <div key={index} className="contact-item">
-              <a href={profile.url} className="contact-link" target="_blank" rel="noopener noreferrer">
-                {profile.network}
-              </a>
-            </div>
+            <React.Fragment key={index}>
+              <span className="contact-separator">•</span>
+              <div className="contact-item">
+                <a href={profile.url} className="contact-link" target="_blank" rel="noopener noreferrer">
+                  {profile.network}
+                </a>
+              </div>
+            </React.Fragment>
           ))}
         </div>
       </header>

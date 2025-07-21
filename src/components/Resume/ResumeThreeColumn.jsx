@@ -73,6 +73,51 @@ const ResumeThreeColumn = ({ skills, education, patents, printMode = false }) =>
           line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
         }
         
+        .education-courses {
+          margin-top: ${getSpacing('microGap', printMode)};
+        }
+        
+        .education-course {
+          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
+          color: ${resumeDesignSystem.typography.bodyText.color};
+          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
+          margin-bottom: ${getSpacing('microGap', printMode)};
+        }
+        
+        .education-coursework {
+          margin-top: ${getSpacing('microGap', printMode)};
+        }
+        
+        .coursework-label {
+          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
+          font-weight: ${resumeDesignSystem.emphasis.bold.fontWeight};
+          color: ${resumeDesignSystem.emphasis.bold.color};
+          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
+          margin-bottom: ${getSpacing('microGap', printMode)};
+        }
+        
+        .coursework-content {
+          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
+          color: ${resumeDesignSystem.typography.bodyText.color};
+          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
+        }
+        
+        .coursework-section {
+          margin-top: ${getSpacing('sectionGap', printMode)};
+        }
+        
+        .coursework-institution {
+          margin-bottom: ${getSpacing('itemGap', printMode)};
+        }
+        
+        .coursework-school {
+          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
+          font-weight: ${resumeDesignSystem.emphasis.bold.fontWeight};
+          color: ${resumeDesignSystem.emphasis.bold.color};
+          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
+          margin-bottom: ${getSpacing('microGap', printMode)};
+        }
+        
         .patent-title-link {
           font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
           font-weight: ${resumeDesignSystem.emphasis.bold.fontWeight};
@@ -156,8 +201,15 @@ const ResumeThreeColumn = ({ skills, education, patents, printMode = false }) =>
                 {edu.studyType}{edu.area && `, ${edu.area}`}
               </div>
               <div className="education-date">
-                {edu.startDate} - {edu.endDate || 'Present'}
+                {edu.endDate ? `Graduated ${edu.endDate}` : 'In Progress'}
               </div>
+              {edu.courses && edu.courses.length > 0 && (
+                <div className="education-courses">
+                  {edu.courses.map((course, courseIndex) => (
+                    <div key={courseIndex} className="education-course">• {course}</div>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -196,6 +248,23 @@ const ResumeThreeColumn = ({ skills, education, patents, printMode = false }) =>
           ))}
         </div>
       </div>
+      
+      {/* Relevant Coursework Section - Full Width Below Three Columns */}
+      {education && education.some(edu => edu.relevantCoursework && edu.relevantCoursework.length > 0) && (
+        <div className="coursework-section">
+          <h3 className="column-title">Relevant Coursework</h3>
+          {education
+            .filter(edu => edu.relevantCoursework && edu.relevantCoursework.length > 0)
+            .map((edu, index) => (
+            <div key={index} className="coursework-institution">
+              <div className="coursework-school">{edu.institution}:</div>
+              <div className="coursework-content">
+                {edu.relevantCoursework.join(', ')}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </>
   );
 };

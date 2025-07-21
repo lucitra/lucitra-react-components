@@ -110,12 +110,18 @@ const sampleResumeData = {
   education: [
     {
       institution: "Harvard Extension School",
-      area: "Software Engineering", 
+      area: "Computer Science", 
       studyType: "Master of Liberal Arts",
       location: "Cambridge, MA",
       startDate: "2020-12",
-      endDate: "Present",
-      visibility: { online: true, print: true }
+      endDate: "2025",
+      visibility: { online: true, print: true },
+      courses: [
+        "Capstone Projects: AI Clinical Trial Matching"
+      ],
+      relevantCoursework: [
+        "Computer Vision, Cloud Security, Programming Big Data Systems, User Experience Engineering, Artificial Intelligence Using Python"
+      ]
     },
     {
       institution: "The University of Texas at Austin",
@@ -123,7 +129,7 @@ const sampleResumeData = {
       studyType: "Bachelor of Business Administration",
       location: "Austin, TX",
       startDate: "2003-07", 
-      endDate: "2008-04",
+      endDate: "2008",
       visibility: { online: true, print: true }
     }
   ],
@@ -135,9 +141,8 @@ const sampleResumeData = {
         "Django, FastAPI, ReactJS, NextJS",
         "AWS, Azure, GCP, Docker, Terraform, Kubernetes", 
         "MySQL, PostgreSQL",
-        "Machine learning techniques",
-        "Software development methodologies",
-        "Data analysis skills"
+        "Machine learning",
+        "Data analysis"
       ]
     }
   ],
