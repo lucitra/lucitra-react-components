@@ -89,16 +89,58 @@ import { ResumeBuilder, Resume, sampleResumeData } from '@lucitra/react-componen
   enableExport={true}
 />
 
-// Display-only resume
+// Display-only resume with layout options
 <Resume 
   data={resumeData}
   config={{
     printMode: true,
+    singleColumn: false, // or true, or 'new'
     maxWorkItems: 4,
     filterByVisibility: true
   }}
 />
 ```
+
+### PDF Printing - All Layout Options
+
+**The Resume components support three layout options, all optimized for PDF printing:**
+
+1. **Three-Column Layout** (default)
+```jsx
+<Resume data={resumeData} config={{ printMode: true }} />
+// Or via ResumeBuilder: Select "Three Column" in layout dropdown + "Export PDF"
+```
+
+2. **Single-Column Layout** (original)
+```jsx
+<Resume data={resumeData} config={{ printMode: true, singleColumn: true }} />
+// Or via ResumeBuilder: Select "Single Column" in layout dropdown + "Export PDF"
+```
+
+3. **Single-Column Layout** (new/improved)
+```jsx
+<Resume data={resumeData} config={{ printMode: true, singleColumn: 'new' }} />
+// Or via ResumeBuilder: Select "Single Column (New)" in layout dropdown + "Export PDF"
+```
+
+### ResumeBuilder PDF Controls
+
+The ResumeBuilder provides a unified interface to print all layout versions:
+
+1. **Layout Selector**: Choose between "Three Column", "Single Column", or "Single Column (New)"
+2. **Print Mode Toggle**: Enable/disable print-optimized styling
+3. **Max Work Items**: Limit work experience (3-5 items recommended for single page)
+4. **Export PDF Button**: Uses browser print dialog with optimized settings
+
+**How to Print:**
+1. Open ResumeBuilder in Storybook
+2. Select desired layout from dropdown
+3. Toggle "Print Mode ON" for optimal spacing
+4. Set "Max Work Items" to 3-4 for single page
+5. Click "Export PDF" button
+6. Use browser print dialog to save as PDF
+
+**All layouts use the same print controls and settings for consistency.**
 
 ### Features
 

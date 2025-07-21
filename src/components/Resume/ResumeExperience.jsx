@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { resumeDesignSystem, getSpacing } from './resumeStyles.js';
 
 const ResumeExperience = ({ work, printMode = false, maxItems }) => {
   if (!work || work.length === 0) return null;
@@ -35,21 +36,21 @@ const ResumeExperience = ({ work, printMode = false, maxItems }) => {
     <>
       <style jsx={true}>{`
         .experience-section {
-          margin-bottom: ${printMode ? '0' : '20px'};
+          margin-bottom: ${printMode ? '0' : getSpacing('sectionGap', false)};
         }
         
         .section-title {
-          font-size: ${printMode ? '14pt' : '14px'};
-          font-weight: bold;
-          margin-bottom: ${printMode ? '0.1cm' : '12px'};
-          color: #000;
-          text-transform: uppercase;
-          letter-spacing: 0.2px;
-          line-height: ${printMode ? '1.3' : '1.2'};
+          font-size: ${printMode ? resumeDesignSystem.typography.sectionTitle.fontSize.print : resumeDesignSystem.typography.sectionTitle.fontSize.screen};
+          font-weight: ${resumeDesignSystem.typography.sectionTitle.fontWeight};
+          margin-bottom: ${getSpacing('headerGap', printMode)};
+          color: ${resumeDesignSystem.typography.sectionTitle.color};
+          text-transform: ${resumeDesignSystem.typography.sectionTitle.textTransform};
+          letter-spacing: ${resumeDesignSystem.typography.sectionTitle.letterSpacing};
+          line-height: ${printMode ? resumeDesignSystem.typography.sectionTitle.lineHeight.print : resumeDesignSystem.typography.sectionTitle.lineHeight.screen};
         }
         
         .work-item {
-          margin-bottom: ${printMode ? '0.05cm' : '16px'};
+          margin-bottom: ${getSpacing('itemGap', printMode)};
           page-break-inside: avoid;
         }
         
@@ -61,116 +62,71 @@ const ResumeExperience = ({ work, printMode = false, maxItems }) => {
           display: flex;
           justify-content: space-between;
           align-items: baseline;
-          margin-bottom: ${printMode ? '0.05cm' : '6px'};
+          margin-bottom: ${getSpacing('microGap', printMode)};
         }
         
         .company-name {
-          font-size: ${printMode ? '11pt' : '12px'};
-          font-weight: bold;
-          color: #000;
-          line-height: ${printMode ? '1.5' : '1.2'};
+          font-size: ${printMode ? resumeDesignSystem.typography.keyInfo.fontSize.print : resumeDesignSystem.typography.keyInfo.fontSize.screen};
+          font-weight: ${resumeDesignSystem.typography.keyInfo.fontWeight};
+          color: ${resumeDesignSystem.typography.keyInfo.color};
+          line-height: ${printMode ? resumeDesignSystem.typography.keyInfo.lineHeight.print : resumeDesignSystem.typography.keyInfo.lineHeight.screen};
         }
         
         .company-location {
-          font-size: ${printMode ? '9pt' : '10px'};
-          color: #666;
-          font-style: italic;
-          line-height: ${printMode ? '1.5' : '1.2'};
+          font-size: ${printMode ? resumeDesignSystem.typography.metaText.fontSize.print : resumeDesignSystem.typography.metaText.fontSize.screen};
+          color: ${resumeDesignSystem.typography.metaText.color};
+          font-style: ${resumeDesignSystem.typography.metaText.fontStyle};
+          line-height: ${printMode ? resumeDesignSystem.typography.metaText.lineHeight.print : resumeDesignSystem.typography.metaText.lineHeight.screen};
         }
         
         .position {
-          margin-bottom: ${printMode ? '0.05cm' : '8px'};
+          margin-bottom: ${getSpacing('microGap', printMode)};
         }
         
         .position-header {
           display: flex;
           justify-content: space-between;
           align-items: baseline;
-          margin-bottom: ${printMode ? '0.05cm' : '2px'};
+          margin-bottom: ${getSpacing('microGap', printMode)};
         }
         
         .position-title {
-          font-size: ${printMode ? '10pt' : '11px'};
+          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
           font-weight: normal;
           font-style: italic;
           color: #333;
-          line-height: ${printMode ? '1.5' : '1.2'};
+          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
         }
         
         .position-dates {
-          font-size: ${printMode ? '9pt' : '10px'};
-          color: #666;
-          font-style: italic;
-          line-height: ${printMode ? '1.5' : '1.2'};
+          font-size: ${printMode ? resumeDesignSystem.typography.metaText.fontSize.print : resumeDesignSystem.typography.metaText.fontSize.screen};
+          color: ${resumeDesignSystem.typography.metaText.color};
+          font-style: ${resumeDesignSystem.typography.metaText.fontStyle};
+          line-height: ${printMode ? resumeDesignSystem.typography.metaText.lineHeight.print : resumeDesignSystem.typography.metaText.lineHeight.screen};
         }
         
         .highlights {
           list-style: none;
           padding: 0;
           margin: 0;
-          margin-top: ${printMode ? '0.05cm' : '4px'};
+          margin-top: ${getSpacing('microGap', printMode)};
         }
         
         .highlight {
-          font-size: ${printMode ? '10pt' : '10px'};
-          color: #444;
-          line-height: ${printMode ? '1.5' : '1.4'};
-          margin-bottom: ${printMode ? '0.05cm' : '4px'};
+          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
+          color: ${resumeDesignSystem.typography.bodyText.color};
+          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
+          margin-bottom: ${getSpacing('microGap', printMode)};
           position: relative;
           padding-left: ${printMode ? '8px' : '8px'};
         }
         
         .highlight:before {
           content: '•';
-          color: #666;
+          color: ${resumeDesignSystem.colors.bullet};
           position: absolute;
           left: 0;
-          font-size: ${printMode ? '9pt' : '10px'};
-        }
-        
-        @media print {
-          .experience-section {
-            margin-bottom: 0;
-          }
-          
-          .section-title {
-            font-size: 14pt;
-            margin-bottom: 0.1cm;
-          }
-          
-          .work-item {
-            margin-bottom: 0.05cm;
-          }
-          
-          .company-header {
-            margin-bottom: 0.05cm;
-          }
-          
-          .company-name {
-            font-size: 11pt;
-          }
-          
-          .company-location {
-            font-size: 9pt;
-          }
-          
-          .position {
-            margin-bottom: 0.05cm;
-          }
-          
-          .position-title {
-            font-size: 10pt;
-          }
-          
-          .position-dates {
-            font-size: 9pt;
-          }
-          
-          .highlight {
-            font-size: 10pt;
-            margin-bottom: 0.05cm;
-            line-height: 1.5;
-          }
+          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
         }
       `}</style>
       
@@ -195,7 +151,7 @@ const ResumeExperience = ({ work, printMode = false, maxItems }) => {
                   </div>
                   {position.highlights && position.highlights.length > 0 && (
                     <ul className="highlights">
-                      {position.highlights.slice(0, printMode ? 3 : 4).map((highlight, highlightIndex) => (
+                      {position.highlights.slice(0, printMode ? 2 : 4).map((highlight, highlightIndex) => (
                         <li key={highlightIndex} className="highlight">
                           {highlight}
                         </li>
@@ -215,7 +171,7 @@ const ResumeExperience = ({ work, printMode = false, maxItems }) => {
                 </div>
                 {workItem.highlights && workItem.highlights.length > 0 && (
                   <ul className="highlights">
-                    {workItem.highlights.slice(0, printMode ? 3 : 4).map((highlight, highlightIndex) => (
+                    {workItem.highlights.slice(0, printMode ? 2 : 4).map((highlight, highlightIndex) => (
                       <li key={highlightIndex} className="highlight">
                         {highlight}
                       </li>

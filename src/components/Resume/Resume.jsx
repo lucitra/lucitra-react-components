@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { ResumeHeader } from './ResumeHeader.jsx';
 import { ResumeSummary } from './ResumeSummary.jsx';
 import { ResumeThreeColumn } from './ResumeThreeColumn.jsx';
+import { ResumeSingleColumn } from './ResumeSingleColumn.jsx';
+import { ResumeSingleColumnNew } from './ResumeSingleColumnNew.jsx';
 import { ResumeExperience } from './ResumeExperience.jsx';
+import { resumeDesignSystem, getSpacing } from './resumeStyles.js';
 
 const Resume = ({ 
   data, 
@@ -47,10 +50,10 @@ const Resume = ({
           margin: 0 auto;
           background: white;
           padding: 0.75in;
-          font-family: 'Arial', 'Helvetica', sans-serif;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
           font-size: 11px;
           line-height: 1.4;
-          color: #333;
+          color: #161616;
         }
         
         .print-mode {
@@ -60,12 +63,12 @@ const Resume = ({
           padding: 0.15in;
           margin: 0;
           overflow: hidden;
-          font-size: 9pt;
-          line-height: 1.5;
+          font-size: 8pt;
+          line-height: 1.3;
         }
         
         .print-mode > * + * {
-          margin-top: 0.15rem;
+          margin-top: 0.1rem;
         }
         
         @media print {
@@ -77,7 +80,7 @@ const Resume = ({
             padding: 0 !important;
             background: white !important;
             color: black !important;
-            font-family: Arial, sans-serif !important;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif !important;
           }
           
           /* Page setup with no headers/footers */
@@ -109,11 +112,11 @@ const Resume = ({
             top: 0 !important;
             width: 100% !important;
             height: auto !important;
-            padding: 0.15in !important;
+            padding: ${resumeDesignSystem.layout.margins.print} !important;
             margin: 0 !important;
             box-shadow: none !important;
-            font-size: 9pt !important;
-            line-height: 1.5 !important;
+            font-size: ${resumeDesignSystem.typography.bodyText.fontSize.print} !important;
+            line-height: ${resumeDesignSystem.typography.bodyText.lineHeight.print} !important;
             overflow: visible !important;
             max-width: none !important;
             max-height: none !important;
@@ -122,7 +125,7 @@ const Resume = ({
           }
           
           .resume-container > * + * {
-            margin-top: 0.15rem !important;
+            margin-top: ${getSpacing('sectionGap', true)} !important;
           }
           
           /* Color preservation */
@@ -147,12 +150,28 @@ const Resume = ({
       
       <ResumeHeader basics={resumeBasics} printMode={config.printMode} />
       <ResumeSummary summary={basics.summary} printMode={config.printMode} />
-      <ResumeThreeColumn 
-        skills={skills} 
-        education={education} 
-        patents={patents}
-        printMode={config.printMode} 
-      />
+      {config.singleColumn === 'new' ? (
+        <ResumeSingleColumnNew 
+          skills={skills} 
+          education={education} 
+          patents={patents}
+          printMode={config.printMode} 
+        />
+      ) : config.singleColumn ? (
+        <ResumeSingleColumn 
+          skills={skills} 
+          education={education} 
+          patents={patents}
+          printMode={config.printMode} 
+        />
+      ) : (
+        <ResumeThreeColumn 
+          skills={skills} 
+          education={education} 
+          patents={patents}
+          printMode={config.printMode} 
+        />
+      )}
       <ResumeExperience 
         work={filteredWork} 
         printMode={config.printMode}

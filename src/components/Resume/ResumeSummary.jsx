@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { resumeDesignSystem, getSpacing } from './resumeStyles.js';
 
 const ResumeSummary = ({ summary, printMode = false }) => {
   if (!summary) return null;
@@ -8,41 +9,25 @@ const ResumeSummary = ({ summary, printMode = false }) => {
     <>
       <style jsx={true}>{`
         .summary-section {
-          margin-bottom: ${printMode ? '0.15rem' : '20px'};
+          margin-bottom: ${getSpacing('sectionGap', printMode)};
         }
         
         .section-title {
-          font-size: ${printMode ? '14pt' : '14px'};
-          font-weight: bold;
-          margin-bottom: ${printMode ? '0.1cm' : '8px'};
-          color: #000;
-          text-transform: uppercase;
-          letter-spacing: 0.3px;
-          line-height: ${printMode ? '1.3' : '1.2'};
+          font-size: ${printMode ? resumeDesignSystem.typography.sectionTitle.fontSize.print : resumeDesignSystem.typography.sectionTitle.fontSize.screen};
+          font-weight: ${resumeDesignSystem.typography.sectionTitle.fontWeight};
+          margin-bottom: ${getSpacing('headerGap', printMode)};
+          color: ${resumeDesignSystem.typography.sectionTitle.color};
+          text-transform: ${resumeDesignSystem.typography.sectionTitle.textTransform};
+          letter-spacing: ${resumeDesignSystem.typography.sectionTitle.letterSpacing};
+          line-height: ${printMode ? resumeDesignSystem.typography.sectionTitle.lineHeight.print : resumeDesignSystem.typography.sectionTitle.lineHeight.screen};
         }
         
         .summary-content {
-          font-size: ${printMode ? '10pt' : '11px'};
-          line-height: ${printMode ? '1.5' : '1.5'};
-          color: #444;
+          font-size: ${printMode ? resumeDesignSystem.typography.summaryText.fontSize.print : resumeDesignSystem.typography.summaryText.fontSize.screen};
+          line-height: ${printMode ? resumeDesignSystem.typography.summaryText.lineHeight.print : resumeDesignSystem.typography.summaryText.lineHeight.screen};
+          color: ${resumeDesignSystem.typography.summaryText.color};
           text-align: justify;
           margin: 0;
-        }
-        
-        @media print {
-          .summary-section {
-            margin-bottom: 0.15rem;
-          }
-          
-          .section-title {
-            font-size: 14pt;
-            margin-bottom: 0.1cm;
-          }
-          
-          .summary-content {
-            font-size: 10pt;
-            line-height: 1.5;
-          }
         }
       `}</style>
       

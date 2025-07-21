@@ -165,11 +165,11 @@ export const sampleResumeData = {
   education: [
     {
       institution: "Harvard Extension School",
-      area: "Software Engineering", 
+      area: "Computer Science", 
       studyType: "Master of Liberal Arts",
       location: "Cambridge, MA",
       startDate: "Dec 2020",
-      endDate: "Aug 2025",
+      endDate: "Jul 2025",
       visibility: { online: true, print: true },
       details: [
         "Capstone Projects: AI Clinical Trial Matching",
@@ -192,7 +192,8 @@ export const sampleResumeData = {
       items: [
         "Python, TypeScript, Kotlin, Git",
         "Django, FastAPI, ReactJS, NextJS",
-        "AWS, Azure, GCP, Docker, Terraform, Kubernetes", 
+        "AWS, Azure, GCP, Docker",
+        "Terraform, Kubernetes",
         "MySQL, PostgreSQL",
         "Machine learning techniques",
         "Software development methodologies",

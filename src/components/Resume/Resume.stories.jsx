@@ -244,3 +244,63 @@ export const AllWorkExperience = {
     }
   }
 };
+
+// Single Column Layout - Print Mode
+export const SingleColumnPrint = {
+  args: {
+    data: sampleResumeData,
+    config: {
+      printMode: true,
+      singleColumn: true,
+      maxWorkItems: 3,
+      filterByVisibility: true
+    }
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Single-column layout optimized for PDF printing. Skills, education, and patents are arranged in a single column with education in two columns.'
+      }
+    }
+  }
+};
+
+// New Single Column Layout - Print Mode  
+export const SingleColumnNewPrint = {
+  args: {
+    data: sampleResumeData,
+    config: {
+      printMode: true,
+      singleColumn: 'new',
+      maxWorkItems: 3,
+      filterByVisibility: true
+    }
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'New single-column layout with improved design system consistency, optimized for PDF printing.'
+      }
+    }
+  }
+};
+
+// Single Column Layout - Online Mode
+export const SingleColumnOnline = {
+  args: {
+    data: sampleResumeData,
+    config: {
+      printMode: false,
+      singleColumn: true,
+      maxWorkItems: null,
+      filterByVisibility: true
+    }
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Single-column layout for online viewing with all work experience visible.'
+      }
+    }
+  }
+};

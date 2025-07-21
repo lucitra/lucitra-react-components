@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { resumeDesignSystem, getSpacing } from './resumeStyles.js';
 
 const ResumeHeader = ({ basics, printMode = false }) => {
   const { name, label, email, phone, website, location, profiles } = basics;
@@ -10,38 +11,39 @@ const ResumeHeader = ({ basics, printMode = false }) => {
         .header {
           text-align: center;
           margin-bottom: ${printMode ? '0.2rem' : '20px'};
-          padding-bottom: ${printMode ? '0.05cm' : '16px'};
-          border-bottom: ${printMode ? '1px solid #333' : '2px solid #333'};
+          padding-bottom: ${printMode ? '0.15cm' : '16px'};
+          border-bottom: ${printMode ? `1px solid ${resumeDesignSystem.colors.divider}` : `2px solid ${resumeDesignSystem.colors.divider}`};
         }
         
         .name {
-          font-size: ${printMode ? '18pt' : '24px'};
-          font-weight: bold;
+          font-size: ${printMode ? resumeDesignSystem.typography.primaryHeader.fontSize.print : resumeDesignSystem.typography.primaryHeader.fontSize.screen};
+          font-weight: ${resumeDesignSystem.typography.primaryHeader.fontWeight};
           margin: 0;
-          margin-bottom: ${printMode ? '0.1cm' : '8px'};
+          margin-bottom: ${getSpacing('headerGap', printMode)};
           letter-spacing: 0.3px;
-          color: #000;
-          line-height: ${printMode ? '1.2' : '1.2'};
+          color: ${resumeDesignSystem.typography.primaryHeader.color};
+          line-height: ${printMode ? resumeDesignSystem.typography.primaryHeader.lineHeight.print : resumeDesignSystem.typography.primaryHeader.lineHeight.screen};
         }
         
         .title {
-          font-size: ${printMode ? '11pt' : '14px'};
-          color: #555;
+          font-size: ${printMode ? resumeDesignSystem.typography.secondaryHeader.fontSize.print : resumeDesignSystem.typography.secondaryHeader.fontSize.screen};
+          color: ${resumeDesignSystem.typography.secondaryHeader.color};
           margin: 0;
-          margin-bottom: ${printMode ? '0.1cm' : '8px'};
+          margin-bottom: ${getSpacing('headerGap', printMode)};
           font-style: italic;
-          line-height: ${printMode ? '1.2' : '1.2'};
+          line-height: ${printMode ? resumeDesignSystem.typography.secondaryHeader.lineHeight.print : resumeDesignSystem.typography.secondaryHeader.lineHeight.screen};
         }
         
         .contact-info {
           display: flex;
           justify-content: center;
           flex-wrap: wrap;
-          gap: ${printMode ? '4px' : '12px'};
-          font-size: ${printMode ? '8.5pt' : '11px'};
-          color: #666;
+          gap: ${printMode ? '8px' : '16px'};
+          font-size: ${printMode ? resumeDesignSystem.typography.contactText.fontSize.print : resumeDesignSystem.typography.contactText.fontSize.screen};
+          color: ${resumeDesignSystem.typography.contactText.color};
           margin: 0;
-          line-height: ${printMode ? '1.3' : '1.2'};
+          margin-bottom: ${getSpacing('headerGap', printMode)};
+          line-height: ${printMode ? resumeDesignSystem.typography.contactText.lineHeight.print : resumeDesignSystem.typography.contactText.lineHeight.screen};
         }
         
         .contact-item {
@@ -51,34 +53,14 @@ const ResumeHeader = ({ basics, printMode = false }) => {
         }
         
         .contact-link {
-          color: #333;
-          text-decoration: none;
+          color: ${resumeDesignSystem.links.color};
+          text-decoration: ${resumeDesignSystem.links.textDecoration};
+          text-underline-offset: ${resumeDesignSystem.links.textUnderlineOffset};
+          transition: ${resumeDesignSystem.links.transition};
         }
         
         .contact-link:hover {
-          text-decoration: underline;
-        }
-        
-        @media print {
-          .header {
-            margin-bottom: 0.2rem;
-            padding-bottom: 0.05cm;
-          }
-          
-          .name {
-            font-size: 18pt;
-            margin-bottom: 0.1cm;
-          }
-          
-          .title {
-            font-size: 11pt;
-            margin-bottom: 0.1cm;
-          }
-          
-          .contact-info {
-            font-size: 8.5pt;
-            gap: 4px;
-          }
+          color: ${resumeDesignSystem.links.hoverColor};
         }
       `}</style>
       
@@ -97,7 +79,7 @@ const ResumeHeader = ({ basics, printMode = false }) => {
           </div>
           <div className="contact-item">
             <a href={website} className="contact-link" target="_blank" rel="noopener noreferrer">
-              {website.replace('https://', '')}
+              Portfolio
             </a>
           </div>
           {profiles && profiles.map((profile, index) => (

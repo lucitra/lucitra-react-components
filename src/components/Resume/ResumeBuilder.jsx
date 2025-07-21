@@ -13,6 +13,7 @@ const ResumeBuilder = ({
   const [resumeData, setResumeData] = useState(initialData || defaultResumeData);
   const [config, setConfig] = useState({
     printMode: false,
+    singleColumn: false,
     maxWorkItems: null,
     filterByVisibility: true
   });
@@ -38,9 +39,13 @@ const ResumeBuilder = ({
       link.click();
       URL.revokeObjectURL(url);
     } else if (format === 'pdf') {
-      // Set print mode temporarily and trigger print
+      // Set print mode temporarily while preserving layout selection and trigger print
       const originalConfig = { ...config };
-      setConfig(prev => ({ ...prev, printMode: true }));
+      setConfig(prev => ({ 
+        ...prev, 
+        printMode: true,
+        maxWorkItems: prev.maxWorkItems || 3 // Default to 3 for single-page layout
+      }));
       setTimeout(() => {
         window.print();
         setConfig(originalConfig);
@@ -328,6 +333,25 @@ const ResumeBuilder = ({
                 >
                   {config.printMode ? 'Print Mode ON' : 'Print Mode OFF'}
                 </button>
+              </div>
+              
+              <div className="control-group">
+                <label htmlFor="layoutSelect">Layout:</label>
+                <select 
+                  id="layoutSelect"
+                  className="select"
+                  value={config.singleColumn === 'new' ? 'new' : (config.singleColumn ? 'single' : 'three')}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    handleConfigChange({ 
+                      singleColumn: value === 'three' ? false : (value === 'new' ? 'new' : true)
+                    });
+                  }}
+                >
+                  <option value="three">Three Column</option>
+                  <option value="single">Single Column</option>
+                  <option value="new">Single Column (New)</option>
+                </select>
               </div>
               
               <div className="control-group">

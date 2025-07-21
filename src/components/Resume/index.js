@@ -4,6 +4,7 @@ export { ResumePrintPage } from './ResumePrintPage.jsx';
 export { ResumeHeader } from './ResumeHeader.jsx';
 export { ResumeSummary } from './ResumeSummary.jsx';
 export { ResumeThreeColumn } from './ResumeThreeColumn.jsx';
+export { ResumeSingleColumn } from './ResumeSingleColumn.jsx';
 export { ResumeExperience } from './ResumeExperience.jsx';
 
 // Export data and utilities
