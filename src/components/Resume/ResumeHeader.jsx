@@ -16,22 +16,24 @@ const ResumeHeader = ({ basics, printMode = false }) => {
         }
         
         .name {
-          font-size: ${printMode ? resumeDesignSystem.typography.primaryHeader.fontSize.print : resumeDesignSystem.typography.primaryHeader.fontSize.screen};
-          font-weight: ${resumeDesignSystem.typography.primaryHeader.fontWeight};
+          font-size: ${printMode ? resumeDesignSystem.typography.nameText.fontSize.print : resumeDesignSystem.typography.nameText.fontSize.screen};
+          font-weight: ${resumeDesignSystem.typography.nameText.fontWeight};
           margin: 0;
           margin-bottom: ${getSpacing('headerGap', printMode)};
-          letter-spacing: 0.3px;
-          color: ${resumeDesignSystem.typography.primaryHeader.color};
-          line-height: ${printMode ? resumeDesignSystem.typography.primaryHeader.lineHeight.print : resumeDesignSystem.typography.primaryHeader.lineHeight.screen};
+          letter-spacing: ${resumeDesignSystem.typography.nameText.letterSpacing};
+          color: ${resumeDesignSystem.typography.nameText.color};
+          text-transform: ${resumeDesignSystem.typography.nameText.textTransform};
+          line-height: ${printMode ? resumeDesignSystem.typography.nameText.lineHeight.print : resumeDesignSystem.typography.nameText.lineHeight.screen};
         }
         
         .title {
-          font-size: ${printMode ? resumeDesignSystem.typography.secondaryHeader.fontSize.print : resumeDesignSystem.typography.secondaryHeader.fontSize.screen};
-          color: ${resumeDesignSystem.typography.secondaryHeader.color};
+          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
+          color: ${resumeDesignSystem.typography.bodyText.color};
           margin: 0;
           margin-bottom: ${getSpacing('headerGap', printMode)};
           font-style: italic;
-          line-height: ${printMode ? resumeDesignSystem.typography.secondaryHeader.lineHeight.print : resumeDesignSystem.typography.secondaryHeader.lineHeight.screen};
+          font-weight: ${resumeDesignSystem.emphasis.italic.fontWeight};
+          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
         }
         
         .contact-info {
@@ -39,11 +41,11 @@ const ResumeHeader = ({ basics, printMode = false }) => {
           justify-content: center;
           flex-wrap: wrap;
           gap: ${printMode ? '8px' : '16px'};
-          font-size: ${printMode ? resumeDesignSystem.typography.contactText.fontSize.print : resumeDesignSystem.typography.contactText.fontSize.screen};
-          color: ${resumeDesignSystem.typography.contactText.color};
+          font-size: ${printMode ? resumeDesignSystem.typography.smallText.fontSize.print : resumeDesignSystem.typography.smallText.fontSize.screen};
+          color: ${resumeDesignSystem.typography.smallText.color};
           margin: 0;
           margin-bottom: ${getSpacing('headerGap', printMode)};
-          line-height: ${printMode ? resumeDesignSystem.typography.contactText.lineHeight.print : resumeDesignSystem.typography.contactText.lineHeight.screen};
+          line-height: ${printMode ? resumeDesignSystem.typography.smallText.lineHeight.print : resumeDesignSystem.typography.smallText.lineHeight.screen};
         }
         
         .contact-item {

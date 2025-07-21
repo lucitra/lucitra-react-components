@@ -1,72 +1,65 @@
 // Centralized resume design system
 export const resumeDesignSystem = {
-  // Typography scale - consistent across all components
+  // Simplified typography scale - minimal font sizes with emphasis via weight/style
   typography: {
-    // Section headers (SKILLS, EDUCATION, etc.)
-    sectionTitle: {
-      fontSize: { print: '12pt', screen: '14px' },
-      fontWeight: 600,
-      color: '#161616',
-      textTransform: 'uppercase',
-      letterSpacing: '0.5px',
-      lineHeight: { print: '1.3', screen: '1.2' }
-    },
-    
-    // Main headers (name, company names, institution names)
-    primaryHeader: {
-      fontSize: { print: '18pt', screen: '24px' }, // Name
+    // Name only - largest size
+    nameText: {
+      fontSize: { print: '16pt', screen: '20px' },
       fontWeight: 700,
-      color: '#161616',
+      color: '#000000',
+      textTransform: 'uppercase',
+      letterSpacing: '1px',
       lineHeight: { print: '1.2', screen: '1.2' }
     },
     
-    // Secondary headers (job title, degree types, patent titles)
-    secondaryHeader: {
-      fontSize: { print: '11pt', screen: '14px' },
-      fontWeight: 600,
-      color: '#161616',
-      lineHeight: { print: '1.3', screen: '1.2' }
+    // Section headers and important titles
+    headerText: {
+      fontSize: { print: '12pt', screen: '14px' },
+      fontWeight: 700,
+      color: '#000000',
+      textTransform: 'uppercase',
+      letterSpacing: '0.5px',
+      lineHeight: { print: '1.3', screen: '1.3' }
     },
     
-    // Company/institution names, position titles
-    keyInfo: {
-      fontSize: { print: '12pt', screen: '13px' },
-      fontWeight: 600,
-      color: '#161616',
-      lineHeight: { print: '1.3', screen: '1.2' }
-    },
-    
-    // Body text (summary, skills, bullet points, descriptions)
+    // All body content - one size for everything
     bodyText: {
       fontSize: { print: '11pt', screen: '12px' },
       fontWeight: 400,
-      color: '#161616',
-      lineHeight: { print: '1.3', screen: '1.4' }
+      color: '#000000',
+      lineHeight: { print: '1.4', screen: '1.4' }
     },
     
-    // Summary text - larger than body text
-    summaryText: {
-      fontSize: { print: '11.5pt', screen: '12.5px' },
+    // Small text for contact info only
+    smallText: {
+      fontSize: { print: '9pt', screen: '10px' },
       fontWeight: 400,
-      color: '#161616',
-      lineHeight: { print: '1.4', screen: '1.5' }
+      color: '#000000',
+      lineHeight: { print: '1.3', screen: '1.3' }
+    }
+  },
+  
+  // Text emphasis styles - use with bodyText size
+  emphasis: {
+    // For company names, institution names, job titles
+    bold: {
+      fontWeight: 700,
+      color: '#000000'
     },
     
-    // Meta text (dates, locations) - consistent size
-    metaText: {
-      fontSize: { print: '9.5pt', screen: '10px' },
+    // For dates, locations, secondary info
+    italic: {
       fontWeight: 400,
-      color: '#161616',
       fontStyle: 'italic',
-      lineHeight: { print: '1.3', screen: '1.2' }
+      color: '#000000'
     },
     
-    // Contact info
-    contactText: {
-      fontSize: { print: '8.5pt', screen: '11px' },
-      fontWeight: 400,
-      color: '#161616',
-      lineHeight: { print: '1.3', screen: '1.2' }
+    // For section headers, important labels
+    boldUppercase: {
+      fontWeight: 700,
+      textTransform: 'uppercase',
+      letterSpacing: '0.5px',
+      color: '#000000'
     }
   },
   

@@ -17,13 +17,13 @@ const ResumeSingleColumnNew = ({ skills, education, patents, printMode = false }
         }
         
         .section-title {
-          font-size: ${printMode ? typography.sectionTitle.fontSize.print : typography.sectionTitle.fontSize.screen};
-          font-weight: ${typography.sectionTitle.fontWeight};
+          font-size: ${printMode ? typography.headerText.fontSize.print : typography.headerText.fontSize.screen};
+          font-weight: ${typography.headerText.fontWeight};
           margin-bottom: ${getSpacing('headerGap', printMode)};
-          color: ${typography.sectionTitle.color};
-          text-transform: ${typography.sectionTitle.textTransform};
-          letter-spacing: ${typography.sectionTitle.letterSpacing};
-          line-height: ${printMode ? typography.sectionTitle.lineHeight.print : typography.sectionTitle.lineHeight.screen};
+          color: ${typography.headerText.color};
+          text-transform: ${typography.headerText.textTransform};
+          letter-spacing: ${typography.headerText.letterSpacing};
+          line-height: ${printMode ? typography.headerText.lineHeight.print : typography.headerText.lineHeight.screen};
         }
         
         .skills-list {
@@ -45,10 +45,10 @@ const ResumeSingleColumnNew = ({ skills, education, patents, printMode = false }
         }
         
         .education-institution, .patent-title {
-          font-size: ${printMode ? typography.keyInfo.fontSize.print : typography.keyInfo.fontSize.screen};
-          font-weight: ${typography.keyInfo.fontWeight};
-          color: ${typography.keyInfo.color};
-          line-height: ${printMode ? typography.keyInfo.lineHeight.print : typography.keyInfo.lineHeight.screen};
+          font-size: ${printMode ? typography.bodyText.fontSize.print : typography.bodyText.fontSize.screen};
+          font-weight: ${resumeDesignSystem.emphasis.bold.fontWeight};
+          color: ${resumeDesignSystem.emphasis.bold.color};
+          line-height: ${printMode ? typography.bodyText.lineHeight.print : typography.bodyText.lineHeight.screen};
           margin-bottom: ${getSpacing('microGap', printMode)};
         }
         
@@ -60,29 +60,44 @@ const ResumeSingleColumnNew = ({ skills, education, patents, printMode = false }
         }
         
         .education-date, .patent-date {
-          font-size: ${printMode ? typography.metaText.fontSize.print : typography.metaText.fontSize.screen};
-          color: ${typography.metaText.color};
-          font-style: ${typography.metaText.fontStyle};
-          line-height: ${printMode ? typography.metaText.lineHeight.print : typography.metaText.lineHeight.screen};
+          font-size: ${printMode ? typography.bodyText.fontSize.print : typography.bodyText.fontSize.screen};
+          color: ${resumeDesignSystem.emphasis.italic.color};
+          font-style: ${resumeDesignSystem.emphasis.italic.fontStyle};
+          font-weight: ${resumeDesignSystem.emphasis.italic.fontWeight};
+          line-height: ${printMode ? typography.bodyText.lineHeight.print : typography.bodyText.lineHeight.screen};
         }
         
         .patent-header {
           display: flex;
           justify-content: space-between;
-          align-items: baseline;
+          align-items: flex-start;
           margin-bottom: ${getSpacing('microGap', printMode)};
         }
         
-        .patent-title-wrapper {
+        .patent-left {
           flex: 1;
         }
         
+        .patent-right {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          text-align: right;
+        }
+        
+        .patent-description {
+          font-size: ${printMode ? typography.bodyText.fontSize.print : typography.bodyText.fontSize.screen};
+          color: ${resumeDesignSystem.typography.bodyText.color};
+          line-height: ${printMode ? typography.bodyText.lineHeight.print : typography.bodyText.lineHeight.screen};
+          margin-bottom: ${getSpacing('microGap', printMode)};
+        }
+        
         .patent-title-link {
-          font-size: ${printMode ? typography.keyInfo.fontSize.print : typography.keyInfo.fontSize.screen};
-          font-weight: ${typography.keyInfo.fontWeight};
-          color: ${links.color};
+          font-size: ${printMode ? typography.bodyText.fontSize.print : typography.bodyText.fontSize.screen};
+          font-weight: ${resumeDesignSystem.emphasis.bold.fontWeight};
+          color: ${resumeDesignSystem.emphasis.bold.color};
           text-decoration: none;
-          line-height: ${printMode ? typography.keyInfo.lineHeight.print : typography.keyInfo.lineHeight.screen};
+          line-height: ${printMode ? typography.bodyText.lineHeight.print : typography.bodyText.lineHeight.screen};
           transition: ${links.transition};
         }
         
@@ -90,11 +105,30 @@ const ResumeSingleColumnNew = ({ skills, education, patents, printMode = false }
           color: ${links.hoverColor};
         }
         
+        .patent-company-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: ${getSpacing('microGap', printMode)};
+        }
+        
         .patent-company {
           font-size: ${printMode ? typography.bodyText.fontSize.print : typography.bodyText.fontSize.screen};
           color: ${typography.bodyText.color};
           line-height: ${printMode ? typography.bodyText.lineHeight.print : typography.bodyText.lineHeight.screen};
-          margin-bottom: ${getSpacing('microGap', printMode)};
+        }
+        
+        .patent-link-inline {
+          font-size: ${printMode ? typography.bodyText.fontSize.print : typography.bodyText.fontSize.screen};
+          color: ${links.color};
+          text-decoration: ${links.textDecoration};
+          text-underline-offset: ${links.textUnderlineOffset};
+          line-height: ${printMode ? typography.bodyText.lineHeight.print : typography.bodyText.lineHeight.screen};
+          transition: ${links.transition};
+        }
+        
+        .patent-link-inline:hover {
+          color: ${links.hoverColor};
         }
         
         .patent-link {
@@ -103,9 +137,8 @@ const ResumeSingleColumnNew = ({ skills, education, patents, printMode = false }
           text-decoration: ${links.textDecoration};
           text-underline-offset: ${links.textUnderlineOffset};
           line-height: ${printMode ? typography.bodyText.lineHeight.print : typography.bodyText.lineHeight.screen};
-          display: block;
-          margin-bottom: ${getSpacing('microGap', printMode)};
           transition: ${links.transition};
+          margin-top: ${getSpacing('microGap', printMode)};
         }
         
         .patent-link:hover {
@@ -152,7 +185,7 @@ const ResumeSingleColumnNew = ({ skills, education, patents, printMode = false }
             .map((patent, index) => (
             <div key={index} className="patent-item">
               <div className="patent-header">
-                <div className="patent-title-wrapper">
+                <div className="patent-left">
                   {patent.url ? (
                     <a href={patent.url} className="patent-title-link" target="_blank" rel="noopener noreferrer">
                       {patent.title}
@@ -161,13 +194,20 @@ const ResumeSingleColumnNew = ({ skills, education, patents, printMode = false }
                     <div className="patent-title">{patent.title}</div>
                   )}
                 </div>
-                <div className="patent-date">{patent.date}</div>
+                <div className="patent-right">
+                  <div className="patent-date">{patent.date}</div>
+                </div>
               </div>
-              <div className="patent-company">Microsoft Technology Licensing, LLC</div>
-              {patent.url && (
-                <a href={patent.url} className="patent-link" target="_blank" rel="noopener noreferrer">
-                  US Patent #{patent.awarder.match(/#(\d+,\d+)/)?.[1] || '11,250,716'}
-                </a>
+              <div className="patent-company-row">
+                <div className="patent-company">Microsoft Technology Licensing, LLC</div>
+                {patent.url && (
+                  <a href={patent.url} className="patent-link-inline" target="_blank" rel="noopener noreferrer">
+                    View Patent
+                  </a>
+                )}
+              </div>
+              {patent.summary && (
+                <div className="patent-description">{patent.summary}</div>
               )}
             </div>
           ))}

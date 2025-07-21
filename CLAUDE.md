@@ -142,6 +142,23 @@ The ResumeBuilder provides a unified interface to print all layout versions:
 
 **All layouts use the same print controls and settings for consistency.**
 
+### Typography System - Simplified & Consistent
+
+**Only 4 Font Sizes Used:**
+- **Name**: 16pt (uppercase, bold, black)
+- **Section Headers**: 12pt (SKILLS, EDUCATION - uppercase, bold, black)
+- **All Body Text**: 11pt (black - emphasis via bold/italic)
+- **Contact Info**: 9pt (black)
+
+**Text Emphasis (same font size, different styling):**
+- **Company Names**: 11pt + **Bold**
+- **Job Titles**: 11pt + *Italic*
+- **Dates & Locations**: 11pt + *Italic*
+- **Descriptions**: 11pt + Regular
+- **All text is pure black (#000000)**
+
+This creates a clean, professional hierarchy using minimal font sizes with strategic emphasis.
+
 ### Features
 
 - **Live Editing**: Real-time preview while editing

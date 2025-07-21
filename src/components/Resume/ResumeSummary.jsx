@@ -13,19 +13,19 @@ const ResumeSummary = ({ summary, printMode = false }) => {
         }
         
         .section-title {
-          font-size: ${printMode ? resumeDesignSystem.typography.sectionTitle.fontSize.print : resumeDesignSystem.typography.sectionTitle.fontSize.screen};
-          font-weight: ${resumeDesignSystem.typography.sectionTitle.fontWeight};
+          font-size: ${printMode ? resumeDesignSystem.typography.headerText.fontSize.print : resumeDesignSystem.typography.headerText.fontSize.screen};
+          font-weight: ${resumeDesignSystem.typography.headerText.fontWeight};
           margin-bottom: ${getSpacing('headerGap', printMode)};
-          color: ${resumeDesignSystem.typography.sectionTitle.color};
-          text-transform: ${resumeDesignSystem.typography.sectionTitle.textTransform};
-          letter-spacing: ${resumeDesignSystem.typography.sectionTitle.letterSpacing};
-          line-height: ${printMode ? resumeDesignSystem.typography.sectionTitle.lineHeight.print : resumeDesignSystem.typography.sectionTitle.lineHeight.screen};
+          color: ${resumeDesignSystem.typography.headerText.color};
+          text-transform: ${resumeDesignSystem.typography.headerText.textTransform};
+          letter-spacing: ${resumeDesignSystem.typography.headerText.letterSpacing};
+          line-height: ${printMode ? resumeDesignSystem.typography.headerText.lineHeight.print : resumeDesignSystem.typography.headerText.lineHeight.screen};
         }
         
         .summary-content {
-          font-size: ${printMode ? resumeDesignSystem.typography.summaryText.fontSize.print : resumeDesignSystem.typography.summaryText.fontSize.screen};
-          line-height: ${printMode ? resumeDesignSystem.typography.summaryText.lineHeight.print : resumeDesignSystem.typography.summaryText.lineHeight.screen};
-          color: ${resumeDesignSystem.typography.summaryText.color};
+          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
+          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
+          color: ${resumeDesignSystem.typography.bodyText.color};
           text-align: justify;
           margin: 0;
         }

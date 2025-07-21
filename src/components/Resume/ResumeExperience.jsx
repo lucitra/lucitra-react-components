@@ -40,13 +40,13 @@ const ResumeExperience = ({ work, printMode = false, maxItems }) => {
         }
         
         .section-title {
-          font-size: ${printMode ? resumeDesignSystem.typography.sectionTitle.fontSize.print : resumeDesignSystem.typography.sectionTitle.fontSize.screen};
-          font-weight: ${resumeDesignSystem.typography.sectionTitle.fontWeight};
+          font-size: ${printMode ? resumeDesignSystem.typography.headerText.fontSize.print : resumeDesignSystem.typography.headerText.fontSize.screen};
+          font-weight: ${resumeDesignSystem.typography.headerText.fontWeight};
           margin-bottom: ${getSpacing('headerGap', printMode)};
-          color: ${resumeDesignSystem.typography.sectionTitle.color};
-          text-transform: ${resumeDesignSystem.typography.sectionTitle.textTransform};
-          letter-spacing: ${resumeDesignSystem.typography.sectionTitle.letterSpacing};
-          line-height: ${printMode ? resumeDesignSystem.typography.sectionTitle.lineHeight.print : resumeDesignSystem.typography.sectionTitle.lineHeight.screen};
+          color: ${resumeDesignSystem.typography.headerText.color};
+          text-transform: ${resumeDesignSystem.typography.headerText.textTransform};
+          letter-spacing: ${resumeDesignSystem.typography.headerText.letterSpacing};
+          line-height: ${printMode ? resumeDesignSystem.typography.headerText.lineHeight.print : resumeDesignSystem.typography.headerText.lineHeight.screen};
         }
         
         .work-item {
@@ -66,17 +66,18 @@ const ResumeExperience = ({ work, printMode = false, maxItems }) => {
         }
         
         .company-name {
-          font-size: ${printMode ? resumeDesignSystem.typography.keyInfo.fontSize.print : resumeDesignSystem.typography.keyInfo.fontSize.screen};
-          font-weight: ${resumeDesignSystem.typography.keyInfo.fontWeight};
-          color: ${resumeDesignSystem.typography.keyInfo.color};
-          line-height: ${printMode ? resumeDesignSystem.typography.keyInfo.lineHeight.print : resumeDesignSystem.typography.keyInfo.lineHeight.screen};
+          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
+          font-weight: ${resumeDesignSystem.emphasis.bold.fontWeight};
+          color: ${resumeDesignSystem.emphasis.bold.color};
+          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
         }
         
         .company-location {
-          font-size: ${printMode ? resumeDesignSystem.typography.metaText.fontSize.print : resumeDesignSystem.typography.metaText.fontSize.screen};
-          color: ${resumeDesignSystem.typography.metaText.color};
-          font-style: ${resumeDesignSystem.typography.metaText.fontStyle};
-          line-height: ${printMode ? resumeDesignSystem.typography.metaText.lineHeight.print : resumeDesignSystem.typography.metaText.lineHeight.screen};
+          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
+          color: ${resumeDesignSystem.emphasis.italic.color};
+          font-style: ${resumeDesignSystem.emphasis.italic.fontStyle};
+          font-weight: ${resumeDesignSystem.emphasis.italic.fontWeight};
+          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
         }
         
         .position {
@@ -92,17 +93,18 @@ const ResumeExperience = ({ work, printMode = false, maxItems }) => {
         
         .position-title {
           font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
-          font-weight: normal;
-          font-style: italic;
-          color: #333;
+          font-weight: ${resumeDesignSystem.emphasis.italic.fontWeight};
+          font-style: ${resumeDesignSystem.emphasis.italic.fontStyle};
+          color: ${resumeDesignSystem.emphasis.italic.color};
           line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
         }
         
         .position-dates {
-          font-size: ${printMode ? resumeDesignSystem.typography.metaText.fontSize.print : resumeDesignSystem.typography.metaText.fontSize.screen};
-          color: ${resumeDesignSystem.typography.metaText.color};
-          font-style: ${resumeDesignSystem.typography.metaText.fontStyle};
-          line-height: ${printMode ? resumeDesignSystem.typography.metaText.lineHeight.print : resumeDesignSystem.typography.metaText.lineHeight.screen};
+          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
+          color: ${resumeDesignSystem.emphasis.italic.color};
+          font-style: ${resumeDesignSystem.emphasis.italic.fontStyle};
+          font-weight: ${resumeDesignSystem.emphasis.italic.fontWeight};
+          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
         }
         
         .highlights {

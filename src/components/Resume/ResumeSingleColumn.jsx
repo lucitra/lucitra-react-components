@@ -15,13 +15,13 @@ const ResumeSingleColumn = ({ skills, education, patents, printMode = false }) =
         }
         
         .section-title {
-          font-size: ${printMode ? resumeDesignSystem.typography.sectionTitle.fontSize.print : resumeDesignSystem.typography.sectionTitle.fontSize.screen};
-          font-weight: ${resumeDesignSystem.typography.sectionTitle.fontWeight};
+          font-size: ${printMode ? resumeDesignSystem.typography.headerText.fontSize.print : resumeDesignSystem.typography.headerText.fontSize.screen};
+          font-weight: ${resumeDesignSystem.typography.headerText.fontWeight};
           margin-bottom: ${getSpacing('headerGap', printMode)};
-          color: ${resumeDesignSystem.typography.sectionTitle.color};
-          text-transform: ${resumeDesignSystem.typography.sectionTitle.textTransform};
-          letter-spacing: ${resumeDesignSystem.typography.sectionTitle.letterSpacing};
-          line-height: ${printMode ? resumeDesignSystem.typography.sectionTitle.lineHeight.print : resumeDesignSystem.typography.sectionTitle.lineHeight.screen};
+          color: ${resumeDesignSystem.typography.headerText.color};
+          text-transform: ${resumeDesignSystem.typography.headerText.textTransform};
+          letter-spacing: ${resumeDesignSystem.typography.headerText.letterSpacing};
+          line-height: ${printMode ? resumeDesignSystem.typography.headerText.lineHeight.print : resumeDesignSystem.typography.headerText.lineHeight.screen};
         }
         
         .skills-list {
@@ -43,11 +43,11 @@ const ResumeSingleColumn = ({ skills, education, patents, printMode = false }) =
         }
         
         .education-institution, .patent-title {
-          font-size: ${printMode ? resumeDesignSystem.typography.keyInfo.fontSize.print : resumeDesignSystem.typography.keyInfo.fontSize.screen};
-          font-weight: ${resumeDesignSystem.typography.keyInfo.fontWeight};
-          color: ${resumeDesignSystem.typography.keyInfo.color};
+          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
+          font-weight: ${resumeDesignSystem.emphasis.bold.fontWeight};
+          color: ${resumeDesignSystem.emphasis.bold.color};
           margin-bottom: ${getSpacing('microGap', printMode)};
-          line-height: ${printMode ? resumeDesignSystem.typography.keyInfo.lineHeight.print : resumeDesignSystem.typography.keyInfo.lineHeight.screen};
+          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
         }
         
         .education-degree, .patent-details {
@@ -58,18 +58,19 @@ const ResumeSingleColumn = ({ skills, education, patents, printMode = false }) =
         }
         
         .education-date, .patent-date {
-          font-size: ${printMode ? resumeDesignSystem.typography.metaText.fontSize.print : resumeDesignSystem.typography.metaText.fontSize.screen};
-          color: ${resumeDesignSystem.typography.metaText.color};
-          font-style: ${resumeDesignSystem.typography.metaText.fontStyle};
-          line-height: ${printMode ? resumeDesignSystem.typography.metaText.lineHeight.print : resumeDesignSystem.typography.metaText.lineHeight.screen};
+          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
+          color: ${resumeDesignSystem.emphasis.italic.color};
+          font-style: ${resumeDesignSystem.emphasis.italic.fontStyle};
+          font-weight: ${resumeDesignSystem.emphasis.italic.fontWeight};
+          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
         }
         
         .patent-title-link {
-          font-size: ${printMode ? resumeDesignSystem.typography.keyInfo.fontSize.print : resumeDesignSystem.typography.keyInfo.fontSize.screen};
-          font-weight: ${resumeDesignSystem.typography.keyInfo.fontWeight};
-          color: ${resumeDesignSystem.links.color};
+          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
+          font-weight: ${resumeDesignSystem.emphasis.bold.fontWeight};
+          color: ${resumeDesignSystem.emphasis.bold.color};
           text-decoration: none;
-          line-height: ${printMode ? resumeDesignSystem.typography.keyInfo.lineHeight.print : resumeDesignSystem.typography.keyInfo.lineHeight.screen};
+          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
           transition: ${resumeDesignSystem.links.transition};
         }
         
@@ -83,31 +84,63 @@ const ResumeSingleColumn = ({ skills, education, patents, printMode = false }) =
           text-decoration: ${resumeDesignSystem.links.textDecoration};
           text-underline-offset: ${resumeDesignSystem.links.textUnderlineOffset};
           line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
-          display: block;
-          margin-bottom: ${getSpacing('microGap', printMode)};
           transition: ${resumeDesignSystem.links.transition};
+          margin-top: ${getSpacing('microGap', printMode)};
         }
         
         .patent-link:hover {
           color: ${resumeDesignSystem.links.hoverColor};
         }
         
+        .patent-company-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: ${getSpacing('microGap', printMode)};
+        }
+        
         .patent-company {
           font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
           color: ${resumeDesignSystem.typography.bodyText.color};
           line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
-          margin-bottom: ${getSpacing('microGap', printMode)};
+        }
+        
+        .patent-link-inline {
+          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
+          color: ${resumeDesignSystem.links.color};
+          text-decoration: ${resumeDesignSystem.links.textDecoration};
+          text-underline-offset: ${resumeDesignSystem.links.textUnderlineOffset};
+          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
+          transition: ${resumeDesignSystem.links.transition};
+        }
+        
+        .patent-link-inline:hover {
+          color: ${resumeDesignSystem.links.hoverColor};
         }
         
         .patent-header {
           display: flex;
           justify-content: space-between;
-          align-items: baseline;
+          align-items: flex-start;
           margin-bottom: ${getSpacing('microGap', printMode)};
         }
         
-        .patent-title-wrapper {
+        .patent-left {
           flex: 1;
+        }
+        
+        .patent-right {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          text-align: right;
+        }
+        
+        .patent-description {
+          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
+          color: ${resumeDesignSystem.typography.bodyText.color};
+          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
+          margin-bottom: ${getSpacing('microGap', printMode)};
         }
         
       `}</style>
@@ -151,7 +184,7 @@ const ResumeSingleColumn = ({ skills, education, patents, printMode = false }) =
             .map((patent, index) => (
             <div key={index} className="patent-item">
               <div className="patent-header">
-                <div className="patent-title-wrapper">
+                <div className="patent-left">
                   {patent.url ? (
                     <a href={patent.url} className="patent-title-link" target="_blank" rel="noopener noreferrer">
                       {patent.title}
@@ -160,13 +193,20 @@ const ResumeSingleColumn = ({ skills, education, patents, printMode = false }) =
                     <div className="patent-title">{patent.title}</div>
                   )}
                 </div>
-                <div className="patent-date">{patent.date}</div>
+                <div className="patent-right">
+                  <div className="patent-date">{patent.date}</div>
+                </div>
               </div>
-              <div className="patent-company">Microsoft Technology Licensing, LLC</div>
-              {patent.url && (
-                <a href={patent.url} className="patent-link" target="_blank" rel="noopener noreferrer">
-                  US Patent #{patent.awarder.match(/#(\d+,\d+)/)?.[1] || '11,250,716'}
-                </a>
+              <div className="patent-company-row">
+                <div className="patent-company">Microsoft Technology Licensing, LLC</div>
+                {patent.url && (
+                  <a href={patent.url} className="patent-link-inline" target="_blank" rel="noopener noreferrer">
+                    View Patent
+                  </a>
+                )}
+              </div>
+              {patent.summary && (
+                <div className="patent-description">{patent.summary}</div>
               )}
             </div>
           ))}
