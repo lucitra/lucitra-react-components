@@ -21,3 +21,6 @@ export * from './DataDisplay'
 
 // Typography Components
 export * from './Typography'
+
+// Resume Components
+export * from './Resume'

@@ -58,9 +58,61 @@ fix: resolved tooltip issue.       # Wrong: Past tense and period
 docs: Update README               # Wrong: Capital 'U'
 ```
 
+## Resume Components
+
+This library includes a comprehensive resume system with editing and export capabilities:
+
+### Available Components
+
+- **Resume**: Display-only resume component with print optimization
+- **ResumeBuilder**: Full-featured resume builder with editing interface
+- **ResumeHeader**: Personal info and contact details section
+- **ResumeSummary**: Professional summary section
+- **ResumeThreeColumn**: Skills, Education, and Patents in 3-column layout
+- **ResumeExperience**: Work experience with career progression support
+
+### Data and Utilities
+
+- **sampleResumeData**: Complete sample resume data for testing/demos
+- **defaultResumeData**: Empty resume structure for new resumes
+
+### Usage Examples
+
+```jsx
+import { ResumeBuilder, Resume, sampleResumeData } from '@lucitra/react-components';
+
+// Full resume builder with editing
+<ResumeBuilder 
+  initialData={sampleResumeData}
+  onDataChange={(data) => saveResume(data)}
+  onExport={(format, data) => handleExport(format, data)}
+  enableExport={true}
+/>
+
+// Display-only resume
+<Resume 
+  data={resumeData}
+  config={{
+    printMode: true,
+    maxWorkItems: 4,
+    filterByVisibility: true
+  }}
+/>
+```
+
+### Features
+
+- **Live Editing**: Real-time preview while editing
+- **Export Options**: JSON and PDF export functionality
+- **Print Optimization**: Single-page PDF-ready layouts
+- **Responsive Design**: Works on desktop and mobile
+- **Customizable**: Flexible configuration options
+- **Professional Layout**: Based on modern resume standards
+
 ## Important Notes
 
 - Component library using Mantine UI
 - Exports ES modules for tree-shaking
 - Includes Storybook for component development
 - Pre-commit hooks enforce linting and commit message format
+- Resume components use JSON Resume standard with extensions

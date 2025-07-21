@@ -24,7 +24,8 @@ module.exports = {
   rules: {
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'warn',
-    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }]
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    'react/no-unknown-property': ['error', { ignore: ['jsx', 'global'] }]
   },
   settings: {
     react: {
