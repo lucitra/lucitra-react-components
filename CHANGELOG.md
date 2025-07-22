@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.17.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.16.1...react-components-v0.17.0) (2025-07-22)
+
+
+### Features
+
+* **Resume:** add EducationEditor and SkillsEditor components for enhanced resume editing ([221054b](https://github.com/lucitra/lucitra-react-components/commit/221054b6f300601bdd56f46a882b99170c2f7bf0))
+* **Resume:** enhance education section with coursework details and layout improvements ([b4ccfe6](https://github.com/lucitra/lucitra-react-components/commit/b4ccfe636708ed242074be721cf296c8024f4e29))
+* **Resume:** enhance PDF printing options and layout consistency ([b39962c](https://github.com/lucitra/lucitra-react-components/commit/b39962ca8fc3ca2b2ee301d0caf29f7232e6318f))
+* **Resume:** enhance version control with detailed diff viewer and AI analysis ([5631aa9](https://github.com/lucitra/lucitra-react-components/commit/5631aa9ccd70fbfebb3212563544d68f4b1a180d))
+* **Resume:** implement comprehensive version control for resume editing ([5484722](https://github.com/lucitra/lucitra-react-components/commit/5484722e98ce62c5ead06506c009d5efe3a8a8b4))
+* **Resume:** implement direct data updates for AI optimizations ([af791ad](https://github.com/lucitra/lucitra-react-components/commit/af791ade0a1a3cb4abcfe86cf8069b6dcf0c18f6))
+* **Resume:** integrate AI-powered optimization features for enhanced resume editing ([896ac75](https://github.com/lucitra/lucitra-react-components/commit/896ac75973964c05eca1620f8f3c0f9cdfea3574))
+* **Resume:** integrate modular icon system and enhance UI components ([a016417](https://github.com/lucitra/lucitra-react-components/commit/a01641746f548b15ec75d1280490fcfaebe73221))
+* **Resume:** introduce new resume data structures and enhance typography options ([291e4e2](https://github.com/lucitra/lucitra-react-components/commit/291e4e2141c851ffa9a86dff76f3f3904ec1c3b8))
+* **Resume:** overhaul resume components and introduce competitive feature analysis ([09fa1f6](https://github.com/lucitra/lucitra-react-components/commit/09fa1f6101cca365180dedb8bc9d072243de1729))
+* **Resume:** simplify typography system and enhance layout consistency ([537da8f](https://github.com/lucitra/lucitra-react-components/commit/537da8f251735c1eb6a5964c60f600d73a6ac683))
+* **Resume:** update resume components for improved layout and content accuracy ([90ffc5e](https://github.com/lucitra/lucitra-react-components/commit/90ffc5efe570a4f428a1af8209104b7737bed584))
+
+
+### Bug Fixes
+
+* resolve eslint errors and improve resume layout ([83ecfe1](https://github.com/lucitra/lucitra-react-components/commit/83ecfe1f96e1f71542d7ccbae09178004341f291))
+
+
+### Miscellaneous Chores
+
+* **Resume:** remove deprecated ResumeSingleColumn stories ([0ce83d6](https://github.com/lucitra/lucitra-react-components/commit/0ce83d6ab42d87b768675f174f854cb6c5f54da6))
+
 ## [0.16.1](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.16.0...react-components-v0.16.1) (2025-07-20)
 
 
