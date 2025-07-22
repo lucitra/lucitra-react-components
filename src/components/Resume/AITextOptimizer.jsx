@@ -13,10 +13,12 @@ const AITextOptimizer = ({
   onApplyOptimization, 
   context = {},
   fieldType = 'general',
+  fieldName = '',
   userSubscription = 'free',
   remainingCredits = 3,
   onUpgrade,
-  onCreditUsed
+  onCreditUsed,
+  onVersionTrack
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -185,6 +187,19 @@ const AITextOptimizer = ({
   };
 
   const applyOptimization = (optimization) => {
+    // Track the AI optimization in version control
+    if (onVersionTrack) {
+      onVersionTrack({
+        field: fieldName,
+        originalValue: originalText,
+        newValue: optimization.optimized,
+        goal: optimization.goal,
+        confidence: optimization.confidence,
+        reasoning: optimization.reasoning,
+        fieldType: fieldType
+      });
+    }
+    
     onApplyOptimization(optimization.optimized);
     setOptimizations([]);
     setIsVisible(false);
@@ -584,10 +599,12 @@ AITextOptimizer.propTypes = {
   onApplyOptimization: PropTypes.func.isRequired,
   context: PropTypes.object,
   fieldType: PropTypes.oneOf(['job-title', 'bullet-point', 'summary', 'skills', 'general']),
+  fieldName: PropTypes.string,
   userSubscription: PropTypes.oneOf(['free', 'pro', 'enterprise']),
   remainingCredits: PropTypes.number,
   onUpgrade: PropTypes.func,
-  onCreditUsed: PropTypes.func
+  onCreditUsed: PropTypes.func,
+  onVersionTrack: PropTypes.func
 };
 
 export default AITextOptimizer;

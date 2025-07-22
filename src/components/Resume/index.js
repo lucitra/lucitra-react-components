@@ -17,5 +17,8 @@ export { default as AIAssistant } from './AIAssistant.jsx';
 export { default as AITextOptimizer } from './AITextOptimizer.jsx';
 export { default as AITextInput } from './AITextInput.jsx';
 
+// Version Control
+export { default as ResumeVersionControl } from './ResumeVersionControl.jsx';
+
 // Export data and utilities
 export { defaultResumeData, baseResumeData, genericResumeData, ibraheemResumeData } from '../../data/resumeData.js';

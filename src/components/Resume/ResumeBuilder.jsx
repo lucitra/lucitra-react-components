@@ -10,6 +10,8 @@ import EducationEditor from './EducationEditor.jsx';
 import SkillsEditor from './SkillsEditor.jsx';
 import AIAssistant from './AIAssistant.jsx';
 import AITextInput from './AITextInput.jsx';
+import ResumeVersionControl from './ResumeVersionControl.jsx';
+import { useResumeVersionControl } from '../../hooks/useResumeVersionControl.js';
 import { defaultResumeData } from "../../data/resumeData.js";
 
 const ResumeBuilder = ({
@@ -20,9 +22,17 @@ const ResumeBuilder = ({
   enableExport = true,
   useSerifFont = false,
 }) => {
-  const [resumeData, setResumeData] = useState(
-    initialData || defaultResumeData
-  );
+  // Replace basic state with version control
+  const {
+    currentData: resumeData,
+    versionHistory,
+    currentVersion,
+    updateWithAI,
+    updateManual,
+    undo,
+    redo,
+    revertToVersion
+  } = useResumeVersionControl(initialData || defaultResumeData);
   const [config, setConfig] = useState({
     printMode: false,
     singleColumn: false,
@@ -41,11 +51,16 @@ const ResumeBuilder = ({
 
   const handleDataChange = useCallback(
     (newData) => {
-      setResumeData(newData);
+      // This will be called for version-controlled updates
       onDataChange(newData);
     },
     [onDataChange]
   );
+
+  // Version control for AI optimizations
+  const handleAIVersionTrack = useCallback((aiInfo) => {
+    updateWithAI(resumeData, aiInfo);
+  }, [resumeData, updateWithAI]);
 
   const handleConfigChange = useCallback((newConfig) => {
     setConfig((prev) => ({ ...prev, ...newConfig }));
@@ -82,15 +97,18 @@ const ResumeBuilder = ({
 
   const updateBasics = useCallback(
     (field, value) => {
-      handleDataChange({
+      const originalValue = resumeData.basics[field];
+      const newData = {
         ...resumeData,
         basics: {
           ...resumeData.basics,
           [field]: value,
         },
-      });
+      };
+      updateManual(newData, `basics.${field}`, originalValue, value);
+      handleDataChange(newData);
     },
-    [resumeData, handleDataChange]
+    [resumeData, updateManual, handleDataChange]
   );
 
   // Simple inline Resume component for display
@@ -732,11 +750,13 @@ const ResumeBuilder = ({
                     placeholder="Brief professional summary highlighting your expertise and achievements..."
                     style={{ resize: "vertical", minHeight: "80px" }}
                     fieldType="summary"
+                    fieldName="Professional Summary"
                     context={aiContext}
                     userSubscription={aiSubscription}
                     remainingCredits={aiCredits}
                     onUpgrade={handleUpgrade}
                     onCreditUsed={handleCreditUsed}
+                    onVersionTrack={handleAIVersionTrack}
                   />
                 </div>
 
@@ -762,6 +782,7 @@ const ResumeBuilder = ({
                     remainingCredits={aiCredits}
                     onUpgrade={handleUpgrade}
                     onCreditUsed={handleCreditUsed}
+                    onVersionTrack={handleAIVersionTrack}
                     context={aiContext}
                   />
                 ))}
@@ -792,6 +813,7 @@ const ResumeBuilder = ({
                     remainingCredits={aiCredits}
                     onUpgrade={handleUpgrade}
                     onCreditUsed={handleCreditUsed}
+                    onVersionTrack={handleAIVersionTrack}
                     context={aiContext}
                   />
                 ))}
@@ -804,6 +826,15 @@ const ResumeBuilder = ({
                 <SkillsEditor
                   skillsData={resumeData.skills}
                   onUpdate={updateSkills}
+                />
+
+                <h2 className="section-header">Version Control</h2>
+                <ResumeVersionControl
+                  versionHistory={versionHistory}
+                  currentVersion={currentVersion}
+                  onUndo={undo}
+                  onRedo={redo}
+                  onRevertToVersion={revertToVersion}
                 />
 
                 <h2 className="section-header">AI Assistant</h2>

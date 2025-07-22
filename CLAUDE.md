@@ -207,6 +207,73 @@ import { AITextInput } from '@lucitra/react-components';
 - **Pro Subscription**: Unlimited AI optimizations
 - **Context Optimization**: Job-specific suggestions based on provided context
 
+### Version Control System
+
+The resume builder includes comprehensive version control for tracking all changes, especially AI optimizations:
+
+#### Features
+- **Automatic Tracking**: Every AI optimization and manual edit is tracked
+- **Undo/Redo**: Full undo/redo functionality with keyboard shortcuts (Ctrl+Z, Ctrl+Y)
+- **Version History**: Complete history of all changes with timestamps
+- **AI Change Detection**: Special tracking for AI-generated optimizations with confidence scores
+- **Granular Reversion**: Click any version to revert instantly
+- **Change Context**: Detailed information about what changed and why
+
+#### Change Types Tracked
+- **AI Optimizations**: 🤖 AI suggestions applied to text fields
+- **Manual Edits**: ✏️ User-made changes
+- **Bullet Point Edits**: 🎯 Specific bullet point optimizations
+- **Job Title Changes**: 💼 Job title optimizations
+- **Summary Updates**: 📝 Professional summary changes
+- **Bulk Operations**: 📊 Mass changes
+
+#### Technical Implementation
+```jsx
+import { useResumeVersionControl } from '@lucitra/react-components';
+
+const MyResumeBuilder = () => {
+  const {
+    currentData,
+    versionHistory, 
+    currentVersion,
+    updateWithAI,
+    updateManual,
+    undo,
+    redo,
+    revertToVersion
+  } = useResumeVersionControl(initialData);
+
+  // Track AI optimizations
+  const handleAIOptimization = (aiInfo) => {
+    updateWithAI(newResumeData, {
+      field: 'Job Title',
+      originalValue: 'Developer',
+      newValue: 'Senior Software Engineer',
+      goal: 'impact',
+      confidence: 92,
+      reasoning: 'Added seniority and impact indicators',
+      fieldType: 'job-title'
+    });
+  };
+
+  return (
+    <ResumeVersionControl
+      versionHistory={versionHistory}
+      currentVersion={currentVersion}
+      onUndo={undo}
+      onRedo={redo}
+      onRevertToVersion={revertToVersion}
+    />
+  );
+};
+```
+
+#### Benefits
+- **Safe Experimentation**: Users can try AI suggestions without fear of losing work
+- **Change Transparency**: Full visibility into what AI optimizations were applied
+- **Professional Confidence**: Ability to revert any changes that don't feel right
+- **Analytics Potential**: Track which AI optimizations are most commonly accepted/reverted
+
 ## Important Notes
 
 - Component library using Mantine UI

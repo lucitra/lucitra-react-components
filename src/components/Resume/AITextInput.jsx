@@ -13,11 +13,13 @@ const AITextInput = ({
   value,
   onChange,
   fieldType = 'general',
+  fieldName = '',
   context = {},
   userSubscription = 'free',
   remainingCredits = 3,
   onUpgrade,
   onCreditUsed,
+  onVersionTrack,
   children,
   className = '',
   style = {},
@@ -69,10 +71,12 @@ const AITextInput = ({
             onApplyOptimization={handleApplyOptimization}
             context={context}
             fieldType={fieldType}
+            fieldName={fieldName}
             userSubscription={userSubscription}
             remainingCredits={remainingCredits}
             onUpgrade={onUpgrade}
             onCreditUsed={onCreditUsed}
+            onVersionTrack={onVersionTrack}
           />
         )}
       </div>
@@ -120,10 +124,12 @@ const AITextInput = ({
           onApplyOptimization={handleApplyOptimization}
           context={context}
           fieldType={fieldType}
+          fieldName={fieldName}
           userSubscription={userSubscription}
           remainingCredits={remainingCredits}
           onUpgrade={onUpgrade}
           onCreditUsed={onCreditUsed}
+          onVersionTrack={onVersionTrack}
         />
       )}
     </div>
@@ -134,11 +140,13 @@ AITextInput.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   fieldType: PropTypes.oneOf(['job-title', 'bullet-point', 'summary', 'skills', 'general']),
+  fieldName: PropTypes.string,
   context: PropTypes.object,
   userSubscription: PropTypes.oneOf(['free', 'pro', 'enterprise']),
   remainingCredits: PropTypes.number,
   onUpgrade: PropTypes.func,
   onCreditUsed: PropTypes.func,
+  onVersionTrack: PropTypes.func,
   children: PropTypes.node,
   className: PropTypes.string,
   style: PropTypes.object

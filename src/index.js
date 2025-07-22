@@ -6,6 +6,7 @@ export * from './components'
 
 // Hooks
 export { useClickOutside } from './hooks/useClickOutside'
+export { useResumeVersionControl } from './hooks/useResumeVersionControl'
 
 // Utils and configs
 export { 

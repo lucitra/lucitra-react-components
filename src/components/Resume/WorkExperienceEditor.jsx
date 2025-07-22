@@ -10,6 +10,7 @@ const WorkExperienceEditor = ({
   remainingCredits = 3,
   onUpgrade,
   onCreditUsed,
+  onVersionTrack,
   context = {}
 }) => {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -392,11 +393,13 @@ const WorkExperienceEditor = ({
                     onChange={(e) => updatePosition(positionIndex, 'title', e.target.value)}
                     placeholder="Software Engineer"
                     fieldType="job-title"
+                    fieldName={`${workData.company} - Job Title`}
                     context={context}
                     userSubscription={userSubscription}
                     remainingCredits={remainingCredits}
                     onUpgrade={onUpgrade}
                     onCreditUsed={onCreditUsed}
+                    onVersionTrack={onVersionTrack}
                   />
                 </div>
                 <div className="form-group">
@@ -452,11 +455,13 @@ const WorkExperienceEditor = ({
                             }
                           }}
                           fieldType="bullet-point"
+                          fieldName={`${workData.company} - Bullet Point ${highlightIndex + 1}`}
                           context={context}
                           userSubscription={userSubscription}
                           remainingCredits={remainingCredits}
                           onUpgrade={onUpgrade}
                           onCreditUsed={onCreditUsed}
+                          onVersionTrack={onVersionTrack}
                         />
                         <div className="highlight-actions">
                           <button
@@ -503,11 +508,13 @@ const WorkExperienceEditor = ({
                     onChange={(e) => setNewHighlight(e.target.value)}
                     placeholder="Add a new achievement or responsibility..."
                     fieldType="bullet-point"
+                    fieldName={`${workData.company} - New Bullet Point`}
                     context={context}
                     userSubscription={userSubscription}
                     remainingCredits={remainingCredits}
                     onUpgrade={onUpgrade}
                     onCreditUsed={onCreditUsed}
+                    onVersionTrack={onVersionTrack}
                   />
                   <button
                     className="add-btn"
@@ -540,6 +547,7 @@ WorkExperienceEditor.propTypes = {
   remainingCredits: PropTypes.number,
   onUpgrade: PropTypes.func,
   onCreditUsed: PropTypes.func,
+  onVersionTrack: PropTypes.func,
   context: PropTypes.object
 };
 

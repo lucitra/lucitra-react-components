@@ -10,6 +10,7 @@ const EducationEditor = ({
   remainingCredits = 3,
   onUpgrade,
   onCreditUsed,
+  onVersionTrack,
   context = {}
 }) => {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -294,11 +295,13 @@ const EducationEditor = ({
                 onChange={(e) => updateEducationField('area', e.target.value)}
                 placeholder="Computer Science"
                 fieldType="general"
+                fieldName={`${educationData.institution} - Area of Study`}
                 context={context}
                 userSubscription={userSubscription}
                 remainingCredits={remainingCredits}
                 onUpgrade={onUpgrade}
                 onCreditUsed={onCreditUsed}
+                onVersionTrack={onVersionTrack}
               />
             </div>
           </div>
@@ -394,6 +397,7 @@ EducationEditor.propTypes = {
   remainingCredits: PropTypes.number,
   onUpgrade: PropTypes.func,
   onCreditUsed: PropTypes.func,
+  onVersionTrack: PropTypes.func,
   context: PropTypes.object
 };
 
