@@ -58,18 +58,18 @@ fix: resolved tooltip issue.       # Wrong: Past tense and period
 docs: Update README               # Wrong: Capital 'U'
 ```
 
-## Resume Components
+## Resume System
 
-This library includes a comprehensive resume system with editing and export capabilities:
+This library includes a comprehensive resume builder with two layout options:
 
-### Available Components
+### Main Component
 
-- **Resume**: Display-only resume component with print optimization
-- **ResumeBuilder**: Full-featured resume builder with editing interface
-- **ResumeHeader**: Personal info and contact details section
-- **ResumeSummary**: Professional summary section
-- **ResumeThreeColumn**: Skills, Education, and Patents in 3-column layout
-- **ResumeExperience**: Work experience with career progression support
+- **ResumeBuilder**: Complete resume builder with editing interface, live preview, and export capabilities
+
+### Layout Options
+
+1. **Three-Column Layout**: Skills, Education, and Patents in 3-column layout (default)
+2. **Single-Column Layout**: Vertical layout optimized for single-page PDF output
 
 ### Data and Utilities
 
@@ -79,25 +79,22 @@ This library includes a comprehensive resume system with editing and export capa
 ### Usage Examples
 
 ```jsx
-import { ResumeBuilder, Resume, sampleResumeData } from '@lucitra/react-components';
+import { ResumeBuilder, sampleResumeData } from '@lucitra/react-components';
 
-// Full resume builder with editing
+// Full resume builder with editing and export
 <ResumeBuilder 
   initialData={sampleResumeData}
-  onDataChange={(data) => saveResume(data)}
-  onExport={(format, data) => handleExport(format, data)}
+  onDataChange={(data) => console.log('Data changed:', data)}
+  onExport={(format, data) => console.log('Export:', format, data)}
+  showControls={true}
   enableExport={true}
 />
 
-// Display-only resume with layout options
-<Resume 
-  data={resumeData}
-  config={{
-    printMode: true,
-    singleColumn: false, // or true, or 'new'
-    maxWorkItems: 4,
-    filterByVisibility: true
-  }}
+// Minimal version without controls (for embedding)
+<ResumeBuilder 
+  initialData={sampleResumeData}
+  showControls={false}
+  enableExport={false}
 />
 ```
 

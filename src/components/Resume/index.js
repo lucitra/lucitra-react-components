@@ -1,6 +1,6 @@
-export { default as Resume } from './Resume.jsx';
 export { default as ResumeBuilder } from './ResumeBuilder.jsx';
-export { ResumePrintPage } from './ResumePrintPage.jsx';
+
+// Individual components (for advanced customization)
 export { ResumeHeader } from './ResumeHeader.jsx';
 export { ResumeSummary } from './ResumeSummary.jsx';
 export { ResumeThreeColumn } from './ResumeThreeColumn.jsx';

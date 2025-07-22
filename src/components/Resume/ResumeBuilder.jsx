@@ -1,6 +1,10 @@
 import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
-import Resume from "./Resume.jsx";
+import { ResumeHeader } from './ResumeHeader.jsx';
+import { ResumeSummary } from './ResumeSummary.jsx';
+import { ResumeThreeColumn } from './ResumeThreeColumn.jsx';
+import { ResumeSingleColumn } from './ResumeSingleColumn.jsx';
+import { ResumeExperience } from './ResumeExperience.jsx';
 import { defaultResumeData } from "../../data/resumeData.js";
 
 const ResumeBuilder = ({
@@ -74,6 +78,110 @@ const ResumeBuilder = ({
     },
     [resumeData, handleDataChange]
   );
+
+  // Simple inline Resume component for display
+  const ResumeDisplay = useCallback(({ data, config }) => {
+    if (!data) return <div>No resume data provided</div>;
+
+    const { basics, work, education, skills, patents } = data;
+    
+    // Filter work experience based on visibility and print mode
+    let filteredWork = work;
+    if (config.filterByVisibility) {
+      filteredWork = work.filter(item => 
+        config.printMode ? item.visibility.print : item.visibility.online
+      );
+    }
+    if (config.maxWorkItems && config.maxWorkItems > 0) {
+      filteredWork = filteredWork.slice(0, config.maxWorkItems);
+    }
+
+    return (
+      <div className={`resume-display ${config.printMode ? 'print-mode' : ''}`}>
+        <style jsx={true}>{`
+          .resume-display {
+            max-width: 8.5in;
+            margin: 0 auto;
+            background: white;
+            padding: 0.75in;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            font-size: 11px;
+            line-height: 1.4;
+            color: #161616;
+            box-sizing: border-box;
+          }
+          
+          .print-mode {
+            width: 8.5in;
+            height: 11in;
+            padding: 0.1in;
+            margin: 0;
+            overflow: hidden;
+            font-size: 8pt;
+            line-height: 1.3;
+          }
+          
+          .print-mode > * + * {
+            margin-top: 0.02rem;
+          }
+          
+          @media print {
+            html, body {
+              width: 100% !important;
+              height: auto !important;
+              margin: 0 !important;
+              padding: 0 !important;
+              background: white !important;
+              color: black !important;
+            }
+            
+            @page {
+              size: letter;
+              margin: 0.1in;
+            }
+            
+            body * {
+              visibility: hidden !important;
+            }
+            
+            .resume-display,
+            .resume-display * {
+              visibility: visible !important;
+            }
+            
+            .resume-display {
+              position: absolute !important;
+              left: 0 !important;
+              top: 0 !important;
+              width: 100% !important;
+              height: auto !important;
+              padding: 0.1in !important;
+              margin: 0 !important;
+            }
+          }
+        `}</style>
+        
+        <ResumeHeader basics={basics} printMode={config.printMode} />
+        <ResumeSummary summary={basics.summary} printMode={config.printMode} />
+        {config.singleColumn ? (
+          <ResumeSingleColumn 
+            skills={skills} 
+            education={education} 
+            patents={patents}
+            printMode={config.printMode} 
+          />
+        ) : (
+          <ResumeThreeColumn 
+            skills={skills} 
+            education={education} 
+            patents={patents}
+            printMode={config.printMode} 
+          />
+        )}
+        <ResumeExperience work={filteredWork} printMode={config.printMode} />
+      </div>
+    );
+  }, []);
 
   const addWorkExperience = useCallback(() => {
     const newWork = {
@@ -427,7 +535,7 @@ const ResumeBuilder = ({
 
         <div className="content">
           {activeTab === "preview" ? (
-            <Resume data={resumeData} config={config} />
+            <ResumeDisplay data={resumeData} config={config} />
           ) : (
             <div className="editor-grid">
               <div className="editor-panel">
@@ -547,10 +655,48 @@ const ResumeBuilder = ({
                 <button className="btn btn-outline" onClick={addWorkExperience}>
                   + Add Work Experience
                 </button>
+
+                <h2 className="section-header">Quick Actions</h2>
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                  <button className="btn btn-outline" onClick={() => {
+                    const templates = {
+                      'ai-engineer': 'Applied AI Engineer | Deep Learning & Scalable AI Systems',
+                      'fullstack': 'Full-Stack Engineer | React & Python Specialist', 
+                      'data-scientist': 'Data Scientist | ML & Analytics Expert',
+                      'frontend': 'Frontend Engineer | React & TypeScript Specialist'
+                    };
+                    const title = templates['ai-engineer'];
+                    updateBasics('label', title);
+                  }}>
+                    AI Engineer Template
+                  </button>
+                  
+                  <button className="btn btn-outline" onClick={() => {
+                    const sampleSummary = "Applied AI engineer with a master's in computer science, focused on deploying deep learning models and ML pipelines in production. Proven track record developing and scaling intelligent systems for healthcare and social platforms. Skilled in Python, TypeScript, and Cloud technologies; experienced in fine-tuning LLMs, building MLOps pipelines, and deploying secure AI features in HIPAA and enterprise environments.";
+                    updateBasics('summary', sampleSummary);
+                  }}>
+                    Sample Summary
+                  </button>
+                  
+                  <button className="btn btn-outline" onClick={() => {
+                    handleDataChange({
+                      ...resumeData,
+                      basics: {
+                        ...resumeData.basics,
+                        profiles: [
+                          { network: "GitHub", username: "username", url: "https://github.com/username" },
+                          { network: "LinkedIn", username: "username", url: "https://www.linkedin.com/in/username" }
+                        ]
+                      }
+                    });
+                  }}>
+                    Add Social Profiles
+                  </button>
+                </div>
               </div>
 
               <div className="preview-panel">
-                <Resume data={resumeData} config={config} />
+                <ResumeDisplay data={resumeData} config={config} />
               </div>
             </div>
           )}
