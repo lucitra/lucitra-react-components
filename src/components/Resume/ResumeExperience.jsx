@@ -152,7 +152,7 @@ const ResumeExperience = ({ work, printMode = false, maxItems, useSerifFont = fa
                   </div>
                   {position.highlights && position.highlights.length > 0 && (
                     <ul className="highlights">
-                      {position.highlights.slice(0, printMode ? 2 : 4).map((highlight, highlightIndex) => (
+                      {position.highlights.map((highlight, highlightIndex) => (
                         <li key={highlightIndex} className="highlight">
                           {highlight}
                         </li>
@@ -172,7 +172,7 @@ const ResumeExperience = ({ work, printMode = false, maxItems, useSerifFont = fa
                 </div>
                 {workItem.highlights && workItem.highlights.length > 0 && (
                   <ul className="highlights">
-                    {workItem.highlights.slice(0, printMode ? 2 : 4).map((highlight, highlightIndex) => (
+                    {workItem.highlights.map((highlight, highlightIndex) => (
                       <li key={highlightIndex} className="highlight">
                         {highlight}
                       </li>

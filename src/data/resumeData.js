@@ -222,7 +222,7 @@ export const ibraheemResumeData = {
       location: "Remote",
       startDate: "2023-04", 
       endDate: "2023-08",
-      visibility: { online: true, print: true },
+      visibility: { online: true, print: false },
       highlights: [],
       positions: [
         {
@@ -281,6 +281,200 @@ export const ibraheemResumeData = {
             "Established and implemented comprehensive accessibility standards for mobile application suite",
             "Engineered and deployed key features for LinkedIn Sales Navigator platform and infrastructure",
             "Achieved 30% reduction in page load time through implementation of advanced image optimization",
+          ],
+        },
+      ],
+    },
+    {
+      company: "66 Greenpoint",
+      location: "Brooklyn, NY",
+      startDate: "2021-09",
+      endDate: "2025-04",
+      visibility: { online: false, print: false },
+      highlights: [],
+      positions: [
+        {
+          title: "Business Owner",
+          location: "Brooklyn, NY",
+          startDate: "Sep 2021",
+          endDate: "Apr 2025",
+          highlights: [
+            "Founded and managed a brick-and-mortar business, applying data-driven principles for 35% year-over-year revenue growth",
+            "Developed custom tech stack by integrating Clover's API with proprietary AI algorithms for operations optimization",
+            "Implemented predictive analytics platform for consumer behavior modeling and targeted marketing",
+            "Designed and deployed a full-stack reservation system with React frontend and Python backend",
+          ],
+        },
+      ],
+    },
+    {
+      company: "Zynga",
+      location: "San Francisco, CA",
+      startDate: "2013-09",
+      endDate: "2015-02",
+      visibility: { online: true, print: false },
+      highlights: [],
+      positions: [
+        {
+          title: "User Acquisition Manager",
+          location: "San Francisco, CA",
+          startDate: "Sep 2013",
+          endDate: "Feb 2015",
+          highlights: [
+            "Led paid acquisition for Words With Friends, optimizing user acquisition costs by 30% with predictive analytics",
+            "Developed Python data analysis tools to guide multi-million dollar quarterly marketing investments",
+          ],
+        },
+      ],
+    },
+    {
+      company: "MdotM",
+      location: "San Mateo, CA",
+      startDate: "2011-06",
+      endDate: "2016-03",
+      visibility: { online: false, print: false },
+      highlights: [],
+      positions: [
+        {
+          title: "Account Director",
+          location: "San Mateo, CA",
+          startDate: "Mar 2015",
+          endDate: "Mar 2016",
+          highlights: [
+            "Led cross-functional teams at profitable, bootstrapped adtech startup, increasing campaign ROI by 65%",
+            "Implemented machine learning algorithms for ad targeting that drove millions of mobile app installs",
+            "Designed and documented RESTful advertising API with Python backend for programmatic campaign management",
+          ],
+        },
+        {
+          title: "Account Manager",
+          location: "San Mateo, CA",
+          startDate: "Jun 2011",
+          endDate: "Jun 2012",
+          highlights: [
+            "Led teams at profitable, bootstrapped adtech startup, managing all aspects of advertising operations",
+            "Drove millions of mobile app installs and in-app purchases for top-grossing iOS and Android developers",
+            "Designed and documented the advertising API for programmatic campaign management",
+          ],
+        },
+      ],
+    },
+    {
+      company: "TinyCo",
+      location: "San Francisco, CA",
+      startDate: "2012-07",
+      endDate: "2012-12",
+      visibility: { online: false, print: false },
+      highlights: [],
+      positions: [
+        {
+          title: "User Acquisition Manager",
+          location: "San Francisco, CA",
+          startDate: "Jul 2012",
+          endDate: "Dec 2012",
+          highlights: [
+            "Managed user acquisition for various cross-platform mobile games",
+            "Collaborated with graphic designers and product managers to deliver compelling static and video assets",
+          ],
+        },
+      ],
+    },
+    {
+      company: "KBW",
+      location: "San Francisco, CA",
+      startDate: "2010-12",
+      endDate: "2011-03",
+      visibility: { online: true, print: false },
+      highlights: [],
+      positions: [
+        {
+          title: "Equity Research Associate",
+          location: "San Francisco, CA",
+          startDate: "Dec 2010",
+          endDate: "Mar 2011",
+          highlights: [
+            "Performed fundamental research on Financial Services companies, primarily Banks",
+            "Provided buy/sell/hold recommendations by analyzing industry trends and creating financial models",
+          ],
+        },
+      ],
+    },
+    {
+      company: "Barclays Capital (Lehman Brothers)",
+      location: "New York, NY",
+      startDate: "2008-07",
+      endDate: "2010-07",
+      visibility: { online: true, print: false },
+      highlights: [],
+      positions: [
+        {
+          title: "Investment Banking Analyst",
+          location: "New York, NY",
+          startDate: "Jul 2008",
+          endDate: "Jul 2010",
+          highlights: [
+            "Primary contact for executing over $3.3 billion of Liability Management trades",
+            "Modeled financial transactions including debt restructuring, exchange offers, and tender offers",
+          ],
+        },
+      ],
+    },
+    {
+      company: "UBS Investment Bank",
+      location: "New York, NY",
+      startDate: "2007-06",
+      endDate: "2007-08",
+      visibility: { online: false, print: false },
+      highlights: [],
+      positions: [
+        {
+          title: "Summer Analyst",
+          location: "New York, NY",
+          startDate: "Jun 2007",
+          endDate: "Aug 2007",
+          highlights: [
+            "Completed summer analyst program in Investment Banking division",
+            "Assisted with financial modeling and client presentation preparation",
+          ],
+        },
+      ],
+    },
+    {
+      company: "Macy's",
+      location: "New York, NY",
+      startDate: "2006-05",
+      endDate: "2006-08",
+      visibility: { online: false, print: false },
+      highlights: [],
+      positions: [
+        {
+          title: "Marketing Intern",
+          location: "New York, NY",
+          startDate: "May 2006",
+          endDate: "Aug 2006",
+          highlights: [
+            "Supported marketing campaigns and promotional strategies for retail operations",
+            "Analyzed customer data and market trends to inform marketing decisions",
+          ],
+        },
+      ],
+    },
+    {
+      company: "May Department Stores Company",
+      location: "St. Louis, MO",
+      startDate: "2005-05",
+      endDate: "2005-08",
+      visibility: { online: false, print: false },
+      highlights: [],
+      positions: [
+        {
+          title: "Finance Intern",
+          location: "St. Louis, MO",
+          startDate: "May 2005",
+          endDate: "Aug 2005",
+          highlights: [
+            "Completed finance internship program supporting corporate finance operations",
+            "Assisted with financial analysis and reporting for retail division",
           ],
         },
       ],
@@ -408,7 +602,7 @@ export const legacySampleResumeData = {
       location: "Remote",
       startDate: "2023-04",
       endDate: "2023-08",
-      visibility: { online: true, print: true },
+      visibility: { online: true, print: false },
       highlights: [],
       positions: [
         {

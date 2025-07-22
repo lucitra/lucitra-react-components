@@ -5,6 +5,9 @@ import { ResumeSummary } from './ResumeSummary.jsx';
 import { ResumeThreeColumn } from './ResumeThreeColumn.jsx';
 import { ResumeSingleColumn } from './ResumeSingleColumn.jsx';
 import { ResumeExperience } from './ResumeExperience.jsx';
+import WorkExperienceEditor from './WorkExperienceEditor.jsx';
+import EducationEditor from './EducationEditor.jsx';
+import SkillsEditor from './SkillsEditor.jsx';
 import { defaultResumeData } from "../../data/resumeData.js";
 
 const ResumeBuilder = ({
@@ -210,6 +213,51 @@ const ResumeBuilder = ({
       ...resumeData,
       work: [...resumeData.work, newWork],
     });
+  }, [resumeData, handleDataChange]);
+
+  const updateWorkExperience = useCallback((index, updatedWork) => {
+    const newWork = [...resumeData.work];
+    newWork[index] = updatedWork;
+    handleDataChange({ ...resumeData, work: newWork });
+  }, [resumeData, handleDataChange]);
+
+  const deleteWorkExperience = useCallback((index) => {
+    const newWork = resumeData.work.filter((_, i) => i !== index);
+    handleDataChange({ ...resumeData, work: newWork });
+  }, [resumeData, handleDataChange]);
+
+  const addEducation = useCallback(() => {
+    const newEducation = {
+      institution: "",
+      area: "",
+      studyType: "",
+      location: "",
+      startDate: "",
+      endDate: "",
+      visibility: { online: true, print: true },
+      courses: [],
+      relevantCoursework: [],
+    };
+
+    handleDataChange({
+      ...resumeData,
+      education: [...resumeData.education, newEducation],
+    });
+  }, [resumeData, handleDataChange]);
+
+  const updateEducation = useCallback((index, updatedEducation) => {
+    const newEducation = [...resumeData.education];
+    newEducation[index] = updatedEducation;
+    handleDataChange({ ...resumeData, education: newEducation });
+  }, [resumeData, handleDataChange]);
+
+  const deleteEducation = useCallback((index) => {
+    const newEducation = resumeData.education.filter((_, i) => i !== index);
+    handleDataChange({ ...resumeData, education: newEducation });
+  }, [resumeData, handleDataChange]);
+
+  const updateSkills = useCallback((updatedSkills) => {
+    handleDataChange({ ...resumeData, skills: updatedSkills });
   }, [resumeData, handleDataChange]);
 
   return (
@@ -673,9 +721,49 @@ const ResumeBuilder = ({
                   {resumeData.work.length !== 1 ? "s" : ""} added
                 </p>
 
+                {resumeData.work.map((workItem, index) => (
+                  <WorkExperienceEditor
+                    key={index}
+                    workData={workItem}
+                    onUpdate={(updatedWork) => updateWorkExperience(index, updatedWork)}
+                    onDelete={() => deleteWorkExperience(index)}
+                  />
+                ))}
+
                 <button className="btn btn-outline" onClick={addWorkExperience}>
                   + Add Work Experience
                 </button>
+
+                <h2 className="section-header">Education</h2>
+                <p
+                  style={{
+                    fontSize: "14px",
+                    color: "#6c757d",
+                    marginBottom: "16px",
+                  }}
+                >
+                  {resumeData.education.length} education entr
+                  {resumeData.education.length !== 1 ? "ies" : "y"} added
+                </p>
+
+                {resumeData.education.map((educationItem, index) => (
+                  <EducationEditor
+                    key={index}
+                    educationData={educationItem}
+                    onUpdate={(updatedEducation) => updateEducation(index, updatedEducation)}
+                    onDelete={() => deleteEducation(index)}
+                  />
+                ))}
+
+                <button className="btn btn-outline" onClick={addEducation}>
+                  + Add Education
+                </button>
+
+                <h2 className="section-header">Skills & Technologies</h2>
+                <SkillsEditor
+                  skillsData={resumeData.skills}
+                  onUpdate={updateSkills}
+                />
 
                 <h2 className="section-header">Quick Actions</h2>
                 <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
