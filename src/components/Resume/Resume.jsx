@@ -1,36 +1,35 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { ResumeHeader } from './ResumeHeader.jsx';
-import { ResumeSummary } from './ResumeSummary.jsx';
-import { ResumeThreeColumn } from './ResumeThreeColumn.jsx';
-import { ResumeSingleColumn } from './ResumeSingleColumn.jsx';
-import { ResumeSingleColumnNew } from './ResumeSingleColumnNew.jsx';
-import { ResumeExperience } from './ResumeExperience.jsx';
-import { resumeDesignSystem, getSpacing } from './resumeStyles.js';
+import React from "react";
+import PropTypes from "prop-types";
+import { ResumeHeader } from "./ResumeHeader.jsx";
+import { ResumeSummary } from "./ResumeSummary.jsx";
+import { ResumeThreeColumn } from "./ResumeThreeColumn.jsx";
+import { ResumeSingleColumn } from "./ResumeSingleColumn.jsx";
+import { ResumeExperience } from "./ResumeExperience.jsx";
+import { resumeDesignSystem, getSpacing } from "./resumeStyles.js";
 
-const Resume = ({ 
-  data, 
-  config = { 
-    printMode: false, 
+const Resume = ({
+  data,
+  config = {
+    printMode: false,
     maxWorkItems: null,
-    filterByVisibility: true
-  } 
+    filterByVisibility: true,
+  },
 }) => {
   if (!data) {
     return <div>No resume data provided</div>;
   }
 
   const { basics, work, education, skills, patents } = data;
-  
+
   // Filter work experience based on visibility and print mode
   let filteredWork = work;
-  
+
   if (config.filterByVisibility) {
-    filteredWork = work.filter(item => 
+    filteredWork = work.filter((item) =>
       config.printMode ? item.visibility.print : item.visibility.online
     );
   }
-  
+
   // Apply max items limit if specified
   if (config.maxWorkItems && config.maxWorkItems > 0) {
     filteredWork = filteredWork.slice(0, config.maxWorkItems);
@@ -39,72 +38,88 @@ const Resume = ({
   // Update job title as requested
   const resumeBasics = {
     ...basics,
-    label: "Senior Software Engineer | Applied AI Specialist"
+    label: "Senior Applied AI Engineer | Deep Learning & Scalable AI Systems",
   };
 
   return (
-    <div className={`resume-container ${config.printMode ? 'print-mode' : ''}`}>
+    <div className={`resume-container ${config.printMode ? "print-mode" : ""}`}>
       <style jsx={true}>{`
         .resume-container {
           max-width: 8.5in;
           margin: 0 auto;
           background: white;
           padding: 0.75in;
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+            "Helvetica", "Arial", sans-serif;
           font-size: 11px;
           line-height: 1.4;
           color: #161616;
         }
-        
+
         .print-mode {
           width: 8.5in;
           height: 11in;
           box-sizing: border-box;
-          padding: 0.15in;
+          padding: 0.1in;
           margin: 0;
           overflow: hidden;
           font-size: 8pt;
           line-height: 1.3;
         }
-        
+
         .print-mode > * + * {
-          margin-top: 0.1rem;
+          margin-top: 0.02rem;
         }
-        
+
         @media print {
           /* Comprehensive print reset */
-          html, body {
+          html,
+          body {
             width: 100% !important;
             height: auto !important;
             margin: 0 !important;
             padding: 0 !important;
             background: white !important;
             color: black !important;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+              "Helvetica", "Arial", sans-serif !important;
           }
-          
+
           /* Page setup with no headers/footers */
           @page {
             size: letter;
             margin: 0.15in;
             /* Attempt to disable headers and footers */
-            @top-left { content: ""; }
-            @top-center { content: ""; }
-            @top-right { content: ""; }
-            @bottom-left { content: ""; }
-            @bottom-center { content: ""; }
-            @bottom-right { content: ""; }
+            @top-left {
+              content: "";
+            }
+            @top-center {
+              content: "";
+            }
+            @top-right {
+              content: "";
+            }
+            @bottom-left {
+              content: "";
+            }
+            @bottom-center {
+              content: "";
+            }
+            @bottom-right {
+              content: "";
+            }
           }
-          
+
           /* Hide everything except resume content */
-          body * { 
+          body * {
             visibility: hidden !important;
           }
-          
-          .resume-container, .resume-container * { 
+
+          .resume-container,
+          .resume-container * {
             visibility: visible !important;
           }
-          
+
           /* Force clean layout */
           .resume-container {
             position: absolute !important;
@@ -115,26 +130,28 @@ const Resume = ({
             padding: ${resumeDesignSystem.layout.margins.print} !important;
             margin: 0 !important;
             box-shadow: none !important;
-            font-size: ${resumeDesignSystem.typography.bodyText.fontSize.print} !important;
-            line-height: ${resumeDesignSystem.typography.bodyText.lineHeight.print} !important;
+            font-size: ${resumeDesignSystem.typography.bodyText.fontSize
+              .print} !important;
+            line-height: ${resumeDesignSystem.typography.bodyText.lineHeight
+              .print} !important;
             overflow: visible !important;
             max-width: none !important;
             max-height: none !important;
             background: white !important;
             border: none !important;
           }
-          
+
           .resume-container > * + * {
-            margin-top: ${getSpacing('sectionGap', true)} !important;
+            margin-top: ${getSpacing("sectionGap", true)} !important;
           }
-          
+
           /* Color preservation */
           * {
             -webkit-print-color-adjust: exact !important;
             color-adjust: exact !important;
             print-color-adjust: exact !important;
           }
-          
+
           /* Hide any potential metadata elements */
           header:not(.resume-container header),
           footer,
@@ -147,51 +164,41 @@ const Resume = ({
           }
         }
       `}</style>
-      
+
       <ResumeHeader basics={resumeBasics} printMode={config.printMode} />
       <ResumeSummary summary={basics.summary} printMode={config.printMode} />
-      {config.singleColumn === 'new' ? (
-        <ResumeSingleColumnNew 
-          skills={skills} 
-          education={education} 
+      {config.singleColumn ? (
+        <ResumeSingleColumn
+          skills={skills}
+          education={education}
           patents={patents}
-          printMode={config.printMode} 
-        />
-      ) : config.singleColumn ? (
-        <ResumeSingleColumn 
-          skills={skills} 
-          education={education} 
-          patents={patents}
-          printMode={config.printMode} 
+          printMode={config.printMode}
         />
       ) : (
-        <ResumeThreeColumn 
-          skills={skills} 
-          education={education} 
+        <ResumeThreeColumn
+          skills={skills}
+          education={education}
           patents={patents}
-          printMode={config.printMode} 
+          printMode={config.printMode}
         />
       )}
-      <ResumeExperience 
-        work={filteredWork} 
-        printMode={config.printMode}
-      />
+      <ResumeExperience work={filteredWork} printMode={config.printMode} />
     </div>
   );
 };
 
 Resume.propTypes = {
   data: PropTypes.object,
-  config: PropTypes.object
+  config: PropTypes.object,
 };
 
 Resume.defaultProps = {
   data: null,
-  config: { 
-    printMode: false, 
+  config: {
+    printMode: false,
     maxWorkItems: null,
-    filterByVisibility: true
-  }
+    filterByVisibility: true,
+  },
 };
 
 export default Resume;

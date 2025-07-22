@@ -10,8 +10,8 @@ const ResumeHeader = ({ basics, printMode = false }) => {
       <style jsx={true}>{`
         .header {
           text-align: center;
-          margin-bottom: ${printMode ? '0.2rem' : '20px'};
-          padding-bottom: ${printMode ? '0.15cm' : '16px'};
+          margin-bottom: ${printMode ? '0.05rem' : '20px'};
+          padding-bottom: ${printMode ? '0.08cm' : '16px'};
           border-bottom: ${printMode ? `1px solid ${resumeDesignSystem.colors.divider}` : `2px solid ${resumeDesignSystem.colors.divider}`};
         }
         

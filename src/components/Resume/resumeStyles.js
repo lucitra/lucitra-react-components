@@ -27,7 +27,7 @@ export const resumeDesignSystem = {
       fontSize: { print: '11pt', screen: '12px' },
       fontWeight: 400,
       color: '#000000',
-      lineHeight: { print: '1.4', screen: '1.4' }
+      lineHeight: { print: '1.35', screen: '1.4' }
     },
     
     // Small text for contact info only
@@ -65,10 +65,10 @@ export const resumeDesignSystem = {
   
   // Spacing system
   spacing: {
-    sectionGap: { print: '0.15rem', screen: '24px' },
-    itemGap: { print: '0.08cm', screen: '12px' },
-    microGap: { print: '0.02cm', screen: '4px' },
-    headerGap: { print: '0.1cm', screen: '8px' }
+    sectionGap: { print: '0.04rem', screen: '20px' },
+    itemGap: { print: '0.03cm', screen: '10px' },
+    microGap: { print: '0.005cm', screen: '3px' },
+    headerGap: { print: '0.03cm', screen: '6px' }
   },
   
   // Links
@@ -86,7 +86,7 @@ export const resumeDesignSystem = {
       width: '8.5in',
       height: '11in'
     },
-    margins: { print: '0.15in', screen: '0.75in' },
+    margins: { print: '0.1in', screen: '0.75in' },
     fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif"
   },
   

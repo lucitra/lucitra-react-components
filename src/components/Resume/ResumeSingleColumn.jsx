@@ -7,17 +7,17 @@ const ResumeSingleColumn = ({ skills, education, patents, printMode = false }) =
     <>
       <style jsx={true}>{`
         .single-column-section {
-          margin-bottom: ${getSpacing('sectionGap', printMode)};
+          margin-bottom: ${printMode ? '0.04rem' : getSpacing('sectionGap', false)};
         }
         
         .section {
-          margin-bottom: ${getSpacing('sectionGap', printMode)};
+          margin-bottom: ${printMode ? '0.04rem' : getSpacing('sectionGap', false)};
         }
         
         .section-title {
           font-size: ${printMode ? resumeDesignSystem.typography.headerText.fontSize.print : resumeDesignSystem.typography.headerText.fontSize.screen};
           font-weight: ${resumeDesignSystem.typography.headerText.fontWeight};
-          margin-bottom: ${getSpacing('headerGap', printMode)};
+          margin-bottom: ${printMode ? '0.03cm' : getSpacing('headerGap', false)};
           color: ${resumeDesignSystem.typography.headerText.color};
           text-transform: ${resumeDesignSystem.typography.headerText.textTransform};
           letter-spacing: ${resumeDesignSystem.typography.headerText.letterSpacing};
@@ -34,8 +34,8 @@ const ResumeSingleColumn = ({ skills, education, patents, printMode = false }) =
         .education-section {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: ${printMode ? '0.25rem' : '20px'};
-          margin-bottom: ${printMode ? '0.05cm' : '8px'};
+          gap: ${printMode ? '0.15rem' : '16px'};
+          margin-bottom: ${printMode ? '0.03cm' : '6px'};
         }
         
         .education-item, .patent-item {
@@ -228,16 +228,12 @@ const ResumeSingleColumn = ({ skills, education, patents, printMode = false }) =
         {education && education.some(edu => edu.relevantCoursework && edu.relevantCoursework.length > 0) && (
           <div className="section">
             <h3 className="section-title">Relevant Coursework</h3>
-            {education
-              .filter(edu => edu.relevantCoursework && edu.relevantCoursework.length > 0)
-              .map((edu, index) => (
-              <div key={index} className="coursework-institution">
-                <div className="coursework-school">{edu.institution}:</div>
-                <div className="coursework-content">
-                  {edu.relevantCoursework.join(', ')}
-                </div>
-              </div>
-            ))}
+            <div className="coursework-content">
+              {education
+                .filter(edu => edu.relevantCoursework && edu.relevantCoursework.length > 0)
+                .map(edu => edu.relevantCoursework.join(', '))
+                .join(', ')}
+            </div>
           </div>
         )}
 

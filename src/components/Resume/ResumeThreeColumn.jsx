@@ -9,8 +9,8 @@ const ResumeThreeColumn = ({ skills, education, patents, printMode = false }) =>
         .three-column-section {
           display: grid;
           grid-template-columns: 1fr 1fr 1fr;
-          gap: ${printMode ? '0.15rem' : '20px'};
-          margin-bottom: ${getSpacing('sectionGap', printMode)};
+          gap: ${printMode ? '0.1rem' : '18px'};
+          margin-bottom: ${printMode ? '0.04rem' : getSpacing('sectionGap', false)};
         }
         
         .column {
@@ -30,7 +30,7 @@ const ResumeThreeColumn = ({ skills, education, patents, printMode = false }) =>
         }
         
         .skills-category {
-          margin-bottom: ${printMode ? '0.05cm' : '10px'};
+          margin-bottom: ${printMode ? '0.03cm' : '8px'};
         }
         
         .skills-category-title {

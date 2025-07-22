@@ -9,13 +9,13 @@ const ResumeSummary = ({ summary, printMode = false }) => {
     <>
       <style jsx={true}>{`
         .summary-section {
-          margin-bottom: ${getSpacing('sectionGap', printMode)};
+          margin-bottom: ${printMode ? '0.04rem' : getSpacing('sectionGap', false)};
         }
         
         .section-title {
           font-size: ${printMode ? resumeDesignSystem.typography.headerText.fontSize.print : resumeDesignSystem.typography.headerText.fontSize.screen};
           font-weight: ${resumeDesignSystem.typography.headerText.fontWeight};
-          margin-bottom: ${getSpacing('headerGap', printMode)};
+          margin-bottom: ${printMode ? '0.03cm' : getSpacing('headerGap', false)};
           color: ${resumeDesignSystem.typography.headerText.color};
           text-transform: ${resumeDesignSystem.typography.headerText.textTransform};
           letter-spacing: ${resumeDesignSystem.typography.headerText.letterSpacing};
