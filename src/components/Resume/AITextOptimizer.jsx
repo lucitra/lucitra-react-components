@@ -66,6 +66,39 @@ const AITextOptimizer = ({
 
   const availableGoals = getOptimizationGoals(fieldType);
 
+  // Generate realistic fallback optimizations
+  const generateFallbackOptimization = (text, goal, _fieldType) => {
+    // Simple optimizations that don't add debug text
+    const improvements = {
+      'professional': {
+        optimized: text.charAt(0).toUpperCase() + text.slice(1),
+        reasoning: 'Improved capitalization and professional formatting'
+      },
+      'concise': {
+        optimized: text.length > 50 ? text.substring(0, 47) + '...' : text,
+        reasoning: 'Made more concise while preserving key information'
+      },
+      'impact': {
+        optimized: text.includes('developed') ? text.replace('developed', 'architected and delivered') : 
+                  text.includes('worked') ? text.replace('worked', 'led initiative') :
+                  `${text} with measurable impact`,
+        reasoning: 'Enhanced to emphasize impact and leadership'
+      },
+      'detailed': {
+        optimized: `${text}${text.endsWith('.') ? '' : '.'} Leveraged modern technologies and best practices.`,
+        reasoning: 'Added technical depth and context'
+      }
+    };
+    
+    const improvement = improvements[goal] || improvements.professional;
+    
+    return {
+      original: text,
+      optimized: improvement.optimized,
+      reasoning: improvement.reasoning
+    };
+  };
+
   // Mock AI optimization with realistic context-aware suggestions
   const generateOptimizations = async (goal, text, context) => {
     const mockOptimizations = {
@@ -133,13 +166,14 @@ const AITextOptimizer = ({
 
     // Get the appropriate mock based on field type and goal
     const fieldMocks = mockOptimizations[fieldType] || mockOptimizations.general;
-    const mockData = fieldMocks[goal] || fieldMocks.professional || {
-      original: text,
-      optimized: `${text} [AI-optimized for ${goal}]`,
-      reasoning: `Enhanced for ${goal} optimization goal`
-    };
+    let mockData = fieldMocks[goal] || fieldMocks.professional;
+    
+    // If no specific mock exists, create a realistic fallback
+    if (!mockData) {
+      mockData = generateFallbackOptimization(text, goal, fieldType);
+    }
 
-    // Add context-aware modifications
+    // Add context-aware modifications (subtle, no debug text)
     if (context.jobDescription) {
       const jobKeywords = ['AI', 'machine learning', 'React', 'Python', 'leadership', 'scalable'];
       const foundKeywords = jobKeywords.filter(keyword => 
@@ -147,7 +181,7 @@ const AITextOptimizer = ({
       );
       
       if (foundKeywords.length > 0) {
-        mockData.optimized += ` (tailored for: ${foundKeywords.join(', ')})`;
+        // Only update the reasoning, not the optimized text with debug info
         mockData.reasoning += `. Incorporated job-relevant keywords: ${foundKeywords.join(', ')}`;
       }
     }

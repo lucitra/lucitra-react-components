@@ -218,6 +218,9 @@ The resume builder includes comprehensive version control for tracking all chang
 - **AI Change Detection**: Special tracking for AI-generated optimizations with confidence scores
 - **Granular Reversion**: Click any version to revert instantly
 - **Change Context**: Detailed information about what changed and why
+- **Google Docs-Style Diff Viewer**: Click 👁️ on any version to see detailed before/after comparisons
+- **Visual Change Tracking**: Color-coded additions, modifications, and deletions
+- **AI Analysis Panel**: View confidence scores and reasoning for AI-generated changes
 
 #### Change Types Tracked
 - **AI Optimizations**: 🤖 AI suggestions applied to text fields
@@ -285,12 +288,30 @@ const updatedData = updateResumeField(resumeData, fieldInfo.path, newValue);
 // Directly updates the nested data structure
 ```
 
+#### Diff Viewer Interface
+The version diff viewer provides Google Docs-style change tracking:
+
+- **Summary Tab**: Overview of additions, modifications, and deletions with counts
+- **Detailed Changes Tab**: Complete before/after comparison for every change
+- **AI Analysis Tab**: AI confidence scores, optimization goals, and reasoning (for AI changes)
+- **Color-Coded Changes**: 
+  - 🟢 Green: Added content
+  - 🟡 Yellow: Modified content  
+  - 🔴 Red: Removed content
+- **Interactive Actions**: View changes (👁️) or revert to version (↶) from any point
+
+#### User Experience
+```
+Version History → Click 👁️ → See detailed diff → Understand changes → Decide to keep or revert
+```
+
 #### Benefits
 - **Safe Experimentation**: Users can try AI suggestions without fear of losing work
 - **Change Transparency**: Full visibility into what AI optimizations were applied
 - **Professional Confidence**: Ability to revert any changes that don't feel right
 - **Analytics Potential**: Track which AI optimizations are most commonly accepted/reverted
 - **Reliable Updates**: Direct data structure updates ensure AI changes are always applied correctly
+- **Professional Review Process**: Like Google Docs, see exactly what changed before accepting
 
 ## Important Notes
 

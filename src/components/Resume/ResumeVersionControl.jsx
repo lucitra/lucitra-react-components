@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import VersionDiffViewer from './VersionDiffViewer.jsx';
 
 /**
  * Resume Version Control Component
@@ -17,6 +18,7 @@ const ResumeVersionControl = ({
   className = ''
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [selectedVersion, setSelectedVersion] = useState(null);
 
 
   // Format timestamp for display
@@ -170,16 +172,17 @@ const ResumeVersionControl = ({
           display: flex;
           align-items: center;
           gap: 8px;
-          padding: 6px 8px;
+          padding: 8px;
           border-radius: 4px;
           margin-bottom: 4px;
-          cursor: pointer;
           font-size: 12px;
           transition: background 0.2s;
+          border: 1px solid transparent;
         }
 
         .version-item:hover {
           background: #e9ecef;
+          border-color: #dee2e6;
         }
 
         .version-item.current {
@@ -210,10 +213,46 @@ const ResumeVersionControl = ({
           font-size: 11px;
         }
 
+        .version-actions {
+          display: flex;
+          gap: 4px;
+          opacity: 0;
+          transition: opacity 0.2s;
+        }
+
+        .version-item:hover .version-actions {
+          opacity: 1;
+        }
+
+        .btn-diff,
+        .btn-revert {
+          background: none;
+          border: 1px solid #ddd;
+          border-radius: 3px;
+          padding: 2px 6px;
+          cursor: pointer;
+          font-size: 12px;
+          transition: all 0.2s;
+          color: #666;
+        }
+
+        .btn-diff:hover {
+          background: #007bff;
+          border-color: #007bff;
+          color: white;
+        }
+
+        .btn-revert:hover {
+          background: #6c757d;
+          border-color: #6c757d;
+          color: white;
+        }
+
         .change-timestamp {
           font-size: 10px;
           color: #999;
           white-space: nowrap;
+          margin-left: auto;
         }
 
         .ai-badge {
@@ -278,13 +317,12 @@ const ResumeVersionControl = ({
             const actualIndex = versionHistory.length - 1 - index;
             const isCurrent = actualIndex === currentVersion;
             const changeIcon = getChangeIcon(version.change.type);
+            const previousVersion = actualIndex > 0 ? versionHistory[actualIndex - 1] : null;
             
             return (
               <div
                 key={version.id}
                 className={`version-item ${isCurrent ? 'current' : ''}`}
-                onClick={() => onRevertToVersion(actualIndex)}
-                title={`Click to revert to this version`}
               >
                 <span 
                   className="change-icon" 
@@ -305,6 +343,28 @@ const ResumeVersionControl = ({
                     </div>
                   )}
                 </div>
+                <div className="version-actions">
+                  <button
+                    className="btn-diff"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedVersion({ version, previousVersion });
+                    }}
+                    title="View changes"
+                  >
+                    👁️
+                  </button>
+                  <button
+                    className="btn-revert"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onRevertToVersion(actualIndex);
+                    }}
+                    title="Revert to this version"
+                  >
+                    ↶
+                  </button>
+                </div>
                 <div className="change-timestamp">
                   {formatTimestamp(version.timestamp)}
                 </div>
@@ -314,9 +374,17 @@ const ResumeVersionControl = ({
         </div>
 
         <div className="keyboard-shortcuts">
-          <strong>Shortcuts:</strong> Ctrl+Z (Undo) • Ctrl+Y (Redo) • Ctrl+H (Toggle History)
+          <strong>Shortcuts:</strong> Ctrl+Z (Undo) • Ctrl+Y (Redo) • 👁️ (View Changes)
         </div>
       </div>
+
+      {selectedVersion && (
+        <VersionDiffViewer
+          version={selectedVersion.version}
+          previousVersion={selectedVersion.previousVersion}
+          onClose={() => setSelectedVersion(null)}
+        />
+      )}
     </>
   );
 };

@@ -19,6 +19,7 @@ export { default as AITextInput } from './AITextInput.jsx';
 
 // Version Control
 export { default as ResumeVersionControl } from './ResumeVersionControl.jsx';
+export { default as VersionDiffViewer } from './VersionDiffViewer.jsx';
 
 // Export data and utilities
 export { defaultResumeData, baseResumeData, genericResumeData, ibraheemResumeData } from '../../data/resumeData.js';
