@@ -1,5 +1,5 @@
 import ResumeBuilder from './ResumeBuilder';
-import { sampleResumeData, defaultResumeData } from '../../data/resumeData.js';
+import { genericResumeData, ibraheemResumeData, defaultResumeData } from '../../data/resumeData.js';
 
 export default {
   title: 'Resume/ResumeBuilder',
@@ -32,21 +32,42 @@ export default {
     enableExport: {
       description: 'Whether to enable export functionality',
       control: { type: 'boolean' }
+    },
+    useSerifFont: {
+      description: 'Whether to use serif fonts for bold text elements',
+      control: { type: 'boolean' }
     }
   }
 };
 
-// Default builder with sample data
-export const WithSampleData = {
+// Generic SaaS product version
+export const GenericResumeBuilder = {
   args: {
-    initialData: sampleResumeData,
+    initialData: genericResumeData,
     showControls: true,
     enableExport: true
   },
   parameters: {
     docs: {
       description: {
-        story: 'Resume Builder loaded with sample professional data. Includes full editing capabilities and export options.'
+        story: 'Generic Resume Builder with professional sample data - perfect for SaaS product demos. Clean, professional template that any user can customize.'
+      }
+    }
+  }
+};
+
+// Ibraheem's personal resume builder with serif fonts
+export const IbraheemResumeBuilder = {
+  args: {
+    initialData: ibraheemResumeData,
+    showControls: true,
+    enableExport: true,
+    useSerifFont: true
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Ibraheem's personal resume with real data and classic serif typography for a sophisticated look. Optimized for AI engineering roles with elegant typography."
       }
     }
   }
@@ -71,7 +92,7 @@ export const EmptyBuilder = {
 // Minimal builder without controls
 export const MinimalBuilder = {
   args: {
-    initialData: sampleResumeData,
+    initialData: genericResumeData,
     showControls: false,
     enableExport: false
   },
@@ -87,7 +108,7 @@ export const MinimalBuilder = {
 // Builder with custom callbacks
 export const WithCallbacks = {
   args: {
-    initialData: sampleResumeData,
+    initialData: genericResumeData,
     showControls: true,
     enableExport: true,
     onDataChange: (data) => {
@@ -110,9 +131,9 @@ export const WithCallbacks = {
 export const PrintOptimized = {
   args: {
     initialData: {
-      ...sampleResumeData,
+      ...genericResumeData,
       // Override to show print-optimized data
-      work: sampleResumeData.work.slice(0, 3) // Limit to 3 most recent for single page
+      work: genericResumeData.work.slice(0, 3) // Limit to 3 most recent for single page
     },
     showControls: true,
     enableExport: true

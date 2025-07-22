@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { resumeDesignSystem, getSpacing } from './resumeStyles.js';
 
-const ResumeHeader = ({ basics, printMode = false }) => {
+const ResumeHeader = ({ basics, printMode = false, useSerifFont = false }) => {
   const { name, label, email, phone, website, location, profiles } = basics;
 
   return (
@@ -18,6 +18,7 @@ const ResumeHeader = ({ basics, printMode = false }) => {
         .name {
           font-size: ${printMode ? resumeDesignSystem.typography.nameText.fontSize.print : resumeDesignSystem.typography.nameText.fontSize.screen};
           font-weight: ${resumeDesignSystem.typography.nameText.fontWeight};
+          font-family: ${useSerifFont ? resumeDesignSystem.layout.serifFontFamily : 'inherit'};
           margin: 0;
           margin-bottom: ${getSpacing('headerGap', printMode)};
           letter-spacing: ${resumeDesignSystem.typography.nameText.letterSpacing};
@@ -29,6 +30,7 @@ const ResumeHeader = ({ basics, printMode = false }) => {
         .title {
           font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
           color: ${resumeDesignSystem.typography.bodyText.color};
+          font-family: ${useSerifFont ? resumeDesignSystem.layout.serifFontFamily : 'inherit'};
           margin: 0;
           margin-bottom: ${getSpacing('headerGap', printMode)};
           font-style: italic;
@@ -110,12 +112,14 @@ const ResumeHeader = ({ basics, printMode = false }) => {
 
 ResumeHeader.propTypes = {
   basics: PropTypes.object,
-  printMode: PropTypes.bool
+  printMode: PropTypes.bool,
+  useSerifFont: PropTypes.bool
 };
 
 ResumeHeader.defaultProps = {
   basics: {},
-  printMode: false
+  printMode: false,
+  useSerifFont: false
 };
 
 export { ResumeHeader };

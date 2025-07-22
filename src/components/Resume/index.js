@@ -8,4 +8,4 @@ export { ResumeSingleColumn } from './ResumeSingleColumn.jsx';
 export { ResumeExperience } from './ResumeExperience.jsx';
 
 // Export data and utilities
-export { defaultResumeData, sampleResumeData } from '../../data/resumeData.js';
+export { defaultResumeData, baseResumeData, genericResumeData, ibraheemResumeData } from '../../data/resumeData.js';

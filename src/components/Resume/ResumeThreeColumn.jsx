@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { resumeDesignSystem, getSpacing } from './resumeStyles.js';
 
-const ResumeThreeColumn = ({ skills, education, patents, printMode = false }) => {
+const ResumeThreeColumn = ({ skills, education, patents, printMode = false, useSerifFont = false }) => {
   return (
     <>
       <style jsx={true}>{`
@@ -20,6 +20,7 @@ const ResumeThreeColumn = ({ skills, education, patents, printMode = false }) =>
         .column-title {
           font-size: ${printMode ? resumeDesignSystem.typography.headerText.fontSize.print : resumeDesignSystem.typography.headerText.fontSize.screen};
           font-weight: ${resumeDesignSystem.typography.headerText.fontWeight};
+          font-family: ${useSerifFont ? resumeDesignSystem.layout.serifFontFamily : 'inherit'};
           margin-bottom: ${getSpacing('headerGap', printMode)};
           color: ${resumeDesignSystem.typography.headerText.color};
           text-transform: ${resumeDesignSystem.typography.headerText.textTransform};
@@ -52,8 +53,9 @@ const ResumeThreeColumn = ({ skills, education, patents, printMode = false }) =>
         
         .education-institution, .patent-title {
           font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
-          font-weight: ${resumeDesignSystem.emphasis.bold.fontWeight};
-          color: ${resumeDesignSystem.emphasis.bold.color};
+          font-weight: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.fontWeight : resumeDesignSystem.emphasis.bold.fontWeight};
+          color: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.color : resumeDesignSystem.emphasis.bold.color};
+          font-family: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.fontFamily : 'inherit'};
           margin-bottom: ${getSpacing('microGap', printMode)};
           line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
         }
@@ -67,9 +69,7 @@ const ResumeThreeColumn = ({ skills, education, patents, printMode = false }) =>
         
         .education-date, .patent-date {
           font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
-          color: ${resumeDesignSystem.emphasis.italic.color};
-          font-style: ${resumeDesignSystem.emphasis.italic.fontStyle};
-          font-weight: ${resumeDesignSystem.emphasis.italic.fontWeight};
+          color: ${resumeDesignSystem.typography.bodyText.color};
           line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
         }
         
@@ -120,8 +120,9 @@ const ResumeThreeColumn = ({ skills, education, patents, printMode = false }) =>
         
         .patent-title-link {
           font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
-          font-weight: ${resumeDesignSystem.emphasis.bold.fontWeight};
-          color: ${resumeDesignSystem.emphasis.bold.color};
+          font-weight: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.fontWeight : resumeDesignSystem.emphasis.bold.fontWeight};
+          color: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.color : resumeDesignSystem.emphasis.bold.color};
+          font-family: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.fontFamily : 'inherit'};
           text-decoration: none;
           line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
           transition: ${resumeDesignSystem.links.transition};
@@ -253,16 +254,12 @@ const ResumeThreeColumn = ({ skills, education, patents, printMode = false }) =>
       {education && education.some(edu => edu.relevantCoursework && edu.relevantCoursework.length > 0) && (
         <div className="coursework-section">
           <h3 className="column-title">Relevant Coursework</h3>
-          {education
-            .filter(edu => edu.relevantCoursework && edu.relevantCoursework.length > 0)
-            .map((edu, index) => (
-            <div key={index} className="coursework-institution">
-              <div className="coursework-school">{edu.institution}:</div>
-              <div className="coursework-content">
-                {edu.relevantCoursework.join(', ')}
-              </div>
-            </div>
-          ))}
+          <div className="coursework-content">
+            {education
+              .filter(edu => edu.relevantCoursework && edu.relevantCoursework.length > 0)
+              .map(edu => edu.relevantCoursework.join(', '))
+              .join(', ')}
+          </div>
         </div>
       )}
     </>
@@ -273,14 +270,16 @@ ResumeThreeColumn.propTypes = {
   skills: PropTypes.array,
   education: PropTypes.array,
   patents: PropTypes.array,
-  printMode: PropTypes.bool
+  printMode: PropTypes.bool,
+  useSerifFont: PropTypes.bool
 };
 
 ResumeThreeColumn.defaultProps = {
   skills: [],
   education: [],
   patents: [],
-  printMode: false
+  printMode: false,
+  useSerifFont: false
 };
 
 export { ResumeThreeColumn };

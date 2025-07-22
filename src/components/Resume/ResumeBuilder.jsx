@@ -13,6 +13,7 @@ const ResumeBuilder = ({
   onExport = () => {},
   showControls = true,
   enableExport = true,
+  useSerifFont = false,
 }) => {
   const [resumeData, setResumeData] = useState(
     initialData || defaultResumeData
@@ -22,6 +23,7 @@ const ResumeBuilder = ({
     singleColumn: false,
     maxWorkItems: null,
     filterByVisibility: true,
+    useSerifFont: useSerifFont,
   });
   const [activeTab, setActiveTab] = useState("preview");
 
@@ -161,24 +163,26 @@ const ResumeBuilder = ({
           }
         `}</style>
         
-        <ResumeHeader basics={basics} printMode={config.printMode} />
-        <ResumeSummary summary={basics.summary} printMode={config.printMode} />
+        <ResumeHeader basics={basics} printMode={config.printMode} useSerifFont={config.useSerifFont} />
+        <ResumeSummary summary={basics.summary} printMode={config.printMode} useSerifFont={config.useSerifFont} />
         {config.singleColumn ? (
           <ResumeSingleColumn 
             skills={skills} 
             education={education} 
             patents={patents}
-            printMode={config.printMode} 
+            printMode={config.printMode}
+            useSerifFont={config.useSerifFont}
           />
         ) : (
           <ResumeThreeColumn 
             skills={skills} 
             education={education} 
             patents={patents}
-            printMode={config.printMode} 
+            printMode={config.printMode}
+            useSerifFont={config.useSerifFont}
           />
         )}
-        <ResumeExperience work={filteredWork} printMode={config.printMode} />
+        <ResumeExperience work={filteredWork} printMode={config.printMode} useSerifFont={config.useSerifFont} />
       </div>
     );
   }, []);
@@ -498,6 +502,23 @@ const ResumeBuilder = ({
                 </select>
               </div>
 
+              <div className="control-group">
+                <label htmlFor="fontStyle">Font Style:</label>
+                <select
+                  id="fontStyle"
+                  className="select"
+                  value={config.useSerifFont ? "serif" : "sans-serif"}
+                  onChange={(e) =>
+                    handleConfigChange({
+                      useSerifFont: e.target.value === "serif",
+                    })
+                  }
+                >
+                  <option value="sans-serif">Modern (Sans-serif)</option>
+                  <option value="serif">Classic (Serif)</option>
+                </select>
+              </div>
+
               {enableExport && (
                 <div className="control-group">
                   <button
@@ -712,6 +733,7 @@ ResumeBuilder.propTypes = {
   onExport: PropTypes.func,
   showControls: PropTypes.bool,
   enableExport: PropTypes.bool,
+  useSerifFont: PropTypes.bool,
 };
 
 export default ResumeBuilder;

@@ -47,6 +47,13 @@ export const resumeDesignSystem = {
       color: '#000000'
     },
     
+    // Serif version for more sophisticated look
+    boldSerif: {
+      fontWeight: 700,
+      color: '#000000',
+      fontFamily: "Georgia, 'Times New Roman', Times, serif"
+    },
+    
     // For dates, locations, secondary info
     italic: {
       fontWeight: 400,
@@ -87,7 +94,8 @@ export const resumeDesignSystem = {
       height: '11in'
     },
     margins: { print: '0.1in', screen: '0.75in' },
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif"
+    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+    serifFontFamily: "Georgia, 'Times New Roman', Times, serif"
   },
   
   // Colors

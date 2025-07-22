@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { resumeDesignSystem, getSpacing } from './resumeStyles.js';
 
-const ResumeExperience = ({ work, printMode = false, maxItems }) => {
+const ResumeExperience = ({ work, printMode = false, maxItems, useSerifFont = false }) => {
   if (!work || work.length === 0) return null;
 
   const displayWork = maxItems ? work.slice(0, maxItems) : work;
@@ -42,6 +42,7 @@ const ResumeExperience = ({ work, printMode = false, maxItems }) => {
         .section-title {
           font-size: ${printMode ? resumeDesignSystem.typography.headerText.fontSize.print : resumeDesignSystem.typography.headerText.fontSize.screen};
           font-weight: ${resumeDesignSystem.typography.headerText.fontWeight};
+          font-family: ${useSerifFont ? resumeDesignSystem.layout.serifFontFamily : 'inherit'};
           margin-bottom: ${printMode ? '0.03cm' : getSpacing('headerGap', false)};
           color: ${resumeDesignSystem.typography.headerText.color};
           text-transform: ${resumeDesignSystem.typography.headerText.textTransform};
@@ -67,16 +68,15 @@ const ResumeExperience = ({ work, printMode = false, maxItems }) => {
         
         .company-name {
           font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
-          font-weight: ${resumeDesignSystem.emphasis.bold.fontWeight};
-          color: ${resumeDesignSystem.emphasis.bold.color};
+          font-weight: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.fontWeight : resumeDesignSystem.emphasis.bold.fontWeight};
+          color: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.color : resumeDesignSystem.emphasis.bold.color};
+          font-family: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.fontFamily : 'inherit'};
           line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
         }
         
         .company-location {
           font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
-          color: ${resumeDesignSystem.emphasis.italic.color};
-          font-style: ${resumeDesignSystem.emphasis.italic.fontStyle};
-          font-weight: ${resumeDesignSystem.emphasis.italic.fontWeight};
+          color: ${resumeDesignSystem.typography.bodyText.color};
           line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
         }
         
@@ -93,17 +93,16 @@ const ResumeExperience = ({ work, printMode = false, maxItems }) => {
         
         .position-title {
           font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
-          font-weight: ${resumeDesignSystem.emphasis.italic.fontWeight};
-          font-style: ${resumeDesignSystem.emphasis.italic.fontStyle};
-          color: ${resumeDesignSystem.emphasis.italic.color};
+          font-weight: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.fontWeight : resumeDesignSystem.emphasis.italic.fontWeight};
+          font-style: ${useSerifFont ? 'normal' : resumeDesignSystem.emphasis.italic.fontStyle};
+          color: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.color : resumeDesignSystem.emphasis.italic.color};
+          font-family: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.fontFamily : 'inherit'};
           line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
         }
         
         .position-dates {
           font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
-          color: ${resumeDesignSystem.emphasis.italic.color};
-          font-style: ${resumeDesignSystem.emphasis.italic.fontStyle};
-          font-weight: ${resumeDesignSystem.emphasis.italic.fontWeight};
+          color: ${resumeDesignSystem.typography.bodyText.color};
           line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
         }
         
@@ -192,13 +191,15 @@ const ResumeExperience = ({ work, printMode = false, maxItems }) => {
 ResumeExperience.propTypes = {
   work: PropTypes.array,
   printMode: PropTypes.bool,
-  maxItems: PropTypes.number
+  maxItems: PropTypes.number,
+  useSerifFont: PropTypes.bool
 };
 
 ResumeExperience.defaultProps = {
   work: [],
   printMode: false,
-  maxItems: null
+  maxItems: null,
+  useSerifFont: false
 };
 
 export { ResumeExperience };
