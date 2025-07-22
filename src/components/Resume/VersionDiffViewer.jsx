@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import {
+  DocumentIcon,
+  EditIcon,
+  AIIcon,
+  BulletPointIcon,
+  JobTitleIcon,
+  CloseIcon
+} from './icons/ResumeIcons.jsx';
 
 /**
  * Version Diff Viewer Component
@@ -150,21 +158,22 @@ const VersionDiffViewer = ({
     return new Date(timestamp).toLocaleString();
   };
 
-  // Get change type icon and color
+  // Get change type icon component and color
   const getChangeIcon = (changeType) => {
-    const icons = {
-      'initial': { icon: '📄', color: '#6c757d', label: 'Initial Version' },
-      'manual': { icon: '✏️', color: '#007bff', label: 'Manual Edit' },
-      'ai-optimization': { icon: '🤖', color: '#667eea', label: 'AI Optimization' },
-      'ai-bullet-point': { icon: '🎯', color: '#28a745', label: 'AI Bullet Point' },
-      'ai-job-title': { icon: '💼', color: '#fd7e14', label: 'AI Job Title' },
-      'ai-summary': { icon: '📝', color: '#6f42c1', label: 'AI Summary' },
-      'bulk-edit': { icon: '📊', color: '#20c997', label: 'Bulk Edit' }
+    const iconConfigs = {
+      'initial': { component: DocumentIcon, color: '#666', label: 'Initial Version' },
+      'manual': { component: EditIcon, color: '#333', label: 'Manual Edit' },
+      'ai-optimization': { component: AIIcon, color: '#666', label: 'AI Optimization' },
+      'ai-bullet-point': { component: BulletPointIcon, color: '#333', label: 'AI Bullet Point' },
+      'ai-job-title': { component: JobTitleIcon, color: '#666', label: 'AI Job Title' },
+      'ai-summary': { component: DocumentIcon, color: '#333', label: 'AI Summary' },
+      'bulk-edit': { component: EditIcon, color: '#666', label: 'Bulk Edit' }
     };
-    return icons[changeType] || icons.manual;
+    return iconConfigs[changeType] || iconConfigs.manual;
   };
 
   const changeIcon = getChangeIcon(version.change.type);
+  const ChangeIconComponent = changeIcon.component;
 
   return (
     <>
@@ -261,8 +270,8 @@ const VersionDiffViewer = ({
           gap: 4px;
         }
 
-        .count-added { color: #28a745; }
-        .count-modified { color: #ffc107; }
+        .count-added { color: #666; }
+        .count-modified { color: #666; }
         .count-removed { color: #dc3545; }
 
         .diff-tabs {
@@ -283,8 +292,8 @@ const VersionDiffViewer = ({
         }
 
         .diff-tab.active {
-          color: #007bff;
-          border-bottom-color: #007bff;
+          color: #333;
+          border-bottom-color: #333;
           background: white;
         }
 
@@ -327,13 +336,13 @@ const VersionDiffViewer = ({
         }
 
         .change-item.added {
-          background: #f8fff9;
-          border-left-color: #28a745;
+          background: #f8f9fa;
+          border-left-color: #666;
         }
 
         .change-item.modified {
-          background: #fffdf5;
-          border-left-color: #ffc107;
+          background: #f8f9fa;
+          border-left-color: #666;
         }
 
         .change-item.removed {
@@ -365,16 +374,16 @@ const VersionDiffViewer = ({
         }
 
         .change-before {
-          background: #ffebee;
-          border: 1px solid #ffcdd2;
+          background: #f0f0f0;
+          border: 1px solid #ccc;
           text-decoration: line-through;
-          color: #d32f2f;
+          color: #666;
         }
 
         .change-after {
-          background: #e8f5e8;
-          border: 1px solid #c8e6c9;
-          color: #2e7d32;
+          background: #f8f9fa;
+          border: 1px solid #ddd;
+          color: #333;
         }
 
         .single-value {
@@ -391,8 +400,9 @@ const VersionDiffViewer = ({
         .ai-info {
           margin-top: 12px;
           padding: 12px;
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          color: white;
+          background: #f8f9fa;
+          color: #333;
+          border: 1px solid #ddd;
           border-radius: 6px;
           font-size: 12px;
         }
@@ -413,8 +423,8 @@ const VersionDiffViewer = ({
           <div className="diff-header">
             <div className="diff-title">
               <div className="version-info">
-                <span className="change-icon" style={{ color: changeIcon.color }}>
-                  {changeIcon.icon}
+                <span className="change-icon">
+                  <ChangeIconComponent size={20} color={changeIcon.color} />
                 </span>
                 <div className="version-details">
                   <h3>{version.change.description}</h3>
@@ -424,7 +434,7 @@ const VersionDiffViewer = ({
                 </div>
               </div>
               <button className="close-btn" onClick={onClose}>
-                ×
+                <CloseIcon size={20} color="#999" />
               </button>
             </div>
             
@@ -487,7 +497,7 @@ const VersionDiffViewer = ({
                     {differences.added.length > 0 && (
                       <div className="change-group">
                         <div className="change-group-title">
-                          <span style={{ color: '#28a745' }}>+ Added ({differences.added.length})</span>
+                          <span style={{ color: '#666' }}>+ Added ({differences.added.length})</span>
                         </div>
                         {differences.added.slice(0, 3).map((change, index) => (
                           <div key={index} className="change-item added">
@@ -506,7 +516,7 @@ const VersionDiffViewer = ({
                     {differences.modified.length > 0 && (
                       <div className="change-group">
                         <div className="change-group-title">
-                          <span style={{ color: '#ffc107' }}>~ Modified ({differences.modified.length})</span>
+                          <span style={{ color: '#666' }}>~ Modified ({differences.modified.length})</span>
                         </div>
                         {differences.modified.slice(0, 3).map((change, index) => (
                           <div key={index} className="change-item modified">

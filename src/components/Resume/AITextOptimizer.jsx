@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { AIIcon, OptimizeIcon, CloseIcon } from './icons/ResumeIcons.jsx';
 
 /**
  * Granular AI Text Optimizer Component
@@ -269,13 +270,17 @@ const AITextOptimizer = ({
           cursor: 'pointer',
           zIndex: 1000,
           opacity: 0.8,
-          transition: 'opacity 0.2s'
+          transition: 'opacity 0.2s',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '4px'
         }}
         onClick={() => setIsVisible(true)}
         onMouseEnter={(e) => e.target.style.opacity = '1'}
         onMouseLeave={(e) => e.target.style.opacity = '0.8'}
       >
-        ✨ AI
+        <AIIcon size={14} color="white" />
+        AI
       </button>
     );
   }
@@ -522,10 +527,11 @@ const AITextOptimizer = ({
       <div className="ai-optimizer-overlay" ref={containerRef}>
         <div className="optimizer-header">
           <div className="optimizer-title">
-            🤖 AI Text Optimizer
+            <AIIcon size={16} color="#333" />
+            AI Text Optimizer
           </div>
           <button className="close-btn" onClick={() => setIsVisible(false)}>
-            ×
+            <CloseIcon size={16} color="#999" />
           </button>
         </div>
 
@@ -535,7 +541,7 @@ const AITextOptimizer = ({
 
         {remainingCredits <= 0 && userSubscription === 'free' ? (
           <div className="credits-warning">
-            <div>🚀 Unlock AI Text Optimization</div>
+            <div>Unlock AI Text Optimization</div>
             <div style={{ fontSize: '11px', marginTop: '4px' }}>
               Get unlimited AI-powered text improvements
             </div>
@@ -581,7 +587,8 @@ const AITextOptimizer = ({
                 onClick={handleOptimize}
                 disabled={isProcessing || (!originalText.trim())}
               >
-                ✨ Optimize Text
+                <OptimizeIcon size={14} color="white" />
+                Optimize Text
               </button>
             </div>
 

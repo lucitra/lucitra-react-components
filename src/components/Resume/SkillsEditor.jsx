@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { CloseIcon, InfoIcon } from './icons/ResumeIcons.jsx';
 
 const SkillsEditor = ({ skillsData, onUpdate }) => {
   const [newSkill, setNewSkill] = useState('');
@@ -124,12 +125,12 @@ const SkillsEditor = ({ skillsData, onUpdate }) => {
 
         .form-control:focus {
           outline: none;
-          border-color: #007bff;
-          box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+          border-color: #666;
+          box-shadow: 0 0 0 2px rgba(102, 102, 102, 0.25);
         }
 
         .add-btn {
-          background: #007bff;
+          background: #333;
           color: white;
           border: none;
           padding: 8px 16px;
@@ -139,7 +140,7 @@ const SkillsEditor = ({ skillsData, onUpdate }) => {
         }
 
         .add-btn:hover {
-          background: #0056b3;
+          background: #000;
         }
 
         .add-btn:disabled {
@@ -154,7 +155,7 @@ const SkillsEditor = ({ skillsData, onUpdate }) => {
           padding: 8px 12px;
           background: #f8f9fa;
           border-radius: 4px;
-          border-left: 4px solid #007bff;
+          border-left: 4px solid #666;
         }
 
         .bulk-edit {
@@ -212,7 +213,7 @@ const SkillsEditor = ({ skillsData, onUpdate }) => {
                 className="btn-small btn-delete"
                 onClick={() => deleteSkill(skillIndex)}
               >
-                ✕
+                <CloseIcon size={12} color="white" />
               </button>
             </div>
           ))}
@@ -242,7 +243,7 @@ const SkillsEditor = ({ skillsData, onUpdate }) => {
         </div>
 
         <div className="skills-help">
-          💡 <strong>Tip:</strong> Click on any skill to edit it inline. Skills will be displayed as a comma-separated list in your resume.
+          <InfoIcon size={14} color="#666" /> <strong>Tip:</strong> Click on any skill to edit it inline. Skills will be displayed as a comma-separated list in your resume.
         </div>
 
         {/* Bulk Edit Section */}

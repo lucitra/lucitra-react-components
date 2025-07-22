@@ -14,6 +14,7 @@ import ResumeVersionControl from './ResumeVersionControl.jsx';
 import { useResumeVersionControl } from '../../hooks/useResumeVersionControl.js';
 import { updateResumeField, getFieldPathWithContext } from '../../utils/resumeFieldUpdater.js';
 import { defaultResumeData } from "../../data/resumeData.js";
+import { OptimizeIcon, InfoIcon } from './icons/ResumeIcons.jsx';
 
 const ResumeBuilder = ({
   initialData = null,
@@ -370,21 +371,21 @@ const ResumeBuilder = ({
         }
 
         .btn-primary {
-          background-color: #007bff;
+          background-color: #333;
           color: white;
         }
 
         .btn-primary:hover {
-          background-color: #0056b3;
+          background-color: #222;
         }
 
         .btn-success {
-          background-color: #28a745;
+          background-color: #666;
           color: white;
         }
 
         .btn-success:hover {
-          background-color: #1e7e34;
+          background-color: #555;
         }
 
         .btn-secondary {
@@ -398,12 +399,12 @@ const ResumeBuilder = ({
 
         .btn-outline {
           background-color: transparent;
-          border: 2px solid #007bff;
-          color: #007bff;
+          border: 2px solid #666;
+          color: #666;
         }
 
         .btn-outline:hover {
-          background-color: #007bff;
+          background-color: #666;
           color: white;
         }
 
@@ -414,8 +415,8 @@ const ResumeBuilder = ({
         }
 
         .toggle-btn.active {
-          background-color: #007bff;
-          border-color: #007bff;
+          background-color: #333;
+          border-color: #333;
           color: white;
         }
 
@@ -445,7 +446,7 @@ const ResumeBuilder = ({
         }
 
         .tab.active {
-          background-color: #007bff;
+          background-color: #333;
           color: white;
         }
 
@@ -501,8 +502,8 @@ const ResumeBuilder = ({
 
         .form-control:focus {
           outline: none;
-          border-color: #007bff;
-          box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+          border-color: #666;
+          box-shadow: 0 0 0 2px rgba(102, 102, 102, 0.25);
         }
 
         .section-header {
@@ -864,8 +865,9 @@ const ResumeBuilder = ({
                   border: '1px solid #e0e0e0',
                   marginBottom: '16px'
                 }}>
-                  <h3 style={{ fontSize: '16px', margin: '0 0 12px 0', fontWeight: '600' }}>
-                    🎯 AI Optimization Context
+                  <h3 style={{ fontSize: '16px', margin: '0 0 12px 0', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <OptimizeIcon size={18} color="#333" />
+                    AI Optimization Context
                   </h3>
                   <p style={{ fontSize: '13px', color: '#666', margin: '0 0 12px 0' }}>
                     Set context to help AI provide more targeted optimizations for any text field
@@ -916,10 +918,13 @@ const ResumeBuilder = ({
                     fontSize: '12px',
                     color: '#666'
                   }}>
-                    <span>💡 Now hover over any text field and click ✨ AI for smart suggestions</span>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <InfoIcon size={14} color="#666" />
+                      Now hover over any text field and click AI for smart suggestions
+                    </span>
                     <span style={{ 
-                      background: aiSubscription === 'pro' ? '#28a745' : '#ffc107',
-                      color: aiSubscription === 'pro' ? 'white' : '#000',
+                      background: aiSubscription === 'pro' ? '#333' : '#666',
+                      color: 'white',
                       padding: '2px 8px',
                       borderRadius: '12px',
                       fontSize: '11px'

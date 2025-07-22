@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import VersionDiffViewer from './VersionDiffViewer.jsx';
+import { 
+  VersionIcon, 
+  UndoIcon, 
+  RedoIcon, 
+  ChevronRightIcon,
+  ViewIcon,
+  RevertIcon,
+  DocumentIcon,
+  EditIcon,
+  AIIcon,
+  BulletPointIcon,
+  JobTitleIcon
+} from './icons/ResumeIcons.jsx';
 
 /**
  * Resume Version Control Component
@@ -35,18 +48,18 @@ const ResumeVersionControl = ({
     return date.toLocaleDateString();
   };
 
-  // Get change type icon and color
+  // Get change type icon component and color
   const getChangeIcon = (changeType) => {
-    const icons = {
-      'initial': { icon: '📄', color: '#6c757d' },
-      'manual': { icon: '✏️', color: '#007bff' },
-      'ai-optimization': { icon: '🤖', color: '#667eea' },
-      'ai-bullet-point': { icon: '🎯', color: '#28a745' },
-      'ai-job-title': { icon: '💼', color: '#fd7e14' },
-      'ai-summary': { icon: '📝', color: '#6f42c1' },
-      'bulk-edit': { icon: '📊', color: '#20c997' }
+    const iconConfigs = {
+      'initial': { component: DocumentIcon, color: '#6c757d' },
+      'manual': { component: EditIcon, color: '#007bff' },
+      'ai-optimization': { component: AIIcon, color: '#667eea' },
+      'ai-bullet-point': { component: BulletPointIcon, color: '#28a745' },
+      'ai-job-title': { component: JobTitleIcon, color: '#fd7e14' },
+      'ai-summary': { component: DocumentIcon, color: '#6f42c1' },
+      'bulk-edit': { component: EditIcon, color: '#20c997' }
     };
-    return icons[changeType] || icons.manual;
+    return iconConfigs[changeType] || iconConfigs.manual;
   };
 
 
@@ -277,7 +290,8 @@ const ResumeVersionControl = ({
       <div className={`version-control ${className}`}>
         <div className="version-header">
           <div className="version-title">
-            ⏰ Version Control
+            <VersionIcon size={16} color="#333" />
+            Version Control
           </div>
           <div className="version-status">
             <span className="status-badge">
@@ -294,7 +308,8 @@ const ResumeVersionControl = ({
             disabled={!canUndo}
             title="Undo (Ctrl+Z)"
           >
-            ↶ Undo
+            <UndoIcon size={14} color="white" />
+            Undo
           </button>
           <button 
             className="btn btn-redo" 
@@ -302,13 +317,17 @@ const ResumeVersionControl = ({
             disabled={!canRedo}
             title="Redo (Ctrl+Y)"
           >
-            ↷ Redo
+            <RedoIcon size={14} color="white" />
+            Redo
           </button>
           <button 
             className={`btn btn-history ${isExpanded ? 'active' : ''}`}
             onClick={() => setIsExpanded(!isExpanded)}
           >
-            <span className="expand-icon">▶</span> History
+            <span className="expand-icon">
+              <ChevronRightIcon size={12} color="white" />
+            </span>
+            History
           </button>
         </div>
 
@@ -317,6 +336,7 @@ const ResumeVersionControl = ({
             const actualIndex = versionHistory.length - 1 - index;
             const isCurrent = actualIndex === currentVersion;
             const changeIcon = getChangeIcon(version.change.type);
+            const ChangeIconComponent = changeIcon.component;
             const previousVersion = actualIndex > 0 ? versionHistory[actualIndex - 1] : null;
             
             return (
@@ -324,11 +344,8 @@ const ResumeVersionControl = ({
                 key={version.id}
                 className={`version-item ${isCurrent ? 'current' : ''}`}
               >
-                <span 
-                  className="change-icon" 
-                  style={{ color: changeIcon.color }}
-                >
-                  {changeIcon.icon}
+                <span className="change-icon">
+                  <ChangeIconComponent size={14} color={changeIcon.color} />
                 </span>
                 <div className="change-details">
                   <div className="change-description">
@@ -352,7 +369,7 @@ const ResumeVersionControl = ({
                     }}
                     title="View changes"
                   >
-                    👁️
+                    <ViewIcon size={12} color="#666" />
                   </button>
                   <button
                     className="btn-revert"
@@ -362,7 +379,7 @@ const ResumeVersionControl = ({
                     }}
                     title="Revert to this version"
                   >
-                    ↶
+                    <RevertIcon size={12} color="#666" />
                   </button>
                 </div>
                 <div className="change-timestamp">
@@ -374,7 +391,7 @@ const ResumeVersionControl = ({
         </div>
 
         <div className="keyboard-shortcuts">
-          <strong>Shortcuts:</strong> Ctrl+Z (Undo) • Ctrl+Y (Redo) • 👁️ (View Changes)
+          <strong>Shortcuts:</strong> Ctrl+Z (Undo) • Ctrl+Y (Redo) • View Changes
         </div>
       </div>
 

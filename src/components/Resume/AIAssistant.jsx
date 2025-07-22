@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { AIIcon, OptimizeIcon, DocumentIcon } from './icons/ResumeIcons.jsx';
 
 /**
  * AI Assistant Component for Resume Optimization
@@ -153,8 +154,8 @@ const AIAssistant = ({
         }
 
         .credits-badge {
-          background: ${userSubscription === 'pro' ? '#28a745' : '#ffc107'};
-          color: ${userSubscription === 'pro' ? 'white' : '#000'};
+          background: ${userSubscription === 'pro' ? '#333' : '#666'};
+          color: white;
           padding: 4px 8px;
           border-radius: 12px;
           font-size: 12px;
@@ -175,8 +176,8 @@ const AIAssistant = ({
 
         .job-input:focus {
           outline: none;
-          border-color: #007bff;
-          box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+          border-color: #666;
+          box-shadow: 0 0 0 3px rgba(102, 102, 102, 0.1);
         }
 
         .ai-actions {
@@ -205,28 +206,29 @@ const AIAssistant = ({
         }
 
         .btn-primary {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          background: #333;
           color: white;
         }
 
         .btn-primary:hover:not(:disabled) {
           transform: translateY(-1px);
-          box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+          background: #000;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .btn-secondary {
-          background: #6c757d;
+          background: #666;
           color: white;
         }
 
         .btn-outline {
           background: transparent;
-          border: 2px solid #007bff;
-          color: #007bff;
+          border: 2px solid #666;
+          color: #666;
         }
 
         .btn-outline:hover:not(:disabled) {
-          background: #007bff;
+          background: #666;
           color: white;
         }
 
@@ -243,7 +245,7 @@ const AIAssistant = ({
           width: 16px;
           height: 16px;
           border: 2px solid #f3f3f3;
-          border-top: 2px solid #007bff;
+          border-top: 2px solid #666;
           border-radius: 50%;
           animation: spin 1s linear infinite;
         }
@@ -266,7 +268,7 @@ const AIAssistant = ({
           padding: 12px;
           background: #f8f9fa;
           border-radius: 6px;
-          border-left: 4px solid #28a745;
+          border-left: 4px solid #666;
         }
 
         .result-header {
@@ -277,7 +279,7 @@ const AIAssistant = ({
         }
 
         .match-score {
-          background: #28a745;
+          background: #333;
           color: white;
           padding: 2px 8px;
           border-radius: 12px;
@@ -300,17 +302,17 @@ const AIAssistant = ({
         }
 
         .text-before {
-          background: #fff3cd;
-          border-left: 3px solid #ffc107;
+          background: #f0f0f0;
+          border-left: 3px solid #666;
         }
 
         .text-after {
-          background: #d4edda;
-          border-left: 3px solid #28a745;
+          background: #f8f9fa;
+          border-left: 3px solid #333;
         }
 
         .apply-btn {
-          background: #28a745;
+          background: #333;
           color: white;
           border: none;
           padding: 6px 12px;
@@ -322,7 +324,7 @@ const AIAssistant = ({
         .upgrade-prompt {
           text-align: center;
           padding: 16px;
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          background: #333;
           color: white;
           border-radius: 8px;
           margin-top: 12px;
@@ -330,7 +332,7 @@ const AIAssistant = ({
 
         .upgrade-btn {
           background: white;
-          color: #667eea;
+          color: #333;
           border: none;
           padding: 8px 16px;
           border-radius: 4px;
@@ -343,7 +345,8 @@ const AIAssistant = ({
       <div className="ai-assistant">
         <div className="ai-header">
           <div className="ai-title">
-            🤖 AI Resume Assistant
+            <AIIcon size={16} color="#333" />
+            AI Resume Assistant
           </div>
           <div className="credits-badge">
             {userSubscription === 'pro' ? '∞ Pro' : `${remainingCredits} credits`}
@@ -368,14 +371,16 @@ const AIAssistant = ({
             onClick={optimizeForJob}
             disabled={!jobDescription.trim() || isProcessing}
           >
-            🎯 Optimize Resume
+            <OptimizeIcon size={14} color="white" />
+            Optimize Resume
           </button>
           <button 
             className="btn-ai btn-secondary" 
             onClick={generateCoverLetter}
             disabled={!jobDescription.trim() || isProcessing}
           >
-            📝 Generate Cover Letter
+            <DocumentIcon size={14} color="white" />
+            Generate Cover Letter
           </button>
         </div>
 
@@ -388,7 +393,7 @@ const AIAssistant = ({
 
         {showResults && lastOptimization && (
           <div className="optimization-results">
-            <h4>🎯 AI Optimization Results (Score: {lastOptimization.overallScore}%)</h4>
+            <h4><AIIcon size={16} color="#333" /> AI Optimization Results (Score: {lastOptimization.overallScore}%)</h4>
             
             <div className="result-item">
               <div className="result-header">
@@ -445,7 +450,7 @@ const AIAssistant = ({
 
         {remainingCredits <= 0 && userSubscription === 'free' && (
           <div className="upgrade-prompt">
-            <h4>🚀 Unlock Unlimited AI Optimization</h4>
+            <h4>Unlock Unlimited AI Optimization</h4>
             <p>Get unlimited AI-powered resume optimization and cover letter generation</p>
             <button className="upgrade-btn" onClick={onUpgrade}>
               Upgrade to Pro - $9.99/month
