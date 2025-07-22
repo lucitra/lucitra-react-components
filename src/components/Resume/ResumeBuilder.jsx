@@ -12,6 +12,7 @@ import AIAssistant from './AIAssistant.jsx';
 import AITextInput from './AITextInput.jsx';
 import ResumeVersionControl from './ResumeVersionControl.jsx';
 import { useResumeVersionControl } from '../../hooks/useResumeVersionControl.js';
+import { updateResumeField, getFieldPathWithContext } from '../../utils/resumeFieldUpdater.js';
 import { defaultResumeData } from "../../data/resumeData.js";
 
 const ResumeBuilder = ({
@@ -57,10 +58,26 @@ const ResumeBuilder = ({
     [onDataChange]
   );
 
-  // Version control for AI optimizations
+  // Version control for AI optimizations - directly updates resume data
   const handleAIVersionTrack = useCallback((aiInfo) => {
-    updateWithAI(resumeData, aiInfo);
-  }, [resumeData, updateWithAI]);
+    // Use the field updater to directly update the resume data structure
+    const fieldInfo = getFieldPathWithContext(aiInfo.field, resumeData);
+    
+    if (fieldInfo && fieldInfo.path) {
+      // Update the resume data directly
+      const updatedData = updateResumeField(resumeData, fieldInfo.path, aiInfo.newValue);
+      
+      // Track this change in version control
+      updateWithAI(updatedData, aiInfo);
+      
+      // Notify parent component
+      handleDataChange(updatedData);
+    } else {
+      console.warn('Could not determine field path for AI optimization:', aiInfo.field);
+      // Fallback to the old approach
+      updateWithAI(resumeData, aiInfo);
+    }
+  }, [resumeData, updateWithAI, handleDataChange]);
 
   const handleConfigChange = useCallback((newConfig) => {
     setConfig((prev) => ({ ...prev, ...newConfig }));

@@ -187,8 +187,8 @@ const AITextOptimizer = ({
   };
 
   const applyOptimization = (optimization) => {
-    // Track the AI optimization in version control
     if (onVersionTrack) {
+      // Let version control handle both the data update and tracking
       onVersionTrack({
         field: fieldName,
         originalValue: originalText,
@@ -198,9 +198,11 @@ const AITextOptimizer = ({
         reasoning: optimization.reasoning,
         fieldType: fieldType
       });
+    } else {
+      // Fallback: apply the optimization directly to the field
+      onApplyOptimization(optimization.optimized);
     }
     
-    onApplyOptimization(optimization.optimized);
     setOptimizations([]);
     setIsVisible(false);
   };

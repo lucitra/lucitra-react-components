@@ -268,11 +268,29 @@ const MyResumeBuilder = () => {
 };
 ```
 
+#### Data Flow & Architecture
+The system uses a sophisticated field updating mechanism to ensure AI optimizations are properly applied:
+
+1. **Field Path Resolution**: AI field names like "Microsoft - Job Title" are resolved to data paths like `work[0].positions[0].title`
+2. **Direct Data Updates**: AI optimizations bypass normal form handling and directly update the resume data structure
+3. **Version Tracking**: Every change is tracked with metadata (confidence, reasoning, goals)
+4. **State Synchronization**: Version control system manages both data updates and UI re-rendering
+
+```jsx
+// Field updater resolves AI optimizations to precise data paths
+const fieldInfo = getFieldPathWithContext('Microsoft - Bullet Point 1', resumeData);
+// Returns: { path: 'work[0].positions[0].highlights[0]', context: {...} }
+
+const updatedData = updateResumeField(resumeData, fieldInfo.path, newValue);
+// Directly updates the nested data structure
+```
+
 #### Benefits
 - **Safe Experimentation**: Users can try AI suggestions without fear of losing work
 - **Change Transparency**: Full visibility into what AI optimizations were applied
 - **Professional Confidence**: Ability to revert any changes that don't feel right
 - **Analytics Potential**: Track which AI optimizations are most commonly accepted/reverted
+- **Reliable Updates**: Direct data structure updates ensure AI changes are always applied correctly
 
 ## Important Notes
 
