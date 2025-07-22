@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import AITextInput from './AITextInput.jsx';
 
-const WorkExperienceEditor = ({ workData, onUpdate, onDelete }) => {
+const WorkExperienceEditor = ({ 
+  workData, 
+  onUpdate, 
+  onDelete, 
+  userSubscription = 'free',
+  remainingCredits = 3,
+  onUpgrade,
+  onCreditUsed,
+  context = {}
+}) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [editingHighlight, setEditingHighlight] = useState(null);
   const [newHighlight, setNewHighlight] = useState('');
@@ -375,12 +385,18 @@ const WorkExperienceEditor = ({ workData, onUpdate, onDelete }) => {
               <div className="form-row">
                 <div className="form-group">
                   <label className="form-label">Job Title</label>
-                  <input
+                  <AITextInput
                     type="text"
                     className="form-control"
                     value={position.title}
                     onChange={(e) => updatePosition(positionIndex, 'title', e.target.value)}
                     placeholder="Software Engineer"
+                    fieldType="job-title"
+                    context={context}
+                    userSubscription={userSubscription}
+                    remainingCredits={remainingCredits}
+                    onUpgrade={onUpgrade}
+                    onCreditUsed={onCreditUsed}
                   />
                 </div>
                 <div className="form-group">
@@ -425,8 +441,9 @@ const WorkExperienceEditor = ({ workData, onUpdate, onDelete }) => {
                   <div key={highlightIndex} className="highlight-item">
                     {editingHighlight === `${positionIndex}-${highlightIndex}` ? (
                       <>
-                        <textarea
+                        <AITextInput
                           className="form-control highlight-textarea"
+                          rows={3}
                           value={highlight}
                           onChange={(e) => updateHighlight(positionIndex, highlightIndex, e.target.value)}
                           onKeyDown={(e) => {
@@ -434,6 +451,12 @@ const WorkExperienceEditor = ({ workData, onUpdate, onDelete }) => {
                               updateHighlight(positionIndex, highlightIndex, e.target.value);
                             }
                           }}
+                          fieldType="bullet-point"
+                          context={context}
+                          userSubscription={userSubscription}
+                          remainingCredits={remainingCredits}
+                          onUpgrade={onUpgrade}
+                          onCreditUsed={onCreditUsed}
                         />
                         <div className="highlight-actions">
                           <button
@@ -473,12 +496,18 @@ const WorkExperienceEditor = ({ workData, onUpdate, onDelete }) => {
                 ))}
 
                 <div className="add-highlight">
-                  <textarea
+                  <AITextInput
                     className="form-control"
+                    rows={2}
                     value={newHighlight}
                     onChange={(e) => setNewHighlight(e.target.value)}
                     placeholder="Add a new achievement or responsibility..."
-                    rows="2"
+                    fieldType="bullet-point"
+                    context={context}
+                    userSubscription={userSubscription}
+                    remainingCredits={remainingCredits}
+                    onUpgrade={onUpgrade}
+                    onCreditUsed={onCreditUsed}
                   />
                   <button
                     className="add-btn"
@@ -507,6 +536,11 @@ WorkExperienceEditor.propTypes = {
   workData: PropTypes.object.isRequired,
   onUpdate: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
+  userSubscription: PropTypes.oneOf(['free', 'pro', 'enterprise']),
+  remainingCredits: PropTypes.number,
+  onUpgrade: PropTypes.func,
+  onCreditUsed: PropTypes.func,
+  context: PropTypes.object
 };
 
 export default WorkExperienceEditor;

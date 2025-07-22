@@ -160,11 +160,52 @@ This creates a clean, professional hierarchy using minimal font sizes with strat
 ### Features
 
 - **Live Editing**: Real-time preview while editing
-- **Export Options**: JSON and PDF export functionality
+- **AI-Powered Optimization**: Granular AI suggestions for any text field with context-aware recommendations
+- **Export Options**: JSON and PDF export functionality  
 - **Print Optimization**: Single-page PDF-ready layouts
 - **Responsive Design**: Works on desktop and mobile
 - **Customizable**: Flexible configuration options
 - **Professional Layout**: Based on modern resume standards
+
+### AI Enhancement System
+
+The resume builder includes a comprehensive AI optimization system:
+
+#### Granular Text Optimization
+- **Any Text Field**: Hover over any input field and click ✨ AI for smart suggestions
+- **Context-Aware**: Provide job descriptions and target roles for tailored optimizations
+- **Field-Specific Goals**: Different optimization strategies based on field type:
+  - **Job Titles**: Impact, Technical Focus, Senior Role, Startup Ready
+  - **Bullet Points**: Add Metrics, Show Impact, Strong Action Verbs, Technical Detail, Leadership
+  - **Summary**: Executive Level, Technical Expert, Versatile Leader, Industry Expert
+  - **Skills**: Trending Tech, Comprehensive, Specialized
+  - **General**: Professional, Concise, Detailed, Impact-Focused
+
+#### AI Components
+- **AITextInput**: Smart wrapper for any input field with AI optimization
+- **AITextOptimizer**: Standalone AI optimizer with contextual suggestions
+- **AIAssistant**: High-level document optimization and cover letter generation
+
+#### Usage Example
+```jsx
+import { AITextInput } from '@lucitra/react-components';
+
+<AITextInput
+  value={text}
+  onChange={handleChange}
+  fieldType="bullet-point"
+  context={{ jobDescription: "..." }}
+  userSubscription="free"
+  remainingCredits={3}
+  onUpgrade={handleUpgrade}
+  onCreditUsed={handleCreditUsed}
+/>
+```
+
+#### Business Model Integration
+- **Freemium**: 3 AI optimizations per month free
+- **Pro Subscription**: Unlimited AI optimizations
+- **Context Optimization**: Job-specific suggestions based on provided context
 
 ## Important Notes
 

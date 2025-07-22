@@ -12,5 +12,10 @@ export { default as WorkExperienceEditor } from './WorkExperienceEditor.jsx';
 export { default as EducationEditor } from './EducationEditor.jsx';
 export { default as SkillsEditor } from './SkillsEditor.jsx';
 
+// AI components
+export { default as AIAssistant } from './AIAssistant.jsx';
+export { default as AITextOptimizer } from './AITextOptimizer.jsx';
+export { default as AITextInput } from './AITextInput.jsx';
+
 // Export data and utilities
 export { defaultResumeData, baseResumeData, genericResumeData, ibraheemResumeData } from '../../data/resumeData.js';

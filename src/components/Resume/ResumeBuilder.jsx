@@ -8,6 +8,8 @@ import { ResumeExperience } from './ResumeExperience.jsx';
 import WorkExperienceEditor from './WorkExperienceEditor.jsx';
 import EducationEditor from './EducationEditor.jsx';
 import SkillsEditor from './SkillsEditor.jsx';
+import AIAssistant from './AIAssistant.jsx';
+import AITextInput from './AITextInput.jsx';
 import { defaultResumeData } from "../../data/resumeData.js";
 
 const ResumeBuilder = ({
@@ -29,6 +31,13 @@ const ResumeBuilder = ({
     useSerifFont: useSerifFont,
   });
   const [activeTab, setActiveTab] = useState("preview");
+  const [aiContext, setAIContext] = useState({
+    jobDescription: '',
+    targetRole: '',
+    industryFocus: ''
+  });
+  const [aiCredits, setAICredits] = useState(3);
+  const [aiSubscription, setAISubscription] = useState('free');
 
   const handleDataChange = useCallback(
     (newData) => {
@@ -259,6 +268,22 @@ const ResumeBuilder = ({
   const updateSkills = useCallback((updatedSkills) => {
     handleDataChange({ ...resumeData, skills: updatedSkills });
   }, [resumeData, handleDataChange]);
+
+  const handleCreditUsed = useCallback(() => {
+    if (aiSubscription === 'free') {
+      setAICredits(prev => Math.max(0, prev - 1));
+    }
+  }, [aiSubscription]);
+
+  const handleUpgrade = useCallback(() => {
+    console.log('Upgrade to Pro requested');
+    // TODO: Implement actual subscription upgrade
+    setAISubscription('pro');
+  }, []);
+
+  const updateAIContext = useCallback((newContext) => {
+    setAIContext(prev => ({ ...prev, ...newContext }));
+  }, []);
 
   return (
     <>
@@ -698,14 +723,20 @@ const ResumeBuilder = ({
                   <label className="form-label" htmlFor="summary">
                     Professional Summary
                   </label>
-                  <textarea
+                  <AITextInput
                     id="summary"
                     className="form-control"
-                    rows="4"
+                    rows={4}
                     value={resumeData.basics.summary}
                     onChange={(e) => updateBasics("summary", e.target.value)}
                     placeholder="Brief professional summary highlighting your expertise and achievements..."
                     style={{ resize: "vertical", minHeight: "80px" }}
+                    fieldType="summary"
+                    context={aiContext}
+                    userSubscription={aiSubscription}
+                    remainingCredits={aiCredits}
+                    onUpgrade={handleUpgrade}
+                    onCreditUsed={handleCreditUsed}
                   />
                 </div>
 
@@ -727,6 +758,11 @@ const ResumeBuilder = ({
                     workData={workItem}
                     onUpdate={(updatedWork) => updateWorkExperience(index, updatedWork)}
                     onDelete={() => deleteWorkExperience(index)}
+                    userSubscription={aiSubscription}
+                    remainingCredits={aiCredits}
+                    onUpgrade={handleUpgrade}
+                    onCreditUsed={handleCreditUsed}
+                    context={aiContext}
                   />
                 ))}
 
@@ -752,6 +788,11 @@ const ResumeBuilder = ({
                     educationData={educationItem}
                     onUpdate={(updatedEducation) => updateEducation(index, updatedEducation)}
                     onDelete={() => deleteEducation(index)}
+                    userSubscription={aiSubscription}
+                    remainingCredits={aiCredits}
+                    onUpgrade={handleUpgrade}
+                    onCreditUsed={handleCreditUsed}
+                    context={aiContext}
                   />
                 ))}
 
@@ -765,43 +806,92 @@ const ResumeBuilder = ({
                   onUpdate={updateSkills}
                 />
 
-                <h2 className="section-header">Quick Actions</h2>
-                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                  <button className="btn btn-outline" onClick={() => {
-                    const templates = {
-                      'ai-engineer': 'Applied AI Engineer | Deep Learning & Scalable AI Systems',
-                      'fullstack': 'Full-Stack Engineer | React & Python Specialist', 
-                      'data-scientist': 'Data Scientist | ML & Analytics Expert',
-                      'frontend': 'Frontend Engineer | React & TypeScript Specialist'
-                    };
-                    const title = templates['ai-engineer'];
-                    updateBasics('label', title);
-                  }}>
-                    AI Engineer Template
-                  </button>
+                <h2 className="section-header">AI Assistant</h2>
+                
+                {/* AI Context Configuration */}
+                <div style={{ 
+                  background: '#f8f9fa', 
+                  padding: '16px', 
+                  borderRadius: '8px', 
+                  border: '1px solid #e0e0e0',
+                  marginBottom: '16px'
+                }}>
+                  <h3 style={{ fontSize: '16px', margin: '0 0 12px 0', fontWeight: '600' }}>
+                    🎯 AI Optimization Context
+                  </h3>
+                  <p style={{ fontSize: '13px', color: '#666', margin: '0 0 12px 0' }}>
+                    Set context to help AI provide more targeted optimizations for any text field
+                  </p>
                   
-                  <button className="btn btn-outline" onClick={() => {
-                    const sampleSummary = "Applied AI engineer with a master's in computer science, focused on deploying deep learning models and ML pipelines in production. Proven track record developing and scaling intelligent systems for healthcare and social platforms. Skilled in Python, TypeScript, and Cloud technologies; experienced in fine-tuning LLMs, building MLOps pipelines, and deploying secure AI features in HIPAA and enterprise environments.";
-                    updateBasics('summary', sampleSummary);
-                  }}>
-                    Sample Summary
-                  </button>
+                  <div className="form-group" style={{ marginBottom: '12px' }}>
+                    <label className="form-label">Job Description (for targeted optimization)</label>
+                    <textarea
+                      className="form-control"
+                      rows={3}
+                      value={aiContext.jobDescription}
+                      onChange={(e) => updateAIContext({ jobDescription: e.target.value })}
+                      placeholder="Paste job description here to enable job-specific optimizations..."
+                      style={{ fontSize: '13px' }}
+                    />
+                  </div>
                   
-                  <button className="btn btn-outline" onClick={() => {
-                    handleDataChange({
-                      ...resumeData,
-                      basics: {
-                        ...resumeData.basics,
-                        profiles: [
-                          { network: "GitHub", username: "username", url: "https://github.com/username" },
-                          { network: "LinkedIn", username: "username", url: "https://www.linkedin.com/in/username" }
-                        ]
-                      }
-                    });
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                    <div className="form-group">
+                      <label className="form-label">Target Role</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={aiContext.targetRole}
+                        onChange={(e) => updateAIContext({ targetRole: e.target.value })}
+                        placeholder="Senior Engineer, VP of Engineering..."
+                        style={{ fontSize: '13px' }}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label className="form-label">Industry Focus</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={aiContext.industryFocus}
+                        onChange={(e) => updateAIContext({ industryFocus: e.target.value })}
+                        placeholder="FinTech, HealthTech, AI/ML..."
+                        style={{ fontSize: '13px' }}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div style={{ 
+                    display: 'flex', 
+                    justifyContent: 'space-between', 
+                    alignItems: 'center', 
+                    marginTop: '12px',
+                    fontSize: '12px',
+                    color: '#666'
                   }}>
-                    Add Social Profiles
-                  </button>
+                    <span>💡 Now hover over any text field and click ✨ AI for smart suggestions</span>
+                    <span style={{ 
+                      background: aiSubscription === 'pro' ? '#28a745' : '#ffc107',
+                      color: aiSubscription === 'pro' ? 'white' : '#000',
+                      padding: '2px 8px',
+                      borderRadius: '12px',
+                      fontSize: '11px'
+                    }}>
+                      {aiSubscription === 'pro' ? '∞ Pro' : `${aiCredits} credits left`}
+                    </span>
+                  </div>
                 </div>
+
+                <AIAssistant
+                  resumeData={resumeData}
+                  onResumeUpdate={handleDataChange}
+                  onGenerateCoverLetter={(coverLetter) => {
+                    console.log('Generated cover letter:', coverLetter);
+                    // TODO: Handle cover letter display/download
+                  }}
+                  userSubscription={aiSubscription}
+                  remainingCredits={aiCredits}
+                  onUpgrade={handleUpgrade}
+                />
               </div>
 
               <div className="preview-panel">

@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import AITextInput from './AITextInput.jsx';
 
-const EducationEditor = ({ educationData, onUpdate, onDelete }) => {
+const EducationEditor = ({ 
+  educationData, 
+  onUpdate, 
+  onDelete,
+  userSubscription = 'free',
+  remainingCredits = 3,
+  onUpgrade,
+  onCreditUsed,
+  context = {}
+}) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [newCourse, setNewCourse] = useState('');
 
@@ -277,12 +287,18 @@ const EducationEditor = ({ educationData, onUpdate, onDelete }) => {
             </div>
             <div className="form-group">
               <label className="form-label">Area of Study</label>
-              <input
+              <AITextInput
                 type="text"
                 className="form-control"
                 value={educationData.area || ''}
                 onChange={(e) => updateEducationField('area', e.target.value)}
                 placeholder="Computer Science"
+                fieldType="general"
+                context={context}
+                userSubscription={userSubscription}
+                remainingCredits={remainingCredits}
+                onUpgrade={onUpgrade}
+                onCreditUsed={onCreditUsed}
               />
             </div>
           </div>
@@ -374,6 +390,11 @@ EducationEditor.propTypes = {
   educationData: PropTypes.object.isRequired,
   onUpdate: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
+  userSubscription: PropTypes.oneOf(['free', 'pro', 'enterprise']),
+  remainingCredits: PropTypes.number,
+  onUpgrade: PropTypes.func,
+  onCreditUsed: PropTypes.func,
+  context: PropTypes.object
 };
 
 export default EducationEditor;
