@@ -24,3 +24,6 @@ export * from './Typography'
 
 // Resume Components
 export * from './Resume'
+
+// HubSpot Integration Components
+export * from './HubSpot'

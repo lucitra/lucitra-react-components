@@ -28,3 +28,6 @@ export * as Feedback from './components/Feedback'
 export * as DataDisplay from './components/DataDisplay'
 export * as Resume from './components/Resume'
 export * as DesignSystem from './design-system/components'
+
+// HubSpot CMS Integration
+export * as HubSpot from './components/HubSpot'

@@ -7,7 +7,13 @@
 
 import React, { createContext, useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { notifications } from '@mantine/notifications';
+// Dynamic import for optional notifications support
+let notifications = null;
+try {
+  notifications = require('@mantine/notifications').notifications;
+} catch (error) {
+  console.warn('[@lucitra/react-components] @mantine/notifications not found. Toast functionality will be limited.');
+}
 import { 
   IconInfoCircle, 
   IconAlertTriangle, 
@@ -43,7 +49,7 @@ export const useToast = () => {
         const IconComponent = VARIANT_ICONS[variant];
         const color = VARIANT_COLORS[variant];
         
-        notifications.show({
+        notifications?.show({
           title,
           message,
           color,
@@ -99,11 +105,11 @@ export const ToastProvider = ({ children }) => {
   }, []);
 
   const hide = useCallback((id) => {
-    notifications.hide(id);
+    notifications?.hide(id);
   }, []);
 
   const clean = useCallback(() => {
-    notifications.clean();
+    notifications?.clean();
   }, []);
 
   const update = useCallback((id, options) => {
@@ -111,7 +117,7 @@ export const ToastProvider = ({ children }) => {
     const IconComponent = variant ? VARIANT_ICONS[variant] : undefined;
     const color = variant ? VARIANT_COLORS[variant] : undefined;
     
-    notifications.update({
+    notifications?.update({
       id,
       title,
       message,

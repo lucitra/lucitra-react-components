@@ -1,6 +1,6 @@
 {
   "name": "@lucitra/react-components",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "type": "module",
   "description": "A comprehensive React component library for modern web applications",
   "author": "Lucitra",
@@ -17,6 +17,11 @@
       "import": "./dist/index.esm.js",
       "require": "./dist/index.js",
       "default": "./dist/index.esm.js"
+    },
+    "./no-toast": {
+      "import": "./dist/index.no-toast.esm.js",
+      "require": "./dist/index.no-toast.js",
+      "default": "./dist/index.no-toast.esm.js"
     },
     "./styles.css": "./dist/index.css",
     "./index.css": "./dist/index.css"
