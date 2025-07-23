@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.17.1](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.17.0...react-components-v0.17.1) (2025-07-23)
+
+
+### Bug Fixes
+
+* make @mantine/notifications optional with alternative export ([87d4282](https://github.com/lucitra/lucitra-react-components/commit/87d4282aafc216e00fdeab109f4b096ec83763b6))
+
 ## [0.17.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.16.1...react-components-v0.17.0) (2025-07-22)
 
 
