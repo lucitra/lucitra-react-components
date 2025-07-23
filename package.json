@@ -1,6 +1,6 @@
 {
   "name": "@lucitra/react-components",
-  "version": "0.17.1",
+  "version": "0.19.0",
   "type": "module",
   "description": "A comprehensive React component library for modern web applications",
   "author": "Lucitra",
@@ -42,8 +42,8 @@
     "@mantine/core": ">=8.0.0",
     "@mantine/hooks": ">=8.0.0",
     "@mantine/notifications": ">=8.0.0",
-    "react": ">=19.0.0",
-    "react-dom": ">=19.0.0"
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   },
   "peerDependenciesMeta": {
     "react-i18next": {

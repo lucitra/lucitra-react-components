@@ -1,5 +1,13 @@
 // Navigation Components
-export { LanguageSwitcher, RegionSwitcher, NavButton } from './Navigation'
+export { 
+  LanguageSwitcher, 
+  RegionSwitcher, 
+  NavButton, 
+  LanguageSwitcherSSR, 
+  RegionSwitcherSSR,
+  SimpleLanguageSwitcher,
+  SimpleRegionSwitcher
+} from './Navigation'
 
 // Debug Components
 export * from './Debug'

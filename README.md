@@ -13,6 +13,7 @@ A comprehensive, production-ready React component library designed for modern we
 - 🔧 **Highly Customizable** - Flexible theming and style overrides
 - 📦 **Tree Shakeable** - Import only what you need
 - ⚡ **Performance Optimized** - Minimal bundle size and runtime overhead
+- 🖥️ **SSR Compatible** - Server-side rendering support for Next.js, HubSpot, and other SSR frameworks
 
 ## 📦 Installation
 
@@ -50,6 +51,25 @@ function App() {
   )
 }
 ```
+
+### 🖥️ Server-Side Rendering (SSR)
+
+For SSR environments like Next.js or HubSpot CMS, use the SSR-compatible versions:
+
+```jsx
+import { LanguageSwitcherSSR, RegionSwitcherSSR } from '@lucitra/react-components'
+
+function App() {
+  return (
+    <div>
+      <LanguageSwitcherSSR onLanguageChange={(lang) => console.log(lang)} />
+      <RegionSwitcherSSR onRegionChange={(region) => console.log(region)} />
+    </div>
+  )
+}
+```
+
+The SSR components handle browser API calls safely and provide proper hydration support.
 
 ## 📚 Component Categories
 

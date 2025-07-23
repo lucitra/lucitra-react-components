@@ -15,6 +15,9 @@ export {
   DEFAULT_THEME 
 } from './utils/defaultConfigs'
 
+// SSR utilities
+export * from './utils/ssr'
+
 // Design System
 export { DESIGN_TOKENS } from './design-system/tokens'
 export { BaseButton } from './design-system/components/BaseButton'
