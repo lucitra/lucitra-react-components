@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.18.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.17.1...react-components-v0.18.0) (2025-07-23)
+
+
+### Features
+
+* add ssr-compatible components and support react 18+ ([f30b40f](https://github.com/lucitra/lucitra-react-components/commit/f30b40f603a68d6c60d0de38d9ac40cdcf6869ea))
+
 ## [0.17.1](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.17.0...react-components-v0.17.1) (2025-07-23)
 
 
