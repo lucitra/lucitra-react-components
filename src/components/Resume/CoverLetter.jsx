@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { resumeDesignSystem } from './resumeStyles.js';
 import AITextInput from './AITextInput.jsx';
@@ -39,6 +39,40 @@ const CoverLetter = ({
 
   const [signatureFont, setSignatureFont] = useState('none');
   const [customSignatureFont, setCustomSignatureFont] = useState(null);
+  const [signatureKey, setSignatureKey] = useState(0);
+  const [isSignatureVisible, setIsSignatureVisible] = useState(false);
+  const signatureRef = useRef(null);
+
+  // Set up intersection observer for signature animation
+  useEffect(() => {
+    const currentRef = signatureRef.current;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !isSignatureVisible) {
+            setIsSignatureVisible(true);
+          }
+        });
+      },
+      { threshold: 0.5 } // Trigger when 50% of signature is visible
+    );
+
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, [signatureKey, isSignatureVisible]); // Re-run when signature changes
+
+  // Reset visibility when font changes
+  useEffect(() => {
+    setIsSignatureVisible(false);
+  }, [signatureFont, customSignatureFont]);
 
   const handleFieldUpdate = useCallback((field, value) => {
     const updatedData = {
@@ -423,12 +457,18 @@ ${signOff},`;
             {/* Signature Selector */}
             <SignatureSelector
               selectedFont={signatureFont}
-              onFontChange={setSignatureFont}
+              onFontChange={(font) => {
+                setSignatureFont(font);
+                setSignatureKey(prev => prev + 1); // Trigger re-animation
+              }}
               userName={resumeData.basics.name}
               userSubscription={userSubscription}
               onUpgrade={onUpgrade}
               customFont={customSignatureFont}
-              onCustomFontChange={setCustomSignatureFont}
+              onCustomFontChange={(font) => {
+                setCustomSignatureFont(font);
+                setSignatureKey(prev => prev + 1); // Trigger re-animation
+              }}
             />
 
             <div className="controls">
@@ -491,6 +531,40 @@ ${signOff},`;
                     color: #1a1a1a;
                     margin: 16px 0 8px 0;
                     letter-spacing: 0.03em;
+                    position: relative;
+                    display: inline-block;
+                    overflow: hidden;
+                  }
+                  
+                  @media screen {
+                    .signature {
+                      background: linear-gradient(90deg, #1a1a1a 0%, #1a1a1a 50%, transparent 50%);
+                      background-size: 200% 100%;
+                      background-position: 100% 0;
+                      -webkit-background-clip: text;
+                      background-clip: text;
+                      -webkit-text-fill-color: transparent;
+                    }
+                    
+                    .signature.animate {
+                      animation: drawSignature 4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+                      animation-delay: 0.5s;
+                    }
+                    
+                    @keyframes drawSignature {
+                      to {
+                        background-position: 0% 0;
+                      }
+                    }
+                  }
+                  
+                  @media print {
+                    .signature {
+                      color: #1a1a1a !important;
+                      -webkit-text-fill-color: #1a1a1a !important;
+                      background: none !important;
+                      animation: none !important;
+                    }
                   }
                   .typed-name {
                     font-size: inherit;
@@ -500,7 +574,13 @@ ${signOff},`;
                   }
                 `}</style>
                 {signatureFont !== 'none' && (
-                  <div className="signature">{resumeData.basics.name}</div>
+                  <div 
+                    key={signatureKey} 
+                    ref={signatureRef}
+                    className={`signature ${isSignatureVisible ? 'animate' : ''}`}
+                  >
+                    {resumeData.basics.name}
+                  </div>
                 )}
                 <div className="typed-name">{resumeData.basics.name}</div>
               </div>
