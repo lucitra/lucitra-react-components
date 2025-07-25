@@ -32,7 +32,7 @@ export const FullAccess = {
     onExport: (format, data) => console.log('Export:', format, data),
     showControls: true,
     enableExport: true,
-    useSerifFont: false,
+    useSerifFont: true,
     showATSTools: true,
   },
   parameters: {
@@ -60,7 +60,7 @@ export const PrintMode = {
     onExport: (format, data) => console.log('Export:', format, data),
     showControls: true,
     enableExport: true,
-    useSerifFont: false,
+    useSerifFont: true,
     showATSTools: true,
   },
   parameters: {
@@ -80,7 +80,7 @@ export const SingleColumn = {
     onExport: (format, data) => console.log('Export:', format, data),
     showControls: true,
     enableExport: true,
-    useSerifFont: false,
+    useSerifFont: true,
     showATSTools: true,
   },
   parameters: {
@@ -100,7 +100,7 @@ export const CleanPreview = {
     onExport: () => {},
     showControls: false,
     enableExport: false,
-    useSerifFont: false,
+    useSerifFont: true,
     showATSTools: false,
   },
   parameters: {

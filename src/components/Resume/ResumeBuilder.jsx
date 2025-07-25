@@ -23,10 +23,11 @@ import LinkedInImport from './LinkedInImport.jsx';
 import UpgradeModal from './UpgradeModal.jsx';
 import featureGating, { SUBSCRIPTION_TIERS } from '../../services/featureGating.js';
 import CoverLetter from './CoverLetter.jsx';
-import PrintPreview from './PrintPreview.jsx';
+
 import ConfigurationPanel from './ConfigurationPanel.jsx';
 import PatentsEditor from './PatentsEditor.jsx';
 import { createResumeDesignSystem } from './resumeStyles.js';
+import { resumeFonts } from './resumeFonts.js';
 
 const ResumeBuilder = ({
   initialData = null,
@@ -51,7 +52,7 @@ const ResumeBuilder = ({
   } = useResumeVersionControl(initialData || defaultResumeData);
   const [config, setConfig] = useState({
     printMode: false,
-    singleColumn: false,
+    singleColumn: true,
     maxWorkItems: null,
     maxEducationItems: null,
     maxWorkBullets: null,
@@ -90,6 +91,8 @@ const ResumeBuilder = ({
       small: 9
     },
     ...initialConfig, // Merge with initial config
+    headingFont: resumeFonts.serif[0].value, // Default to Georgia
+    bodyFont: resumeFonts.sansSerif[0].value, // Default to Helvetica
   });
   const [activeTab, setActiveTab] = useState("preview");
   const [aiContext, setAIContext] = useState({
@@ -382,7 +385,6 @@ const ResumeBuilder = ({
             margin: 0 auto;
             background: white;
             padding: ${designSystem.margins.top} ${designSystem.margins.right} ${designSystem.margins.bottom} ${designSystem.margins.left};
-            font-family: ${config.useSerifFont ? designSystem.layout.serifFontFamily : designSystem.layout.fontFamily};
             font-size: ${designSystem.typography.bodyText.fontSize.screen};
             line-height: ${config.spacing?.lineHeight || 1.4};
             color: #161616;
@@ -391,12 +393,12 @@ const ResumeBuilder = ({
           
           .print-mode {
             width: 8.5in;
-            height: 11in;
+            height: auto;
             padding: ${designSystem.margins.top} ${designSystem.margins.right} ${designSystem.margins.bottom} ${designSystem.margins.left};
             margin: 0;
-            overflow: hidden;
             font-size: ${designSystem.typography.bodyText.fontSize.print};
             line-height: ${config.spacing?.lineHeight || 1.2};
+            page-break-inside: avoid;
           }
           
           .print-mode > * + * {
@@ -428,7 +430,6 @@ const ResumeBuilder = ({
             }
             
             .resume-display {
-              position: absolute !important;
               left: 0 !important;
               top: 0 !important;
               width: 100% !important;
@@ -1043,6 +1044,56 @@ const ResumeBuilder = ({
                 </select>
               </div>
 
+              <div className="control-group">
+                <label htmlFor="headingFontSelect">Heading Font:</label>
+                <select
+                  id="headingFontSelect"
+                  className="select"
+                  value={config.headingFont}
+                  onChange={(e) => handleConfigChange({ headingFont: e.target.value })}
+                >
+                  <optgroup label="Serif">
+                    {resumeFonts.serif.map((font) => (
+                      <option key={font.name} value={font.value}>
+                        {font.name}
+                      </option>
+                    ))}
+                  </optgroup>
+                  <optgroup label="Sans-Serif">
+                    {resumeFonts.sansSerif.map((font) => (
+                      <option key={font.name} value={font.value}>
+                        {font.name}
+                      </option>
+                    ))}
+                  </optgroup>
+                </select>
+              </div>
+
+              <div className="control-group">
+                <label htmlFor="bodyFontSelect">Body Font:</label>
+                <select
+                  id="bodyFontSelect"
+                  className="select"
+                  value={config.bodyFont}
+                  onChange={(e) => handleConfigChange({ bodyFont: e.target.value })}
+                >
+                  <optgroup label="Serif">
+                    {resumeFonts.serif.map((font) => (
+                      <option key={font.name} value={font.value}>
+                        {font.name}
+                      </option>
+                    ))}
+                  </optgroup>
+                  <optgroup label="Sans-Serif">
+                    {resumeFonts.sansSerif.map((font) => (
+                      <option key={font.name} value={font.value}>
+                        {font.name}
+                      </option>
+                    ))}
+                  </optgroup>
+                </select>
+              </div>
+
               {enableExport && (
                 <div className="control-group">
                   <button
@@ -1117,9 +1168,7 @@ const ResumeBuilder = ({
             />
           ) : activeTab === "preview" ? (
             <div style={{ position: 'relative' }}>
-              <PrintPreview isActive={config.printMode}>
-                <ResumeDisplay data={resumeData} config={config} />
-              </PrintPreview>
+              <ResumeDisplay data={resumeData} config={config} />
               <ResumeWatermark isPremium={userTier !== SUBSCRIPTION_TIERS.ANONYMOUS && userTier !== SUBSCRIPTION_TIERS.FREE} />
             </div>
           ) : (

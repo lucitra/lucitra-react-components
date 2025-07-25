@@ -22,7 +22,7 @@ export const createResumeDesignSystem = (config = {}) => {
     }
   };
 
-  // Merge config with defaults
+  const { headingFont, bodyFont } = config;
   const fontSize = { ...defaults.fontSize, ...config.fontSize };
   const spacing = { ...defaults.spacing, ...config.spacing };
   const margins = { ...defaults.margins, ...config.margins };
@@ -32,6 +32,7 @@ export const createResumeDesignSystem = (config = {}) => {
     typography: {
       // Name only - largest size
       nameText: {
+        fontFamily: headingFont || "Georgia, serif",
         fontSize: { print: `${fontSize.name * 0.8}pt`, screen: `${fontSize.name}px` },
         fontWeight: 700,
         color: '#000000',
@@ -42,6 +43,7 @@ export const createResumeDesignSystem = (config = {}) => {
       
       // Section headers and important titles
       headerText: {
+        fontFamily: headingFont || "Georgia, serif",
         fontSize: { print: `${fontSize.header * 0.85}pt`, screen: `${fontSize.header}px` },
         fontWeight: 700,
         color: '#000000',
@@ -52,6 +54,7 @@ export const createResumeDesignSystem = (config = {}) => {
       
       // All body content - one size for everything
       bodyText: {
+        fontFamily: bodyFont || "Helvetica, sans-serif",
         fontSize: { print: `${fontSize.body * 0.85}pt`, screen: `${fontSize.body}px` },
         fontWeight: 400,
         color: '#000000',
@@ -60,6 +63,7 @@ export const createResumeDesignSystem = (config = {}) => {
       
       // Small text for contact info only
       smallText: {
+        fontFamily: bodyFont || "Helvetica, sans-serif",
         fontSize: { print: `${fontSize.small * 0.85}pt`, screen: `${fontSize.small}px` },
         fontWeight: 400,
         color: '#000000',
@@ -163,6 +167,7 @@ export const getTypographyStyle = (type, printMode = false, designSystem = resum
   if (!typography) return {};
   
   return {
+    fontFamily: typography.fontFamily,
     fontSize: printMode ? typography.fontSize.print : typography.fontSize.screen,
     fontWeight: typography.fontWeight,
     color: typography.color,
