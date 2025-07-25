@@ -2,6 +2,8 @@ import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { resumeDesignSystem } from './resumeStyles.js';
 import AITextInput from './AITextInput.jsx';
+import SignatureSelector from './SignatureSelector.jsx';
+import { SIGNATURE_FONTS } from './signatureFonts.js';
 
 const CoverLetter = ({ 
   resumeData, 
@@ -35,6 +37,9 @@ const CoverLetter = ({
     signOff: 'Sincerely'
   });
 
+  const [signatureFont, setSignatureFont] = useState('none');
+  const [customSignatureFont, setCustomSignatureFont] = useState(null);
+
   const handleFieldUpdate = useCallback((field, value) => {
     const updatedData = {
       ...coverLetterData,
@@ -57,15 +62,19 @@ const CoverLetter = ({
 
 ${paragraphs.join('\n\n')}
 
-${signOff},
-${resumeData.basics.name}`;
-  }, [coverLetterData, resumeData.basics.name]);
+${signOff},`;
+  }, [coverLetterData]);
 
   const exportCoverLetter = useCallback((format) => {
     const fullLetter = generateFullLetter();
     
     if (format === 'text') {
-      const blob = new Blob([fullLetter], { type: 'text/plain' });
+      // For text export, add signature notation and typed name
+      const signatureText = signatureFont !== 'none' 
+        ? `${fullLetter}\n[Digital Signature: ${resumeData.basics.name}]\n${resumeData.basics.name}`
+        : `${fullLetter}\n${resumeData.basics.name}`;
+      
+      const blob = new Blob([signatureText], { type: 'text/plain' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
@@ -76,7 +85,7 @@ ${resumeData.basics.name}`;
       // Set print mode and trigger print
       window.print();
     }
-  }, [companyName, generateFullLetter]);
+  }, [companyName, generateFullLetter, signatureFont, resumeData.basics.name]);
 
   const aiContext = {
     jobDescription,
@@ -252,7 +261,8 @@ ${resumeData.basics.name}`;
           }
 
           .editor-section,
-          .controls {
+          .controls,
+          .signature-selector {
             display: none !important;
           }
 
@@ -264,6 +274,11 @@ ${resumeData.basics.name}`;
           .preview-letter {
             box-shadow: none;
             padding: 0;
+          }
+
+          .signature {
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
           }
         }
       `}</style>
@@ -405,6 +420,17 @@ ${resumeData.basics.name}`;
               </div>
             </div>
 
+            {/* Signature Selector */}
+            <SignatureSelector
+              selectedFont={signatureFont}
+              onFontChange={setSignatureFont}
+              userName={resumeData.basics.name}
+              userSubscription={userSubscription}
+              onUpgrade={onUpgrade}
+              customFont={customSignatureFont}
+              onCustomFontChange={setCustomSignatureFont}
+            />
+
             <div className="controls">
               <button className="btn btn-primary" onClick={() => exportCoverLetter('text')}>
                 Export as Text
@@ -446,7 +472,38 @@ ${resumeData.basics.name}`;
             </div>
 
             <div className="letter-body">
-              {generateFullLetter()}
+              <div style={{ whiteSpace: 'pre-wrap' }}>{generateFullLetter()}</div>
+              
+              {/* Signature and Name */}
+              <div className="signature-section" style={{ marginTop: '8px' }}>
+                <style jsx={true}>{`
+                  ${signatureFont === 'custom' && customSignatureFont ? 
+                    `@import url('https://fonts.googleapis.com/css2?family=${customSignatureFont.replace(/\s+/g, '+')}:wght@400;700&display=swap');` :
+                    `@import url('${SIGNATURE_FONTS.find(f => f.id === signatureFont)?.url || ''}');`
+                  }
+                  .signature {
+                    font-family: ${
+                      signatureFont === 'custom' && customSignatureFont ? 
+                        (customSignatureFont.includes(' ') ? `"${customSignatureFont}", cursive` : `${customSignatureFont}, cursive`) :
+                        (SIGNATURE_FONTS.find(f => f.id === signatureFont)?.font || 'inherit')
+                    };
+                    font-size: 36px;
+                    color: #1a1a1a;
+                    margin: 16px 0 8px 0;
+                    letter-spacing: 0.03em;
+                  }
+                  .typed-name {
+                    font-size: inherit;
+                    color: ${resumeDesignSystem.typography.bodyText.color};
+                    font-family: ${useSerifFont ? resumeDesignSystem.layout.serifFontFamily : resumeDesignSystem.layout.fontFamily};
+                    line-height: 1.6;
+                  }
+                `}</style>
+                {signatureFont !== 'none' && (
+                  <div className="signature">{resumeData.basics.name}</div>
+                )}
+                <div className="typed-name">{resumeData.basics.name}</div>
+              </div>
             </div>
           </div>
         </div>

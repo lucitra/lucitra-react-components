@@ -19,6 +19,9 @@ export { default as AIAssistant } from './AIAssistant.jsx';
 export { default as AITextOptimizer } from './AITextOptimizer.jsx';
 export { default as AITextInput } from './AITextInput.jsx';
 
+// Cover Letter
+export { default as CoverLetter } from './CoverLetter.jsx';
+
 // Version Control
 export { default as ResumeVersionControl } from './ResumeVersionControl.jsx';
 export { default as VersionDiffViewer } from './VersionDiffViewer.jsx';
@@ -30,6 +33,7 @@ export { default as LinkedInImport } from './LinkedInImport.jsx';
 export { default as UpgradeModal } from './UpgradeModal.jsx';
 export { default as ATSDevTools } from './ATSDevTools.jsx';
 export { default as AuthModal } from './AuthModal.jsx';
+export { default as SignatureSelector } from './SignatureSelector.jsx';
 
 // Export data and utilities
 export { defaultResumeData, baseResumeData, genericResumeData, ibraheemResumeData } from '../../data/resumeData.js';
