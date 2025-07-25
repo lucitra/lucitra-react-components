@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.19.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.18.0...react-components-v0.19.0) (2025-07-25)
+
+
+### Features
+
+* **Resume:** add AISettings and AITextOptimizerSimple components ([84dbb59](https://github.com/lucitra/lucitra-react-components/commit/84dbb59775bb415b8da081f5b09eba9d1fa28ed5))
+* **Resume:** add signature selection feature to CoverLetter component ([6fd3c51](https://github.com/lucitra/lucitra-react-components/commit/6fd3c51774a0706f3a110550e020f29f921f0f45))
+* **Resume:** enhance signature animation in CoverLetter component ([65a1116](https://github.com/lucitra/lucitra-react-components/commit/65a1116e732fd8280dbc48cf6638ce45da84d406))
+
 ## [0.18.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.17.1...react-components-v0.18.0) (2025-07-23)
 
 
