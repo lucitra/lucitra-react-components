@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.22.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.21.1...react-components-v0.22.0) (2025-07-25)
+
+
+### Features
+
+* **Resume:** integrate VisibilityToggle in PatentsEditor and update visibility logic ([35350a5](https://github.com/lucitra/lucitra-react-components/commit/35350a5eb7da0c8a7952c82b425ef93d24a80ebb))
+
 ## [0.21.1](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.21.0...react-components-v0.21.1) (2025-07-25)
 
 
