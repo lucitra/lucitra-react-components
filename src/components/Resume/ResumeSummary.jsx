@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { resumeDesignSystem, getSpacing } from './resumeStyles.js';
 
-const ResumeSummary = ({ summary, printMode = false, useSerifFont = false, showSummary = true }) => {
+const ResumeSummary = ({ summary, printMode = false, showSummary = true, designSystem = resumeDesignSystem }) => {
   if (!summary || !showSummary) return null;
 
   return (
@@ -13,20 +13,21 @@ const ResumeSummary = ({ summary, printMode = false, useSerifFont = false, showS
         }
         
         .section-title {
-          font-size: ${printMode ? resumeDesignSystem.typography.headerText.fontSize.print : resumeDesignSystem.typography.headerText.fontSize.screen};
-          font-weight: ${resumeDesignSystem.typography.headerText.fontWeight};
-          font-family: ${useSerifFont ? resumeDesignSystem.layout.serifFontFamily : 'inherit'};
+          font-size: ${printMode ? designSystem.typography.headerText.fontSize.print : designSystem.typography.headerText.fontSize.screen};
+          font-weight: ${designSystem.typography.headerText.fontWeight};
+          font-family: ${designSystem.typography.headerText.fontFamily};
           margin-bottom: ${printMode ? '0.02cm' : getSpacing('headerGap', false)};
-          color: ${resumeDesignSystem.typography.headerText.color};
-          text-transform: ${resumeDesignSystem.typography.headerText.textTransform};
-          letter-spacing: ${resumeDesignSystem.typography.headerText.letterSpacing};
-          line-height: ${printMode ? resumeDesignSystem.typography.headerText.lineHeight.print : resumeDesignSystem.typography.headerText.lineHeight.screen};
+          color: ${designSystem.typography.headerText.color};
+          text-transform: ${designSystem.typography.headerText.textTransform};
+          letter-spacing: ${designSystem.typography.headerText.letterSpacing};
+          line-height: ${printMode ? designSystem.typography.headerText.lineHeight.print : designSystem.typography.headerText.lineHeight.screen};
         }
         
         .summary-content {
-          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
-          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
-          color: ${resumeDesignSystem.typography.bodyText.color};
+          font-family: ${designSystem.typography.bodyText.fontFamily};
+          font-size: ${printMode ? designSystem.typography.bodyText.fontSize.print : designSystem.typography.bodyText.fontSize.screen};
+          line-height: ${printMode ? designSystem.typography.bodyText.lineHeight.print : designSystem.typography.bodyText.lineHeight.screen};
+          color: ${designSystem.typography.bodyText.color};
           text-align: justify;
           margin: 0;
         }
@@ -43,14 +44,13 @@ const ResumeSummary = ({ summary, printMode = false, useSerifFont = false, showS
 ResumeSummary.propTypes = {
   summary: PropTypes.string,
   printMode: PropTypes.bool,
-  useSerifFont: PropTypes.bool,
-  showSummary: PropTypes.bool
+  showSummary: PropTypes.bool,
+  designSystem: PropTypes.object
 };
 
 ResumeSummary.defaultProps = {
   summary: '',
-  printMode: false,
-  useSerifFont: false
+  printMode: false
 };
 
 export { ResumeSummary };

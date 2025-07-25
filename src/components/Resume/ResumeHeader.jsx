@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { resumeDesignSystem, getSpacing } from './resumeStyles.js';
 
-const ResumeHeader = ({ basics, printMode = false, useSerifFont = false, designSystem = resumeDesignSystem }) => {
+const ResumeHeader = ({ basics, printMode = false, designSystem = resumeDesignSystem }) => {
   const { name, label, email, phone, website, location, profiles } = basics;
 
   return (
@@ -18,7 +18,7 @@ const ResumeHeader = ({ basics, printMode = false, useSerifFont = false, designS
         .name {
           font-size: ${printMode ? designSystem.typography.nameText.fontSize.print : designSystem.typography.nameText.fontSize.screen};
           font-weight: ${designSystem.typography.nameText.fontWeight};
-          font-family: ${useSerifFont ? designSystem.layout.serifFontFamily : 'inherit'};
+          font-family: ${designSystem.typography.nameText.fontFamily};
           margin: 0;
           margin-bottom: ${getSpacing('headerGap', printMode, designSystem)};
           letter-spacing: ${designSystem.typography.nameText.letterSpacing};
@@ -30,7 +30,7 @@ const ResumeHeader = ({ basics, printMode = false, useSerifFont = false, designS
         .title {
           font-size: ${printMode ? designSystem.typography.bodyText.fontSize.print : designSystem.typography.bodyText.fontSize.screen};
           color: ${designSystem.typography.bodyText.color};
-          font-family: ${useSerifFont ? designSystem.layout.serifFontFamily : 'inherit'};
+          font-family: ${designSystem.typography.bodyText.fontFamily};
           margin: 0;
           margin-bottom: ${getSpacing('headerGap', printMode, designSystem)};
           font-style: italic;
@@ -43,6 +43,7 @@ const ResumeHeader = ({ basics, printMode = false, useSerifFont = false, designS
           justify-content: center;
           flex-wrap: wrap;
           align-items: center;
+          font-family: ${designSystem.typography.smallText.fontFamily};
           font-size: ${printMode ? designSystem.typography.smallText.fontSize.print : designSystem.typography.smallText.fontSize.screen};
           color: ${designSystem.typography.smallText.color};
           margin: 0;
@@ -113,14 +114,12 @@ const ResumeHeader = ({ basics, printMode = false, useSerifFont = false, designS
 ResumeHeader.propTypes = {
   basics: PropTypes.object,
   printMode: PropTypes.bool,
-  useSerifFont: PropTypes.bool,
   designSystem: PropTypes.object
 };
 
 ResumeHeader.defaultProps = {
   basics: {},
-  printMode: false,
-  useSerifFont: false
+  printMode: false
 };
 
 export { ResumeHeader };

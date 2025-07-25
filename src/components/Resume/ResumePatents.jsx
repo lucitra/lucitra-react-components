@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { resumeDesignSystem, getSpacing } from './resumeStyles.js';
 
-const ResumePatents = ({ patents, printMode = false, useSerifFont = false }) => {
+const ResumePatents = ({ patents, printMode = false, useSerifFont = false, designSystem = resumeDesignSystem }) => {
   // Only render if patents exist and have visible items
   const visiblePatents = patents?.filter(patent => 
     printMode ? patent.visibility?.print : patent.visibility?.online
@@ -16,25 +16,25 @@ const ResumePatents = ({ patents, printMode = false, useSerifFont = false }) => 
     <>
       <style jsx={true}>{`
         .patents-section {
-          margin-top: ${getSpacing('sectionGap', printMode)};
-          margin-bottom: ${getSpacing('sectionGap', printMode)};
+          margin-top: ${getSpacing('sectionGap', printMode, designSystem)};
+          margin-bottom: ${getSpacing('sectionGap', printMode, designSystem)};
         }
         
         .patents-title {
-          font-size: ${printMode ? resumeDesignSystem.typography.headerText.fontSize.print : resumeDesignSystem.typography.headerText.fontSize.screen};
-          font-weight: ${resumeDesignSystem.typography.headerText.fontWeight};
-          font-family: ${useSerifFont ? resumeDesignSystem.layout.serifFontFamily : 'inherit'};
-          margin-bottom: ${getSpacing('headerGap', printMode)};
-          color: ${resumeDesignSystem.typography.headerText.color};
-          text-transform: ${resumeDesignSystem.typography.headerText.textTransform};
-          letter-spacing: ${resumeDesignSystem.typography.headerText.letterSpacing};
-          border-bottom: ${printMode ? 'none' : `1px solid ${resumeDesignSystem.colors.divider}`};
+          font-size: ${printMode ? designSystem.typography.headerText.fontSize.print : designSystem.typography.headerText.fontSize.screen};
+          font-weight: ${designSystem.typography.headerText.fontWeight};
+          font-family: ${designSystem.typography.headerText.fontFamily};
+          margin-bottom: ${getSpacing('headerGap', printMode, designSystem)};
+          color: ${designSystem.typography.headerText.color};
+          text-transform: ${designSystem.typography.headerText.textTransform};
+          letter-spacing: ${designSystem.typography.headerText.letterSpacing};
+          border-bottom: ${printMode ? 'none' : `1px solid ${designSystem.colors.divider}`};
           padding-bottom: ${printMode ? '0' : '2px'};
-          line-height: ${printMode ? resumeDesignSystem.typography.headerText.lineHeight.print : resumeDesignSystem.typography.headerText.lineHeight.screen};
+          line-height: ${printMode ? designSystem.typography.headerText.lineHeight.print : designSystem.typography.headerText.lineHeight.screen};
         }
         
         .patent-item {
-          margin-bottom: ${getSpacing('itemGap', printMode)};
+          margin-bottom: ${getSpacing('itemGap', printMode, designSystem)};
         }
         
         .patent-item:last-child {
@@ -45,12 +45,12 @@ const ResumePatents = ({ patents, printMode = false, useSerifFont = false }) => 
           display: flex;
           justify-content: space-between;
           align-items: flex-start;
-          margin-bottom: ${getSpacing('microGap', printMode)};
+          margin-bottom: ${getSpacing('microGap', printMode, designSystem)};
         }
         
         .patent-left {
           flex: 1;
-          padding-right: ${getSpacing('microGap', printMode)};
+          padding-right: ${getSpacing('microGap', printMode, designSystem)};
         }
         
         .patent-right {
@@ -62,60 +62,60 @@ const ResumePatents = ({ patents, printMode = false, useSerifFont = false }) => 
         }
         
         .patent-title {
-          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
-          font-weight: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.fontWeight : resumeDesignSystem.emphasis.bold.fontWeight};
-          color: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.color : resumeDesignSystem.emphasis.bold.color};
-          font-family: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.fontFamily : 'inherit'};
-          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
-          margin-bottom: ${getSpacing('microGap', printMode)};
+          font-size: ${printMode ? designSystem.typography.bodyText.fontSize.print : designSystem.typography.bodyText.fontSize.screen};
+          font-weight: ${useSerifFont ? designSystem.emphasis.boldSerif.fontWeight : designSystem.emphasis.bold.fontWeight};
+          color: ${useSerifFont ? designSystem.emphasis.boldSerif.color : designSystem.emphasis.bold.color};
+          font-family: ${useSerifFont ? designSystem.emphasis.boldSerif.fontFamily : designSystem.typography.bodyText.fontFamily};
+          line-height: ${printMode ? designSystem.typography.bodyText.lineHeight.print : designSystem.typography.bodyText.lineHeight.screen};
+          margin-bottom: ${getSpacing('microGap', printMode, designSystem)};
         }
         
         .patent-title-link {
-          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
-          font-weight: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.fontWeight : resumeDesignSystem.emphasis.bold.fontWeight};
-          color: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.color : resumeDesignSystem.emphasis.bold.color};
-          font-family: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.fontFamily : 'inherit'};
+          font-size: ${printMode ? designSystem.typography.bodyText.fontSize.print : designSystem.typography.bodyText.fontSize.screen};
+          font-weight: ${useSerifFont ? designSystem.emphasis.boldSerif.fontWeight : designSystem.emphasis.bold.fontWeight};
+          color: ${useSerifFont ? designSystem.emphasis.boldSerif.color : designSystem.emphasis.bold.color};
+          font-family: ${useSerifFont ? designSystem.emphasis.boldSerif.fontFamily : designSystem.typography.bodyText.fontFamily};
           text-decoration: none;
-          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
-          transition: ${resumeDesignSystem.links.transition};
+          line-height: ${printMode ? designSystem.typography.bodyText.lineHeight.print : designSystem.typography.bodyText.lineHeight.screen};
+          transition: ${designSystem.links.transition};
         }
         
         .patent-title-link:hover {
-          color: ${resumeDesignSystem.links.hoverColor};
+          color: ${designSystem.links.hoverColor};
         }
         
         .patent-date {
-          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
-          color: ${resumeDesignSystem.typography.bodyText.color};
+          font-size: ${printMode ? designSystem.typography.bodyText.fontSize.print : designSystem.typography.bodyText.fontSize.screen};
+          color: ${designSystem.typography.bodyText.color};
           font-style: italic;
-          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
+          line-height: ${printMode ? designSystem.typography.bodyText.lineHeight.print : designSystem.typography.bodyText.lineHeight.screen};
         }
         
         .patent-link {
-          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
-          color: ${resumeDesignSystem.links.color};
-          text-decoration: ${resumeDesignSystem.links.textDecoration};
-          text-underline-offset: ${resumeDesignSystem.links.textUnderlineOffset};
-          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
-          transition: ${resumeDesignSystem.links.transition};
-          margin-top: ${getSpacing('microGap', printMode)};
+          font-size: ${printMode ? designSystem.typography.bodyText.fontSize.print : designSystem.typography.bodyText.fontSize.screen};
+          color: ${designSystem.links.color};
+          text-decoration: ${designSystem.links.textDecoration};
+          text-underline-offset: ${designSystem.links.textUnderlineOffset};
+          line-height: ${printMode ? designSystem.typography.bodyText.lineHeight.print : designSystem.typography.bodyText.lineHeight.screen};
+          transition: ${designSystem.links.transition};
+          margin-top: ${getSpacing('microGap', printMode, designSystem)};
         }
         
         .patent-link:hover {
-          color: ${resumeDesignSystem.links.hoverColor};
+          color: ${designSystem.links.hoverColor};
         }
         
         .patent-company {
-          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
-          color: ${resumeDesignSystem.typography.bodyText.color};
-          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
-          margin-bottom: ${getSpacing('microGap', printMode)};
+          font-size: ${printMode ? designSystem.typography.bodyText.fontSize.print : designSystem.typography.bodyText.fontSize.screen};
+          color: ${designSystem.typography.bodyText.color};
+          line-height: ${printMode ? designSystem.typography.bodyText.lineHeight.print : designSystem.typography.bodyText.lineHeight.screen};
+          margin-bottom: ${getSpacing('microGap', printMode, designSystem)};
         }
         
         .patent-description {
-          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
-          color: ${resumeDesignSystem.typography.bodyText.color};
-          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
+          font-size: ${printMode ? designSystem.typography.bodyText.fontSize.print : designSystem.typography.bodyText.fontSize.screen};
+          color: ${designSystem.typography.bodyText.color};
+          line-height: ${printMode ? designSystem.typography.bodyText.lineHeight.print : designSystem.typography.bodyText.lineHeight.screen};
         }
       `}</style>
       
@@ -168,13 +168,15 @@ ResumePatents.propTypes = {
     })
   })),
   printMode: PropTypes.bool,
-  useSerifFont: PropTypes.bool
+  useSerifFont: PropTypes.bool,
+  designSystem: PropTypes.object
 };
 
 ResumePatents.defaultProps = {
   patents: [],
   printMode: false,
-  useSerifFont: false
+  useSerifFont: false,
+  designSystem: resumeDesignSystem
 };
 
 export { ResumePatents };
