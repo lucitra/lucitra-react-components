@@ -519,8 +519,10 @@ const ResumeBuilder = ({
   const updateWorkExperience = useCallback((index, updatedWork) => {
     const newWork = [...resumeData.work];
     newWork[index] = updatedWork;
-    handleDataChange({ ...resumeData, work: newWork });
-  }, [resumeData, handleDataChange]);
+    const updatedData = { ...resumeData, work: newWork };
+    updateManual(updatedData, `Updated ${updatedWork.company || 'work experience'}`);
+    handleDataChange(updatedData);
+  }, [resumeData, handleDataChange, updateManual]);
 
   const deleteWorkExperience = useCallback((index) => {
     const newWork = resumeData.work.filter((_, i) => i !== index);
@@ -549,8 +551,10 @@ const ResumeBuilder = ({
   const updateEducation = useCallback((index, updatedEducation) => {
     const newEducation = [...resumeData.education];
     newEducation[index] = updatedEducation;
-    handleDataChange({ ...resumeData, education: newEducation });
-  }, [resumeData, handleDataChange]);
+    const updatedData = { ...resumeData, education: newEducation };
+    updateManual(updatedData, `Updated ${updatedEducation.institution || 'education'}`);
+    handleDataChange(updatedData);
+  }, [resumeData, handleDataChange, updateManual]);
 
   const deleteEducation = useCallback((index) => {
     const newEducation = resumeData.education.filter((_, i) => i !== index);

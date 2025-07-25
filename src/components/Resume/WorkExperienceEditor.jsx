@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import AITextInput from './AITextInput.jsx';
+import VisibilityToggle from './VisibilityToggle.jsx';
 
 const WorkExperienceEditor = ({ 
   workData, 
@@ -21,10 +22,10 @@ const WorkExperienceEditor = ({
     onUpdate({ ...workData, [field]: value });
   };
 
-  const updateVisibility = (type, value) => {
+  const updateVisibility = (newVisibility) => {
     onUpdate({
       ...workData,
-      visibility: { ...workData.visibility, [type]: value }
+      visibility: newVisibility
     });
   };
 
@@ -310,37 +311,28 @@ const WorkExperienceEditor = ({
       <div className="work-editor">
         <div className="work-header">
           <div className="work-title" onClick={() => setIsExpanded(!isExpanded)}>
-            <span className="expand-icon">▶</span>
+            <span className="expand-icon" style={{ 
+              display: 'inline-block',
+              transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
+              transition: 'transform 0.2s'
+            }}>▶</span>
             <span>{workData.company || 'New Company'}</span>
             <span style={{ fontSize: '14px', color: '#666', fontWeight: 'normal' }}>
               ({workData.positions?.[0]?.title || 'Position'})
             </span>
           </div>
           <div className="work-actions">
-            <div className="visibility-controls">
-              <label className="visibility-control">
-                <input
-                  type="checkbox"
-                  checked={workData.visibility.online}
-                  onChange={(e) => updateVisibility('online', e.target.checked)}
-                />
-                Online
-              </label>
-              <label className="visibility-control">
-                <input
-                  type="checkbox"
-                  checked={workData.visibility.print}
-                  onChange={(e) => updateVisibility('print', e.target.checked)}
-                />
-                Print
-              </label>
-            </div>
+            <VisibilityToggle 
+              visibility={workData.visibility}
+              onChange={updateVisibility}
+            />
             <button className="delete-btn" onClick={onDelete}>
               Delete
             </button>
           </div>
         </div>
 
+        {isExpanded && (
         <div className="work-details">
           <div className="form-row">
             <div className="form-group">
@@ -534,6 +526,7 @@ const WorkExperienceEditor = ({
             </button>
           </div>
         </div>
+        )}
       </div>
     </>
   );

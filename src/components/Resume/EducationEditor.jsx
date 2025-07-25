@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import VisibilityToggle from './VisibilityToggle.jsx';
 import AITextInput from './AITextInput.jsx';
 
 const EducationEditor = ({ 
@@ -20,10 +21,10 @@ const EducationEditor = ({
     onUpdate({ ...educationData, [field]: value });
   };
 
-  const updateVisibility = (type, value) => {
+  const updateVisibility = (newVisibility) => {
     onUpdate({
       ...educationData,
-      visibility: { ...educationData.visibility, [type]: value }
+      visibility: newVisibility
     });
   };
 
@@ -239,24 +240,10 @@ const EducationEditor = ({
             </span>
           </div>
           <div className="education-actions">
-            <div className="visibility-controls">
-              <label className="visibility-control">
-                <input
-                  type="checkbox"
-                  checked={educationData.visibility.online}
-                  onChange={(e) => updateVisibility('online', e.target.checked)}
-                />
-                Online
-              </label>
-              <label className="visibility-control">
-                <input
-                  type="checkbox"
-                  checked={educationData.visibility.print}
-                  onChange={(e) => updateVisibility('print', e.target.checked)}
-                />
-                Print
-              </label>
-            </div>
+            <VisibilityToggle 
+              visibility={educationData.visibility}
+              onChange={updateVisibility}
+            />
             <button className="delete-btn" onClick={onDelete}>
               Delete
             </button>

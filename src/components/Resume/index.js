@@ -13,6 +13,7 @@ export { default as WorkExperienceEditor } from './WorkExperienceEditor.jsx';
 export { default as EducationEditor } from './EducationEditor.jsx';
 export { default as SkillsEditor } from './SkillsEditor.jsx';
 export { default as PatentsEditor } from './PatentsEditor.jsx';
+export { default as VisibilityToggle } from './VisibilityToggle.jsx';
 
 // AI components
 export { default as AIAssistant } from './AIAssistant.jsx';
