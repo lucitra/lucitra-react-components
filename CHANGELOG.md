@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.20.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.19.0...react-components-v0.20.0) (2025-07-25)
+
+
+### Features
+
+* **Resume:** integrate design system into resume components ([5634dd3](https://github.com/lucitra/lucitra-react-components/commit/5634dd34c75b85b49b7d62bff935d4072272ba8b))
+
+
+### Code Refactoring
+
+* **Resume:** remove PrintPreview component and update ResumeBuilder ([2b170b7](https://github.com/lucitra/lucitra-react-components/commit/2b170b70e2f677f379110c3e93c9236ff490e075))
+
 ## [0.19.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.18.0...react-components-v0.19.0) (2025-07-25)
 
 
