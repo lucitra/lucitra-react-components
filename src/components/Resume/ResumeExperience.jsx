@@ -51,7 +51,7 @@ const ResumeExperience = ({ work, printMode = false, maxItems, useSerifFont = fa
         }
         
         .work-item {
-          margin-bottom: ${getSpacing('itemGap', printMode, designSystem)};
+          margin-bottom: ${printMode ? '0.3cm' : '16px'};
           page-break-inside: avoid;
         }
         
@@ -63,14 +63,14 @@ const ResumeExperience = ({ work, printMode = false, maxItems, useSerifFont = fa
           display: flex;
           justify-content: space-between;
           align-items: baseline;
-          margin-bottom: ${getSpacing('microGap', printMode, designSystem)};
+          margin-bottom: ${printMode ? '0.1cm' : '6px'};
         }
         
         .company-name {
           font-size: ${printMode ? designSystem.typography.bodyText.fontSize.print : designSystem.typography.bodyText.fontSize.screen};
           font-weight: ${useSerifFont ? designSystem.emphasis.boldSerif.fontWeight : designSystem.emphasis.bold.fontWeight};
           color: ${useSerifFont ? designSystem.emphasis.boldSerif.color : designSystem.emphasis.bold.color};
-          font-family: ${designSystem.typography.bodyText.fontFamily};
+          font-family: ${useSerifFont ? designSystem.emphasis.boldSerif.fontFamily : designSystem.typography.bodyText.fontFamily};
           line-height: ${printMode ? designSystem.typography.bodyText.lineHeight.print : designSystem.typography.bodyText.lineHeight.screen};
         }
         
@@ -81,7 +81,7 @@ const ResumeExperience = ({ work, printMode = false, maxItems, useSerifFont = fa
         }
         
         .position {
-          margin-bottom: ${getSpacing('microGap', printMode, designSystem)};
+          margin-bottom: ${printMode ? '0.15cm' : '8px'};
         }
         
         .position-header {
@@ -93,10 +93,10 @@ const ResumeExperience = ({ work, printMode = false, maxItems, useSerifFont = fa
         
         .position-title {
           font-size: ${printMode ? designSystem.typography.bodyText.fontSize.print : designSystem.typography.bodyText.fontSize.screen};
-          font-weight: ${designSystem.emphasis.bold.fontWeight};
+          font-weight: ${useSerifFont ? designSystem.emphasis.boldSerif.fontWeight : designSystem.emphasis.bold.fontWeight};
           font-style: normal;
-          color: ${designSystem.emphasis.bold.color};
-          font-family: ${designSystem.typography.bodyText.fontFamily};
+          color: ${useSerifFont ? designSystem.emphasis.boldSerif.color : designSystem.emphasis.bold.color};
+          font-family: ${useSerifFont ? designSystem.emphasis.boldSerif.fontFamily : designSystem.typography.bodyText.fontFamily};
           line-height: ${printMode ? designSystem.typography.bodyText.lineHeight.print : designSystem.typography.bodyText.lineHeight.screen};
         }
         
@@ -116,8 +116,8 @@ const ResumeExperience = ({ work, printMode = false, maxItems, useSerifFont = fa
         .highlight {
           font-size: ${printMode ? designSystem.typography.bodyText.fontSize.print : designSystem.typography.bodyText.fontSize.screen};
           color: ${designSystem.typography.bodyText.color};
-          line-height: ${printMode ? designSystem.typography.bodyText.lineHeight.print : designSystem.typography.bodyText.lineHeight.screen};
-          margin-bottom: ${getSpacing('microGap', printMode, designSystem)};
+          line-height: ${printMode ? '1.25' : '1.4'};
+          margin-bottom: ${printMode ? '0.08cm' : '4px'};
           position: relative;
           padding-left: ${printMode ? '8px' : '8px'};
         }

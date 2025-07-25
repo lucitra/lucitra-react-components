@@ -21,7 +21,7 @@ export const ibraheemResumeData = {
     email: "ibraheem4@gmail.com",
     phone: "+1 (832) 605-4585",
     website: "https://ibraheem.com",
-    location: "New York, NY",
+    location: "Cambridge, MA",
     profiles: [
       {
         network: "GitHub",
@@ -34,7 +34,8 @@ export const ibraheemResumeData = {
         url: "https://www.linkedin.com/in/ibraheem4",
       },
     ],
-    summary: "Applied AI engineer with a master's in computer science, focused on deploying deep learning models and ML pipelines in production. Proven track record developing and scaling intelligent systems for healthcare and social platforms. Skilled in Python, TypeScript, and Cloud technologies; experienced in fine-tuning LLMs, building MLOps pipelines, and deploying secure AI features in HIPAA and enterprise environments.",
+    summary:
+      "Applied AI engineer with a master's in computer science, focused on deploying deep learning models and ML pipelines in production. Proven track record developing and scaling intelligent systems for healthcare and social platforms. Skilled in Python, TypeScript, and Cloud technologies; experienced in fine-tuning LLMs, building MLOps pipelines, and deploying secure AI features in HIPAA and enterprise environments.",
   },
   work: [
     {
@@ -159,7 +160,13 @@ export const ibraheemResumeData = {
     },
     {
       category: "Artificial Intelligence Frameworks",
-      items: ["TensorFlow", "PyTorch", "Scikit-learn", "Hugging Face", "LangChain"],
+      items: [
+        "TensorFlow",
+        "PyTorch",
+        "Scikit-learn",
+        "Hugging Face",
+        "LangChain",
+      ],
     },
     {
       category: "Web Technologies",
@@ -171,15 +178,23 @@ export const ibraheemResumeData = {
     },
     {
       category: "Data & Databases",
-      items: ["PostgreSQL", "MongoDB", "Redis", "Elasticsearch", "Data Pipelines"],
+      items: [
+        "PostgreSQL",
+        "MongoDB",
+        "Redis",
+        "Elasticsearch",
+        "Data Pipelines",
+      ],
     },
   ],
   patents: [
     {
-      title: "Network System for Contextual Course Recommendation based on Third-Party Content",
+      title:
+        "Network System for Contextual Course Recommendation based on Third-Party Content",
       date: "Feb 2022",
       awarder: "Microsoft Technology Licensing, LLC (US Patent #11,250,716)",
-      summary: "AI recommendation system for personalized learning pathways from third-party content.",
+      summary:
+        "AI recommendation system for personalized learning pathways from third-party content.",
       url: "https://patents.justia.com/patent/11250716",
       visibility: { online: true, print: true },
     },

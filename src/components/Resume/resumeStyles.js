@@ -100,7 +100,7 @@ export const createResumeDesignSystem = (config = {}) => {
     boldSerif: {
       fontWeight: 700,
       color: '#000000',
-      fontFamily: "Georgia, 'Times New Roman', Times, serif"
+      fontFamily: headingFont || "Georgia, serif"
     },
     
     // For dates, locations, secondary info
@@ -146,8 +146,8 @@ export const createResumeDesignSystem = (config = {}) => {
         print: `${margins.top}in ${margins.right}in ${margins.bottom}in ${margins.left}in`, 
         screen: `${margins.top}in ${margins.right}in ${margins.bottom}in ${margins.left}in` 
       },
-      fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif",
-      serifFontFamily: "Georgia, 'Times New Roman', Times, serif"
+      fontFamily: bodyFont || "Helvetica, sans-serif",
+      serifFontFamily: headingFont || "Georgia, serif"
     },
     
     // Colors

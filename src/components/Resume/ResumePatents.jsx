@@ -28,8 +28,6 @@ const ResumePatents = ({ patents, printMode = false, useSerifFont = false, desig
           color: ${designSystem.typography.headerText.color};
           text-transform: ${designSystem.typography.headerText.textTransform};
           letter-spacing: ${designSystem.typography.headerText.letterSpacing};
-          border-bottom: ${printMode ? 'none' : `1px solid ${designSystem.colors.divider}`};
-          padding-bottom: ${printMode ? '0' : '2px'};
           line-height: ${printMode ? designSystem.typography.headerText.lineHeight.print : designSystem.typography.headerText.lineHeight.screen};
         }
         
@@ -120,7 +118,7 @@ const ResumePatents = ({ patents, printMode = false, useSerifFont = false, desig
       `}</style>
       
       <div className="patents-section">
-        <h3 className="patents-title">PATENTS</h3>
+        <h2 className="patents-title">Patents</h2>
         {visiblePatents.map((patent, index) => (
           <div key={index} className="patent-item">
             <div className="patent-header">

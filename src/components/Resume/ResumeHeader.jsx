@@ -33,8 +33,8 @@ const ResumeHeader = ({ basics, printMode = false, designSystem = resumeDesignSy
           font-family: ${designSystem.typography.bodyText.fontFamily};
           margin: 0;
           margin-bottom: ${getSpacing('headerGap', printMode, designSystem)};
-          font-style: italic;
-          font-weight: ${designSystem.emphasis.italic.fontWeight};
+          font-style: normal;
+          font-weight: ${designSystem.typography.bodyText.fontWeight};
           line-height: ${printMode ? designSystem.typography.bodyText.lineHeight.print : designSystem.typography.bodyText.lineHeight.screen};
         }
         
@@ -81,15 +81,15 @@ const ResumeHeader = ({ basics, printMode = false, designSystem = resumeDesignSy
           <div className="contact-item">
             <a href={`mailto:${email}`} className="contact-link">{email}</a>
           </div>
-          <span className="contact-separator">•</span>
+          <span className="contact-separator">|</span>
           <div className="contact-item">
             <span>{phone}</span>
           </div>
-          <span className="contact-separator">•</span>
+          <span className="contact-separator">|</span>
           <div className="contact-item">
             <span>{location}</span>
           </div>
-          <span className="contact-separator">•</span>
+          <span className="contact-separator">|</span>
           <div className="contact-item">
             <a href={website} className="contact-link" target="_blank" rel="noopener noreferrer">
               Portfolio
@@ -97,7 +97,7 @@ const ResumeHeader = ({ basics, printMode = false, designSystem = resumeDesignSy
           </div>
           {profiles && profiles.map((profile, index) => (
             <React.Fragment key={index}>
-              <span className="contact-separator">•</span>
+              <span className="contact-separator">|</span>
               <div className="contact-item">
                 <a href={profile.url} className="contact-link" target="_blank" rel="noopener noreferrer">
                   {profile.network}

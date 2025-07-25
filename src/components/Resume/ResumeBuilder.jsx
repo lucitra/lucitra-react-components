@@ -485,6 +485,7 @@ const ResumeBuilder = ({
           patents={showPatents ? patents : []}
           printMode={config.printMode}
           useSerifFont={config.useSerifFont}
+          designSystem={designSystem}
         />
       </div>
     );
