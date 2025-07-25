@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.21.1](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.21.0...react-components-v0.21.1) (2025-07-25)
+
+
+### Styles
+
+* **Resume:** enhance link styles in ResumeHeader and ResumePatents components ([3594a0a](https://github.com/lucitra/lucitra-react-components/commit/3594a0a61e48640d0a0338faf4142c9ab9f1a63c))
+
 ## [0.21.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.20.0...react-components-v0.21.0) (2025-07-25)
 
 
