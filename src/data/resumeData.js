@@ -180,7 +180,7 @@ export const ibraheemResumeData = {
     work: { online: true, print: true },
     education: { online: true, print: true },
     skills: { online: true, print: true },
-    patents: { online: true, print: false },
+    patents: { online: true, print: true },
     volunteer: { online: false, print: false },
   },
   basics: {
@@ -239,7 +239,7 @@ export const ibraheemResumeData = {
       location: "Remote",
       startDate: "2023-04",
       endDate: "2023-08",
-      visibility: { online: true, print: false },
+      visibility: { online: true, print: true },
       highlights: [],
       positions: [
         {
@@ -329,7 +329,7 @@ export const ibraheemResumeData = {
       location: "San Francisco, CA",
       startDate: "2013-09",
       endDate: "2015-02",
-      visibility: { online: true, print: false },
+      visibility: { online: true, print: true },
       highlights: [],
       positions: [
         {
@@ -401,7 +401,7 @@ export const ibraheemResumeData = {
       location: "San Francisco, CA",
       startDate: "2010-12",
       endDate: "2011-03",
-      visibility: { online: true, print: false },
+      visibility: { online: true, print: true },
       highlights: [],
       positions: [
         {
@@ -421,7 +421,7 @@ export const ibraheemResumeData = {
       location: "New York, NY",
       startDate: "2008-07",
       endDate: "2010-07",
-      visibility: { online: true, print: false },
+      visibility: { online: true, print: true },
       highlights: [],
       positions: [
         {
@@ -563,7 +563,7 @@ export const legacySampleResumeData = {
     work: { online: true, print: true },
     education: { online: true, print: true },
     skills: { online: true, print: true },
-    patents: { online: true, print: false },
+    patents: { online: true, print: true },
     volunteer: { online: false, print: false },
   },
   sectionDisplayLimits: {
@@ -623,7 +623,7 @@ export const legacySampleResumeData = {
       location: "Remote",
       startDate: "2023-04",
       endDate: "2023-08",
-      visibility: { online: true, print: false },
+      visibility: { online: true, print: true },
       highlights: [],
       positions: [
         {

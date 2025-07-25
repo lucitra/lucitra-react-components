@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import AITextInput from './AITextInput.jsx';
+import VisibilityToggle from './VisibilityToggle.jsx';
 
 const PatentsEditor = ({ 
   patentsData = [], 
@@ -32,11 +33,11 @@ const PatentsEditor = ({
     onUpdate(newPatents);
   };
 
-  const updateVisibility = (index, type, value) => {
+  const updateVisibility = (index, newVisibility) => {
     const newPatents = [...patentsData];
     newPatents[index] = {
       ...newPatents[index],
-      visibility: { ...newPatents[index].visibility, [type]: value }
+      visibility: newVisibility
     };
     onUpdate(newPatents);
   };
@@ -122,17 +123,6 @@ const PatentsEditor = ({
           align-items: center;
         }
 
-        .visibility-controls {
-          display: flex;
-          gap: 12px;
-          font-size: 12px;
-        }
-
-        .visibility-control {
-          display: flex;
-          align-items: center;
-          gap: 4px;
-        }
 
         .delete-btn {
           background: #dc3545;
@@ -217,24 +207,10 @@ const PatentsEditor = ({
                     {patent.title || 'New Patent'}
                   </div>
                   <div className="patent-actions">
-                    <div className="visibility-controls">
-                      <label className="visibility-control">
-                        <input
-                          type="checkbox"
-                          checked={patent.visibility?.online !== false}
-                          onChange={(e) => updateVisibility(index, 'online', e.target.checked)}
-                        />
-                        Online
-                      </label>
-                      <label className="visibility-control">
-                        <input
-                          type="checkbox"
-                          checked={patent.visibility?.print !== false}
-                          onChange={(e) => updateVisibility(index, 'print', e.target.checked)}
-                        />
-                        Print
-                      </label>
-                    </div>
+                    <VisibilityToggle 
+                      visibility={patent.visibility}
+                      onChange={(newVisibility) => updateVisibility(index, newVisibility)}
+                    />
                     <button 
                       className="delete-btn" 
                       onClick={() => deletePatent(index)}

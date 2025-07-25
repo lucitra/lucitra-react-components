@@ -91,8 +91,8 @@ const ResumeBuilder = ({
       small: 9
     },
     ...initialConfig, // Merge with initial config
-    headingFont: resumeFonts.serif[0].value, // Default to Georgia
-    bodyFont: resumeFonts.sansSerif[0].value, // Default to Helvetica
+    headingFont: resumeFonts.sansSerif[1].value, // Default to Verdana
+    bodyFont: resumeFonts.sansSerif[1].value, // Default to Verdana
   });
   const [activeTab, setActiveTab] = useState("preview");
   const [aiContext, setAIContext] = useState({
@@ -566,8 +566,10 @@ const ResumeBuilder = ({
   }, [resumeData, handleDataChange]);
 
   const updatePatents = useCallback((updatedPatents) => {
-    handleDataChange({ ...resumeData, patents: updatedPatents });
-  }, [resumeData, handleDataChange]);
+    const updatedData = { ...resumeData, patents: updatedPatents };
+    updateManual(updatedData, 'Updated patents');
+    handleDataChange(updatedData);
+  }, [resumeData, handleDataChange, updateManual]);
 
   const handleCreditUsed = useCallback(() => {
     if (aiSubscription === 'free') {

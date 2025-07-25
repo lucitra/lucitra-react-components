@@ -103,6 +103,7 @@ const ResumeExperience = ({ work, printMode = false, maxItems, useSerifFont = fa
         .position-dates {
           font-size: ${printMode ? designSystem.typography.bodyText.fontSize.print : designSystem.typography.bodyText.fontSize.screen};
           color: ${designSystem.typography.bodyText.color};
+          font-style: italic;
           line-height: ${printMode ? designSystem.typography.bodyText.lineHeight.print : designSystem.typography.bodyText.lineHeight.screen};
         }
         
@@ -147,6 +148,7 @@ const ResumeExperience = ({ work, printMode = false, maxItems, useSerifFont = fa
                   <div className="position-header">
                     <div className="position-title">{position.title}</div>
                     <div className="position-dates">
+                      {position.location && <span>{position.location} | </span>}
                       {formatDate(position.startDate)} - {formatDate(position.endDate)}
                     </div>
                   </div>
