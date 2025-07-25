@@ -76,6 +76,10 @@ const ResumePatents = ({ patents, printMode = false, useSerifFont = false, desig
           text-decoration: none;
           line-height: ${printMode ? designSystem.typography.bodyText.lineHeight.print : designSystem.typography.bodyText.lineHeight.screen};
           transition: ${designSystem.links.transition};
+          cursor: pointer;
+          pointer-events: auto;
+          position: relative;
+          z-index: 10;
         }
         
         .patent-title-link:hover {
@@ -97,6 +101,10 @@ const ResumePatents = ({ patents, printMode = false, useSerifFont = false, desig
           line-height: ${printMode ? designSystem.typography.bodyText.lineHeight.print : designSystem.typography.bodyText.lineHeight.screen};
           transition: ${designSystem.links.transition};
           margin-top: ${getSpacing('microGap', printMode, designSystem)};
+          cursor: pointer;
+          pointer-events: auto;
+          position: relative;
+          z-index: 10;
         }
         
         .patent-link:hover {

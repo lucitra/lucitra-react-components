@@ -67,6 +67,10 @@ const ResumeHeader = ({ basics, printMode = false, designSystem = resumeDesignSy
           text-decoration: ${designSystem.links.textDecoration};
           text-underline-offset: ${designSystem.links.textUnderlineOffset};
           transition: ${designSystem.links.transition};
+          cursor: pointer;
+          pointer-events: auto;
+          position: relative;
+          z-index: 10;
         }
         
         .contact-link:hover {
