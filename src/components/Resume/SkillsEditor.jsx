@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { CloseIcon, InfoIcon } from './icons/ResumeIcons.jsx';
+import AITextInput from './AITextInput.jsx';
 
-const SkillsEditor = ({ skillsData, onUpdate }) => {
+const SkillsEditor = ({ 
+  skillsData, 
+  onUpdate,
+  userSubscription = 'free',
+  remainingCredits = 3,
+  onUpgrade,
+  onCreditUsed,
+  onVersionTrack,
+  context = {}
+}) => {
   const [newSkill, setNewSkill] = useState('');
 
   const updateSkills = (newSkillsList) => {
@@ -220,7 +230,7 @@ const SkillsEditor = ({ skillsData, onUpdate }) => {
         </div>
 
         <div className="add-skill">
-          <input
+          <AITextInput
             type="text"
             className="form-control"
             value={newSkill}
@@ -232,6 +242,14 @@ const SkillsEditor = ({ skillsData, onUpdate }) => {
                 addSkill();
               }
             }}
+            fieldType="skill"
+            fieldName="New Skill"
+            context={context}
+            userSubscription={userSubscription}
+            remainingCredits={remainingCredits}
+            onUpgrade={onUpgrade}
+            onCreditUsed={onCreditUsed}
+            onVersionTrack={onVersionTrack}
           />
           <button
             className="add-btn"
@@ -249,14 +267,23 @@ const SkillsEditor = ({ skillsData, onUpdate }) => {
         {/* Bulk Edit Section */}
         <div className="bulk-edit">
           <div className="bulk-label">Bulk Edit (Advanced)</div>
-          <textarea
+          <AITextInput
             className="bulk-textarea"
+            rows={4}
             value={currentSkills.join(', ')}
             onChange={(e) => {
               const newSkills = e.target.value.split(',').map(skill => skill.trim()).filter(skill => skill);
               updateSkills(newSkills);
             }}
             placeholder="Enter all skills separated by commas: JavaScript, React, Python, AWS..."
+            fieldType="skills-bulk"
+            fieldName="All Skills"
+            context={context}
+            userSubscription={userSubscription}
+            remainingCredits={remainingCredits}
+            onUpgrade={onUpgrade}
+            onCreditUsed={onCreditUsed}
+            onVersionTrack={onVersionTrack}
           />
           <div className="bulk-help">
             Edit all skills at once. Separate with commas. Changes are saved automatically.
@@ -270,6 +297,12 @@ const SkillsEditor = ({ skillsData, onUpdate }) => {
 SkillsEditor.propTypes = {
   skillsData: PropTypes.array.isRequired,
   onUpdate: PropTypes.func.isRequired,
+  userSubscription: PropTypes.oneOf(['free', 'pro', 'enterprise']),
+  remainingCredits: PropTypes.number,
+  onUpgrade: PropTypes.func,
+  onCreditUsed: PropTypes.func,
+  onVersionTrack: PropTypes.func,
+  context: PropTypes.object
 };
 
 export default SkillsEditor;

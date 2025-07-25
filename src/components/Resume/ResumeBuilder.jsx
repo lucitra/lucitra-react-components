@@ -1,28 +1,42 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 import { ResumeHeader } from './ResumeHeader.jsx';
 import { ResumeSummary } from './ResumeSummary.jsx';
 import { ResumeThreeColumn } from './ResumeThreeColumn.jsx';
 import { ResumeSingleColumn } from './ResumeSingleColumn.jsx';
 import { ResumeExperience } from './ResumeExperience.jsx';
+import { ResumePatents } from './ResumePatents.jsx';
 import WorkExperienceEditor from './WorkExperienceEditor.jsx';
 import EducationEditor from './EducationEditor.jsx';
 import SkillsEditor from './SkillsEditor.jsx';
 import AIAssistant from './AIAssistant.jsx';
 import AITextInput from './AITextInput.jsx';
 import ResumeVersionControl from './ResumeVersionControl.jsx';
+import ATSDevTools from './ATSDevTools.jsx';
 import { useResumeVersionControl } from '../../hooks/useResumeVersionControl.js';
 import { updateResumeField, getFieldPathWithContext } from '../../utils/resumeFieldUpdater.js';
 import { defaultResumeData } from "../../data/resumeData.js";
 import { OptimizeIcon, InfoIcon } from './icons/ResumeIcons.jsx';
+import resumeStorage from '../../services/resumeStorage.js';
+import ResumeWatermark from './ResumeWatermark.jsx';
+import LinkedInImport from './LinkedInImport.jsx';
+import UpgradeModal from './UpgradeModal.jsx';
+import featureGating, { SUBSCRIPTION_TIERS } from '../../services/featureGating.js';
+import CoverLetter from './CoverLetter.jsx';
+import PrintPreview from './PrintPreview.jsx';
+import ConfigurationPanel from './ConfigurationPanel.jsx';
+import PatentsEditor from './PatentsEditor.jsx';
+import { createResumeDesignSystem } from './resumeStyles.js';
 
 const ResumeBuilder = ({
   initialData = null,
+  initialConfig = {},
   onDataChange = () => {},
   onExport = () => {},
   showControls = true,
   enableExport = true,
   useSerifFont = false,
+  showATSTools = true,
 }) => {
   // Replace basic state with version control
   const {
@@ -39,8 +53,43 @@ const ResumeBuilder = ({
     printMode: false,
     singleColumn: false,
     maxWorkItems: null,
+    maxEducationItems: null,
+    maxWorkBullets: null,
+    maxEducationBullets: null,
     filterByVisibility: true,
     useSerifFont: useSerifFont,
+    showSummary: true,
+    showSummaryInPrint: true,
+    showPatents: true,
+    showPatentsInPrint: true,
+    showSkills: true,
+    showSkillsInPrint: true,
+    showEducation: true,
+    showEducationBullets: true,
+    showRelevantCoursework: true,
+    showWorkDates: true,
+    showWorkLocation: true,
+    compactMode: false,
+    showDividers: false,
+    margins: {
+      top: 0.5,
+      bottom: 0.5,
+      left: 0.75,
+      right: 0.75
+    },
+    spacing: {
+      sectionGap: 10,
+      itemGap: 5,
+      lineHeight: 1.4,
+      bulletGap: 2
+    },
+    fontSize: {
+      name: 20,
+      header: 14,
+      body: 11,
+      small: 9
+    },
+    ...initialConfig, // Merge with initial config
   });
   const [activeTab, setActiveTab] = useState("preview");
   const [aiContext, setAIContext] = useState({
@@ -50,6 +99,124 @@ const ResumeBuilder = ({
   });
   const [aiCredits, setAICredits] = useState(3);
   const [aiSubscription, setAISubscription] = useState('free');
+  
+  // Resume storage and management state
+  const [savedResumes, setSavedResumes] = useState([]);
+  const [currentResumeId, setCurrentResumeId] = useState(null);
+  const [showResumeManager, setShowResumeManager] = useState(false);
+  const [lastSaveTime, setLastSaveTime] = useState(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const [autoSaveEnabled] = useState(true);
+  
+  // Freemium model state with premium override check
+  const premiumOverride = typeof window !== 'undefined' && window.__RESUME_PREMIUM_MODE__;
+  const [userTier, setUserTier] = useState(
+    premiumOverride ? SUBSCRIPTION_TIERS.PROFESSIONAL : SUBSCRIPTION_TIERS.ANONYMOUS
+  );
+  const [showLinkedInImport, setShowLinkedInImport] = useState(false);
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+  const [featureToUpgrade, setFeatureToUpgrade] = useState(null);
+  
+  // Save current resume
+  const saveCurrentResume = useCallback((changeDescription = 'Manual save') => {
+    // Check if user can save
+    if (!featureGating.hasFeature('resumeStorage')) {
+      setFeatureToUpgrade('resumeStorage');
+      setShowUpgradeModal(true);
+      return;
+    }
+    
+    // Check save limit
+    const saveLimit = featureGating.getFeatureLimit('resumeStorage');
+    if (saveLimit !== -1 && savedResumes.length >= saveLimit && !currentResumeId) {
+      setFeatureToUpgrade('resumeStorage');
+      setShowUpgradeModal(true);
+      return;
+    }
+    
+    setIsSaving(true);
+    
+    const metadata = {
+      name: resumeData.basics?.name || 'My Resume',
+      changeDescription,
+      targetRole: aiContext.targetRole,
+      atsScore: null, // Will be updated by ATS DevTools
+      created: currentResumeId ? undefined : new Date().toISOString()
+    };
+    
+    const savedResume = resumeStorage.saveResume(
+      { ...resumeData, id: currentResumeId },
+      metadata
+    );
+    
+    setCurrentResumeId(savedResume.id);
+    setLastSaveTime(new Date());
+    setIsSaving(false);
+    
+    // Refresh saved resumes list
+    setSavedResumes(resumeStorage.getAllResumes());
+  }, [resumeData, currentResumeId, aiContext.targetRole, savedResumes.length]);
+  
+  // Create new resume
+  const createNewResume = useCallback(() => {
+    if (!resumeStorage.canCreateResume()) {
+      alert('You have reached the maximum number of resumes for your plan. Please upgrade to create more.');
+      return;
+    }
+    
+    setCurrentResumeId(null);
+    updateManual(defaultResumeData);
+    setAIContext({
+      jobDescription: '',
+      targetRole: '',
+      industryFocus: ''
+    });
+  }, [updateManual]);
+  
+  // Load existing resume
+  const loadResume = useCallback((resumeId) => {
+    const resume = resumeStorage.getResume(resumeId);
+    if (resume) {
+      setCurrentResumeId(resume.id);
+      updateManual(resume.data);
+      setAIContext({
+        jobDescription: '',
+        targetRole: resume.metadata.targetRole || '',
+        industryFocus: ''
+      });
+      setShowResumeManager(false);
+    }
+  }, [updateManual]);
+  
+  // Delete resume
+  const deleteResume = useCallback((resumeId) => {
+    if (confirm('Are you sure you want to delete this resume?')) {
+      resumeStorage.deleteResume(resumeId);
+      setSavedResumes(resumeStorage.getAllResumes());
+      
+      if (resumeId === currentResumeId) {
+        createNewResume();
+      }
+    }
+  }, [currentResumeId, createNewResume]);
+  
+  // Export with versions
+  const exportWithVersions = useCallback(() => {
+    if (!currentResumeId) {
+      alert('Please save your resume first before exporting.');
+      return;
+    }
+    
+    const exportData = resumeStorage.exportResume(currentResumeId, true);
+    const dataStr = JSON.stringify(exportData, null, 2);
+    const dataBlob = new Blob([dataStr], { type: "application/json" });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `resume_${new Date().toISOString().split('T')[0]}_with_versions.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+  }, [currentResumeId]);
 
   const handleDataChange = useCallback(
     (newData) => {
@@ -86,6 +253,19 @@ const ResumeBuilder = ({
 
   const exportResume = useCallback(
     (format) => {
+      // Check export permissions
+      if (format === "json" && !featureGating.hasFeature('jsonExport')) {
+        setFeatureToUpgrade('jsonExport');
+        setShowUpgradeModal(true);
+        return;
+      }
+      
+      if (format === "pdf" && !featureGating.hasFeature('resumeDownloadPDF')) {
+        setFeatureToUpgrade('resumeDownloadPDF');
+        setShowUpgradeModal(true);
+        return;
+      }
+      
       if (format === "json") {
         const dataStr = JSON.stringify(resumeData, null, 2);
         const dataBlob = new Blob([dataStr], { type: "application/json" });
@@ -135,6 +315,9 @@ const ResumeBuilder = ({
 
     const { basics, work, education, skills, patents } = data;
     
+    // Create the design system
+    const designSystem = createResumeDesignSystem(config);
+    
     // Filter work experience based on visibility and print mode
     let filteredWork = work;
     if (config.filterByVisibility) {
@@ -142,9 +325,54 @@ const ResumeBuilder = ({
         config.printMode ? item.visibility.print : item.visibility.online
       );
     }
+    
     if (config.maxWorkItems && config.maxWorkItems > 0) {
       filteredWork = filteredWork.slice(0, config.maxWorkItems);
     }
+    
+    // Apply max bullets to work items
+    if (config.maxWorkBullets && config.maxWorkBullets > 0) {
+      filteredWork = filteredWork.map(workItem => ({
+        ...workItem,
+        positions: workItem.positions.map(position => ({
+          ...position,
+          highlights: position.highlights.slice(0, config.maxWorkBullets)
+        }))
+      }));
+    }
+    
+    // Filter education based on visibility and max items
+    let filteredEducation = education;
+    if (config.showEducation !== false) {
+      if (config.filterByVisibility) {
+        filteredEducation = education.filter(item => 
+          config.printMode ? item.visibility.print : item.visibility.online
+        );
+      }
+      if (config.maxEducationItems && config.maxEducationItems > 0) {
+        filteredEducation = filteredEducation.slice(0, config.maxEducationItems);
+      }
+      
+      // Apply max bullets to education items
+      if (config.maxEducationBullets && config.maxEducationBullets > 0) {
+        filteredEducation = filteredEducation.map(eduItem => ({
+          ...eduItem,
+          courses: eduItem.courses ? eduItem.courses.slice(0, config.maxEducationBullets) : []
+        }));
+      }
+    } else {
+      filteredEducation = [];
+    }
+    
+    // Filter skills based on visibility
+    const showSkills = config.printMode ? 
+      (config.showSkillsInPrint !== false) : 
+      (config.showSkills !== false);
+    
+    // Filter patents based on visibility
+    const showPatents = config.printMode ? 
+      (config.showPatentsInPrint !== false && patents && patents.length > 0) : 
+      (config.showPatents && patents && patents.length > 0);
 
     return (
       <div className={`resume-display ${config.printMode ? 'print-mode' : ''}`}>
@@ -153,10 +381,10 @@ const ResumeBuilder = ({
             max-width: 8.5in;
             margin: 0 auto;
             background: white;
-            padding: 0.75in;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-            font-size: 11px;
-            line-height: 1.4;
+            padding: ${designSystem.margins.top} ${designSystem.margins.right} ${designSystem.margins.bottom} ${designSystem.margins.left};
+            font-family: ${config.useSerifFont ? designSystem.layout.serifFontFamily : designSystem.layout.fontFamily};
+            font-size: ${designSystem.typography.bodyText.fontSize.screen};
+            line-height: ${config.spacing?.lineHeight || 1.4};
             color: #161616;
             box-sizing: border-box;
           }
@@ -164,15 +392,15 @@ const ResumeBuilder = ({
           .print-mode {
             width: 8.5in;
             height: 11in;
-            padding: 0.1in;
+            padding: ${designSystem.margins.top} ${designSystem.margins.right} ${designSystem.margins.bottom} ${designSystem.margins.left};
             margin: 0;
             overflow: hidden;
-            font-size: 8pt;
-            line-height: 1.3;
+            font-size: ${designSystem.typography.bodyText.fontSize.print};
+            line-height: ${config.spacing?.lineHeight || 1.2};
           }
           
           .print-mode > * + * {
-            margin-top: 0.02rem;
+            margin-top: 0;  /* No spacing between sections */
           }
           
           @media print {
@@ -205,32 +433,58 @@ const ResumeBuilder = ({
               top: 0 !important;
               width: 100% !important;
               height: auto !important;
-              padding: 0.1in !important;
+              padding: 0.05in !important;
               margin: 0 !important;
             }
           }
         `}</style>
         
-        <ResumeHeader basics={basics} printMode={config.printMode} useSerifFont={config.useSerifFont} />
-        <ResumeSummary summary={basics.summary} printMode={config.printMode} useSerifFont={config.useSerifFont} />
+        <ResumeHeader 
+          basics={basics} 
+          printMode={config.printMode} 
+          useSerifFont={config.useSerifFont} 
+          designSystem={designSystem}
+        />
+        {config.showSummary && (!config.printMode || config.showSummaryInPrint) && (
+          <ResumeSummary 
+            summary={basics.summary} 
+            printMode={config.printMode} 
+            useSerifFont={config.useSerifFont}
+            showSummary={config.showSummary}
+            designSystem={designSystem}
+          />
+        )}
         {config.singleColumn ? (
           <ResumeSingleColumn 
-            skills={skills} 
-            education={education} 
-            patents={patents}
+            skills={showSkills ? skills : []} 
+            education={filteredEducation} 
             printMode={config.printMode}
             useSerifFont={config.useSerifFont}
+            config={config}
+            designSystem={designSystem}
           />
         ) : (
           <ResumeThreeColumn 
-            skills={skills} 
-            education={education} 
-            patents={patents}
+            skills={showSkills ? skills : []} 
+            education={filteredEducation} 
             printMode={config.printMode}
             useSerifFont={config.useSerifFont}
+            config={config}
+            designSystem={designSystem}
           />
         )}
-        <ResumeExperience work={filteredWork} printMode={config.printMode} useSerifFont={config.useSerifFont} />
+        <ResumeExperience 
+          work={filteredWork} 
+          printMode={config.printMode} 
+          useSerifFont={config.useSerifFont}
+          config={config}
+          designSystem={designSystem}
+        />
+        <ResumePatents
+          patents={showPatents ? patents : []}
+          printMode={config.printMode}
+          useSerifFont={config.useSerifFont}
+        />
       </div>
     );
   }, []);
@@ -305,6 +559,10 @@ const ResumeBuilder = ({
     handleDataChange({ ...resumeData, skills: updatedSkills });
   }, [resumeData, handleDataChange]);
 
+  const updatePatents = useCallback((updatedPatents) => {
+    handleDataChange({ ...resumeData, patents: updatedPatents });
+  }, [resumeData, handleDataChange]);
+
   const handleCreditUsed = useCallback(() => {
     if (aiSubscription === 'free') {
       setAICredits(prev => Math.max(0, prev - 1));
@@ -320,6 +578,40 @@ const ResumeBuilder = ({
   const updateAIContext = useCallback((newContext) => {
     setAIContext(prev => ({ ...prev, ...newContext }));
   }, []);
+  
+  // Load saved resumes on mount
+  useEffect(() => {
+    const resumes = resumeStorage.getAllResumes();
+    setSavedResumes(resumes);
+    
+    // If we have saved resumes and no initial data, load the most recent one
+    if (resumes.length > 0 && !initialData) {
+      const mostRecent = resumes.sort((a, b) => 
+        new Date(b.metadata.lastModified) - new Date(a.metadata.lastModified)
+      )[0];
+      setCurrentResumeId(mostRecent.id);
+      // Update the version control with saved data
+      updateManual(mostRecent.data);
+    }
+  }, [initialData, updateManual]);
+  
+  // Auto-save functionality
+  useEffect(() => {
+    if (!autoSaveEnabled || !currentResumeId) return;
+    
+    const saveTimer = setTimeout(() => {
+      saveCurrentResume('Auto-save');
+    }, 30000); // Auto-save every 30 seconds
+    
+    return () => clearTimeout(saveTimer);
+  }, [resumeData, autoSaveEnabled, currentResumeId, saveCurrentResume]);
+  
+  // Set up premium override for feature gating
+  useEffect(() => {
+    if (premiumOverride) {
+      featureGating.setUser({ subscriptionTier: SUBSCRIPTION_TIERS.PROFESSIONAL });
+    }
+  }, [premiumOverride]);
 
   return (
     <>
@@ -515,6 +807,137 @@ const ResumeBuilder = ({
           color: #495057;
         }
 
+        .config-section {
+          background-color: #f0f4f8;
+          padding: 16px;
+          border-radius: 8px;
+          margin-bottom: 24px;
+          border: 1px solid #e0e0e0;
+        }
+
+        .config-section .form-group {
+          margin-bottom: 12px;
+        }
+
+        .config-section .form-label {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          user-select: none;
+        }
+
+        .config-section input[type="checkbox"] {
+          cursor: pointer;
+        }
+        
+        .resume-manager-modal {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 10000;
+        }
+        
+        .resume-manager {
+          background: white;
+          border-radius: 8px;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+          width: 90%;
+          max-width: 800px;
+          max-height: 80vh;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+        }
+        
+        .resume-manager-header {
+          padding: 20px;
+          border-bottom: 1px solid #dee2e6;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        
+        .resume-manager-title {
+          font-size: 20px;
+          font-weight: bold;
+          margin: 0;
+        }
+        
+        .resume-manager-content {
+          padding: 20px;
+          overflow-y: auto;
+          flex: 1;
+        }
+        
+        .resume-list {
+          display: grid;
+          gap: 12px;
+        }
+        
+        .resume-card {
+          border: 1px solid #dee2e6;
+          border-radius: 6px;
+          padding: 16px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          transition: all 0.2s;
+          cursor: pointer;
+        }
+        
+        .resume-card:hover {
+          background: #f8f9fa;
+          border-color: #adb5bd;
+        }
+        
+        .resume-card.active {
+          background: #e9ecef;
+          border-color: #666;
+        }
+        
+        .resume-info {
+          flex: 1;
+        }
+        
+        .resume-name {
+          font-weight: 600;
+          font-size: 16px;
+          margin-bottom: 4px;
+        }
+        
+        .resume-meta {
+          font-size: 12px;
+          color: #6c757d;
+        }
+        
+        .resume-actions {
+          display: flex;
+          gap: 8px;
+        }
+        
+        .auto-save-indicator {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 12px;
+          color: #6c757d;
+          margin-left: 16px;
+        }
+        
+        .auto-save-indicator.saving {
+          color: #ffc107;
+        }
+        
+        .auto-save-indicator.saved {
+          color: #28a745;
+        }
+
         @media print {
           .resume-builder {
             padding: 0;
@@ -561,6 +984,36 @@ const ResumeBuilder = ({
             <div className="builder-controls">
               <div className="control-group">
                 <button
+                  className="btn btn-primary"
+                  onClick={() => saveCurrentResume()}
+                  disabled={isSaving}
+                >
+                  {isSaving ? "Saving..." : "Save"}
+                </button>
+                <button
+                  className="btn btn-outline"
+                  onClick={() => setShowResumeManager(!showResumeManager)}
+                >
+                  My Resumes ({savedResumes.length})
+                </button>
+                <button
+                  className="btn btn-outline"
+                  onClick={createNewResume}
+                >
+                  New Resume
+                </button>
+                <button
+                  className="btn btn-outline"
+                  onClick={() => alert('Coming Soon! LinkedIn import will be available in the next update.')}
+                  style={{ background: '#0077B5', color: 'white', borderColor: '#0077B5', opacity: 0.7 }}
+                  title="Coming Soon"
+                >
+                  Import from LinkedIn (Soon)
+                </button>
+              </div>
+              
+              <div className="control-group">
+                <button
                   className={`btn toggle-btn ${
                     config.printMode ? "active" : ""
                   }`}
@@ -590,44 +1043,6 @@ const ResumeBuilder = ({
                 </select>
               </div>
 
-              <div className="control-group">
-                <label htmlFor="maxItems">Max Work Items:</label>
-                <select
-                  id="maxItems"
-                  className="select"
-                  value={config.maxWorkItems || ""}
-                  onChange={(e) =>
-                    handleConfigChange({
-                      maxWorkItems: e.target.value
-                        ? parseInt(e.target.value)
-                        : null,
-                    })
-                  }
-                >
-                  <option value="">All</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </div>
-
-              <div className="control-group">
-                <label htmlFor="fontStyle">Font Style:</label>
-                <select
-                  id="fontStyle"
-                  className="select"
-                  value={config.useSerifFont ? "serif" : "sans-serif"}
-                  onChange={(e) =>
-                    handleConfigChange({
-                      useSerifFont: e.target.value === "serif",
-                    })
-                  }
-                >
-                  <option value="sans-serif">Modern (Sans-serif)</option>
-                  <option value="serif">Classic (Serif)</option>
-                </select>
-              </div>
-
               {enableExport && (
                 <div className="control-group">
                   <button
@@ -642,6 +1057,23 @@ const ResumeBuilder = ({
                   >
                     Export PDF
                   </button>
+                </div>
+              )}
+              
+              {/* Auto-save indicator */}
+              {autoSaveEnabled && lastSaveTime && (
+                <div className={`auto-save-indicator ${isSaving ? 'saving' : 'saved'}`}>
+                  {isSaving ? (
+                    <>
+                      <span>⏳</span>
+                      <span>Saving...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>✓</span>
+                      <span>Saved {new Date(lastSaveTime).toLocaleTimeString()}</span>
+                    </>
+                  )}
                 </div>
               )}
             </div>
@@ -661,14 +1093,45 @@ const ResumeBuilder = ({
           >
             Edit
           </button>
+          <button
+            className={`tab ${activeTab === "coverLetter" ? "active" : ""}`}
+            onClick={() => setActiveTab("coverLetter")}
+          >
+            Cover Letter
+          </button>
         </div>
 
         <div className="content">
-          {activeTab === "preview" ? (
-            <ResumeDisplay data={resumeData} config={config} />
+          {activeTab === "coverLetter" ? (
+            <CoverLetter
+              resumeData={resumeData}
+              jobDescription={aiContext.jobDescription}
+              companyName={aiContext.targetRole ? `Target Company` : ''}
+              userSubscription={aiSubscription}
+              remainingCredits={aiCredits}
+              onUpgrade={handleUpgrade}
+              onCreditUsed={handleCreditUsed}
+              onVersionTrack={handleAIVersionTrack}
+              printMode={config.printMode}
+              useSerifFont={config.useSerifFont}
+            />
+          ) : activeTab === "preview" ? (
+            <div style={{ position: 'relative' }}>
+              <PrintPreview isActive={config.printMode}>
+                <ResumeDisplay data={resumeData} config={config} />
+              </PrintPreview>
+              <ResumeWatermark isPremium={userTier !== SUBSCRIPTION_TIERS.ANONYMOUS && userTier !== SUBSCRIPTION_TIERS.FREE} />
+            </div>
           ) : (
             <div className="editor-grid">
               <div className="editor-panel">
+                <h2 className="section-header">Resume Configuration</h2>
+                
+                <ConfigurationPanel 
+                  config={config} 
+                  onConfigChange={handleConfigChange} 
+                />
+
                 <h2 className="section-header">Basic Information</h2>
 
                 <div className="form-group">
@@ -844,7 +1307,29 @@ const ResumeBuilder = ({
                 <SkillsEditor
                   skillsData={resumeData.skills}
                   onUpdate={updateSkills}
+                  userSubscription={aiSubscription}
+                  remainingCredits={aiCredits}
+                  onUpgrade={handleUpgrade}
+                  onCreditUsed={handleCreditUsed}
+                  onVersionTrack={handleAIVersionTrack}
+                  context={aiContext}
                 />
+
+                {config.showPatents && (
+                  <>
+                    <h2 className="section-header">Patents</h2>
+                    <PatentsEditor
+                      patentsData={resumeData.patents || []}
+                      onUpdate={updatePatents}
+                      userSubscription={aiSubscription}
+                      remainingCredits={aiCredits}
+                      onUpgrade={handleUpgrade}
+                      onCreditUsed={handleCreditUsed}
+                      onVersionTrack={handleAIVersionTrack}
+                      context={aiContext}
+                    />
+                  </>
+                )}
 
                 <h2 className="section-header">Version Control</h2>
                 <ResumeVersionControl
@@ -947,24 +1432,182 @@ const ResumeBuilder = ({
                 />
               </div>
 
-              <div className="preview-panel">
+              <div className="preview-panel" style={{ position: 'relative' }}>
                 <ResumeDisplay data={resumeData} config={config} />
+                <ResumeWatermark isPremium={userTier !== SUBSCRIPTION_TIERS.ANONYMOUS && userTier !== SUBSCRIPTION_TIERS.FREE} />
               </div>
             </div>
           )}
         </div>
       </div>
+
+      {/* ATS DevTools Overlay */}
+      {showATSTools && (
+        <ATSDevTools 
+          resumeData={resumeData}
+          onOptimize={() => {
+            // Handle ATS optimization
+            handleConfigChange({ 
+              singleColumn: true,
+              printMode: true,
+              showPatents: false,
+              maxWorkItems: 5,
+              maxWorkBullets: 4
+            });
+            setActiveTab("preview");
+          }}
+        />
+      )}
+      
+      {/* LinkedIn Import Modal */}
+      {showLinkedInImport && (
+        <LinkedInImport
+          onImport={(importedData) => {
+            // Merge imported data with current resume
+            updateManual({
+              ...resumeData,
+              ...importedData,
+              // Preserve any existing data that wasn't imported
+              projects: resumeData.projects,
+              publications: resumeData.publications,
+              patents: resumeData.patents
+            });
+            setShowLinkedInImport(false);
+          }}
+          onClose={() => setShowLinkedInImport(false)}
+          userTier={userTier}
+        />
+      )}
+      
+      {/* Resume Manager Modal */}
+      {showResumeManager && (
+        <div className="resume-manager-modal" onClick={() => setShowResumeManager(false)}>
+          <div className="resume-manager" onClick={(e) => e.stopPropagation()}>
+            <div className="resume-manager-header">
+              <h2 className="resume-manager-title">My Resumes</h2>
+              <button 
+                className="btn btn-secondary"
+                onClick={() => setShowResumeManager(false)}
+              >
+                Close
+              </button>
+            </div>
+            
+            <div className="resume-manager-content">
+              {savedResumes.length === 0 ? (
+                <div style={{ textAlign: 'center', padding: '40px', color: '#6c757d' }}>
+                  <p>No saved resumes yet</p>
+                  <button 
+                    className="btn btn-primary"
+                    onClick={() => {
+                      setShowResumeManager(false);
+                      createNewResume();
+                    }}
+                  >
+                    Create Your First Resume
+                  </button>
+                </div>
+              ) : (
+                <div className="resume-list">
+                  {savedResumes.map((resume) => (
+                    <div 
+                      key={resume.id}
+                      className={`resume-card ${resume.id === currentResumeId ? 'active' : ''}`}
+                      onClick={() => loadResume(resume.id)}
+                    >
+                      <div className="resume-info">
+                        <div className="resume-name">{resume.metadata.name}</div>
+                        <div className="resume-meta">
+                          Last modified: {new Date(resume.metadata.lastModified).toLocaleDateString()}
+                          {resume.metadata.targetRole && ` • ${resume.metadata.targetRole}`}
+                        </div>
+                      </div>
+                      
+                      <div className="resume-actions" onClick={(e) => e.stopPropagation()}>
+                        <button 
+                          className="btn btn-outline"
+                          onClick={() => loadResume(resume.id)}
+                        >
+                          Open
+                        </button>
+                        <button 
+                          className="btn btn-outline"
+                          onClick={() => {
+                            const exportData = resumeStorage.exportResume(resume.id, false);
+                            const dataStr = JSON.stringify(exportData, null, 2);
+                            const dataBlob = new Blob([dataStr], { type: "application/json" });
+                            const url = URL.createObjectURL(dataBlob);
+                            const link = document.createElement("a");
+                            link.href = url;
+                            link.download = `${resume.metadata.name.replace(/\s+/g, '_')}_resume.json`;
+                            link.click();
+                            URL.revokeObjectURL(url);
+                          }}
+                        >
+                          Export
+                        </button>
+                        <button 
+                          className="btn btn-outline"
+                          onClick={() => deleteResume(resume.id)}
+                          style={{ color: '#dc3545', borderColor: '#dc3545' }}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              
+              <div style={{ marginTop: '20px', textAlign: 'center' }}>
+                <button 
+                  className="btn btn-primary"
+                  onClick={exportWithVersions}
+                  disabled={!currentResumeId}
+                >
+                  Export Current Resume with Version History
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Upgrade Modal */}
+      <UpgradeModal
+        isOpen={showUpgradeModal}
+        onClose={() => {
+          setShowUpgradeModal(false);
+          setFeatureToUpgrade(null);
+        }}
+        featureName={featureToUpgrade}
+        currentTier={userTier}
+        onUpgrade={(tier) => {
+          // In a real implementation, this would trigger payment flow
+          console.log('Upgrade to tier:', tier);
+          // For now, just simulate upgrade
+          setUserTier(tier);
+          featureGating.setUser({ subscriptionTier: tier });
+          setShowUpgradeModal(false);
+          // Retry the action that triggered the upgrade
+          if (featureToUpgrade === 'resumeStorage') {
+            saveCurrentResume();
+          }
+        }}
+      />
     </>
   );
 };
 
 ResumeBuilder.propTypes = {
   initialData: PropTypes.object,
+  initialConfig: PropTypes.object,
   onDataChange: PropTypes.func,
   onExport: PropTypes.func,
   showControls: PropTypes.bool,
   enableExport: PropTypes.bool,
   useSerifFont: PropTypes.bool,
+  showATSTools: PropTypes.bool,
 };
 
 export default ResumeBuilder;

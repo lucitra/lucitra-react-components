@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { resumeDesignSystem, getSpacing } from './resumeStyles.js';
 
-const ResumeSingleColumn = ({ skills, education, patents, printMode = false, useSerifFont = false }) => {
+const ResumeSingleColumn = ({ skills, education, printMode = false, useSerifFont = false }) => {
   return (
     <>
       <style jsx={true}>{`
@@ -238,41 +238,6 @@ const ResumeSingleColumn = ({ skills, education, patents, printMode = false, use
           </div>
         )}
 
-        {/* Patents Section */}
-        <div className="section">
-          <h3 className="section-title">Patents</h3>
-          {patents && patents
-            .filter(patent => patent.visibility.print)
-            .map((patent, index) => (
-            <div key={index} className="patent-item">
-              <div className="patent-header">
-                <div className="patent-left">
-                  {patent.url ? (
-                    <a href={patent.url} className="patent-title-link" target="_blank" rel="noopener noreferrer">
-                      {patent.title}
-                    </a>
-                  ) : (
-                    <div className="patent-title">{patent.title}</div>
-                  )}
-                </div>
-                <div className="patent-right">
-                  <div className="patent-date">{patent.date}</div>
-                </div>
-              </div>
-              <div className="patent-company-row">
-                <div className="patent-company">Microsoft Technology Licensing, LLC</div>
-                {patent.url && (
-                  <a href={patent.url} className="patent-link-inline" target="_blank" rel="noopener noreferrer">
-                    View Patent
-                  </a>
-                )}
-              </div>
-              {patent.summary && (
-                <div className="patent-description">{patent.summary}</div>
-              )}
-            </div>
-          ))}
-        </div>
       </div>
     </>
   );
@@ -281,7 +246,6 @@ const ResumeSingleColumn = ({ skills, education, patents, printMode = false, use
 ResumeSingleColumn.propTypes = {
   skills: PropTypes.array,
   education: PropTypes.array,
-  patents: PropTypes.array,
   printMode: PropTypes.bool,
   useSerifFont: PropTypes.bool
 };
@@ -289,7 +253,6 @@ ResumeSingleColumn.propTypes = {
 ResumeSingleColumn.defaultProps = {
   skills: [],
   education: [],
-  patents: [],
   printMode: false,
   useSerifFont: false
 };

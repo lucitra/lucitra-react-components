@@ -2,19 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { resumeDesignSystem, getSpacing } from './resumeStyles.js';
 
-const ResumeThreeColumn = ({ skills, education, patents, printMode = false, useSerifFont = false }) => {
+const ResumeThreeColumn = ({ skills, education, printMode = false, useSerifFont = false }) => {
+  // Now always use 2 columns since patents moved to bottom
+  const gridColumns = '1fr 1fr';
+  
   return (
     <>
       <style jsx={true}>{`
         .three-column-section {
           display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          gap: ${printMode ? '0.1rem' : '18px'};
-          margin-bottom: ${printMode ? '0.04rem' : getSpacing('sectionGap', false)};
+          grid-template-columns: ${gridColumns};
+          gap: ${printMode ? '0.05rem' : '12px'};
+          margin-bottom: ${printMode ? '0' : getSpacing('sectionGap', false)};
         }
         
         .column {
           min-height: ${printMode ? 'auto' : '120px'};
+        }
+        
+        /* When in 2-column mode, give columns more breathing room */
+        .three-column-section:has(.column:nth-child(2):last-child) .column {
+          max-width: ${printMode ? 'none' : '400px'};
         }
         
         .column-title {
@@ -35,7 +43,7 @@ const ResumeThreeColumn = ({ skills, education, patents, printMode = false, useS
         }
         
         .skills-category-title {
-          font-size: ${printMode ? '10pt' : '10px'};
+          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
           font-weight: bold;
           color: #333;
           margin-bottom: ${printMode ? '0.025cm' : '4px'};
@@ -215,39 +223,6 @@ const ResumeThreeColumn = ({ skills, education, patents, printMode = false, useS
           ))}
         </div>
 
-        {/* Patents Column */}
-        <div className="column">
-          <h3 className="column-title">Patents</h3>
-          {patents && patents
-            .filter(patent => patent.visibility.print)
-            .map((patent, index) => (
-            <div key={index} className="patent-item">
-              <div className="patent-header">
-                <div className="patent-left">
-                  {patent.url ? (
-                    <a href={patent.url} className="patent-title-link" target="_blank" rel="noopener noreferrer">
-                      {patent.title}
-                    </a>
-                  ) : (
-                    <div className="patent-title">{patent.title}</div>
-                  )}
-                </div>
-                <div className="patent-right">
-                  <div className="patent-date">{patent.date}</div>
-                  {patent.url && (
-                    <a href={patent.url} className="patent-link" target="_blank" rel="noopener noreferrer">
-                      View Patent
-                    </a>
-                  )}
-                </div>
-              </div>
-              <div className="patent-company">Microsoft Technology Licensing, LLC</div>
-              {patent.summary && (
-                <div className="patent-description">{patent.summary}</div>
-              )}
-            </div>
-          ))}
-        </div>
       </div>
       
       {/* Relevant Coursework Section - Full Width Below Three Columns */}
@@ -269,7 +244,6 @@ const ResumeThreeColumn = ({ skills, education, patents, printMode = false, useS
 ResumeThreeColumn.propTypes = {
   skills: PropTypes.array,
   education: PropTypes.array,
-  patents: PropTypes.array,
   printMode: PropTypes.bool,
   useSerifFont: PropTypes.bool
 };
@@ -277,7 +251,6 @@ ResumeThreeColumn.propTypes = {
 ResumeThreeColumn.defaultProps = {
   skills: [],
   education: [],
-  patents: [],
   printMode: false,
   useSerifFont: false
 };

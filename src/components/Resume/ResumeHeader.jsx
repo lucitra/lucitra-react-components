@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { resumeDesignSystem, getSpacing } from './resumeStyles.js';
 
-const ResumeHeader = ({ basics, printMode = false, useSerifFont = false }) => {
+const ResumeHeader = ({ basics, printMode = false, useSerifFont = false, designSystem = resumeDesignSystem }) => {
   const { name, label, email, phone, website, location, profiles } = basics;
 
   return (
@@ -12,30 +12,30 @@ const ResumeHeader = ({ basics, printMode = false, useSerifFont = false }) => {
           text-align: center;
           margin-bottom: ${printMode ? '0.05rem' : '20px'};
           padding-bottom: ${printMode ? '0.08cm' : '16px'};
-          border-bottom: ${printMode ? `1px solid ${resumeDesignSystem.colors.divider}` : `2px solid ${resumeDesignSystem.colors.divider}`};
+          border-bottom: ${printMode ? `1px solid ${designSystem.colors.divider}` : `2px solid ${designSystem.colors.divider}`};
         }
         
         .name {
-          font-size: ${printMode ? resumeDesignSystem.typography.nameText.fontSize.print : resumeDesignSystem.typography.nameText.fontSize.screen};
-          font-weight: ${resumeDesignSystem.typography.nameText.fontWeight};
-          font-family: ${useSerifFont ? resumeDesignSystem.layout.serifFontFamily : 'inherit'};
+          font-size: ${printMode ? designSystem.typography.nameText.fontSize.print : designSystem.typography.nameText.fontSize.screen};
+          font-weight: ${designSystem.typography.nameText.fontWeight};
+          font-family: ${useSerifFont ? designSystem.layout.serifFontFamily : 'inherit'};
           margin: 0;
-          margin-bottom: ${getSpacing('headerGap', printMode)};
-          letter-spacing: ${resumeDesignSystem.typography.nameText.letterSpacing};
-          color: ${resumeDesignSystem.typography.nameText.color};
-          text-transform: ${resumeDesignSystem.typography.nameText.textTransform};
-          line-height: ${printMode ? resumeDesignSystem.typography.nameText.lineHeight.print : resumeDesignSystem.typography.nameText.lineHeight.screen};
+          margin-bottom: ${getSpacing('headerGap', printMode, designSystem)};
+          letter-spacing: ${designSystem.typography.nameText.letterSpacing};
+          color: ${designSystem.typography.nameText.color};
+          text-transform: ${designSystem.typography.nameText.textTransform};
+          line-height: ${printMode ? designSystem.typography.nameText.lineHeight.print : designSystem.typography.nameText.lineHeight.screen};
         }
         
         .title {
-          font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
-          color: ${resumeDesignSystem.typography.bodyText.color};
-          font-family: ${useSerifFont ? resumeDesignSystem.layout.serifFontFamily : 'inherit'};
+          font-size: ${printMode ? designSystem.typography.bodyText.fontSize.print : designSystem.typography.bodyText.fontSize.screen};
+          color: ${designSystem.typography.bodyText.color};
+          font-family: ${useSerifFont ? designSystem.layout.serifFontFamily : 'inherit'};
           margin: 0;
-          margin-bottom: ${getSpacing('headerGap', printMode)};
+          margin-bottom: ${getSpacing('headerGap', printMode, designSystem)};
           font-style: italic;
-          font-weight: ${resumeDesignSystem.emphasis.italic.fontWeight};
-          line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
+          font-weight: ${designSystem.emphasis.italic.fontWeight};
+          line-height: ${printMode ? designSystem.typography.bodyText.lineHeight.print : designSystem.typography.bodyText.lineHeight.screen};
         }
         
         .contact-info {
@@ -43,11 +43,11 @@ const ResumeHeader = ({ basics, printMode = false, useSerifFont = false }) => {
           justify-content: center;
           flex-wrap: wrap;
           align-items: center;
-          font-size: ${printMode ? resumeDesignSystem.typography.smallText.fontSize.print : resumeDesignSystem.typography.smallText.fontSize.screen};
-          color: ${resumeDesignSystem.typography.smallText.color};
+          font-size: ${printMode ? designSystem.typography.smallText.fontSize.print : designSystem.typography.smallText.fontSize.screen};
+          color: ${designSystem.typography.smallText.color};
           margin: 0;
-          margin-bottom: ${getSpacing('headerGap', printMode)};
-          line-height: ${printMode ? resumeDesignSystem.typography.smallText.lineHeight.print : resumeDesignSystem.typography.smallText.lineHeight.screen};
+          margin-bottom: ${getSpacing('headerGap', printMode, designSystem)};
+          line-height: ${printMode ? designSystem.typography.smallText.lineHeight.print : designSystem.typography.smallText.lineHeight.screen};
         }
         
         .contact-item {
@@ -57,19 +57,19 @@ const ResumeHeader = ({ basics, printMode = false, useSerifFont = false }) => {
         
         .contact-separator {
           margin: 0 ${printMode ? '8px' : '12px'};
-          color: ${resumeDesignSystem.colors.divider};
+          color: ${designSystem.colors.divider};
           font-weight: normal;
         }
         
         .contact-link {
-          color: ${resumeDesignSystem.links.color};
-          text-decoration: ${resumeDesignSystem.links.textDecoration};
-          text-underline-offset: ${resumeDesignSystem.links.textUnderlineOffset};
-          transition: ${resumeDesignSystem.links.transition};
+          color: ${designSystem.links.color};
+          text-decoration: ${designSystem.links.textDecoration};
+          text-underline-offset: ${designSystem.links.textUnderlineOffset};
+          transition: ${designSystem.links.transition};
         }
         
         .contact-link:hover {
-          color: ${resumeDesignSystem.links.hoverColor};
+          color: ${designSystem.links.hoverColor};
         }
       `}</style>
       
@@ -113,7 +113,8 @@ const ResumeHeader = ({ basics, printMode = false, useSerifFont = false }) => {
 ResumeHeader.propTypes = {
   basics: PropTypes.object,
   printMode: PropTypes.bool,
-  useSerifFont: PropTypes.bool
+  useSerifFont: PropTypes.bool,
+  designSystem: PropTypes.object
 };
 
 ResumeHeader.defaultProps = {

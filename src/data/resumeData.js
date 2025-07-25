@@ -491,7 +491,7 @@ export const ibraheemResumeData = {
       visibility: { online: true, print: true },
       courses: [],
       relevantCoursework: [
-        "Wearable Devices and Computer Vision, Networks and Cloud Security, Cloud Infrastructure, Big Data Systems, Data Analysis, UX Engineering, Artificial Intelligence (Python), Blockchain (Bitcoin), Capstone: AI Clinical Trial Matching",
+        "Wearable Devices, Computer Vision, Networks, Cloud Security & Infrastructure, Big Data Systems, Data Analysis, UX Engineering, Artificial Intelligence, Blockchain, Capstone: AI Clinical Trial Matching",
       ],
     },
     {
@@ -507,7 +507,7 @@ export const ibraheemResumeData = {
   skills: [
     {
       category: "All Skills",
-      items: ["Python, TypeScript, JavaScript, React, Django, FastAPI, AWS, Azure, Docker, Kubernetes, PostgreSQL, MongoDB, TensorFlow, PyTorch, Machine Learning, AI/ML"],
+      items: ["Python, TypeScript, JavaScript, React, Django, FastAPI, AWS, Azure, Docker, Kubernetes, PostgreSQL, MongoDB, TensorFlow, PyTorch, Machine Learning, Artificial Intelligence"],
     },
   ],
   patents: [
@@ -515,7 +515,7 @@ export const ibraheemResumeData = {
       title: "Network System for Contextual Course Recommendation based on Third-Party Content",
       date: "Feb 2022", 
       awarder: "Microsoft Technology Licensing, LLC (US Patent #11,250,716)",
-      summary: "AI-driven recommendation system that analyzes third-party content to generate personalized learning pathways.",
+      summary: "AI recommendation system for personalized learning pathways from third-party content.",
       url: "https://patents.justia.com/patent/11250716",
       visibility: { online: true, print: true },
     },
@@ -677,7 +677,7 @@ export const legacySampleResumeData = {
       visibility: { online: true, print: true },
       courses: [],
       relevantCoursework: [
-        "Wearable Devices and Computer Vision, Networks and Cloud Security, Cloud Infrastructure, Big Data Systems, Data Analysis, UX Engineering, Artificial Intelligence (Python), Blockchain (Bitcoin), Capstone: AI Clinical Trial Matching",
+        "Wearable Devices, Computer Vision, Networks, Cloud Security & Infrastructure, Big Data Systems, Data Analysis, UX Engineering, Artificial Intelligence, Blockchain, Capstone: AI Clinical Trial Matching",
       ],
     },
     {
@@ -710,7 +710,7 @@ export const legacySampleResumeData = {
       date: "Feb 2022",
       awarder: "Microsoft Technology Licensing, LLC (US Patent #11,250,716)",
       summary:
-        "AI-driven recommendation system that analyzes third-party content to generate personalized learning pathways.",
+        "AI recommendation system for personalized learning pathways from third-party content.",
       url: "https://patents.justia.com/patent/11250716",
       visibility: { online: true, print: true },
     },

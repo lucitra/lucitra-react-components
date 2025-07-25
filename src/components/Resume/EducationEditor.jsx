@@ -345,7 +345,7 @@ const EducationEditor = ({
             ))}
             
             <div className="add-course">
-              <input
+              <AITextInput
                 type="text"
                 className="form-control"
                 value={newCourse}
@@ -357,6 +357,14 @@ const EducationEditor = ({
                     addCourse();
                   }
                 }}
+                fieldType="course"
+                fieldName={`${educationData.institution} - Course`}
+                context={context}
+                userSubscription={userSubscription}
+                remainingCredits={remainingCredits}
+                onUpgrade={onUpgrade}
+                onCreditUsed={onCreditUsed}
+                onVersionTrack={onVersionTrack}
               />
               <button
                 className="add-btn"
@@ -372,11 +380,20 @@ const EducationEditor = ({
           <div className="coursework-section">
             <div className="form-group">
               <label className="form-label">Relevant Coursework</label>
-              <textarea
+              <AITextInput
                 className="form-control coursework-textarea"
+                rows={3}
                 value={educationData.relevantCoursework?.[0] || ''}
                 onChange={(e) => updateRelevantCoursework(e.target.value)}
                 placeholder="Enter comma-separated coursework: Machine Learning, Data Structures, Algorithms..."
+                fieldType="coursework"
+                fieldName={`${educationData.institution} - Relevant Coursework`}
+                context={context}
+                userSubscription={userSubscription}
+                remainingCredits={remainingCredits}
+                onUpgrade={onUpgrade}
+                onCreditUsed={onCreditUsed}
+                onVersionTrack={onVersionTrack}
               />
               <div className="coursework-help">
                 Separate multiple courses with commas. This will appear in a dedicated &ldquo;Relevant Coursework&rdquo; section.

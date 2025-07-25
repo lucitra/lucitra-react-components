@@ -2,21 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { resumeDesignSystem, getSpacing } from './resumeStyles.js';
 
-const ResumeSummary = ({ summary, printMode = false, useSerifFont = false }) => {
-  if (!summary) return null;
+const ResumeSummary = ({ summary, printMode = false, useSerifFont = false, showSummary = true }) => {
+  if (!summary || !showSummary) return null;
 
   return (
     <>
       <style jsx={true}>{`
         .summary-section {
-          margin-bottom: ${printMode ? '0.04rem' : getSpacing('sectionGap', false)};
+          margin-bottom: ${printMode ? '0.025rem' : getSpacing('sectionGap', false)};
         }
         
         .section-title {
           font-size: ${printMode ? resumeDesignSystem.typography.headerText.fontSize.print : resumeDesignSystem.typography.headerText.fontSize.screen};
           font-weight: ${resumeDesignSystem.typography.headerText.fontWeight};
           font-family: ${useSerifFont ? resumeDesignSystem.layout.serifFontFamily : 'inherit'};
-          margin-bottom: ${printMode ? '0.03cm' : getSpacing('headerGap', false)};
+          margin-bottom: ${printMode ? '0.02cm' : getSpacing('headerGap', false)};
           color: ${resumeDesignSystem.typography.headerText.color};
           text-transform: ${resumeDesignSystem.typography.headerText.textTransform};
           letter-spacing: ${resumeDesignSystem.typography.headerText.letterSpacing};
@@ -43,7 +43,8 @@ const ResumeSummary = ({ summary, printMode = false, useSerifFont = false }) => 
 ResumeSummary.propTypes = {
   summary: PropTypes.string,
   printMode: PropTypes.bool,
-  useSerifFont: PropTypes.bool
+  useSerifFont: PropTypes.bool,
+  showSummary: PropTypes.bool
 };
 
 ResumeSummary.defaultProps = {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from '@mantine/core';
 import { withHubSpotModule } from './HubSpotModuleWrapper.jsx';
 
@@ -56,6 +57,19 @@ const HubSpotButtonComponent = ({
       {button_text || 'Click Me'}
     </Button>
   );
+};
+
+HubSpotButtonComponent.propTypes = {
+  button_text: PropTypes.string,
+  button_url: PropTypes.string,
+  button_style: PropTypes.oneOf(['filled', 'light', 'outline', 'subtle', 'transparent']),
+  button_size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
+  button_color: PropTypes.string,
+  open_in_new_tab: PropTypes.bool,
+  is_disabled: PropTypes.bool,
+  show_icon: PropTypes.bool,
+  icon_position: PropTypes.oneOf(['left', 'right']),
+  onClick: PropTypes.func
 };
 
 // HubSpot module configuration

@@ -93,9 +93,9 @@ const ResumeExperience = ({ work, printMode = false, maxItems, useSerifFont = fa
         
         .position-title {
           font-size: ${printMode ? resumeDesignSystem.typography.bodyText.fontSize.print : resumeDesignSystem.typography.bodyText.fontSize.screen};
-          font-weight: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.fontWeight : resumeDesignSystem.emphasis.italic.fontWeight};
-          font-style: ${useSerifFont ? 'normal' : resumeDesignSystem.emphasis.italic.fontStyle};
-          color: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.color : resumeDesignSystem.emphasis.italic.color};
+          font-weight: ${resumeDesignSystem.emphasis.bold.fontWeight};
+          font-style: normal;
+          color: ${resumeDesignSystem.emphasis.bold.color};
           font-family: ${useSerifFont ? resumeDesignSystem.emphasis.boldSerif.fontFamily : 'inherit'};
           line-height: ${printMode ? resumeDesignSystem.typography.bodyText.lineHeight.print : resumeDesignSystem.typography.bodyText.lineHeight.screen};
         }

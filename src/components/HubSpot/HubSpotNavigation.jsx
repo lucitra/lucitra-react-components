@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Breadcrumbs, Pagination, Button } from '@mantine/core';
 import { withHubSpotModule } from './HubSpotModuleWrapper.jsx';
 
@@ -20,8 +21,7 @@ const HubSpotNavigationComponent = ({
   
   // Additional props
   onPageChange,
-  onNavClick,
-  ...props
+  onNavClick
 }) => {
   const handlePageChange = (page) => {
     // Track pagination in HubSpot
@@ -61,7 +61,7 @@ const HubSpotNavigationComponent = ({
     };
 
     switch (nav_type) {
-      case 'breadcrumb':
+      case 'breadcrumb': {
         const items = show_home_link 
           ? [{ title: home_link_text || 'Home', href: '/' }, ...breadcrumb_items]
           : breadcrumb_items;
@@ -87,6 +87,7 @@ const HubSpotNavigationComponent = ({
             </Breadcrumbs>
           </div>
         );
+      }
 
       case 'pagination':
         return (
@@ -248,6 +249,34 @@ HubSpotNavigationComponent.hubspotModule = {
     // Note: breadcrumb_items and nav_buttons would typically be managed 
     // through repeater fields but simplified here for demo purposes
   ]
+};
+
+// PropTypes definition
+HubSpotNavigationComponent.propTypes = {
+  // HubSpot fields
+  nav_type: PropTypes.oneOf(['breadcrumb', 'pagination', 'buttons']),
+  breadcrumb_items: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    text: PropTypes.string,
+    href: PropTypes.string,
+    url: PropTypes.string
+  })),
+  show_home_link: PropTypes.bool,
+  home_link_text: PropTypes.string,
+  current_page: PropTypes.number,
+  total_pages: PropTypes.number,
+  page_size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
+  nav_buttons: PropTypes.arrayOf(PropTypes.shape({
+    text: PropTypes.string,
+    url: PropTypes.string,
+    open_in_new_tab: PropTypes.bool
+  })),
+  nav_style: PropTypes.oneOf(['filled', 'light', 'outline', 'subtle']),
+  nav_alignment: PropTypes.oneOf(['flex-start', 'center', 'flex-end']),
+  
+  // Additional props
+  onPageChange: PropTypes.func,
+  onNavClick: PropTypes.func
 };
 
 // Export the wrapped component

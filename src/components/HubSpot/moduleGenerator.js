@@ -10,15 +10,14 @@ export const generateHubSpotModule = (componentName, config = {}) => {
     component,
     fields = [],
     meta = {},
-    styles = '',
-    preview = null
+    styles = ''
   } = config;
 
   return {
     'module.jsx': generateModuleComponent(componentName, component),
     'fields.json': generateFieldsJson(fields),
     'meta.json': generateMetaJson(componentName, meta),
-    'module.css': styles || generateDefaultStyles(),
+    'module.css': styles || generateDefaultStyles(componentName),
     'module.html': generateModuleHtml(componentName)
   };
 };
@@ -103,7 +102,7 @@ const generateDefaultMeta = (name) => ({
 /**
  * Generate default module styles
  */
-const generateDefaultStyles = () => `/* ${name} Module Styles */
+const generateDefaultStyles = (name) => `/* ${name} Module Styles */
 .module-wrapper {
   position: relative;
   width: 100%;

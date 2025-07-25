@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { MantineProvider } from '@mantine/core';
 import { mantineTheme } from '../../theme/mantineTheme';
 
@@ -119,6 +120,24 @@ export const HubSpotModuleWrapper = ({
       </div>
     </MantineProvider>
   );
+};
+
+// PropTypes definition for HubSpotModuleWrapper
+HubSpotModuleWrapper.propTypes = {
+  Component: PropTypes.elementType.isRequired,
+  fieldValues: PropTypes.object,
+  theme: PropTypes.object,
+  fallback: PropTypes.node,
+  isPreview: PropTypes.bool,
+  portalId: PropTypes.string,
+  moduleId: PropTypes.string
+};
+
+HubSpotModuleWrapper.defaultProps = {
+  fieldValues: {},
+  theme: mantineTheme,
+  fallback: null,
+  isPreview: false
 };
 
 /**

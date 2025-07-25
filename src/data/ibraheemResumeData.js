@@ -139,7 +139,7 @@ export const ibraheemResumeData = {
       visibility: { online: true, print: true },
       courses: [],
       relevantCoursework: [
-        "Computer Vision, Cloud Security, Big Data Systems, UX Engineering, Artificial Intelligence (Python), Blockchain, Capstone: AI Clinical Trial Matching",
+        "Computer Vision, Cloud Security, Big Data Systems, UX Engineering, Artificial Intelligence, Blockchain, Capstone: AI Clinical Trial Matching",
       ],
     },
     {
@@ -158,7 +158,7 @@ export const ibraheemResumeData = {
       items: ["Python", "TypeScript", "JavaScript", "Kotlin", "SQL"],
     },
     {
-      category: "AI/ML Frameworks",
+      category: "Artificial Intelligence Frameworks",
       items: ["TensorFlow", "PyTorch", "Scikit-learn", "Hugging Face", "LangChain"],
     },
     {
@@ -179,7 +179,7 @@ export const ibraheemResumeData = {
       title: "Network System for Contextual Course Recommendation based on Third-Party Content",
       date: "Feb 2022",
       awarder: "Microsoft Technology Licensing, LLC (US Patent #11,250,716)",
-      summary: "AI-driven recommendation system that analyzes third-party content to generate personalized learning pathways.",
+      summary: "AI recommendation system for personalized learning pathways from third-party content.",
       url: "https://patents.justia.com/patent/11250716",
       visibility: { online: true, print: true },
     },

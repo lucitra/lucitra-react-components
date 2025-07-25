@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button, TextInput, Select, Checkbox } from '@mantine/core';
 import { withHubSpotModule } from './HubSpotModuleWrapper.jsx';
 
@@ -19,8 +20,7 @@ const HubSpotFormComponent = ({
   form_fields = [],
   
   // Additional props
-  onSubmit,
-  ...props
+  onSubmit
 }) => {
   const [formData, setFormData] = React.useState({});
   const [errors, setErrors] = React.useState({});
@@ -247,6 +247,30 @@ HubSpotFormComponent.hubspotModule = {
     // Note: form_fields would typically be managed through a repeater field
     // but simplified here for demo purposes
   ]
+};
+
+// PropTypes definition
+HubSpotFormComponent.propTypes = {
+  // HubSpot fields
+  form_title: PropTypes.string,
+  form_description: PropTypes.string,
+  form_action: PropTypes.string,
+  form_method: PropTypes.oneOf(['POST', 'GET']),
+  success_message: PropTypes.string,
+  error_message: PropTypes.string,
+  submit_button_text: PropTypes.string,
+  submit_button_color: PropTypes.string,
+  enable_validation: PropTypes.bool,
+  form_fields: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(['text', 'email', 'tel', 'select', 'checkbox']),
+    required: PropTypes.bool,
+    options: PropTypes.array
+  })),
+  
+  // Additional props
+  onSubmit: PropTypes.func
 };
 
 // Export the wrapped component

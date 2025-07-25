@@ -36,6 +36,10 @@ export default {
     useSerifFont: {
       description: 'Whether to use serif fonts for bold text elements',
       control: { type: 'boolean' }
+    },
+    showATSTools: {
+      description: 'Whether to show the ATS optimization overlay',
+      control: { type: 'boolean' }
     }
   }
 };
@@ -142,6 +146,71 @@ export const PrintOptimized = {
     docs: {
       description: {
         story: 'Resume Builder optimized for single-page printing. Limited to 3 most recent work experiences to ensure the entire resume fits on one page.'
+      }
+    }
+  }
+};
+
+// Builder without professional summary
+export const WithoutSummary = {
+  args: {
+    initialData: genericResumeData,
+    showControls: true,
+    enableExport: true
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Resume Builder with the professional summary section hidden. Use the "Summary OFF" toggle to hide/show the summary section.'
+      }
+    }
+  }
+};
+
+// Builder without patents section
+export const WithoutPatents = {
+  args: {
+    initialData: genericResumeData,
+    showControls: true,
+    enableExport: true
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Resume Builder with the patents section hidden. Use the "Patents OFF" toggle to hide/show the patents section. Useful for candidates without patents.'
+      }
+    }
+  }
+};
+
+// Minimal resume without summary and patents
+export const MinimalResume = {
+  args: {
+    initialData: genericResumeData,
+    showControls: true,
+    enableExport: true
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Resume Builder configured for a minimal resume without professional summary and patents sections. Toggle these sections on/off using the controls.'
+      }
+    }
+  }
+};
+
+// Resume with ATS optimization tools
+export const WithATSTools = {
+  args: {
+    initialData: genericResumeData,
+    showControls: true,
+    enableExport: true,
+    showATSTools: true
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Resume Builder with ATS (Applicant Tracking System) optimization tools. Shows real-time ATS score, identifies issues, and provides optimization suggestions. The floating ATS score tab can be dragged to reposition.'
       }
     }
   }

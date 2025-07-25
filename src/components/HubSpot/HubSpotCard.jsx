@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Card, Text, Title, Button, Badge } from '@mantine/core';
 import { withHubSpotModule } from './HubSpotModuleWrapper.jsx';
 
@@ -217,6 +218,26 @@ HubSpotCardComponent.hubspotModule = {
       default: 'md'
     }
   ]
+};
+
+// PropTypes definition
+HubSpotCardComponent.propTypes = {
+  // HubSpot fields
+  card_title: PropTypes.string,
+  card_description: PropTypes.string,
+  card_image: PropTypes.string,
+  card_badge: PropTypes.string,
+  badge_color: PropTypes.oneOf(['blue', 'green', 'red', 'yellow', 'purple']),
+  card_button_text: PropTypes.string,
+  card_button_url: PropTypes.string,
+  card_button_style: PropTypes.oneOf(['filled', 'light', 'outline']),
+  open_in_new_tab: PropTypes.bool,
+  card_shadow: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
+  card_padding: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
+  card_radius: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
+  
+  // Additional props
+  onClick: PropTypes.func
 };
 
 // Export the wrapped component
