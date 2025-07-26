@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.22.1](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.22.0...react-components-v0.22.1) (2025-07-26)
+
+
+### Styles
+
+* **Resume:** add font-family to highlight styles in ResumeExperience component ([02315ce](https://github.com/lucitra/lucitra-react-components/commit/02315ce860c484a61bd952f053764b8b8b6f80c0))
+* **Resume:** refactor spacing and margin styles across components ([77c40bb](https://github.com/lucitra/lucitra-react-components/commit/77c40bb6d068c45c7729b3ab9e6f2e39c40ced51))
+* **Resume:** update typography for company names and education institutions ([124028c](https://github.com/lucitra/lucitra-react-components/commit/124028c0c91cb5721d34262e7bc3463e09d51d3a))
+
 ## [0.22.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.21.1...react-components-v0.22.0) (2025-07-25)
 
 
