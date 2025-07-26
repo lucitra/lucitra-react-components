@@ -5,6 +5,7 @@ export const createResumeDesignSystem = (config = {}) => {
     fontSize: {
       name: 20,
       header: 14,
+      company: 12,
       body: 11,
       small: 9
     },
@@ -50,6 +51,15 @@ export const createResumeDesignSystem = (config = {}) => {
         textTransform: 'uppercase',
         letterSpacing: '0.5px',
         lineHeight: { print: `${spacing.lineHeight * 0.95}`, screen: `${spacing.lineHeight}` }
+      },
+      
+      // Company names - slightly larger than body
+      companyText: {
+        fontFamily: bodyFont || "Helvetica, sans-serif",
+        fontSize: { print: `${fontSize.company * 0.85}pt`, screen: `${fontSize.company}px` },
+        fontWeight: 700,
+        color: '#000000',
+        lineHeight: { print: `${spacing.lineHeight * 0.9}`, screen: `${spacing.lineHeight}` }
       },
       
       // All body content - one size for everything

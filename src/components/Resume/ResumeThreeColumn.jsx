@@ -61,7 +61,16 @@ const ResumeThreeColumn = ({ skills, education, printMode = false, useSerifFont 
           margin-bottom: ${getSpacing('itemGap', printMode, designSystem)};
         }
         
-        .education-institution, .patent-title {
+        .education-institution {
+          font-size: ${printMode ? designSystem.typography.companyText.fontSize.print : designSystem.typography.companyText.fontSize.screen};
+          font-weight: ${designSystem.typography.companyText.fontWeight};
+          color: ${designSystem.typography.companyText.color};
+          font-family: ${useSerifFont ? designSystem.emphasis.boldSerif.fontFamily : designSystem.typography.companyText.fontFamily};
+          margin-bottom: ${getSpacing('microGap', printMode, designSystem)};
+          line-height: ${printMode ? designSystem.typography.companyText.lineHeight.print : designSystem.typography.companyText.lineHeight.screen};
+        }
+        
+        .patent-title {
           font-size: ${printMode ? designSystem.typography.bodyText.fontSize.print : designSystem.typography.bodyText.fontSize.screen};
           font-weight: ${useSerifFont ? designSystem.emphasis.boldSerif.fontWeight : designSystem.emphasis.bold.fontWeight};
           color: ${useSerifFont ? designSystem.emphasis.boldSerif.color : designSystem.emphasis.bold.color};

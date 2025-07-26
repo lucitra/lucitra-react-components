@@ -74,7 +74,7 @@ export const baseResumeData = {
   work: [
     {
       company: "TechCorp Inc.",
-      location: "San Francisco, CA",
+      location: "",
       startDate: "2021-03",
       endDate: null,
       visibility: { online: true, print: true },
@@ -96,7 +96,7 @@ export const baseResumeData = {
     },
     {
       company: "StartupXYZ",
-      location: "San Jose, CA",
+      location: "",
       startDate: "2019-06",
       endDate: "2021-02",
       visibility: { online: true, print: true },
@@ -118,7 +118,7 @@ export const baseResumeData = {
     },
     {
       company: "WebAgency Pro",
-      location: "Remote",
+      location: "",
       startDate: "2018-01",
       endDate: "2019-05",
       visibility: { online: true, print: true },
@@ -214,7 +214,7 @@ export const ibraheemResumeData = {
   work: [
     {
       company: "Architect Health",
-      location: "New York, NY",
+      location: "",
       startDate: "2024-09",
       endDate: null,
       visibility: { online: true, print: true },
@@ -236,7 +236,7 @@ export const ibraheemResumeData = {
     },
     {
       company: "Rocket Dollar",
-      location: "Remote",
+      location: "",
       startDate: "2023-04",
       endDate: "2023-08",
       visibility: { online: true, print: true },
@@ -257,7 +257,7 @@ export const ibraheemResumeData = {
     },
     {
       company: "LinkedIn",
-      location: "New York, NY",
+      location: "",
       startDate: "2017-04",
       endDate: "2022-10",
       visibility: { online: true, print: true },
@@ -326,7 +326,7 @@ export const ibraheemResumeData = {
     },
     {
       company: "Zynga",
-      location: "San Francisco, CA",
+      location: "",
       startDate: "2013-09",
       endDate: "2015-02",
       visibility: { online: true, print: true },
@@ -378,7 +378,7 @@ export const ibraheemResumeData = {
     },
     {
       company: "TinyCo",
-      location: "San Francisco, CA",
+      location: "",
       startDate: "2012-07",
       endDate: "2012-12",
       visibility: { online: false, print: false },
@@ -398,7 +398,7 @@ export const ibraheemResumeData = {
     },
     {
       company: "KBW",
-      location: "San Francisco, CA",
+      location: "",
       startDate: "2010-12",
       endDate: "2011-03",
       visibility: { online: true, print: true },
@@ -418,7 +418,7 @@ export const ibraheemResumeData = {
     },
     {
       company: "Barclays Capital (Lehman Brothers)",
-      location: "New York, NY",
+      location: "",
       startDate: "2008-07",
       endDate: "2010-07",
       visibility: { online: true, print: true },
@@ -438,7 +438,7 @@ export const ibraheemResumeData = {
     },
     {
       company: "UBS Investment Bank",
-      location: "New York, NY",
+      location: "",
       startDate: "2007-06",
       endDate: "2007-08",
       visibility: { online: false, print: false },
@@ -458,7 +458,7 @@ export const ibraheemResumeData = {
     },
     {
       company: "Macy's",
-      location: "New York, NY",
+      location: "",
       startDate: "2006-05",
       endDate: "2006-08",
       visibility: { online: false, print: false },
@@ -478,7 +478,7 @@ export const ibraheemResumeData = {
     },
     {
       company: "May Department Stores Company",
-      location: "St. Louis, MO",
+      location: "",
       startDate: "2005-05",
       endDate: "2005-08",
       visibility: { online: false, print: false },
@@ -598,7 +598,7 @@ export const legacySampleResumeData = {
   work: [
     {
       company: "Architect Health",
-      location: "New York, NY",
+      location: "",
       startDate: "2024-09",
       endDate: null,
       visibility: { online: true, print: true },
@@ -620,7 +620,7 @@ export const legacySampleResumeData = {
     },
     {
       company: "Rocket Dollar",
-      location: "Remote",
+      location: "",
       startDate: "2023-04",
       endDate: "2023-08",
       visibility: { online: true, print: true },
@@ -641,7 +641,7 @@ export const legacySampleResumeData = {
     },
     {
       company: "LinkedIn",
-      location: "New York, NY",
+      location: "",
       startDate: "2017-04",
       endDate: "2022-10",
       visibility: { online: true, print: true },
