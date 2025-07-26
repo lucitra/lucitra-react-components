@@ -116,6 +116,7 @@ const ResumeExperience = ({ work, printMode = false, maxItems, useSerifFont = fa
         
         .highlight {
           font-size: ${printMode ? designSystem.typography.bodyText.fontSize.print : designSystem.typography.bodyText.fontSize.screen};
+          font-family: ${designSystem.typography.bodyText.fontFamily};
           color: ${designSystem.typography.bodyText.color};
           line-height: ${printMode ? '1.25' : '1.4'};
           margin-bottom: ${printMode ? '0.08cm' : '4px'};
@@ -126,6 +127,7 @@ const ResumeExperience = ({ work, printMode = false, maxItems, useSerifFont = fa
         .highlight:before {
           content: '•';
           color: ${designSystem.colors.bullet};
+          font-family: ${designSystem.typography.bodyText.fontFamily};
           position: absolute;
           left: 0;
           font-size: ${printMode ? designSystem.typography.bodyText.fontSize.print : designSystem.typography.bodyText.fontSize.screen};
