@@ -12,17 +12,17 @@ const ResumeThreeColumn = ({ skills, education, printMode = false, useSerifFont 
         .three-column-section {
           display: grid;
           grid-template-columns: ${gridColumns};
-          gap: ${printMode ? '0.05rem' : '12px'};
+          gap: ${printMode ? '0.05rem' : getSpacing('itemGap', false, designSystem)};
           margin-bottom: ${printMode ? '0' : getSpacing('sectionGap', false, designSystem)};
         }
         
         .column {
-          min-height: ${printMode ? 'auto' : '120px'};
+          min-height: ${printMode ? 'auto' : 'auto'};
         }
         
         /* When in 2-column mode, give columns more breathing room */
         .three-column-section:has(.column:nth-child(2):last-child) .column {
-          max-width: ${printMode ? 'none' : '400px'};
+          max-width: ${printMode ? 'none' : 'none'};
         }
         
         .column-title {
@@ -34,20 +34,20 @@ const ResumeThreeColumn = ({ skills, education, printMode = false, useSerifFont 
           text-transform: ${designSystem.typography.headerText.textTransform};
           letter-spacing: ${designSystem.typography.headerText.letterSpacing};
           border-bottom: ${printMode ? 'none' : `1px solid ${designSystem.colors.divider}`};
-          padding-bottom: ${printMode ? '0' : '2px'};
+          padding-bottom: ${getSpacing(printMode ? 'microGap' : 'headerGap', printMode, designSystem)};
           line-height: ${printMode ? designSystem.typography.headerText.lineHeight.print : designSystem.typography.headerText.lineHeight.screen};
         }
         
         .skills-category {
-          margin-bottom: ${printMode ? '0.03cm' : '8px'};
+          margin-bottom: ${getSpacing('largeGap', printMode, designSystem)};
         }
         
         .skills-category-title {
           font-size: ${printMode ? designSystem.typography.bodyText.fontSize.print : designSystem.typography.bodyText.fontSize.screen};
           font-weight: bold;
           font-family: ${designSystem.typography.bodyText.fontFamily};
-          color: #333;
-          margin-bottom: ${printMode ? '0.025cm' : '4px'};
+          color: ${designSystem.colors.text.secondary};
+          margin-bottom: ${getSpacing('smallGap', printMode, designSystem)};
         }
         
         .skills-list {

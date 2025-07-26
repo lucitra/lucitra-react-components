@@ -36,8 +36,8 @@ const ResumeSingleColumn = ({ skills, education, printMode = false, useSerifFont
         .education-section {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: ${printMode ? '0.15rem' : '16px'};
-          margin-bottom: ${printMode ? '0.03cm' : '6px'};
+          gap: ${getSpacing('extraLargeGap', printMode, designSystem)};
+          margin-bottom: ${getSpacing('mediumGap', printMode, designSystem)};
         }
         
         .education-item, .patent-item {

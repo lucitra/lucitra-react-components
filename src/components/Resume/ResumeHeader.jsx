@@ -10,8 +10,8 @@ const ResumeHeader = ({ basics, printMode = false, designSystem = resumeDesignSy
       <style jsx={true}>{`
         .header {
           text-align: center;
-          margin-bottom: ${printMode ? '0.05rem' : '20px'};
-          padding-bottom: ${printMode ? '0.08cm' : '16px'};
+          margin-bottom: ${getSpacing('sectionGap', printMode, designSystem)};
+          padding-bottom: ${getSpacing('extraLargeGap', printMode, designSystem)};
           border-bottom: ${printMode ? `1px solid ${designSystem.colors.divider}` : `2px solid ${designSystem.colors.divider}`};
         }
         
@@ -57,7 +57,7 @@ const ResumeHeader = ({ basics, printMode = false, designSystem = resumeDesignSy
         }
         
         .contact-separator {
-          margin: 0 ${printMode ? '8px' : '12px'};
+          margin: 0 ${getSpacing(printMode ? 'largeGap' : 'itemGap', printMode, designSystem)};
           color: ${designSystem.colors.divider};
           font-weight: normal;
         }

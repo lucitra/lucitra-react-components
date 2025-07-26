@@ -51,7 +51,7 @@ const ResumeExperience = ({ work, printMode = false, maxItems, useSerifFont = fa
         }
         
         .work-item {
-          margin-bottom: ${printMode ? '0.3cm' : '16px'};
+          margin-bottom: ${getSpacing('extraLargeGap', printMode, designSystem)};
           page-break-inside: avoid;
         }
         
@@ -63,7 +63,7 @@ const ResumeExperience = ({ work, printMode = false, maxItems, useSerifFont = fa
           display: flex;
           justify-content: space-between;
           align-items: baseline;
-          margin-bottom: ${printMode ? '0.1cm' : '6px'};
+          margin-bottom: ${getSpacing('mediumGap', printMode, designSystem)};
         }
         
         .company-name {
@@ -81,7 +81,7 @@ const ResumeExperience = ({ work, printMode = false, maxItems, useSerifFont = fa
         }
         
         .position {
-          margin-bottom: ${printMode ? '0.15cm' : '8px'};
+          margin-bottom: ${getSpacing('largeGap', printMode, designSystem)};
         }
         
         .position-header {
@@ -118,10 +118,10 @@ const ResumeExperience = ({ work, printMode = false, maxItems, useSerifFont = fa
           font-size: ${printMode ? designSystem.typography.bodyText.fontSize.print : designSystem.typography.bodyText.fontSize.screen};
           font-family: ${designSystem.typography.bodyText.fontFamily};
           color: ${designSystem.typography.bodyText.color};
-          line-height: ${printMode ? '1.25' : '1.4'};
-          margin-bottom: ${printMode ? '0.08cm' : '4px'};
+          line-height: ${printMode ? designSystem.typography.bodyText.lineHeight.print : designSystem.typography.bodyText.lineHeight.screen};
+          margin-bottom: ${getSpacing('smallGap', printMode, designSystem)};
           position: relative;
-          padding-left: ${printMode ? '8px' : '8px'};
+          padding-left: ${getSpacing('bulletIndent', printMode, designSystem)};
         }
         
         .highlight:before {

@@ -87,7 +87,12 @@ export const createResumeDesignSystem = (config = {}) => {
       itemGap: { print: config.compactMode ? '0.005cm' : '0.01cm', screen: `${spacing.itemGap}px` },
       microGap: { print: '0.001cm', screen: '1px' },
       headerGap: { print: '0.01cm', screen: '2px' },
-      bulletGap: { print: `${spacing.bulletGap * 0.1}cm`, screen: `${spacing.bulletGap}px` }
+      bulletGap: { print: `${spacing.bulletGap * 0.1}cm`, screen: `${spacing.bulletGap}px` },
+      smallGap: { print: '0.08cm', screen: '4px' },
+      mediumGap: { print: '0.1cm', screen: '6px' },
+      largeGap: { print: '0.15cm', screen: '8px' },
+      extraLargeGap: { print: '0.3cm', screen: '16px' },
+      bulletIndent: { print: '8px', screen: '8px' }
     },
 
     // Page margins
@@ -162,8 +167,16 @@ export const createResumeDesignSystem = (config = {}) => {
     
     // Colors
     colors: {
+      primary: '#000000',
+      secondary: '#333333',
+      tertiary: '#555555',
       divider: config.showDividers ? '#666' : 'transparent',
-      bullet: '#666'
+      bullet: '#666',
+      text: {
+        primary: '#000000',
+        secondary: '#333333',
+        tertiary: '#555555'
+      }
     }
   };
 };
