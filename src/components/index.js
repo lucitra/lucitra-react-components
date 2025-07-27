@@ -6,7 +6,8 @@ export {
   LanguageSwitcherSSR, 
   RegionSwitcherSSR,
   SimpleLanguageSwitcher,
-  SimpleRegionSwitcher
+  SimpleRegionSwitcher,
+  Navigation
 } from './Navigation'
 
 // Debug Components
@@ -35,3 +36,6 @@ export * from './Resume'
 
 // HubSpot Integration Components
 export * from './HubSpot'
+
+// Example Page Compositions
+export * from './Examples'

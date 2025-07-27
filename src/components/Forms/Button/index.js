@@ -1,9 +1,8 @@
-// Legacy Button (simple)
-export { default as Button } from './Button.jsx'
+// Export the main Button component as default
+export { default } from './Button.jsx'
 
-// Enhanced Button (comprehensive)
+// Enhanced Button (comprehensive) - available as named exports
 export { 
-  EnhancedButton as default,
   EnhancedButton,
   PrimaryButton,
   SecondaryButton, 

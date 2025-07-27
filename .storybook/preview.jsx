@@ -3,7 +3,7 @@ import '@mantine/core/styles.css'
 import mantineTheme from '../src/theme/mantineTheme'
 import '../src/index.css'
 
-/** @type { import('@storybook/react').Preview } */
+/** @type { import('@storybook/react-vite').Preview } */
 const preview = {
   parameters: {
     controls: {
