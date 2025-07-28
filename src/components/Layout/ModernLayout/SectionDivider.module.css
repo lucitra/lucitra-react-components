@@ -1,0 +1,58 @@
+.root {
+  position: relative;
+  width: 100%;
+}
+
+.dividerLine {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 1px;
+  background-color: var(--color-border-default);
+  pointer-events: none;
+}
+
+.dividerDefault {
+  border-style: solid;
+}
+
+.dividerDashed {
+  border-top: 1px dashed var(--color-border-default);
+  background-color: transparent;
+}
+
+.dividerDotted {
+  border-top: 1px dotted var(--color-border-default);
+  background-color: transparent;
+}
+
+.spacingNone {
+  margin: 0;
+}
+
+.spacingSm {
+  margin: 16px 0;
+}
+
+.spacingMd {
+  margin: 32px 0;
+}
+
+.spacingLg {
+  margin: 48px 0;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .dividerLine {
+  background-color: var(--color-border-default);
+}
+
+[data-theme="dark"] .dividerDashed {
+  border-top-color: var(--color-border-default);
+}
+
+[data-theme="dark"] .dividerDotted {
+  border-top-color: var(--color-border-default);
+}

@@ -8,3 +8,6 @@ export { default as Footer } from './Footer'
 export { default as Grid } from './Grid'
 export { default as Stack } from './Stack'
 export { default as Flex, FlexItem } from './Flex'
+
+// Modern Layout Components
+export { PageLayout, PageSection, SectionDivider, ModernContainer } from './ModernLayout'

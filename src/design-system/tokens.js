@@ -13,6 +13,7 @@ export const DESIGN_TOKENS = {
       secondary: '#a8a8a8',
       inverse: '#ffffff',
       disabled: '#c6c6c6',
+      muted: '#6b7280',
     },
     
     // Background colors
@@ -23,19 +24,47 @@ export const DESIGN_TOKENS = {
       dropdown: '#000000',
       selected: '#000000',
       unselected: '#ffffff',
+      default: '#ffffff',
+      muted: '#f9fafb',
+      subtle: 'rgba(0, 0, 0, 0.02)',
     },
     
     // Border colors
     border: {
       transparent: 'transparent',
       focus: '#0f62fe',
-      divider: '#393939',
+      divider: '#e5e7eb',
+      default: '#e5e7eb',
+      strong: '#d1d5db',
     },
     
     // Brand colors
     brand: {
       primary: '#0f62fe',
       secondary: '#393939',
+    },
+    
+    // Dark mode colors
+    dark: {
+      text: {
+        primary: '#f9fafb',
+        secondary: '#9ca3af',
+        inverse: '#161616',
+        disabled: '#4b5563',
+        muted: '#9ca3af',
+      },
+      background: {
+        default: '#0a0a0a',
+        hover: '#1f2937',
+        active: '#374151',
+        muted: '#111827',
+        subtle: 'rgba(255, 255, 255, 0.03)',
+      },
+      border: {
+        divider: '#374151',
+        default: '#374151',
+        strong: '#4b5563',
+      },
     },
   },
 

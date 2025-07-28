@@ -4,3 +4,64 @@
 .lucitra-component-base {
   box-sizing: border-box;
 }
+
+/* Modern Design System CSS Variables */
+:root {
+  /* Light mode colors */
+  --color-background: #ffffff;
+  --color-background-muted: #f9fafb;
+  --color-background-subtle: rgba(0, 0, 0, 0.02);
+  --color-text-primary: #161616;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
+  --color-border-default: #e5e7eb;
+  --color-border-strong: #d1d5db;
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+  
+  /* Transitions */
+  --transition-fast: 0.1s ease;
+  --transition-default: 0.15s ease;
+  --transition-slow: 0.3s ease;
+}
+
+/* Dark mode CSS variables */
+[data-mantine-color-scheme="dark"] {
+  --color-background: #0a0a0a;
+  --color-background-muted: #111827;
+  --color-background-subtle: rgba(255, 255, 255, 0.03);
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #9ca3af;
+  --color-text-muted: #6b7280;
+  --color-border-default: #374151;
+  --color-border-strong: #4b5563;
+}
+
+/* Modern layout utilities */
+.modern-border-x {
+  border-left: 1px solid var(--color-border-default);
+  border-right: 1px solid var(--color-border-default);
+}
+
+.modern-border-y {
+  border-top: 1px solid var(--color-border-default);
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+.modern-section-divider {
+  height: 1px;
+  background-color: var(--color-border-default);
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}

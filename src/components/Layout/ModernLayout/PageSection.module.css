@@ -1,0 +1,72 @@
+.root {
+  position: relative;
+  padding: 32px 0;
+}
+
+.noPadding {
+  padding: 0;
+}
+
+@media (min-width: 640px) {
+  .root:not(.noPadding) {
+    padding: 48px 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .root:not(.noPadding) {
+    padding: 64px 0;
+  }
+}
+
+.borderLine {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 1px;
+  background-color: var(--color-border-default);
+  pointer-events: none;
+}
+
+.borderTop {
+  top: 0;
+}
+
+.borderBottom {
+  bottom: 0;
+}
+
+.content {
+  position: relative;
+  margin: 0 auto;
+}
+
+.backgroundDefault {
+  background-color: var(--color-background);
+}
+
+.backgroundMuted {
+  background-color: var(--color-background-muted);
+}
+
+.backgroundSubtle {
+  background-color: var(--color-background-subtle);
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .backgroundDefault {
+  background-color: var(--color-background);
+}
+
+[data-theme="dark"] .backgroundMuted {
+  background-color: var(--color-background-muted);
+}
+
+[data-theme="dark"] .backgroundSubtle {
+  background-color: var(--color-background-subtle);
+}
+
+[data-theme="dark"] .borderLine {
+  background-color: var(--color-border-default);
+}

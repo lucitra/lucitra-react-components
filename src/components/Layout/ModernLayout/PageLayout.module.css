@@ -1,0 +1,50 @@
+.root {
+  min-height: 100vh;
+  background-color: var(--color-background);
+  position: relative;
+}
+
+.sideBorders {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: var(--color-border-default);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.leftBorder {
+  left: 0;
+}
+
+.rightBorder {
+  right: 0;
+}
+
+.content {
+  position: relative;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+@media (min-width: 640px) {
+  .content {
+    padding: 0 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content {
+    padding: 0 32px;
+  }
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .root {
+  background-color: var(--color-background);
+}
+
+[data-theme="dark"] .sideBorders {
+  background-color: var(--color-border-default);
+}
