@@ -1,8 +1,8 @@
 import React from 'react';
 import { Stack, Group, Paper, Text, Title } from '@mantine/core';
-import { NavButton } from '../components/Navigation/NavButton/NavButton';
-import { Badge } from '../components/DataDisplay/Badge/Badge';
-import { Alert } from '../components/Feedback/Alert/Alert';
+import { NavButton } from '../components/Navigation/NavButton';
+import { Badge } from '../components/DataDisplay/Badge';
+import { Alert } from '../components/Feedback/Alert';
 import { IconHome, IconSettings, IconUser } from '@tabler/icons-react';
 
 export default {
@@ -65,9 +65,15 @@ export const UpdatedComponents = () => {
       <Paper p="md" withBorder>
         <Title order={3} mb="md">NavButton Component</Title>
         <Group>
-          <NavButton icon={<IconHome size={20} />} />
-          <NavButton icon={<IconSettings size={20} />} />
-          <NavButton icon={<IconUser size={20} />} disabled />
+          <NavButton ariaLabel="Home">
+            <IconHome size={20} />
+          </NavButton>
+          <NavButton ariaLabel="Settings">
+            <IconSettings size={20} />
+          </NavButton>
+          <NavButton ariaLabel="User" disabled>
+            <IconUser size={20} />
+          </NavButton>
         </Group>
         <Text size="sm" c="dimmed" mt="sm">
           Uses: --spacing-2xl (width), --spacing-xl (height), --color-background-Hover, --color-border-Focus
