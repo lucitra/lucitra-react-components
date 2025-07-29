@@ -422,23 +422,34 @@ const DesignTokensEditor = ({ onThemeChange }) => {
         return (
           <Stack>
             {TOKEN_CATEGORIES.spacing.tokens.map((space) => {
-              const tokenName = `--space-${space}`;
+              const tokenName = `--spacing-${space}`;
+              const value = tokens[tokenName] || "";
+              
+              // Compute the actual value from the CSS variable references
+              let computedValue = value;
+              if (value && value.startsWith("var(")) {
+                const refName = value.match(/var\((--[^)]+)\)/)?.[1];
+                if (refName && tokens[refName]) {
+                  computedValue = tokens[refName];
+                }
+              }
+              
               return (
                 <Group key={space} position="apart" align="center">
-                  <Text size="sm" style={{ minWidth: 100 }}>
-                    space-{space}
+                  <Text size="sm" style={{ minWidth: 120 }}>
+                    spacing-{space}
                   </Text>
                   <TextInput
-                    value={tokens[tokenName] || ""}
+                    value={computedValue}
                     onChange={(e) => handleTokenChange(tokenName, e.target.value)}
                     placeholder="1rem"
                     style={{ flex: 1 }}
                   />
                   <Box
                     style={{
-                      width: tokens[tokenName] || "1rem",
+                      width: computedValue || "16px",
                       height: "20px",
-                      backgroundColor: "var(--color-primary)",
+                      backgroundColor: "var(--color-brand-500)",
                       borderRadius: "var(--radius-sm)",
                     }}
                   />
