@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Menu, Text, UnstyledButton, Group, useMantineColorScheme, useMantineTheme } from '@mantine/core';
+import { Menu, Text, UnstyledButton, Group, useMantineTheme } from '@mantine/core';
 import { IconSun, IconMoon, IconDeviceDesktop } from '@tabler/icons-react';
 
 const THEMES = [
@@ -31,15 +31,21 @@ export function ThemeSwitcherMantine({
   style = {},
   className = '',
 }) {
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const theme = useMantineTheme();
-  const [selectedTheme, setSelectedTheme] = useState(currentTheme || colorScheme);
+  const [selectedTheme, setSelectedTheme] = useState(currentTheme || 'light');
   const [isClient, setIsClient] = useState(false);
 
   // Handle hydration
   useEffect(() => {
     setIsClient(true);
-  }, []);
+    // Get initial theme from document attribute if not provided
+    if (!currentTheme) {
+      const docTheme = document.documentElement.getAttribute('data-mantine-color-scheme');
+      if (docTheme) {
+        setSelectedTheme(docTheme);
+      }
+    }
+  }, [currentTheme]);
 
   // Sync with external currentTheme changes
   useEffect(() => {
@@ -47,13 +53,6 @@ export function ThemeSwitcherMantine({
       setSelectedTheme(currentTheme);
     }
   }, [currentTheme, selectedTheme]);
-
-  // Initialize with Mantine's current color scheme
-  useEffect(() => {
-    if (!currentTheme && colorScheme !== selectedTheme) {
-      setSelectedTheme(colorScheme);
-    }
-  }, [colorScheme, currentTheme, selectedTheme]);
 
   const handleChange = (value) => {
     if (value === selectedTheme) return;
@@ -63,15 +62,10 @@ export function ThemeSwitcherMantine({
 
     setSelectedTheme(value);
     
-    // Toggle Mantine color scheme
-    if (value !== 'auto') {
-      toggleColorScheme(value);
-    } else {
-      // For system/auto, detect and apply system preference
-      const systemPreference = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      toggleColorScheme(systemPreference);
-    }
+    // Update document attribute for CSS
+    document.documentElement.setAttribute('data-mantine-color-scheme', value);
     
+    // Notify parent component
     onThemeChange(themeOption);
   };
 

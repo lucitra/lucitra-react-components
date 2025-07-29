@@ -1,22 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { PageLayout, PageSection, SectionDivider, ModernContainer } from './index';
 import Button from '../../Forms/Button';
 import { Card } from '../../DataDisplay/Card';
 import { Text } from '../../Typography/Text';
 import { Heading } from '../../Typography/Heading';
-import { Grid, Stack, MantineProvider } from '@mantine/core';
-
-// Wrapper to ensure Mantine context is available
-const StoryWrapper = ({ children }) => (
-  <MantineProvider>
-    {children}
-  </MantineProvider>
-);
-
-StoryWrapper.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+import { Grid, Stack } from '@mantine/core';
 
 export default {
   title: 'Layout/ModernLayout',
@@ -24,7 +12,6 @@ export default {
   parameters: {
     layout: 'fullscreen',
   },
-  decorators: [(Story) => <StoryWrapper><Story /></StoryWrapper>],
 };
 
 export const Default = () => (

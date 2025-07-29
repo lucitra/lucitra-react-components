@@ -1,17 +1,10 @@
 import React from 'react';
 import { ThemeSwitcherMantine } from './ThemeSwitcherMantine';
-import { Stack, Paper, Text, Group, MantineProvider } from '@mantine/core';
+import { Stack, Paper, Text, Group } from '@mantine/core';
 
 export default {
   title: 'Navigation/ThemeSwitcher',
   component: ThemeSwitcherMantine,
-  decorators: [
-    (Story) => (
-      <MantineProvider>
-        <Story />
-      </MantineProvider>
-    ),
-  ],
 };
 
 const Template = (args) => <ThemeSwitcherMantine {...args} />;
