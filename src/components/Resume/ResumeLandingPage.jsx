@@ -11,7 +11,7 @@ const ResumeLandingPage = () => {
       <style jsx>{`
         .landing-page {
           min-height: 100vh;
-          background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+          background: #fafbfc;
         }
         
         .header {
@@ -150,21 +150,7 @@ const ResumeLandingPage = () => {
           background: #f8f9fa;
           padding: 12px 20px;
           border-bottom: 1px solid #e0e0e0;
-          display: flex;
-          align-items: center;
-          gap: 8px;
         }
-        
-        .preview-dot {
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
-          background: #ddd;
-        }
-        
-        .preview-dot.red { background: #ff5f57; }
-        .preview-dot.yellow { background: #ffbd2e; }
-        .preview-dot.green { background: #28ca42; }
         
         .preview-content {
           height: 600px;
@@ -218,19 +204,15 @@ const ResumeLandingPage = () => {
         }
         
         .feature-card {
-          text-align: center;
+          text-align: left;
           padding: 30px;
         }
         
-        .feature-icon {
-          font-size: 48px;
-          margin-bottom: 20px;
-        }
         
         .feature-title {
-          font-size: 22px;
+          font-size: 24px;
           font-weight: 600;
-          margin-bottom: 12px;
+          margin-bottom: 16px;
           color: #333;
         }
         
@@ -333,8 +315,9 @@ const ResumeLandingPage = () => {
         }
         
         .plan-feature-icon {
-          color: #4CAF50;
+          color: #667eea;
           margin-right: 10px;
+          font-weight: bold;
         }
         
         .builder-modal {
@@ -428,9 +411,6 @@ const ResumeLandingPage = () => {
           
           <div className="hero-preview">
             <div className="preview-header">
-              <div className="preview-dot red"></div>
-              <div className="preview-dot yellow"></div>
-              <div className="preview-dot green"></div>
             </div>
             <div className="preview-content">
               <ResumeBuilder
@@ -453,7 +433,6 @@ const ResumeLandingPage = () => {
             
             <div className="features-grid">
               <div className="feature-card">
-                <div className="feature-icon">🤖</div>
                 <h3 className="feature-title">AI-Powered Optimization</h3>
                 <p className="feature-desc">
                   Get intelligent suggestions to improve your resume content and beat ATS filters
@@ -461,7 +440,6 @@ const ResumeLandingPage = () => {
               </div>
               
               <div className="feature-card">
-                <div className="feature-icon">💼</div>
                 <h3 className="feature-title">LinkedIn Import</h3>
                 <p className="feature-desc">
                   Import your LinkedIn profile with one click and transform it into a professional resume
@@ -469,7 +447,6 @@ const ResumeLandingPage = () => {
               </div>
               
               <div className="feature-card">
-                <div className="feature-icon">📊</div>
                 <h3 className="feature-title">ATS Scoring</h3>
                 <p className="feature-desc">
                   Real-time ATS compatibility scoring to ensure your resume gets past automated filters
@@ -477,7 +454,6 @@ const ResumeLandingPage = () => {
               </div>
               
               <div className="feature-card">
-                <div className="feature-icon">🎨</div>
                 <h3 className="feature-title">Professional Templates</h3>
                 <p className="feature-desc">
                   Choose from modern, ATS-friendly templates designed by HR professionals
@@ -485,7 +461,6 @@ const ResumeLandingPage = () => {
               </div>
               
               <div className="feature-card">
-                <div className="feature-icon">💾</div>
                 <h3 className="feature-title">Version Control</h3>
                 <p className="feature-desc">
                   Track changes and revert to previous versions with built-in version history
@@ -493,7 +468,6 @@ const ResumeLandingPage = () => {
               </div>
               
               <div className="feature-card">
-                <div className="feature-icon">📱</div>
                 <h3 className="feature-title">Multiple Formats</h3>
                 <p className="feature-desc">
                   Export your resume as PDF, DOCX, or JSON for maximum compatibility
@@ -516,23 +490,23 @@ const ResumeLandingPage = () => {
                 </div>
                 <div className="plan-features">
                   <div className="plan-feature">
-                    <span className="plan-feature-icon">✓</span>
+                    <span className="plan-feature-icon">•</span>
                     <span>Preview with watermark</span>
                   </div>
                   <div className="plan-feature">
-                    <span className="plan-feature-icon">✓</span>
+                    <span className="plan-feature-icon">•</span>
                     <span>Basic templates</span>
                   </div>
                   <div className="plan-feature">
-                    <span className="plan-feature-icon">✓</span>
+                    <span className="plan-feature-icon">•</span>
                     <span>LinkedIn import</span>
                   </div>
                   <div className="plan-feature">
-                    <span className="plan-feature-icon">✗</span>
+                    <span className="plan-feature-icon" style={{ color: '#999' }}>•</span>
                     <span>No downloads</span>
                   </div>
                   <div className="plan-feature">
-                    <span className="plan-feature-icon">✗</span>
+                    <span className="plan-feature-icon" style={{ color: '#999' }}>•</span>
                     <span>No resume saving</span>
                   </div>
                 </div>
@@ -550,23 +524,23 @@ const ResumeLandingPage = () => {
                 </div>
                 <div className="plan-features">
                   <div className="plan-feature">
-                    <span className="plan-feature-icon">✓</span>
+                    <span className="plan-feature-icon">•</span>
                     <span>Download PDF (no watermark)</span>
                   </div>
                   <div className="plan-feature">
-                    <span className="plan-feature-icon">✓</span>
+                    <span className="plan-feature-icon">•</span>
                     <span>Save up to 3 resumes</span>
                   </div>
                   <div className="plan-feature">
-                    <span className="plan-feature-icon">✓</span>
+                    <span className="plan-feature-icon">•</span>
                     <span>Basic ATS scoring</span>
                   </div>
                   <div className="plan-feature">
-                    <span className="plan-feature-icon">✓</span>
+                    <span className="plan-feature-icon">•</span>
                     <span>20 AI optimizations/month</span>
                   </div>
                   <div className="plan-feature">
-                    <span className="plan-feature-icon">✓</span>
+                    <span className="plan-feature-icon">•</span>
                     <span>5 premium templates</span>
                   </div>
                 </div>
@@ -583,23 +557,23 @@ const ResumeLandingPage = () => {
                 </div>
                 <div className="plan-features">
                   <div className="plan-feature">
-                    <span className="plan-feature-icon">✓</span>
+                    <span className="plan-feature-icon">•</span>
                     <span>Everything in Starter</span>
                   </div>
                   <div className="plan-feature">
-                    <span className="plan-feature-icon">✓</span>
+                    <span className="plan-feature-icon">•</span>
                     <span>Download DOCX format</span>
                   </div>
                   <div className="plan-feature">
-                    <span className="plan-feature-icon">✓</span>
+                    <span className="plan-feature-icon">•</span>
                     <span>Save up to 10 resumes</span>
                   </div>
                   <div className="plan-feature">
-                    <span className="plan-feature-icon">✓</span>
+                    <span className="plan-feature-icon">•</span>
                     <span>100 AI optimizations/month</span>
                   </div>
                   <div className="plan-feature">
-                    <span className="plan-feature-icon">✓</span>
+                    <span className="plan-feature-icon">•</span>
                     <span>Remove branding</span>
                   </div>
                 </div>

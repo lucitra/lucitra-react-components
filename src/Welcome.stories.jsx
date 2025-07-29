@@ -45,9 +45,9 @@ const WelcomeComponent = () => {
           padding: '24px',
           border: '1px solid #e5e7eb',
           borderRadius: '8px',
-          backgroundColor: '#f9fafb'
+          backgroundColor: 'white'
         }}>
-          <h3 style={{ color: '#1f2937', marginTop: 0 }}>🧭 Navigation Components</h3>
+          <h3 style={{ color: '#1f2937', marginTop: 0 }}>Navigation Components</h3>
           <ul style={{ color: '#6b7280', paddingLeft: '20px' }}>
             <li><strong>LanguageSwitcher</strong> - Multi-language dropdown with RTL support</li>
             <li><strong>RegionSwitcher</strong> - Country/region selector with language integration</li>
@@ -58,9 +58,9 @@ const WelcomeComponent = () => {
           padding: '24px',
           border: '1px solid #e5e7eb',
           borderRadius: '8px',
-          backgroundColor: '#f0f9ff'
+          backgroundColor: 'white'
         }}>
-          <h3 style={{ color: '#1f2937', marginTop: 0 }}>📝 Form Components</h3>
+          <h3 style={{ color: '#1f2937', marginTop: 0 }}>Form Components</h3>
           <ul style={{ color: '#6b7280', paddingLeft: '20px' }}>
             <li>Button - <em>Coming Soon</em></li>
             <li>Input - <em>Coming Soon</em></li>
@@ -73,9 +73,9 @@ const WelcomeComponent = () => {
           padding: '24px',
           border: '1px solid #e5e7eb',
           borderRadius: '8px',
-          backgroundColor: '#f0fdf4'
+          backgroundColor: 'white'
         }}>
-          <h3 style={{ color: '#1f2937', marginTop: 0 }}>🎨 Layout Components</h3>
+          <h3 style={{ color: '#1f2937', marginTop: 0 }}>Layout Components</h3>
           <ul style={{ color: '#6b7280', paddingLeft: '20px' }}>
             <li>Container - <em>Coming Soon</em></li>
             <li>Grid - <em>Coming Soon</em></li>
@@ -88,9 +88,9 @@ const WelcomeComponent = () => {
           padding: '24px',
           border: '1px solid #e5e7eb',
           borderRadius: '8px',
-          backgroundColor: '#fefce8'
+          backgroundColor: 'white'
         }}>
-          <h3 style={{ color: '#1f2937', marginTop: 0 }}>💬 Feedback Components</h3>
+          <h3 style={{ color: '#1f2937', marginTop: 0 }}>Feedback Components</h3>
           <ul style={{ color: '#6b7280', paddingLeft: '20px' }}>
             <li>Alert - <em>Coming Soon</em></li>
             <li>Toast - <em>Coming Soon</em></li>
@@ -102,24 +102,25 @@ const WelcomeComponent = () => {
 
       <div style={{
         padding: '24px',
-        backgroundColor: '#3b82f6',
-        color: 'white',
+        backgroundColor: '#f9fafb',
+        border: '1px solid #e5e7eb',
+        color: '#1f2937',
         borderRadius: '8px',
         textAlign: 'center'
       }}>
-        <h3 style={{ marginTop: 0, color: 'white' }}>✨ Features</h3>
+        <h3 style={{ marginTop: 0, color: '#1f2937' }}>Key Features</h3>
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
           gap: '16px',
           textAlign: 'left'
         }}>
-          <div>♿ Accessibility First</div>
-          <div>🌍 Internationalization</div>
-          <div>🎨 Themeable</div>
-          <div>📱 Responsive</div>
-          <div>🎯 TypeScript</div>
-          <div>📦 Tree Shakeable</div>
+          <div>Accessibility First</div>
+          <div>Internationalization</div>
+          <div>Themeable</div>
+          <div>Responsive</div>
+          <div>TypeScript</div>
+          <div>Tree Shakeable</div>
         </div>
       </div>
 

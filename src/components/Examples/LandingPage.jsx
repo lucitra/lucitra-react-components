@@ -31,37 +31,37 @@ const LandingPage = () => {
       icon: IconBolt,
       title: 'Lightning Fast',
       description: 'Optimized performance with instant load times and smooth interactions.',
-      iconColor: 'yellow'
+      iconColor: '#667eea'
     },
     {
       icon: IconPalette,
       title: 'Beautiful Design',
       description: 'Modern, clean interfaces with customizable themes and components.',
-      iconColor: 'pink'
+      iconColor: '#667eea'
     },
     {
       icon: IconDeviceMobile,
       title: 'Mobile First',
       description: 'Responsive design that works perfectly on all screen sizes.',
-      iconColor: 'blue'
+      iconColor: '#667eea'
     },
     {
       icon: IconLock,
       title: 'Secure & Private',
       description: 'Enterprise-grade security with end-to-end encryption.',
-      iconColor: 'green'
+      iconColor: '#667eea'
     },
     {
       icon: IconCloud,
       title: 'Cloud Native',
       description: 'Deploy anywhere with automatic scaling and high availability.',
-      iconColor: 'cyan'
+      iconColor: '#667eea'
     },
     {
       icon: IconUsers,
       title: 'Team Collaboration',
       description: 'Real-time collaboration tools for teams of any size.',
-      iconColor: 'violet'
+      iconColor: '#667eea'
     },
   ]
 
@@ -93,7 +93,7 @@ const LandingPage = () => {
   ]
 
   return (
-    <Page backgroundColor="linear-gradient(to bottom, #f8f9fa 0%, #ffffff 50%)">
+    <Page backgroundColor="#fafbfc">
       <Header
         logo={
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -101,7 +101,7 @@ const LandingPage = () => {
               width: 36, 
               height: 36, 
               borderRadius: 8, 
-              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              background: '#667eea',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -117,7 +117,7 @@ const LandingPage = () => {
         navigation={navigation}
         actions={[
           { name: 'Sign In', href: '#signin' },
-          <Button key="demo" variant="filled" gradient={{ from: 'indigo', to: 'cyan' }}>
+          <Button key="demo" variant="filled">
             Request Demo
           </Button>,
         ]}
@@ -130,9 +130,7 @@ const LandingPage = () => {
         subtitle="Build beautiful, responsive web applications faster than ever with our comprehensive component library"
         primaryAction={{ 
           label: 'Start Building', 
-          href: '#start',
-          variant: 'gradient',
-          gradient: { from: 'indigo', to: 'cyan' }
+          href: '#start'
         }}
         secondaryAction={{ 
           label: 'View Components', 
