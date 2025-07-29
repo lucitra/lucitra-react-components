@@ -22,8 +22,8 @@ function Footer({
   px = rem(48),
   py = 'lg',
   style = {
-    borderTop: '1px solid rgba(0, 0, 0, 0.1)',
-    backgroundColor: 'rgba(248, 249, 250, 0.95)',
+    borderTop: '1px solid var(--color-border-Tertiary)',
+    backgroundColor: 'var(--color-surface-L1)',
     backdropFilter: 'blur(10px)'
   },
   iconVariant = 'subtle',

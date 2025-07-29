@@ -34,18 +34,18 @@ export const Badge = ({
       size={size}
       radius={radius}
       style={{
-        border: `2px solid ${badgeColor === 'blue' ? '#228be6' : 
-                              badgeColor === 'green' ? '#40c057' :
-                              badgeColor === 'yellow' ? '#fd7e14' : 
-                              badgeColor === 'red' ? '#fa5252' :
-                              badgeColor === 'cyan' ? '#15aabf' : '#868e96'}`,
-        borderRadius: radius,
-        backgroundColor: 'white',
-        color: badgeColor === 'blue' ? '#228be6' : 
-               badgeColor === 'green' ? '#40c057' :
-               badgeColor === 'yellow' ? '#fd7e14' : 
-               badgeColor === 'red' ? '#fa5252' :
-               badgeColor === 'cyan' ? '#15aabf' : '#868e96'
+        border: `2px solid ${badgeColor === 'blue' ? 'var(--color-blue-500)' : 
+                              badgeColor === 'green' ? 'var(--color-green-500)' :
+                              badgeColor === 'yellow' ? 'var(--color-yellow-500)' : 
+                              badgeColor === 'red' ? 'var(--color-red-500)' :
+                              badgeColor === 'cyan' ? 'var(--color-cyan-500)' : 'var(--color-neutral-500)'}`,
+        borderRadius: radius === 0 ? 'var(--radius-sm)' : radius,
+        backgroundColor: 'var(--color-background-Primary)',
+        color: badgeColor === 'blue' ? 'var(--color-blue-500)' : 
+               badgeColor === 'green' ? 'var(--color-green-500)' :
+               badgeColor === 'yellow' ? 'var(--color-yellow-500)' : 
+               badgeColor === 'red' ? 'var(--color-red-500)' :
+               badgeColor === 'cyan' ? 'var(--color-cyan-500)' : 'var(--color-neutral-500)'
       }}
       {...props}
     >

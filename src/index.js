@@ -1,6 +1,7 @@
 // Styles
 import './index.css'
 import './styles/tokens.css'
+import './styles/typography-utilities.css'
 
 // All Components
 export * from './components'

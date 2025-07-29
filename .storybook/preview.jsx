@@ -7,6 +7,8 @@ import '@mantine/core/styles.css'
 import mantineTheme from '../src/theme/mantineTheme'
 import { DEFAULT_LANGUAGES, DEFAULT_REGIONS } from '../src/utils/defaultConfigs'
 import '../src/index.css'
+import '../src/styles/tokens.css'
+import '../src/styles/typography-utilities.css'
 
 // Initialize i18next for Storybook with only supported languages
 if (!i18n.isInitialized) {
@@ -63,6 +65,7 @@ if (!i18n.isInitialized) {
 
 // Import shared context
 import { RegionContext } from './contexts'
+import { ThemeProvider } from '../src/providers/ThemeProvider'
 
 // Filter to only supported languages and regions
 // Supporting: en-US (English), ar-SA (Arabic), fr-FR (French)
@@ -145,6 +148,16 @@ const preview = {
         setScheme(colorScheme)
         // Also update document color scheme for CSS variables
         document.documentElement.setAttribute('data-mantine-color-scheme', colorScheme)
+        // Update theme attribute for design tokens
+        const actualScheme = colorScheme === 'auto' ? 
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : 
+          colorScheme;
+        document.documentElement.setAttribute('data-theme', actualScheme)
+        
+        // Force CSS to reload
+        document.documentElement.style.display = 'none';
+        document.documentElement.offsetHeight; // Trigger reflow
+        document.documentElement.style.display = '';
       }, [colorScheme])
       
       // Update language when toolbar changes
@@ -180,36 +193,38 @@ const preview = {
           forceColorScheme={scheme === 'auto' ? undefined : scheme}
         >
           <I18nextProvider i18n={i18n}>
-            <RegionContext.Provider value={region}>
-              <div 
-                style={{ 
-                  minHeight: '100vh',
-                  backgroundColor: scheme === 'dark' ? '#0a0a0a' : '#ffffff',
-                  color: scheme === 'dark' ? '#f9fafb' : '#161616',
-                  transition: 'background-color 0.3s ease, color 0.3s ease',
-                }}
-                data-theme={scheme}
-                data-mantine-color-scheme={scheme}
-              >
-                {/* Optional: Show current settings in development */}
-                {process.env.NODE_ENV === 'development' && (
-                  <div style={{
-                    position: 'fixed',
-                    bottom: 20,
-                    right: 20,
-                    padding: '8px 12px',
-                    backgroundColor: scheme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
-                    borderRadius: 8,
-                    fontSize: 12,
-                    fontFamily: 'monospace',
-                    zIndex: 9999,
-                  }}>
-                    Theme: {scheme} | Lang: {locale} | Region: {region}
-                  </div>
-                )}
-                <Story />
-              </div>
-            </RegionContext.Provider>
+            <ThemeProvider>
+              <RegionContext.Provider value={region}>
+                <div 
+                  style={{ 
+                    minHeight: '100vh',
+                    backgroundColor: 'var(--color-background-Primary)',
+                    color: 'var(--color-content-Primary)',
+                    transition: 'background-color 0.3s ease, color 0.3s ease',
+                  }}
+                  data-theme={scheme}
+                  data-mantine-color-scheme={scheme}
+                >
+                  {/* Optional: Show current settings in development */}
+                  {process.env.NODE_ENV === 'development' && (
+                    <div style={{
+                      position: 'fixed',
+                      bottom: 20,
+                      right: 20,
+                      padding: '8px 12px',
+                      backgroundColor: scheme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+                      borderRadius: 8,
+                      fontSize: 12,
+                      fontFamily: 'monospace',
+                      zIndex: 9999,
+                    }}>
+                      Theme: {scheme} | Lang: {locale} | Region: {region}
+                    </div>
+                  )}
+                  <Story />
+                </div>
+              </RegionContext.Provider>
+            </ThemeProvider>
           </I18nextProvider>
         </MantineProvider>
       )

@@ -113,7 +113,7 @@ const AITextInput = ({
         }}
         style={{
           width: '100%',
-          paddingRight: shouldShowAIButton && value && value.trim() ? '45px' : '12px',
+          paddingRight: shouldShowAIButton && value && value.trim() ? 'var(--spacing-6xl)' : 'var(--spacing-md)',
           ...inputProps.style
         }}
       />

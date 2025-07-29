@@ -35,37 +35,32 @@ const TOKEN_CATEGORIES = {
     label: "Colors",
     icon: IconPalette,
     tokens: [
-      "background",
-      "surface",
-      "surface-hover",
-      "border",
-      "border-subtle",
-      "text-primary",
-      "text-secondary",
-      "text-muted",
-      "text-inverse",
-      "primary",
-      "primary-hover",
-      "primary-text",
-      "success",
-      "warning",
-      "error",
-      "info",
+      "background-Primary",
+      "surface-L0",
+      "surface-L1",
+      "border-Primary",
+      "border-Secondary",
+      "content-Primary",
+      "content-Secondary",
+      "content-Tertiary",
+      "background-Brand",
+      "background-Info",
+      "background-Notice",
+      "background-Negative",
+      "background-Positive",
     ],
   },
   typography: {
     label: "Typography",
     icon: IconLetterCase,
     tokens: {
-      fontSize: ["xs", "sm", "base", "lg", "xl", "2xl", "3xl", "4xl", "5xl"],
+      fontSize: ["6xs", "5xs", "4xs", "3xs", "2xs", "xs", "sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl"],
       fontWeight: [
-        "thin",
-        "light",
-        "normal",
-        "medium",
-        "semibold",
+        "regular",
+        "semi-bold",
         "bold",
-        "extrabold",
+        "black",
+        "italic",
       ],
       lineHeight: ["none", "tight", "snug", "normal", "relaxed", "loose"],
       fontFamily: ["sans", "mono"],
@@ -74,17 +69,17 @@ const TOKEN_CATEGORIES = {
   spacing: {
     label: "Spacing",
     icon: IconRuler,
-    tokens: ["0", "1", "2", "3", "4", "5", "6", "8", "10", "12", "16"],
+    tokens: ["9xs", "8xs", "7xs", "6xs", "5xs", "4xs", "3xs", "2xs", "xs", "sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "7xl", "8xl", "9xl", "10xl", "11xl", "12xl", "13xl", "14xl", "15xl", "16xl"],
   },
   borderRadius: {
     label: "Border Radius",
     icon: IconSquare,
-    tokens: ["none", "sm", "base", "md", "lg", "xl", "2xl", "3xl", "full"],
+    tokens: ["xs", "sm", "md", "lg", "pill", "circle"],
   },
   shadows: {
     label: "Shadows",
     icon: IconBox,
-    tokens: ["xs", "sm", "base", "md", "lg", "xl"],
+    tokens: ["xs", "sm", "md", "lg", "xl"],
   },
   transitions: {
     label: "Transitions",
@@ -290,18 +285,20 @@ const DesignTokensEditor = ({ onThemeChange }) => {
                     onChange={(value) => handleTokenChange(tokenName, value)}
                     format="hex"
                     swatches={[
-                      "#111827",
-                      "#6b7280",
-                      "#9ca3af",
-                      "#e5e7eb",
-                      "#f3f4f6",
                       "#ffffff",
-                      "#667eea",
-                      "#5a67d8",
-                      "#10b981",
-                      "#f59e0b",
-                      "#ef4444",
-                      "#3b82f6",
+                      "#f5f5f5",
+                      "#e6e6e6",
+                      "#cccccc",
+                      "#999999",
+                      "#666666",
+                      "#333333",
+                      "#1a1a1a",
+                      "#000000",
+                      "#2d9bd3",
+                      "#ff8c00",
+                      "#ff0000",
+                      "#00ff00",
+                      "#ffbf00",
                     ]}
                     style={{ flex: 1 }}
                   />
@@ -359,14 +356,12 @@ const DesignTokensEditor = ({ onThemeChange }) => {
                       <Text size="sm" style={{ minWidth: 100 }}>
                         {weight}
                       </Text>
-                      <NumberInput
-                        value={parseInt(tokens[tokenName]) || 400}
-                        onChange={(value) =>
-                          handleTokenChange(tokenName, value.toString())
+                      <TextInput
+                        value={tokens[tokenName] || ""}
+                        onChange={(e) =>
+                          handleTokenChange(tokenName, e.target.value)
                         }
-                        min={100}
-                        max={900}
-                        step={100}
+                        placeholder="400"
                         style={{ flex: 1 }}
                       />
                     </Group>

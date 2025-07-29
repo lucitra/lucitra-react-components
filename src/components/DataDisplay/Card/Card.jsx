@@ -50,7 +50,7 @@ Card.Title = forwardRef(({ children, order = 3, ...props }, ref) => {
   return (
     <Component 
       ref={ref} 
-      style={{ margin: 0, fontWeight: 600, fontSize: order === 3 ? '1.125rem' : '1rem' }} 
+      style={{ margin: 0, fontWeight: 'var(--typography-lg-semibold-font-weight)', fontSize: order === 3 ? 'var(--typography-lg-semibold-font-size)' : 'var(--typography-md-semibold-font-size)' }} 
       {...props}
     >
       {children}
@@ -62,7 +62,7 @@ Card.Title.displayName = 'Card.Title'
 Card.Meta = forwardRef(({ children, ...props }, ref) => (
   <span 
     ref={ref} 
-    style={{ fontSize: '0.875rem', color: 'var(--mantine-color-dimmed)' }} 
+    style={{ fontSize: 'var(--typography-sm-regular-font-size)', color: 'var(--color-content-Tertiary)' }} 
     {...props}
   >
     {children}
@@ -73,7 +73,7 @@ Card.Meta.displayName = 'Card.Meta'
 Card.Actions = forwardRef(({ children, ...props }, ref) => (
   <div 
     ref={ref} 
-    style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }} 
+    style={{ display: 'flex', gap: 'var(--spacing-sm)', alignItems: 'center' }} 
     {...props}
   >
     {children}

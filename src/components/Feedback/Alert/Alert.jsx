@@ -50,11 +50,11 @@ export const Alert = ({
       title={title}
       color={alertColor}
       style={{
-        border: `2px solid ${alertColor === 'blue' ? '#228be6' : 
-                              alertColor === 'green' ? '#40c057' :
-                              alertColor === 'yellow' ? '#fd7e14' : '#fa5252'}`,
-        borderRadius: 0,
-        backgroundColor: 'white'
+        border: `2px solid ${alertColor === 'blue' ? 'var(--color-blue-500)' : 
+                              alertColor === 'green' ? 'var(--color-green-500)' :
+                              alertColor === 'yellow' ? 'var(--color-yellow-500)' : 'var(--color-red-500)'}`,
+        borderRadius: 'var(--radius-md)',
+        backgroundColor: 'var(--color-background-Primary)'
       }}
       {...props}
     >

@@ -6,7 +6,7 @@ const Hero = ({
   title,
   subtitle,
   backgroundImage,
-  backgroundColor = '#111827',
+  backgroundColor = 'var(--color-neutral-900)',
   primaryAction,
   secondaryAction,
   announcement,
@@ -55,7 +55,7 @@ const Hero = ({
             transform: 'translateX(-50%) rotate(30deg)',
             width: rem(578),
             aspectRatio: '1155/678',
-            background: 'linear-gradient(to top right, #ff80b5, #9089fc)',
+            background: 'linear-gradient(to top right, var(--color-pink-400), var(--color-purple-400))',
             opacity: 0.2,
             overflow: 'hidden',
             filter: 'blur(3rem)',
@@ -114,7 +114,7 @@ const Hero = ({
                     paddingBottom: rem(4),
                     fontSize: rem(14),
                     lineHeight: 1.5,
-                    color: '#9CA3AF',
+                    color: 'var(--color-content-Tertiary)',
                     border: '1px solid rgba(255, 255, 255, 0.1)',
                     ':hover': {
                       borderColor: 'rgba(255, 255, 255, 0.2)'
@@ -130,7 +130,7 @@ const Hero = ({
                           href={announcement.link.href}
                           style={{
                             fontWeight: 600,
-                            color: 'white',
+                            color: 'var(--color-content-Primary-Inverse)',
                             textDecoration: 'none'
                           }}
                         >
@@ -170,7 +170,7 @@ const Hero = ({
                     fontSize: rem(18),
                     fontWeight: 500,
                     textWrap: 'pretty',
-                    color: '#9CA3AF',
+                    color: 'var(--color-content-Tertiary)',
                     '@media (min-width: 640px)': {
                       fontSize: rem(20),
                       lineHeight: 2
@@ -195,7 +195,7 @@ const Hero = ({
                         href={primaryAction.href || '#'}
                         onClick={primaryAction.onClick}
                         style={{
-                          backgroundColor: primaryAction.color || '#6366F1',
+                          backgroundColor: primaryAction.color || 'var(--color-brand-500)',
                           borderRadius: rem(6),
                           padding: `${rem(10)} ${rem(14)}`,
                           fontSize: rem(14),
@@ -204,10 +204,10 @@ const Hero = ({
                           boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
                           border: 'none',
                           ':hover': {
-                            backgroundColor: primaryAction.hoverColor || '#4F46E5'
+                            backgroundColor: primaryAction.hoverColor || 'var(--color-brand-600)'
                           },
                           ':focus': {
-                            outline: `2px solid ${primaryAction.color || '#6366F1'}`,
+                            outline: `2px solid ${primaryAction.color || 'var(--color-brand-500)'}`,
                             outlineOffset: '2px'
                           }
                         }}
@@ -251,7 +251,7 @@ const Hero = ({
             transform: 'translateX(-50%)',
             width: rem(578),
             aspectRatio: '1155/678',
-            background: 'linear-gradient(to top right, #ff80b5, #9089fc)',
+            background: 'linear-gradient(to top right, var(--color-pink-400), var(--color-purple-400))',
             opacity: 0.2,
             overflow: 'hidden',
             filter: 'blur(3rem)',
