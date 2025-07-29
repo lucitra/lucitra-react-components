@@ -28,6 +28,7 @@ import ConfigurationPanel from './ConfigurationPanel.jsx';
 import PatentsEditor from './PatentsEditor.jsx';
 import { createResumeDesignSystem } from './resumeStyles.js';
 import { resumeFonts } from './resumeFonts.js';
+import styles from './ResumeBuilder.module.css';
 
 const ResumeBuilder = ({
   initialData = null,
@@ -378,67 +379,7 @@ const ResumeBuilder = ({
       (config.showPatents && patents && patents.length > 0);
 
     return (
-      <div className={`resume-display ${config.printMode ? 'print-mode' : ''}`}>
-        <style jsx={true}>{`
-          .resume-display {
-            max-width: 8.5in;
-            margin: 0 auto;
-            background: white;
-            padding: ${designSystem.margins.top} ${designSystem.margins.right} ${designSystem.margins.bottom} ${designSystem.margins.left};
-            font-size: ${designSystem.typography.bodyText.fontSize.screen};
-            line-height: ${config.spacing?.lineHeight || 1.4};
-            color: #161616;
-            box-sizing: border-box;
-          }
-          
-          .print-mode {
-            width: 8.5in;
-            height: auto;
-            padding: ${designSystem.margins.top} ${designSystem.margins.right} ${designSystem.margins.bottom} ${designSystem.margins.left};
-            margin: 0;
-            font-size: ${designSystem.typography.bodyText.fontSize.print};
-            line-height: ${config.spacing?.lineHeight || 1.2};
-            page-break-inside: avoid;
-          }
-          
-          .print-mode > * + * {
-            margin-top: 0;  /* No spacing between sections */
-          }
-          
-          @media print {
-            html, body {
-              width: 100% !important;
-              height: auto !important;
-              margin: 0 !important;
-              padding: 0 !important;
-              background: white !important;
-              color: black !important;
-            }
-            
-            @page {
-              size: letter;
-              margin: 0.1in;
-            }
-            
-            body * {
-              visibility: hidden !important;
-            }
-            
-            .resume-display,
-            .resume-display * {
-              visibility: visible !important;
-            }
-            
-            .resume-display {
-              left: 0 !important;
-              top: 0 !important;
-              width: 100% !important;
-              height: auto !important;
-              padding: 0.05in !important;
-              margin: 0 !important;
-            }
-          }
-        `}</style>
+      <div className={`${styles.resumeDisplay} ${config.printMode ? styles.printMode : ''}`}>
         
         <ResumeHeader 
           basics={basics} 
@@ -1011,9 +952,8 @@ const ResumeBuilder = ({
                   New Resume
                 </button>
                 <button
-                  className="btn btn-outline"
+                  className={`btn btn-outline ${styles.linkedinButton}`}
                   onClick={() => alert('Coming Soon! LinkedIn import will be available in the next update.')}
-                  style={{ background: '#0077B5', color: 'white', borderColor: '#0077B5', opacity: 0.7 }}
                   title="Coming Soon"
                 >
                   Import from LinkedIn (Soon)
@@ -1174,7 +1114,7 @@ const ResumeBuilder = ({
               useSerifFont={config.useSerifFont}
             />
           ) : activeTab === "preview" ? (
-            <div style={{ position: 'relative' }}>
+            <div className={styles.relativeContainer}>
               <ResumeDisplay data={resumeData} config={config} />
               <ResumeWatermark isPremium={userTier !== SUBSCRIPTION_TIERS.ANONYMOUS && userTier !== SUBSCRIPTION_TIERS.FREE} />
             </div>
@@ -1280,12 +1220,11 @@ const ResumeBuilder = ({
                   </label>
                   <AITextInput
                     id="summary"
-                    className="form-control"
+                    className={`form-control ${styles.textareaResizable}`}
                     rows={4}
                     value={resumeData.basics.summary}
                     onChange={(e) => updateBasics("summary", e.target.value)}
                     placeholder="Brief professional summary highlighting your expertise and achievements..."
-                    style={{ resize: "vertical", minHeight: "80px" }}
                     fieldType="summary"
                     fieldName="Professional Summary"
                     context={aiContext}
@@ -1298,13 +1237,7 @@ const ResumeBuilder = ({
                 </div>
 
                 <h2 className="section-header">Work Experience</h2>
-                <p
-                  style={{
-                    fontSize: "14px",
-                    color: "#6c757d",
-                    marginBottom: "16px",
-                  }}
-                >
+                <p className={styles.workExperienceCount}>
                   {resumeData.work.length} work experience
                   {resumeData.work.length !== 1 ? "s" : ""} added
                 </p>
@@ -1329,13 +1262,7 @@ const ResumeBuilder = ({
                 </button>
 
                 <h2 className="section-header">Education</h2>
-                <p
-                  style={{
-                    fontSize: "14px",
-                    color: "#6c757d",
-                    marginBottom: "16px",
-                  }}
-                >
+                <p className={styles.sectionDescription}>
                   {resumeData.education.length} education entr
                   {resumeData.education.length !== 1 ? "ies" : "y"} added
                 </p>
@@ -1399,54 +1326,45 @@ const ResumeBuilder = ({
                 <h2 className="section-header">AI Assistant</h2>
                 
                 {/* AI Context Configuration */}
-                <div style={{ 
-                  background: '#f8f9fa', 
-                  padding: '16px', 
-                  borderRadius: '8px', 
-                  border: '1px solid #e0e0e0',
-                  marginBottom: '16px'
-                }}>
-                  <h3 style={{ fontSize: '16px', margin: '0 0 12px 0', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div className={styles.aiAssistantSection}>
+                  <h3 className={styles.aiSectionHeader}>
                     <OptimizeIcon size={18} color="#333" />
                     AI Optimization Context
                   </h3>
-                  <p style={{ fontSize: '13px', color: '#666', margin: '0 0 12px 0' }}>
+                  <p className={styles.aiSectionDescription}>
                     Set context to help AI provide more targeted optimizations for any text field
                   </p>
                   
-                  <div className="form-group" style={{ marginBottom: '12px' }}>
+                  <div className={`form-group ${styles.aiFormGroup}`}>
                     <label className="form-label">Job Description (for targeted optimization)</label>
                     <textarea
-                      className="form-control"
+                      className={`form-control ${styles.aiFormLabel}`}
                       rows={3}
                       value={aiContext.jobDescription}
                       onChange={(e) => updateAIContext({ jobDescription: e.target.value })}
                       placeholder="Paste job description here to enable job-specific optimizations..."
-                      style={{ fontSize: '13px' }}
                     />
                   </div>
                   
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                  <div className={styles.aiGridTwoColumns}>
                     <div className="form-group">
                       <label className="form-label">Target Role</label>
                       <input
                         type="text"
-                        className="form-control"
+                        className={`form-control ${styles.aiFormLabel}`}
                         value={aiContext.targetRole}
                         onChange={(e) => updateAIContext({ targetRole: e.target.value })}
                         placeholder="Senior Engineer, VP of Engineering..."
-                        style={{ fontSize: '13px' }}
                       />
                     </div>
                     <div className="form-group">
                       <label className="form-label">Industry Focus</label>
                       <input
                         type="text"
-                        className="form-control"
+                        className={`form-control ${styles.aiFormLabel}`}
                         value={aiContext.industryFocus}
                         onChange={(e) => updateAIContext({ industryFocus: e.target.value })}
                         placeholder="FinTech, HealthTech, AI/ML..."
-                        style={{ fontSize: '13px' }}
                       />
                     </div>
                   </div>

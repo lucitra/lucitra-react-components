@@ -30,7 +30,8 @@ export default [
     peerDepsExternal(),
     resolve({
       browser: true,
-      preferBuiltins: false
+      preferBuiltins: false,
+      extensions: ['.js', '.jsx', '.ts', '.tsx']
     }),
     commonjs(),
     babel({
@@ -74,7 +75,8 @@ export default [
       peerDepsExternal(),
       resolve({
         browser: true,
-        preferBuiltins: false
+        preferBuiltins: false,
+        extensions: ['.js', '.jsx', '.ts', '.tsx']
       }),
       commonjs(),
       babel({

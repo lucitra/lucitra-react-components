@@ -13,10 +13,8 @@
   --font-weight-bold: 700;
   --font-weight-regular: 400;
   --font-weight-black: 900;
-  --font-weight-black-italic: Black Italic;
-  --font-weight-extra-bold: Extra Bold;
-  --font-weight-extra-bold-italic: Extra Bold Italic;
-  --font-weight-italic: Italic;
+  --font-weight-extra-bold: 800;
+  --font-weight-italic: italic;
 
   /* Typography - Font Sizes */
   --font-size-6xs: var(--spacing-unit-8);

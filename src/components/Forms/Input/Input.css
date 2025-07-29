@@ -2,7 +2,7 @@
 .input-container {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--spacing-7xs);
 }
 
 .input-container--full-width {
@@ -11,10 +11,10 @@
 
 /* Input Label */
 .input-label {
-  font-size: var(--typography-sm-regular-font-size);
-  font-weight: var(--typography-sm-semibold-font-weight);
+  font-size: var(--font-size-4xs);
+  font-weight: var(--font-weight-semi-bold);
   color: var(--color-content-Primary);
-  margin-bottom: 4px;
+  margin-bottom: var(--spacing-7xs);
   display: block;
 }
 
@@ -24,7 +24,7 @@
 
 .input-label-required {
   color: var(--color-content-Error);
-  margin-left: 2px;
+  margin-left: var(--spacing-8xs);
 }
 
 /* Input Wrapper */
@@ -41,7 +41,7 @@
   line-height: 1.5;
   color: var(--color-content-Primary);
   background-color: var(--color-background-Primary);
-  border: 2px solid var(--color-border-Tertiary);
+  border: var(--border-width-md) solid var(--color-border-Tertiary);
   transition: all 0.15s ease;
   outline: none;
   width: 100%;
@@ -69,13 +69,13 @@
 
 /* Visual Variants */
 .input--outlined {
-  border: 2px solid var(--color-border-Tertiary);
+  border: var(--border-width-md) solid var(--color-border-Tertiary);
   border-radius: 0;
   background-color: var(--color-background-Primary);
 }
 
 .input--filled {
-  border: 2px solid transparent;
+  border: var(--border-width-md) solid transparent;
   border-radius: 0;
   background-color: var(--color-surface-L0);
   border-bottom: 2px solid var(--color-border-Tertiary);
@@ -107,11 +107,11 @@
 }
 
 .input-icon--start {
-  left: 12px;
+  left: var(--spacing-4xs);
 }
 
 .input-icon--end {
-  right: 12px;
+  right: var(--spacing-4xs);
 }
 
 .input--with-icons.input-icon--start ~ .input {
@@ -158,17 +158,17 @@
 .input-helper {
   font-size: var(--typography-xs-regular-font-size);
   color: var(--color-content-Secondary);
-  margin-top: 4px;
+  margin-top: var(--spacing-7xs);
 }
 
 /* Error Text */
 .input-error {
   font-size: var(--typography-xs-regular-font-size);
   color: var(--color-content-Error);
-  margin-top: 4px;
+  margin-top: var(--spacing-7xs);
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--spacing-7xs);
 }
 
 /* Placeholder */

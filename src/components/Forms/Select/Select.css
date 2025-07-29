@@ -2,7 +2,7 @@
 .select-container {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--spacing-7xs);
 }
 
 .select-container--full-width {
@@ -11,20 +11,20 @@
 
 /* Select Label */
 .select-label {
-  font-size: 14px;
-  font-weight: 500;
-  color: #374151;
-  margin-bottom: 4px;
+  font-size: var(--font-size-4xs);
+  font-weight: var(--font-weight-semi-bold);
+  color: var(--color-content-Primary);
+  margin-bottom: var(--spacing-7xs);
   display: block;
 }
 
 .select-label--required {
-  color: #374151;
+  color: var(--color-content-Primary);
 }
 
 .select-label-required {
-  color: #ef4444;
-  margin-left: 2px;
+  color: var(--color-content-Error);
+  margin-left: var(--spacing-8xs);
 }
 
 /* Select Wrapper */
@@ -37,12 +37,12 @@
 /* Base Select Styles */
 .select {
   font-family: inherit;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #111827;
-  background-color: #ffffff;
-  border: 2px solid #d1d5db;
-  transition: all 0.15s ease;
+  font-size: var(--font-size-4xs);
+  line-height: var(--line-height-md);
+  color: var(--color-content-Primary);
+  background-color: var(--color-background-Primary);
+  border: var(--border-width-md) solid var(--color-border-Tertiary);
+  transition: var(--transition-all);
   outline: none;
   width: 100%;
   box-sizing: border-box;
@@ -53,40 +53,40 @@
 
 /* Size Variants */
 .select--small {
-  padding: 6px 32px 6px 8px;
-  font-size: 12px;
-  min-height: 32px;
+  padding: var(--spacing-6xs) var(--spacing-2xs) var(--spacing-6xs) var(--spacing-5xs);
+  font-size: var(--font-size-5xs);
+  min-height: var(--spacing-2xs);
 }
 
 .select--medium {
-  padding: 8px 40px 8px 12px;
-  font-size: 14px;
-  min-height: 40px;
+  padding: var(--spacing-5xs) var(--spacing-xs) var(--spacing-5xs) var(--spacing-4xs);
+  font-size: var(--font-size-4xs);
+  min-height: var(--spacing-xs);
 }
 
 .select--large {
-  padding: 12px 48px 12px 16px;
-  font-size: 16px;
-  min-height: 48px;
+  padding: var(--spacing-4xs) var(--spacing-sm) var(--spacing-4xs) var(--spacing-3xs);
+  font-size: var(--font-size-3xs);
+  min-height: var(--spacing-sm);
 }
 
 /* Visual Variants */
 .select--outlined {
-  border: 2px solid #d1d5db;
-  border-radius: 0;
-  background-color: #ffffff;
+  border: var(--border-width-md) solid var(--color-border-Tertiary);
+  border-radius: var(--radius-xs);
+  background-color: var(--color-background-Primary);
 }
 
 .select--filled {
-  border: 2px solid transparent;
-  border-radius: 0;
-  background-color: #f9fafb;
-  border-bottom: 2px solid #d1d5db;
+  border: var(--border-width-md) solid transparent;
+  border-radius: var(--radius-xs);
+  background-color: var(--color-background-Hover);
+  border-bottom: var(--border-width-md) solid var(--color-border-Tertiary);
 }
 
 .select--standard {
   border: none;
-  border-bottom: 2px solid #d1d5db;
+  border-bottom: var(--border-width-md) solid var(--color-border-Tertiary);
   border-radius: 0;
   background-color: transparent;
   padding-left: 0;
@@ -100,92 +100,109 @@
 /* Custom Arrow */
 .select-arrow {
   position: absolute;
-  right: 12px;
+  right: var(--spacing-4xs);
   top: 50%;
   transform: translateY(-50%);
-  color: #6b7280;
+  color: var(--color-content-Secondary);
   pointer-events: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.15s ease;
+  transition: var(--transition-all);
 }
 
 .select:focus + .select-arrow {
-  color: #3b82f6;
+  color: var(--color-brand-500);
 }
 
 /* States */
 .select:hover:not(:disabled) {
-  border-color: #9ca3af;
+  border-color: var(--color-border-Secondary);
 }
 
 .select:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 1px #3b82f6;
+  border-color: var(--color-brand-500);
+  box-shadow: 0 0 0 var(--border-width-xs) var(--color-brand-500);
 }
 
 .select:disabled {
-  background-color: #f3f4f6;
-  color: #6b7280;
+  background-color: var(--color-background-Disabled);
+  color: var(--color-content-Disabled);
   cursor: not-allowed;
-  border-color: #e5e7eb;
+  border-color: var(--color-border-Disabled);
 }
 
 .select:disabled + .select-arrow {
-  color: #d1d5db;
+  color: var(--color-content-Disabled);
 }
 
 /* Error State */
 .select--error {
-  border-color: #ef4444;
+  border-color: var(--color-border-Negative);
 }
 
 .select--error:focus {
-  border-color: #ef4444;
-  box-shadow: 0 0 0 1px #ef4444;
+  border-color: var(--color-border-Negative);
+  box-shadow: 0 0 0 var(--border-width-xs) var(--color-border-Negative);
 }
 
 .select--error + .select-arrow {
-  color: #ef4444;
+  color: var(--color-content-Error);
 }
 
 /* Helper Text */
 .select-helper {
-  font-size: 12px;
-  color: #6b7280;
-  margin-top: 4px;
+  font-size: var(--font-size-5xs);
+  color: var(--color-content-Secondary);
+  margin-top: var(--spacing-7xs);
 }
 
 /* Error Text */
 .select-error {
-  font-size: 12px;
-  color: #ef4444;
-  margin-top: 4px;
+  font-size: var(--font-size-5xs);
+  color: var(--color-content-Error);
+  margin-top: var(--spacing-7xs);
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--spacing-7xs);
 }
 
 /* Option Styles */
 .select option {
-  color: #111827;
-  background-color: #ffffff;
-  padding: 8px 12px;
+  color: var(--color-content-Primary);
+  background-color: var(--color-background-Primary);
+  padding: var(--spacing-5xs) var(--spacing-4xs);
 }
 
 .select option:disabled {
-  color: #9ca3af;
-  background-color: #f3f4f6;
+  color: var(--color-content-Disabled);
+  background-color: var(--color-background-Disabled);
 }
 
 /* Focus Visible for Accessibility */
 .select:focus-visible {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
+  outline: var(--border-width-md) solid var(--color-border-Focus);
+  outline-offset: var(--spacing-8xs);
 }
 
 /* Standard variant specific arrow positioning */
 .select--standard + .select-arrow {
   right: 0;
+}
+
+/* Dark theme support */
+[data-theme="dark"] .select--filled {
+  background-color: var(--color-surface-L1);
+}
+
+[data-theme="dark"] .select:focus {
+  box-shadow: 0 0 0 var(--border-width-xs) var(--color-brand-400);
+}
+
+[data-theme="dark"] .select--error:focus {
+  box-shadow: 0 0 0 var(--border-width-xs) var(--color-red-400);
+}
+
+[data-theme="dark"] .select:focus-visible {
+  outline-color: var(--color-brand-400);
 }
