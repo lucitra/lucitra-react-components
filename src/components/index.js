@@ -13,6 +13,10 @@ export {
 // Debug Components
 export * from './Debug'
 
+// Theme Components
+export { default as ThemeToggle } from './Theme/ThemeToggle'
+export { default as DesignTokensEditor } from './Debug/DesignTokensEditor'
+
 // Icon Components  
 export * from './Icons'
 

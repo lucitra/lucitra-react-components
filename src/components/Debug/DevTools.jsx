@@ -8,9 +8,11 @@ import {
   Stack,
   Divider,
   Transition,
+  Tabs,
 } from "@mantine/core";
-import { IconRefresh, IconTrash, IconX, IconCode } from "@tabler/icons-react";
+import { IconRefresh, IconTrash, IconX, IconCode, IconPalette, IconInfoCircle } from "@tabler/icons-react";
 import LucitraIcon from "../Icons/LucitraIcon.jsx";
+import DesignTokensEditor from "./DesignTokensEditor.jsx";
 
 /**
  * DevTools Component
@@ -116,7 +118,7 @@ const DevTools = ({
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [isDragging, dragStart.y, initialPos.y]);
+  }, [isDragging, dragStart.x, dragStart.y, initialPos.y]);
 
   if (isProduction && !showInProduction) {
     return null;
@@ -289,119 +291,171 @@ const DevTools = ({
             </Group>
 
             {/* Content */}
-            <Stack
-              p="md"
-              gap="md"
+            <Tabs
+              defaultValue="info"
               style={{
                 height: "calc(100vh - 60px)",
-                overflowY: "auto",
-                color: "white",
+                display: "flex",
+                flexDirection: "column",
               }}
             >
-              {Object.keys(cleanPackages).length > 0 && (
-                <>
+              <Tabs.List
+                style={{
+                  backgroundColor: "rgba(255, 255, 255, 0.05)",
+                  borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+                }}
+              >
+                <Tabs.Tab
+                  value="info"
+                  leftSection={<IconInfoCircle size={16} />}
+                  style={{ color: "white" }}
+                >
+                  Info
+                </Tabs.Tab>
+                <Tabs.Tab
+                  value="tokens"
+                  leftSection={<IconPalette size={16} />}
+                  style={{ color: "white" }}
+                >
+                  Design Tokens
+                </Tabs.Tab>
+              </Tabs.List>
+
+              <Tabs.Panel value="info" style={{ flex: 1, overflow: "auto" }}>
+                <Stack
+                  p="md"
+                  gap="md"
+                  style={{
+                    height: "100%",
+                    overflowY: "auto",
+                    color: "white",
+                  }}
+                >
+                  {Object.keys(cleanPackages).length > 0 && (
+                    <>
+                      <div>
+                        <Text fw={600} size="sm" c="white" opacity={0.9} mb="xs">
+                          Package Versions:
+                        </Text>
+                        <Stack gap="xs">
+                          {Object.entries(cleanPackages).map(([name, version]) => (
+                            <Group key={name} justify="space-between">
+                              <Text size="xs" c="white" opacity={0.7}>
+                                {name}:
+                              </Text>
+                              <Text size="xs" ff="monospace" c="#4FC3F7" ta="right">
+                                {version}
+                              </Text>
+                            </Group>
+                          ))}
+                        </Stack>
+                      </div>
+                      <Divider color="rgba(255, 255, 255, 0.1)" />
+                    </>
+                  )}
+
                   <div>
                     <Text fw={600} size="sm" c="white" opacity={0.9} mb="xs">
-                      Package Versions:
+                      Environment:
                     </Text>
                     <Stack gap="xs">
-                      {Object.entries(cleanPackages).map(([name, version]) => (
-                        <Group key={name} justify="space-between">
+                      {environment.mode && (
+                        <Group justify="space-between">
                           <Text size="xs" c="white" opacity={0.7}>
-                            {name}:
+                            Mode:
                           </Text>
-                          <Text size="xs" ff="monospace" c="#4FC3F7" ta="right">
-                            {version}
+                          <Text size="xs" ff="monospace" c="#81C784">
+                            {environment.mode}
                           </Text>
                         </Group>
-                      ))}
+                      )}
+                      {environment.baseUrl && (
+                        <Group justify="space-between">
+                          <Text size="xs" c="white" opacity={0.7}>
+                            Base URL:
+                          </Text>
+                          <Text size="xs" ff="monospace" c="#81C784">
+                            {environment.baseUrl}
+                          </Text>
+                        </Group>
+                      )}
+                      <Group justify="space-between">
+                        <Text size="xs" c="white" opacity={0.7}>
+                          Position:
+                        </Text>
+                        <Text size="xs" ff="monospace" c="#CE93D8" tt="capitalize">
+                          {position.side}, {Math.round(position.y)}
+                        </Text>
+                      </Group>
                     </Stack>
                   </div>
+
                   <Divider color="rgba(255, 255, 255, 0.1)" />
-                </>
-              )}
 
-              <div>
-                <Text fw={600} size="sm" c="white" opacity={0.9} mb="xs">
-                  Environment:
-                </Text>
-                <Stack gap="xs">
-                  {environment.mode && (
-                    <Group justify="space-between">
-                      <Text size="xs" c="white" opacity={0.7}>
-                        Mode:
-                      </Text>
-                      <Text size="xs" ff="monospace" c="#81C784">
-                        {environment.mode}
-                      </Text>
-                    </Group>
-                  )}
-                  {environment.baseUrl && (
-                    <Group justify="space-between">
-                      <Text size="xs" c="white" opacity={0.7}>
-                        Base URL:
-                      </Text>
-                      <Text size="xs" ff="monospace" c="#81C784">
-                        {environment.baseUrl}
-                      </Text>
-                    </Group>
-                  )}
-                  <Group justify="space-between">
-                    <Text size="xs" c="white" opacity={0.7}>
-                      Position:
-                    </Text>
-                    <Text size="xs" ff="monospace" c="#CE93D8" tt="capitalize">
-                      {position.side}, {Math.round(position.y)}
-                    </Text>
-                  </Group>
+                  <Stack gap="xs">
+                    <Button
+                      leftSection={<IconRefresh size={14} />}
+                      onClick={onRefresh || defaultRefresh}
+                      variant="light"
+                      color="gray"
+                      size="sm"
+                      fullWidth
+                      styles={{
+                        root: {
+                          backgroundColor: "rgba(255, 255, 255, 0.1)",
+                          color: "white",
+                          border: "1px solid rgba(255, 255, 255, 0.2)",
+                          "&:hover": {
+                            backgroundColor: "rgba(255, 255, 255, 0.15)",
+                          },
+                        },
+                      }}
+                    >
+                      Refresh Page
+                    </Button>
+                    <Button
+                      leftSection={<IconTrash size={14} />}
+                      onClick={onClearCache || defaultClearCache}
+                      variant="light"
+                      color="gray"
+                      size="sm"
+                      fullWidth
+                      styles={{
+                        root: {
+                          backgroundColor: "rgba(255, 255, 255, 0.1)",
+                          color: "white",
+                          border: "1px solid rgba(255, 255, 255, 0.2)",
+                          "&:hover": {
+                            backgroundColor: "rgba(255, 255, 255, 0.15)",
+                          },
+                        },
+                      }}
+                    >
+                      Clear Cache & Reload
+                    </Button>
+                  </Stack>
                 </Stack>
-              </div>
+              </Tabs.Panel>
 
-              <Divider color="rgba(255, 255, 255, 0.1)" />
-
-              <Stack gap="xs">
-                <Button
-                  leftSection={<IconRefresh size={14} />}
-                  onClick={onRefresh || defaultRefresh}
-                  variant="light"
-                  color="gray"
-                  size="sm"
-                  fullWidth
-                  styles={{
-                    root: {
-                      backgroundColor: "rgba(255, 255, 255, 0.1)",
-                      color: "white",
-                      border: "1px solid rgba(255, 255, 255, 0.2)",
-                      "&:hover": {
-                        backgroundColor: "rgba(255, 255, 255, 0.15)",
-                      },
-                    },
+              <Tabs.Panel
+                value="tokens"
+                style={{
+                  flex: 1,
+                  overflow: "hidden",
+                  height: "100%",
+                }}
+              >
+                <div
+                  style={{
+                    height: "100%",
+                    backgroundColor: "white",
+                    color: "var(--color-text-primary)",
                   }}
                 >
-                  Refresh Page
-                </Button>
-                <Button
-                  leftSection={<IconTrash size={14} />}
-                  onClick={onClearCache || defaultClearCache}
-                  variant="light"
-                  color="gray"
-                  size="sm"
-                  fullWidth
-                  styles={{
-                    root: {
-                      backgroundColor: "rgba(255, 255, 255, 0.1)",
-                      color: "white",
-                      border: "1px solid rgba(255, 255, 255, 0.2)",
-                      "&:hover": {
-                        backgroundColor: "rgba(255, 255, 255, 0.15)",
-                      },
-                    },
-                  }}
-                >
-                  Clear Cache & Reload
-                </Button>
-              </Stack>
-            </Stack>
+                  <DesignTokensEditor />
+                </div>
+              </Tabs.Panel>
+            </Tabs>
           </div>
         )}
       </Transition>
