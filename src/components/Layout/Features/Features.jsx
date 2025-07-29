@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Grid, Title, Text, Box, ThemeIcon } from '@mantine/core'
+import { Container, Title, Text, Box, ThemeIcon, SimpleGrid } from '@mantine/core'
 import PropTypes from 'prop-types'
 
 const Features = ({
@@ -10,6 +10,7 @@ const Features = ({
   iconSize = 'lg',
   iconColor = 'blue',
   spacing = 'xl',
+  align = 'center',
   ...props
 }) => {
   return (
@@ -30,16 +31,19 @@ const Features = ({
           </Box>
         )}
 
-        <Grid gutter={spacing}>
+        <SimpleGrid 
+          cols={typeof columns === 'object' ? columns : { base: 1, sm: 2, lg: columns || 3 }}
+          spacing={spacing}
+        >
           {features.map((feature, index) => (
-            <Grid.Col key={feature.key || index} span={columns}>
-              <Box>
+            <Box key={feature.key || index} ta={align}>
                 {feature.icon && (
                   <ThemeIcon
                     size={iconSize === 'lg' ? 60 : iconSize === 'md' ? 48 : 36}
                     radius={iconSize === 'lg' ? 30 : iconSize === 'md' ? 24 : 18}
                     color={feature.iconColor || iconColor}
                     mb="md"
+                    mx={align === 'center' ? 'auto' : undefined}
                   >
                     {React.isValidElement(feature.icon) ? (
                       feature.icon
@@ -75,10 +79,9 @@ const Features = ({
                     {feature.link.text || 'Learn more →'}
                   </Text>
                 )}
-              </Box>
-            </Grid.Col>
+            </Box>
           ))}
-        </Grid>
+        </SimpleGrid>
       </Container>
     </Box>
   )
@@ -114,7 +117,8 @@ Features.propTypes = {
   ]),
   iconSize: PropTypes.oneOf(['sm', 'md', 'lg']),
   iconColor: PropTypes.string,
-  spacing: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  spacing: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  align: PropTypes.oneOf(['left', 'center', 'right'])
 }
 
 export default Features

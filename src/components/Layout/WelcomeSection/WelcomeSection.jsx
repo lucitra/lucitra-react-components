@@ -13,6 +13,7 @@ function WelcomeSection({
   descriptionKey = 'app.description',
   descriptionFallback = 'This is a React SPA template with best practices.',
   className = '',
+  align = 'center',
   ...props 
 }) {
   const { t } = useTranslation()
@@ -23,11 +24,11 @@ function WelcomeSection({
     : description
 
   return (
-    <Stack gap={gap} data-testid="welcome-section" className={className} {...props}>
-      <Title order={titleOrder} data-testid="welcome-heading">
+    <Stack gap={gap} align={align} data-testid="welcome-section" className={className} {...props}>
+      <Title order={titleOrder} ta={align} data-testid="welcome-heading">
         {displayTitle}
       </Title>
-      <Text size={textSize} data-testid="app-description">
+      <Text size={textSize} ta={align} data-testid="app-description">
         {displayDescription}
       </Text>
     </Stack>
@@ -45,6 +46,7 @@ WelcomeSection.propTypes = {
   descriptionKey: PropTypes.string,
   descriptionFallback: PropTypes.string,
   className: PropTypes.string,
+  align: PropTypes.oneOf(['left', 'center', 'right']),
 }
 
 export default WelcomeSection
