@@ -7,6 +7,7 @@
 
 import React, { createContext, useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import './Toast.css';
 // Dynamic import for optional notifications support
 let notifications = null;
 try {
@@ -54,12 +55,8 @@ export const useToast = () => {
           message,
           color,
           icon: IconComponent && <IconComponent size={16} />,
-          style: {
-            border: `2px solid ${color === 'blue' ? '#228be6' : 
-                                 color === 'green' ? '#40c057' :
-                                 color === 'yellow' ? '#fd7e14' : '#fa5252'}`,
-            borderRadius: 0,
-            backgroundColor: 'white'
+          classNames: {
+            root: `toast toast--${variant}`
           },
           ...rest
         });
@@ -93,12 +90,8 @@ export const ToastProvider = ({ children }) => {
       autoClose: duration,
       withCloseButton,
       icon: IconComponent && <IconComponent size={16} />,
-      style: {
-        border: `2px solid ${color === 'blue' ? '#228be6' : 
-                             color === 'green' ? '#40c057' :
-                             color === 'yellow' ? '#fd7e14' : '#fa5252'}`,
-        borderRadius: 0,
-        backgroundColor: 'white'
+      classNames: {
+        root: `toast toast--${variant}`
       },
       ...rest
     });
@@ -151,54 +144,30 @@ export const Toast = ({
   ...props
 }) => {
   const IconComponent = VARIANT_ICONS[variant];
-  const color = VARIANT_COLORS[variant];
+
+  const toastClasses = [
+    'toast',
+    `toast--${variant}`
+  ].filter(Boolean).join(' ');
 
   return (
     <div
-      style={{
-        padding: '12px 16px',
-        border: `2px solid ${color === 'blue' ? '#228be6' : 
-                              color === 'green' ? '#40c057' :
-                              color === 'yellow' ? '#fd7e14' : '#fa5252'}`,
-        borderRadius: 0,
-        backgroundColor: 'white',
-        display: 'flex',
-        alignItems: 'flex-start',
-        gap: '12px',
-        maxWidth: '400px',
-        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
-      }}
+      className={toastClasses}
       {...props}
     >
       {IconComponent && (
-        <IconComponent 
-          size={16} 
-          style={{ 
-            color: color === 'blue' ? '#228be6' : 
-                   color === 'green' ? '#40c057' :
-                   color === 'yellow' ? '#fd7e14' : '#fa5252',
-            marginTop: '2px',
-            flexShrink: 0
-          }} 
-        />
+        <span className="toast__icon">
+          <IconComponent size={16} />
+        </span>
       )}
       
-      <div style={{ flex: 1, minWidth: 0 }}>
+      <div className="toast__content">
         {title && (
-          <div style={{ 
-            fontWeight: 600, 
-            fontSize: '14px',
-            marginBottom: '4px',
-            color: '#000'
-          }}>
+          <div className="toast__title">
             {title}
           </div>
         )}
-        <div style={{ 
-          fontSize: '14px',
-          color: '#666',
-          lineHeight: '1.4'
-        }}>
+        <div className="toast__message">
           {message}
         </div>
       </div>
@@ -206,17 +175,8 @@ export const Toast = ({
       {withCloseButton && onClose && (
         <button
           onClick={onClose}
-          style={{
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            padding: '4px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#666',
-            flexShrink: 0
-          }}
+          className="toast__close"
+          aria-label="Close"
         >
           <IconX size={14} />
         </button>
