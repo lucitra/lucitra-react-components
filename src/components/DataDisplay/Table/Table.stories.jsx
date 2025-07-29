@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Stack, Button, Group, Badge, ActionIcon, Text } from '@mantine/core';
+import { Stack, Button, Group, ActionIcon, Text } from '@mantine/core';
 import { IconEdit, IconTrash, IconEye } from '@tabler/icons-react';
 import { Table } from './Table';
+import { Badge } from '../Badge/Badge';
 
 export default {
   title: 'DataDisplay/Table',
@@ -148,6 +149,7 @@ const customColumns = [
       <Badge 
         variant={value === 'Admin' ? 'error' : value === 'Editor' ? 'warning' : 'neutral'}
         size="sm"
+        style="filled"
       >
         {value}
       </Badge>
@@ -160,6 +162,7 @@ const customColumns = [
       <Badge 
         variant={value === 'active' ? 'success' : value === 'pending' ? 'warning' : 'neutral'}
         size="sm"
+        style="filled"
       >
         {value.charAt(0).toUpperCase() + value.slice(1)}
       </Badge>

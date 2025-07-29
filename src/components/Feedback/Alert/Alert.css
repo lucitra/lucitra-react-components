@@ -1,0 +1,194 @@
+/* Alert Component Styles */
+
+.alert {
+  position: relative;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  border-width: var(--border-width-md);
+  border-style: solid;
+  background-color: var(--color-background-Primary);
+  transition: all 0.2s ease;
+  font-family: var(--font-family-inter);
+}
+
+/* Icon container */
+.alert__icon {
+  display: flex;
+  align-items: flex-start;
+  margin-right: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+/* Content wrapper */
+.alert__content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Title styling */
+.alert__title {
+  font-weight: var(--font-weight-semi-bold);
+  font-size: var(--font-size-2xs);
+  line-height: var(--line-height-2xs);
+  margin-bottom: var(--spacing-7xs);
+}
+
+/* Message body */
+.alert__message {
+  font-size: var(--font-size-3xs);
+  line-height: var(--line-height-3xs);
+  color: var(--color-content-Secondary);
+}
+
+/* Actions container */
+.alert__actions {
+  display: flex;
+  gap: var(--spacing-xs);
+  margin-left: auto;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+
+/* Close button */
+.alert__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-md);
+  height: var(--spacing-md);
+  border-radius: var(--radius-xs);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: calc(var(--spacing-8xs) * -1);
+  margin-right: calc(var(--spacing-6xs) * -1);
+}
+
+.alert__close:hover {
+  background-color: var(--color-background-Hover);
+}
+
+/* Variant styles */
+.alert--info {
+  border-color: var(--color-blue-500);
+  background-color: var(--color-blue-50);
+}
+
+.alert--info .alert__icon,
+.alert--info .alert__title {
+  color: var(--color-blue-600);
+}
+
+.alert--info .alert__close {
+  color: var(--color-blue-600);
+}
+
+.alert--success {
+  border-color: var(--color-green-500);
+  background-color: var(--color-green-50);
+}
+
+.alert--success .alert__icon,
+.alert--success .alert__title {
+  color: var(--color-green-600);
+}
+
+.alert--success .alert__close {
+  color: var(--color-green-600);
+}
+
+.alert--warning {
+  border-color: var(--color-yellow-500);
+  background-color: var(--color-yellow-50);
+}
+
+.alert--warning .alert__icon,
+.alert--warning .alert__title {
+  color: var(--color-yellow-700);
+}
+
+.alert--warning .alert__close {
+  color: var(--color-yellow-700);
+}
+
+.alert--warning .alert__message {
+  color: var(--color-yellow-800);
+}
+
+.alert--error {
+  border-color: var(--color-red-500);
+  background-color: var(--color-red-50);
+}
+
+.alert--error .alert__icon,
+.alert--error .alert__title {
+  color: var(--color-red-600);
+}
+
+.alert--error .alert__close {
+  color: var(--color-red-600);
+}
+
+/* Solid variant */
+.alert--solid.alert--info {
+  background-color: var(--color-blue-500);
+  border-color: var(--color-blue-500);
+}
+
+.alert--solid.alert--info .alert__icon,
+.alert--solid.alert--info .alert__title,
+.alert--solid.alert--info .alert__message,
+.alert--solid.alert--info .alert__close {
+  color: var(--color-primary-White);
+}
+
+.alert--solid.alert--success {
+  background-color: var(--color-green-500);
+  border-color: var(--color-green-500);
+}
+
+.alert--solid.alert--success .alert__icon,
+.alert--solid.alert--success .alert__title,
+.alert--solid.alert--success .alert__message,
+.alert--solid.alert--success .alert__close {
+  color: var(--color-primary-White);
+}
+
+.alert--solid.alert--warning {
+  background-color: var(--color-yellow-500);
+  border-color: var(--color-yellow-500);
+}
+
+.alert--solid.alert--warning .alert__icon,
+.alert--solid.alert--warning .alert__title,
+.alert--solid.alert--warning .alert__message,
+.alert--solid.alert--warning .alert__close {
+  color: var(--color-primary-Black);
+}
+
+.alert--solid.alert--error {
+  background-color: var(--color-red-500);
+  border-color: var(--color-red-500);
+}
+
+.alert--solid.alert--error .alert__icon,
+.alert--solid.alert--error .alert__title,
+.alert--solid.alert--error .alert__message,
+.alert--solid.alert--error .alert__close {
+  color: var(--color-primary-White);
+}
+
+/* Compact size variant */
+.alert--compact {
+  padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.alert--compact .alert__title {
+  font-size: var(--font-size-3xs);
+  margin-bottom: var(--spacing-9xs);
+}
+
+.alert--compact .alert__message {
+  font-size: var(--font-size-4xs);
+}

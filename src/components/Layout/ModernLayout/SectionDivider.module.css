@@ -33,15 +33,15 @@
 }
 
 .spacingSm {
-  margin: 16px 0;
+  margin: var(--spacing-md) 0;
 }
 
 .spacingMd {
-  margin: 32px 0;
+  margin: var(--spacing-xl) 0;
 }
 
 .spacingLg {
-  margin: 48px 0;
+  margin: var(--spacing-2xl) 0;
 }
 
 /* Dark mode adjustments */

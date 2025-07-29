@@ -2,12 +2,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 42px;
+  width: var(--spacing-2xl);
+  height: var(--spacing-xl);
   box-sizing: border-box;
   overflow: hidden;
   cursor: pointer;
-  border: 2px solid transparent;
+  border: var(--border-width-md) solid transparent;
   background-color: transparent;
   transition: all 0.15s ease;
   outline: none;
@@ -20,12 +20,12 @@
 }
 
 .nav-button:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: var(--color-background-Hover);
 }
 
 .nav-button:focus {
-  border-color: #0056b3;
-  outline: 2px solid #0056b3;
+  border-color: var(--color-border-Focus);
+  outline: 2px solid var(--color-border-Focus);
   outline-offset: 2px;
 }
 

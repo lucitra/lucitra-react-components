@@ -1,0 +1,171 @@
+/* Badge Component Styles */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-inter);
+  font-weight: var(--font-weight-semi-bold);
+  transition: all 0.2s ease;
+}
+
+/* Size variants */
+.badge--xs {
+  font-size: var(--font-size-5xs);
+  padding: var(--spacing-9xs) var(--spacing-7xs);
+  min-height: var(--spacing-xs);
+}
+
+.badge--sm {
+  font-size: var(--font-size-4xs);
+  padding: var(--spacing-8xs) var(--spacing-6xs);
+  min-height: var(--spacing-sm);
+}
+
+.badge--md {
+  font-size: var(--font-size-3xs);
+  padding: var(--spacing-7xs) var(--spacing-5xs);
+  min-height: var(--spacing-md);
+}
+
+.badge--lg {
+  font-size: var(--font-size-2xs);
+  padding: var(--spacing-6xs) var(--spacing-4xs);
+  min-height: var(--spacing-lg);
+}
+
+.badge--xl {
+  font-size: var(--font-size-xs);
+  padding: var(--spacing-5xs) var(--spacing-3xs);
+  min-height: var(--spacing-xl);
+}
+
+/* Variant styles using design tokens */
+.badge--primary {
+  background-color: var(--color-background-Primary);
+  color: var(--color-blue-500);
+  border: var(--border-width-md) solid var(--color-blue-500);
+}
+
+.badge--success {
+  background-color: var(--color-background-Primary);
+  color: var(--color-green-500);
+  border: var(--border-width-md) solid var(--color-green-500);
+}
+
+.badge--warning {
+  background-color: var(--color-background-Primary);
+  color: var(--color-yellow-600);
+  border: var(--border-width-md) solid var(--color-yellow-600);
+}
+
+.badge--error {
+  background-color: var(--color-background-Primary);
+  color: var(--color-red-500);
+  border: var(--border-width-md) solid var(--color-red-500);
+}
+
+.badge--info {
+  background-color: var(--color-background-Primary);
+  color: var(--color-cyan-500);
+  border: var(--border-width-md) solid var(--color-cyan-500);
+}
+
+.badge--neutral {
+  background-color: var(--color-background-Primary);
+  color: var(--color-content-Secondary);
+  border: var(--border-width-md) solid var(--color-border-Secondary);
+}
+
+/* Filled variants */
+.badge--primary.badge--filled {
+  background-color: var(--color-blue-500);
+  color: var(--color-primary-White);
+  border-color: var(--color-blue-500);
+}
+
+.badge--success.badge--filled {
+  background-color: var(--color-green-500);
+  color: var(--color-primary-White);
+  border-color: var(--color-green-500);
+}
+
+.badge--warning.badge--filled {
+  background-color: var(--color-yellow-500);
+  color: var(--color-primary-Black);
+  border-color: var(--color-yellow-500);
+}
+
+.badge--error.badge--filled {
+  background-color: var(--color-red-500);
+  color: var(--color-primary-White);
+  border-color: var(--color-red-500);
+}
+
+.badge--info.badge--filled {
+  background-color: var(--color-cyan-500);
+  color: var(--color-primary-White);
+  border-color: var(--color-cyan-500);
+}
+
+.badge--neutral.badge--filled {
+  background-color: var(--color-neutral-500);
+  color: var(--color-primary-White);
+  border-color: var(--color-neutral-500);
+}
+
+/* Subtle variants */
+.badge--primary.badge--subtle {
+  background-color: var(--color-blue-50);
+  color: var(--color-blue-600);
+  border: none;
+}
+
+.badge--success.badge--subtle {
+  background-color: var(--color-green-50);
+  color: var(--color-green-600);
+  border: none;
+}
+
+.badge--warning.badge--subtle {
+  background-color: var(--color-yellow-50);
+  color: var(--color-yellow-700);
+  border: none;
+}
+
+.badge--error.badge--subtle {
+  background-color: var(--color-red-50);
+  color: var(--color-red-600);
+  border: none;
+}
+
+.badge--info.badge--subtle {
+  background-color: var(--color-cyan-50);
+  color: var(--color-cyan-600);
+  border: none;
+}
+
+.badge--neutral.badge--subtle {
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-700);
+  border: none;
+}
+
+/* Badge with icon */
+.badge__icon {
+  margin-right: var(--spacing-8xs);
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Close button for dismissible badges */
+.badge__close {
+  margin-left: var(--spacing-7xs);
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.badge__close:hover {
+  opacity: 1;
+}

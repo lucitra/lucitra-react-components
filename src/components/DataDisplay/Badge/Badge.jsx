@@ -7,50 +7,39 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Badge as MantineBadge } from '@mantine/core';
-
-const VARIANT_COLORS = {
-  primary: 'blue',
-  success: 'green',
-  warning: 'yellow', 
-  error: 'red',
-  info: 'cyan',
-  neutral: 'gray'
-};
+import './Badge.css';
 
 export const Badge = ({
   variant = 'primary',
   size = 'sm',
+  style = 'outline',
   children,
-  color: customColor,
-  radius = 0,
+  className = '',
+  radius,
   ...props
 }) => {
-  const badgeColor = customColor || VARIANT_COLORS[variant];
+  const badgeClasses = [
+    'badge',
+    `badge--${variant}`,
+    `badge--${size}`,
+    style === 'filled' && 'badge--filled',
+    style === 'subtle' && 'badge--subtle',
+    className
+  ].filter(Boolean).join(' ');
+
+  const badgeStyle = {
+    borderRadius: radius || 'var(--radius-sm)',
+    ...props.style
+  };
 
   return (
-    <MantineBadge
-      color={badgeColor}
-      size={size}
-      radius={radius}
-      style={{
-        border: `2px solid ${badgeColor === 'blue' ? 'var(--color-blue-500)' : 
-                              badgeColor === 'green' ? 'var(--color-green-500)' :
-                              badgeColor === 'yellow' ? 'var(--color-yellow-500)' : 
-                              badgeColor === 'red' ? 'var(--color-red-500)' :
-                              badgeColor === 'cyan' ? 'var(--color-cyan-500)' : 'var(--color-neutral-500)'}`,
-        borderRadius: radius === 0 ? 'var(--radius-sm)' : radius,
-        backgroundColor: 'var(--color-background-Primary)',
-        color: badgeColor === 'blue' ? 'var(--color-blue-500)' : 
-               badgeColor === 'green' ? 'var(--color-green-500)' :
-               badgeColor === 'yellow' ? 'var(--color-yellow-500)' : 
-               badgeColor === 'red' ? 'var(--color-red-500)' :
-               badgeColor === 'cyan' ? 'var(--color-cyan-500)' : 'var(--color-neutral-500)'
-      }}
+    <span
+      className={badgeClasses}
+      style={badgeStyle}
       {...props}
     >
       {children}
-    </MantineBadge>
+    </span>
   );
 };
 
@@ -112,10 +101,12 @@ Badge.propTypes = {
   variant: PropTypes.oneOf(['primary', 'success', 'warning', 'error', 'info', 'neutral']),
   /** Badge size */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
+  /** Badge style */
+  style: PropTypes.oneOf(['outline', 'filled', 'subtle']),
   /** Badge content */
   children: PropTypes.node.isRequired,
-  /** Custom color override */
-  color: PropTypes.string,
+  /** Additional CSS class names */
+  className: PropTypes.string,
   /** Border radius */
   radius: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };

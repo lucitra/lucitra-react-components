@@ -7,7 +7,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert as MantineAlert, Group, ActionIcon } from '@mantine/core';
 import { 
   IconInfoCircle, 
   IconAlertTriangle, 
@@ -15,6 +14,7 @@ import {
   IconX,
   IconAlertCircle 
 } from '@tabler/icons-react';
+import './Alert.css';
 
 const VARIANT_ICONS = {
   info: IconInfoCircle,
@@ -23,64 +23,59 @@ const VARIANT_ICONS = {
   error: IconAlertCircle,
 };
 
-const VARIANT_COLORS = {
-  info: 'blue',
-  success: 'green', 
-  warning: 'yellow',
-  error: 'red',
-};
-
 export const Alert = ({
   variant = 'info',
   title,
   children,
   icon: customIcon,
-  color: customColor,
   onClose,
   actions,
   withCloseButton = false,
+  className = '',
+  solid = false,
+  compact = false,
   ...props
 }) => {
   const IconComponent = customIcon || VARIANT_ICONS[variant];
-  const alertColor = customColor || VARIANT_COLORS[variant];
+  
+  const alertClasses = [
+    'alert',
+    `alert--${variant}`,
+    solid && 'alert--solid',
+    compact && 'alert--compact',
+    className
+  ].filter(Boolean).join(' ');
 
   return (
-    <MantineAlert
-      icon={IconComponent && <IconComponent size={16} />}
-      title={title}
-      color={alertColor}
-      style={{
-        border: `2px solid ${alertColor === 'blue' ? 'var(--color-blue-500)' : 
-                              alertColor === 'green' ? 'var(--color-green-500)' :
-                              alertColor === 'yellow' ? 'var(--color-yellow-500)' : 'var(--color-red-500)'}`,
-        borderRadius: 'var(--radius-md)',
-        backgroundColor: 'var(--color-background-Primary)'
-      }}
-      {...props}
-    >
-      <Group justify="space-between" align="flex-start">
-        <div style={{ flex: 1 }}>
-          {children}
+    <div className={alertClasses} {...props}>
+      <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+        {IconComponent && (
+          <div className="alert__icon">
+            <IconComponent size={compact ? 16 : 20} />
+          </div>
+        )}
+        
+        <div className="alert__content">
+          {title && <div className="alert__title">{title}</div>}
+          <div className="alert__message">{children}</div>
         </div>
         
         {(actions || withCloseButton) && (
-          <Group gap="xs" style={{ marginLeft: 'auto' }}>
+          <div className="alert__actions">
             {actions}
             {withCloseButton && onClose && (
-              <ActionIcon
-                variant="subtle"
-                color={alertColor}
+              <button
+                className="alert__close"
                 onClick={onClose}
-                size="sm"
-                style={{ marginTop: '-4px' }}
+                aria-label="Close alert"
               >
                 <IconX size={14} />
-              </ActionIcon>
+              </button>
             )}
-          </Group>
+          </div>
         )}
-      </Group>
-    </MantineAlert>
+      </div>
+    </div>
   );
 };
 
@@ -93,14 +88,18 @@ Alert.propTypes = {
   children: PropTypes.node.isRequired,
   /** Custom icon component */
   icon: PropTypes.elementType,
-  /** Custom color override */
-  color: PropTypes.string,
   /** Close handler function */
   onClose: PropTypes.func,
   /** Action buttons or elements */
   actions: PropTypes.node,
   /** Show close button */
   withCloseButton: PropTypes.bool,
+  /** Additional CSS class names */
+  className: PropTypes.string,
+  /** Use solid background style */
+  solid: PropTypes.bool,
+  /** Use compact spacing */
+  compact: PropTypes.bool,
 };
 
 export default Alert;

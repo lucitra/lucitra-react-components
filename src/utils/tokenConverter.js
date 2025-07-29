@@ -217,7 +217,10 @@ export function generateCSSFromTokens(tokens) {
     if (tokens.font['font-size']) {
       Object.entries(tokens.font['font-size']).forEach(([key, value]) => {
         const sizeValue = value.value || value;
-        css += `  --font-size-${key}: ${resolveTokenValue(sizeValue)}px;\n`;
+        const resolvedValue = resolveTokenValue(sizeValue);
+        // Check if the resolved value already contains 'px' from the token reference
+        const needsPx = !resolvedValue.includes('px') && !resolvedValue.includes('var(');
+        css += `  --font-size-${key}: ${resolvedValue}${needsPx ? 'px' : ''};\n`;
       });
     }
     css += '\n';
@@ -320,7 +323,9 @@ export function generateCSSFromTokens(tokens) {
   if (tokens.unit) {
     Object.entries(tokens.unit).forEach(([key, value]) => {
       const unitValue = value.value || value;
-      css += `  --spacing-unit-${key}: ${unitValue};\n`;
+      // Add 'px' unit to numeric values
+      const finalValue = !isNaN(unitValue) ? `${unitValue}px` : unitValue;
+      css += `  --spacing-unit-${key}: ${finalValue};\n`;
     });
   }
   css += '\n';
