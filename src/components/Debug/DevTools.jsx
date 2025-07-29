@@ -172,15 +172,11 @@ const DevTools = ({
   return (
     <>
       {/* Floating Tab - Always visible */}
-      <Tooltip label="Dev Tools - Click to open, drag to move" position="left">
-        <ActionIcon
+      <Tooltip label="Dev Tools" position="left" withArrow arrowSize={4}>
+        <div
           ref={widgetRef}
           onMouseDown={handleTabMouseDown}
           onClick={handleTabClick}
-          size="lg"
-          radius="xl"
-          variant="filled"
-          color="gray"
           style={{
             position: 'fixed',
             [position.side]: '0px',
@@ -188,11 +184,15 @@ const DevTools = ({
             cursor: isDragging ? 'grabbing' : 'grab',
             transition: isDragging ? 'none' : 'all 0.2s ease',
             zIndex: 9999,
-            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+            width: '40px',
+            height: '40px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
-          <LucitraIcon size={24} />
-        </ActionIcon>
+          <LucitraIcon size={40} />
+        </div>
       </Tooltip>
 
       {/* Content Panel - Only visible when open */}
