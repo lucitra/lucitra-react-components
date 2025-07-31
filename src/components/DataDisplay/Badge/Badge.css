@@ -12,32 +12,37 @@
 /* Size variants */
 .badge--xs {
   font-size: var(--font-size-5xs);
-  padding: var(--spacing-9xs) var(--spacing-7xs);
-  min-height: var(--spacing-xs);
+  padding: var(--spacing-2xs) var(--spacing-xs);
+  min-height: 16px;
+  border-radius: var(--radius-xs);
 }
 
 .badge--sm {
   font-size: var(--font-size-4xs);
-  padding: var(--spacing-8xs) var(--spacing-6xs);
-  min-height: var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  min-height: 20px;
+  border-radius: var(--radius-xs);
 }
 
 .badge--md {
   font-size: var(--font-size-3xs);
-  padding: var(--spacing-7xs) var(--spacing-5xs);
-  min-height: var(--spacing-md);
+  padding: var(--spacing-xs) var(--spacing-md);
+  min-height: 24px;
+  border-radius: var(--radius-sm);
 }
 
 .badge--lg {
   font-size: var(--font-size-2xs);
-  padding: var(--spacing-6xs) var(--spacing-4xs);
-  min-height: var(--spacing-lg);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  min-height: 32px;
+  border-radius: var(--radius-sm);
 }
 
 .badge--xl {
   font-size: var(--font-size-xs);
-  padding: var(--spacing-5xs) var(--spacing-3xs);
-  min-height: var(--spacing-xl);
+  padding: var(--spacing-sm) var(--spacing-xl);
+  min-height: 40px;
+  border-radius: var(--radius-md);
 }
 
 /* Variant styles using design tokens */
@@ -153,14 +158,14 @@
 
 /* Badge with icon */
 .badge__icon {
-  margin-right: var(--spacing-8xs);
+  margin-right: var(--spacing-xs);
   display: inline-flex;
   align-items: center;
 }
 
 /* Close button for dismissible badges */
 .badge__close {
-  margin-left: var(--spacing-7xs);
+  margin-left: var(--spacing-xs);
   cursor: pointer;
   opacity: 0.6;
   transition: opacity 0.2s ease;

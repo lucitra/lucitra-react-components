@@ -69,7 +69,7 @@ const TOKEN_CATEGORIES = {
   spacing: {
     label: "Spacing",
     icon: IconRuler,
-    tokens: ["9xs", "8xs", "7xs", "6xs", "5xs", "4xs", "3xs", "2xs", "xs", "sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "7xl", "8xl", "9xl", "10xl", "11xl", "12xl", "13xl", "14xl", "15xl", "16xl"],
+    tokens: ["2xs", "xs", "sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "7xl", "8xl", "9xl", "10xl"],
   },
   borderRadius: {
     label: "Border Radius",
@@ -437,7 +437,7 @@ const DesignTokensEditor = ({ onThemeChange }) => {
               return (
                 <Group key={space} position="apart" align="center">
                   <Text size="sm" style={{ minWidth: 120 }}>
-                    spacing-{space}
+                    {space}
                   </Text>
                   <TextInput
                     value={computedValue}

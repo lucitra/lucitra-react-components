@@ -611,35 +611,22 @@
   --color-primary-Figma-Background-Gray: #f5f5f5;
   --color-primary-Dark-Orange: #ff8c00;
 
-  /* Spacing */
-  --spacing-2xs: var(--spacing-unit-2);
-  --spacing-3xs: var(--spacing-unit-0);
-  --spacing-4xs: var(--spacing-unit--2);
-  --spacing-5xs: var(--spacing-unit--4);
-  --spacing-6xs: var(--spacing-unit--8);
-  --spacing-7xs: var(--spacing-unit--12);
-  --spacing-8xs: var(--spacing-unit--16);
-  --spacing-9xs: var(--spacing-unit--20);
-  --spacing-xs: var(--spacing-unit-4);
-  --spacing-sm: var(--spacing-unit-8);
-  --spacing-md: var(--spacing-unit-12);
-  --spacing-lg: var(--spacing-unit-16);
-  --spacing-xl: var(--spacing-unit-24);
-  --spacing-2xl: var(--spacing-unit-28);
-  --spacing-3xl: var(--spacing-unit-32);
-  --spacing-4xl: var(--spacing-unit-36);
-  --spacing-5xl: var(--spacing-unit-40);
-  --spacing-6xl: var(--spacing-unit-48);
-  --spacing-7xl: var(--spacing-unit-56);
-  --spacing-8xl: var(--spacing-unit-64);
-  --spacing-9xl: var(--spacing-unit-72);
-  --spacing-10xl: var(--spacing-unit-80);
-  --spacing-11xl: var(--spacing-unit-88);
-  --spacing-12xl: var(--spacing-unit-96);
-  --spacing-13xl: var(--spacing-unit-104);
-  --spacing-14xl: var(--spacing-unit-112);
-  --spacing-15xl: var(--spacing-unit-120);
-  --spacing-16xl: var(--spacing-unit-128);
+  /* Spacing - 4px base grid system */
+  --spacing-2xs: var(--spacing-unit-2);   /* 2px = 0.5 × base */
+  --spacing-xs: var(--spacing-unit-4);    /* 4px = 1 × base */
+  --spacing-sm: var(--spacing-unit-8);    /* 8px = 2 × base */
+  --spacing-md: var(--spacing-unit-12);   /* 12px = 3 × base */
+  --spacing-lg: var(--spacing-unit-16);   /* 16px = 4 × base */
+  --spacing-xl: var(--spacing-unit-20);   /* 20px = 5 × base */
+  --spacing-2xl: var(--spacing-unit-24);  /* 24px = 6 × base */
+  --spacing-3xl: var(--spacing-unit-32);  /* 32px = 8 × base */
+  --spacing-4xl: var(--spacing-unit-40);  /* 40px = 10 × base */
+  --spacing-5xl: var(--spacing-unit-48);  /* 48px = 12 × base */
+  --spacing-6xl: var(--spacing-unit-56);  /* 56px = 14 × base */
+  --spacing-7xl: var(--spacing-unit-64);  /* 64px = 16 × base */
+  --spacing-8xl: var(--spacing-unit-72);  /* 72px = 18 × base */
+  --spacing-9xl: var(--spacing-unit-80);  /* 80px = 20 × base */
+  --spacing-10xl: var(--spacing-unit-96); /* 96px = 24 × base */
   --spacing-unit-1: 1px;
   --spacing-unit-2: 2px;
   --spacing-unit-4: 4px;

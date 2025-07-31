@@ -69,45 +69,55 @@ export const DESIGN_TOKENS = {
   },
 
   spacing: {
-    // Button dimensions
+    // Core spacing scale - 4px base grid
+    scale: {
+      '2xs': 2,   // 0.5 × base
+      'xs': 4,    // 1 × base
+      'sm': 8,    // 2 × base
+      'md': 12,   // 3 × base
+      'lg': 16,   // 4 × base
+      'xl': 20,   // 5 × base
+      '2xl': 24,  // 6 × base
+      '3xl': 32,  // 8 × base
+      '4xl': 40,  // 10 × base
+      '5xl': 48,  // 12 × base
+      '6xl': 56,  // 14 × base
+      '7xl': 64,  // 16 × base
+      '8xl': 72,  // 18 × base
+      '9xl': 80,  // 20 × base
+      '10xl': 96, // 24 × base
+    },
+    
+    // Component-specific spacing (using scale values)
     button: {
       iconSize: {
-        icon: 20,
-        text: 16,
+        icon: 20,  // 5 × base
+        text: 16,  // 4 × base
       },
       size: {
-        width: 48,
-        height: 48,
+        width: 48,  // 12 × base
+        height: 48, // 12 × base
       },
-      gap: 8,
+      gap: 8,     // 2 × base
       padding: {
-        vertical: 8,
-        horizontal: 12,
+        vertical: 8,    // 2 × base
+        horizontal: 12, // 3 × base
       },
     },
     
-    // Menu/Dropdown spacing
+    // Menu/Dropdown spacing (using scale values)
     dropdown: {
       width: 300,
-      offset: 8,
+      offset: 8,     // 2 × base
       maxHeight: 400,
       itemPadding: {
-        vertical: 12,
-        horizontal: 16,
+        vertical: 12,   // 3 × base
+        horizontal: 16, // 4 × base
       },
       sectionPadding: {
-        vertical: 16,
-        horizontal: 16,
+        vertical: 16,   // 4 × base
+        horizontal: 16, // 4 × base
       },
-    },
-    
-    // General spacing scale
-    scale: {
-      xs: 4,
-      sm: 8,
-      md: 16,
-      lg: 24,
-      xl: 32,
     },
   },
 
