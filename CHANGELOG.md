@@ -5,6 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.23.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.22.1...react-components-v0.23.0) (2025-07-31)
+
+
+### Features
+
+* add comprehensive design tokens system with visual editor ([81a6b14](https://github.com/lucitra/lucitra-react-components/commit/81a6b140bf5946d1ef914efce88d7567973f40a8))
+* apply design tokens to Toast component ([451ecbc](https://github.com/lucitra/lucitra-react-components/commit/451ecbc9607325a2209746761c1ec0de7442fca3))
+* **Components:** update Storybook configuration and add new page examples ([84a7296](https://github.com/lucitra/lucitra-react-components/commit/84a7296f0dec9c8e959952ac35c2b250d0695d0d))
+* **Features, WelcomeSection:** enhance layout components with alignment and grid updates ([6e8f684](https://github.com/lucitra/lucitra-react-components/commit/6e8f684acb576fd892057bc7143815059e5d34b3))
+* integrate design tokens and typography utilities into the project ([bb03dc0](https://github.com/lucitra/lucitra-react-components/commit/bb03dc074ad33f6279cf0b1c25d3a309349e2216))
+* **Internationalization:** integrate i18next for language support in Storybook ([de5a9d7](https://github.com/lucitra/lucitra-react-components/commit/de5a9d73826bfb6a1ceaf2e09ea732bbfb851876))
+* **Layout:** introduce modern layout components and design tokens ([351ca67](https://github.com/lucitra/lucitra-react-components/commit/351ca67508d5d4edf0347d6b758cb517a15e0721))
+* **ResumeBuilder:** refactor styles and integrate CSS modules for improved maintainability ([de873e4](https://github.com/lucitra/lucitra-react-components/commit/de873e49afb1bf03193c075c349206c4c2c3952c))
+
+
+### Bug Fixes
+
+* correct import paths in TokenVerification story ([e30367d](https://github.com/lucitra/lucitra-react-components/commit/e30367d35f493508104bceb405995d3e0368d03f))
+
+
+### Styles
+
+* **DevTools:** enhance tooltip and refactor tab component ([495c0ce](https://github.com/lucitra/lucitra-react-components/commit/495c0ce2ddaef07120fa710d6ff4a3a1f08528bf))
+* **DevTools:** enhance UI and interaction features ([e0562f4](https://github.com/lucitra/lucitra-react-components/commit/e0562f4413aa56ef2e1fda9c6ec26230578b472a))
+* **Welcome, LandingPage, Resume:** unify color scheme and improve component styles ([162bded](https://github.com/lucitra/lucitra-react-components/commit/162bded1db2bf3ff271a8dffb7ade72adc78d5df))
+
+
+### Code Refactoring
+
+* apply design tokens throughout component library ([86c35c6](https://github.com/lucitra/lucitra-react-components/commit/86c35c60f4ea061043e8643892536c50832be228))
+* **Badge, DesignTokens:** update badge styles and spacing tokens for consistency ([cc8e001](https://github.com/lucitra/lucitra-react-components/commit/cc8e00137fde5988dedf16a51a8433a3e220a787))
+* **DesignTokensEditor:** update spacing token naming and improve value computation ([be49966](https://github.com/lucitra/lucitra-react-components/commit/be49966fe93994d0af077d983a909aecffc9d26b))
+
 ## [0.22.1](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.22.0...react-components-v0.22.1) (2025-07-26)
 
 
