@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.24.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.23.0...react-components-v0.24.0) (2025-08-01)
+
+
+### Features
+
+* add comprehensive kitchen sink story for all components ([b54c6e4](https://github.com/lucitra/lucitra-react-components/commit/b54c6e4d9f154f45fe3d8aad85278f354af203fd))
+* **StandardLayout:** introduce Standard Layout components and documentation ([9dcb00a](https://github.com/lucitra/lucitra-react-components/commit/9dcb00a1a757fc6bc5bb1e9243cee3865e4aef73))
+
 ## [0.23.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.22.1...react-components-v0.23.0) (2025-07-31)
 
 
