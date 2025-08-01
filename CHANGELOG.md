@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.25.1](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.25.0...react-components-v0.25.1) (2025-08-01)
+
+
+### Miscellaneous Chores
+
+* update package.json to use caret (^) for versioning of dependencies ([1cc4d03](https://github.com/lucitra/lucitra-react-components/commit/1cc4d03145d848e3d114a6800f6db71de2e9e4bd))
+
 ## [0.25.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.24.0...react-components-v0.25.0) (2025-08-01)
 
 
