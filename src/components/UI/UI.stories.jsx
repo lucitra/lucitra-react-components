@@ -21,7 +21,7 @@ import {
   StatusIndicator,
   ModularButton,
   ModularBadge,
-  CodeBlock,
+  ModularCodeBlock as CodeBlock,
   AlertBox,
   ProgressBar,
   TabButton

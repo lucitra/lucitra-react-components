@@ -11,8 +11,7 @@ import {
   StatusIndicator,
   AlertBox,
   ProgressBar,
-} from '../Privacy/UI';
-// Using existing privacy components from the UI system
+} from '../UI';
 
 export default {
   title: 'Components/Animation/Privacy Components Integration',
