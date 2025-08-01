@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.25.0](https://github.com/lucitra/lucitra-react-components/compare/react-components-v0.24.0...react-components-v0.25.0) (2025-08-01)
+
+
+### Features
+
+* add animation system and ui components from privacy-components ([c439024](https://github.com/lucitra/lucitra-react-components/commit/c439024eba20a1a098fe7e0cd2f9b575fe194564))
+
+
+### Bug Fixes
+
+* resolve build issues for v0.25.0 ([95251eb](https://github.com/lucitra/lucitra-react-components/commit/95251ebb830b3695fee2eb35b685e409ebe3cf91))
+* update story imports for renamed components ([d9d1e02](https://github.com/lucitra/lucitra-react-components/commit/d9d1e029dde2bef55b23cdf0621713566156f029))
+
 ## [0.25.0] - 2024-08-01
 
 ### Added
