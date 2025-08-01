@@ -1,0 +1,88 @@
+/* ModularCard Component Styles */
+
+.modular-card {
+  border-radius: var(--radius-md);
+  box-shadow: none;
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+/* Padding variants */
+.modular-card--xs { padding: var(--spacing-xs); }
+.modular-card--sm { padding: var(--spacing-sm); }
+.modular-card--md { padding: var(--spacing-md); }
+.modular-card--lg { padding: var(--spacing-lg); }
+.modular-card--xl { padding: var(--spacing-xl); }
+
+/* Primary variant */
+.modular-card--primary {
+  background-color: var(--color-background-Primary);
+  border: var(--border-width-md) solid var(--color-primary-Black);
+}
+
+/* Secondary variant */
+.modular-card--secondary {
+  background-color: var(--color-surface-L1);
+  border: var(--border-width-sm) solid var(--color-border-Secondary);
+}
+
+/* Accent variant */
+.modular-card--accent {
+  background-color: var(--color-background-Primary);
+  border: var(--border-width-md) solid var(--color-primary-Black);
+  border-left-width: 4px;
+}
+
+/* Status variant (success) */
+.modular-card--status {
+  background-color: var(--color-surface-L1);
+  border: var(--border-width-sm) solid var(--color-border-Tertiary);
+  border-left: 4px solid var(--color-green-500);
+}
+
+/* Warning variant */
+.modular-card--warning {
+  background-color: var(--color-surface-L1);
+  border: var(--border-width-sm) solid var(--color-border-Tertiary);
+  border-left: 4px solid var(--color-yellow-500);
+}
+
+/* Critical variant */
+.modular-card--critical {
+  background-color: var(--color-surface-L1);
+  border: var(--border-width-sm) solid var(--color-border-Tertiary);
+  border-left: 4px solid var(--color-red-500);
+}
+
+/* Hover effects */
+.modular-card--hoverable:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.modular-card--hoverable {
+  cursor: pointer;
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .modular-card--primary {
+  background-color: var(--color-surface-L1);
+  border-color: var(--color-primary-White);
+}
+
+[data-theme="dark"] .modular-card--secondary {
+  background-color: var(--color-surface-L2);
+  border-color: var(--color-border-Secondary);
+}
+
+[data-theme="dark"] .modular-card--accent {
+  background-color: var(--color-surface-L1);
+  border-color: var(--color-primary-White);
+}
+
+[data-theme="dark"] .modular-card--status,
+[data-theme="dark"] .modular-card--warning,
+[data-theme="dark"] .modular-card--critical {
+  background-color: var(--color-surface-L2);
+  border-color: var(--color-border-Secondary);
+}

@@ -1,0 +1,84 @@
+/* CodeBlock Component Styles */
+
+.code-block {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-5xs);
+  color: var(--color-content-Primary);
+  background-color: var(--color-surface-L0);
+  border: var(--border-width-sm) solid var(--color-border-Secondary);
+  border-radius: var(--radius-xs);
+}
+
+/* Variant styles */
+.code-block--inline {
+  display: inline;
+  padding: var(--spacing-8xs) var(--spacing-6xs);
+}
+
+.code-block--block {
+  display: block;
+  padding: var(--spacing-4xs);
+  white-space: pre-wrap;
+  overflow: auto;
+  margin: 0;
+}
+
+.code-block--metric {
+  display: inline-block;
+  padding: var(--spacing-7xs) var(--spacing-5xs);
+  font-weight: var(--font-weight-semi-bold);
+}
+
+.code-block--data {
+  display: block;
+  padding: var(--spacing-5xs);
+  white-space: pre-wrap;
+  max-height: 200px;
+  overflow: auto;
+  margin: 0;
+}
+
+/* Copy button container */
+.code-block__container {
+  position: relative;
+}
+
+.code-block__copy-button {
+  position: absolute;
+  top: var(--spacing-5xs);
+  right: var(--spacing-5xs);
+  background-color: var(--color-background-Primary);
+  border: var(--border-width-sm) solid var(--color-border-Secondary);
+  color: var(--color-content-Primary);
+  font-size: var(--font-size-6xs);
+  padding: var(--spacing-7xs) var(--spacing-5xs);
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  font-weight: var(--font-weight-semi-bold);
+  transition: var(--transition-all);
+}
+
+.code-block__copy-button:hover {
+  background-color: var(--color-background-Hover);
+  border-color: var(--color-border-Primary);
+}
+
+.code-block__copy-button:focus {
+  outline: var(--border-width-md) solid var(--color-border-Focus);
+  outline-offset: 2px;
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .code-block {
+  background-color: var(--color-surface-L1);
+  border-color: var(--color-border-Tertiary);
+}
+
+[data-theme="dark"] .code-block__copy-button {
+  background-color: var(--color-surface-L2);
+  border-color: var(--color-border-Secondary);
+}
+
+[data-theme="dark"] .code-block__copy-button:hover {
+  background-color: var(--color-surface-L0);
+}

@@ -1,0 +1,9 @@
+.stickySection {
+  position: relative;
+  will-change: transform;
+}
+
+.stickySection.sticky {
+  position: sticky;
+  top: 0;
+}

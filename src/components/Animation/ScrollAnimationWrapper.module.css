@@ -1,0 +1,132 @@
+.animationWrapper {
+  will-change: transform, opacity;
+  transition-property: transform, opacity, filter;
+  transition-duration: var(--animation-duration, 0.6s);
+  transition-delay: var(--animation-delay, 0s);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Fade animations */
+.fadeIn {
+  opacity: 0;
+}
+
+.fadeIn.animate {
+  opacity: 1;
+}
+
+.fadeInUp {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.fadeInUp.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fadeInDown {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.fadeInDown.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fadeInLeft {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.fadeInLeft.animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fadeInRight {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.fadeInRight.animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Slide animations */
+.slideInUp {
+  transform: translateY(100%);
+}
+
+.slideInUp.animate {
+  transform: translateY(0);
+}
+
+.slideInDown {
+  transform: translateY(-100%);
+}
+
+.slideInDown.animate {
+  transform: translateY(0);
+}
+
+.slideInLeft {
+  transform: translateX(-100%);
+}
+
+.slideInLeft.animate {
+  transform: translateX(0);
+}
+
+.slideInRight {
+  transform: translateX(100%);
+}
+
+.slideInRight.animate {
+  transform: translateX(0);
+}
+
+/* Scale animations */
+.scaleIn {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.scaleIn.animate {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.scaleInUp {
+  opacity: 0;
+  transform: scale(0.8) translateY(30px);
+}
+
+.scaleInUp.animate {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Rotate animation */
+.rotateIn {
+  opacity: 0;
+  transform: rotate(-10deg) scale(0.9);
+}
+
+.rotateIn.animate {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+/* Blur animation */
+.blur {
+  opacity: 0;
+  filter: blur(10px);
+}
+
+.blur.animate {
+  opacity: 1;
+  filter: blur(0);
+}

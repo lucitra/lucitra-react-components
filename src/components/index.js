@@ -43,3 +43,9 @@ export * from './HubSpot'
 
 // Example Page Compositions
 export * from './Examples'
+
+// Animation Components
+export * from './Animation'
+
+// UI Components (Modular Design System)
+export * from './UI'

@@ -12,6 +12,12 @@ export { ThemeProvider, useTheme } from './providers/ThemeProvider'
 // Hooks
 export { useClickOutside } from './hooks/useClickOutside'
 export { useResumeVersionControl } from './hooks/useResumeVersionControl'
+export { 
+  useScrollAnimation, 
+  useParallax, 
+  useScrollProgress, 
+  useStickyScroll 
+} from './hooks/useScrollAnimation'
 
 // Utils and configs
 export { 

@@ -1,0 +1,90 @@
+/* ModularBadge Component Styles */
+
+.modular-badge {
+  display: inline-block;
+  font-weight: var(--font-weight-semi-bold);
+  font-family: var(--font-family-inter);
+  border-radius: var(--radius-xs);
+  transition: all 0.2s ease;
+  border-width: var(--border-width-sm);
+  border-style: solid;
+}
+
+.modular-badge--uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Size variants */
+.modular-badge--xs {
+  font-size: var(--font-size-5xs);
+  padding: var(--spacing-9xs) var(--spacing-7xs);
+}
+
+.modular-badge--sm {
+  font-size: var(--font-size-4xs);
+  padding: var(--spacing-8xs) var(--spacing-7xs);
+}
+
+.modular-badge--md {
+  font-size: var(--font-size-4xs);
+  padding: var(--spacing-7xs) var(--spacing-6xs);
+}
+
+.modular-badge--lg {
+  font-size: var(--font-size-3xs);
+  padding: var(--spacing-7xs) var(--spacing-md);
+}
+
+/* Variant styles */
+.modular-badge--primary {
+  background-color: var(--color-primary-Black);
+  color: var(--color-primary-White);
+  border-color: var(--color-primary-Black);
+}
+
+.modular-badge--secondary {
+  background-color: var(--color-background-Primary);
+  color: var(--color-content-Primary);
+  border-color: var(--color-border-Secondary);
+}
+
+.modular-badge--outline {
+  background-color: transparent;
+  color: var(--color-content-Primary);
+  border-color: var(--color-border-Primary);
+}
+
+.modular-badge--code {
+  background-color: var(--color-neutral-100);
+  color: var(--color-content-Primary);
+  border-color: var(--color-border-Tertiary);
+  font-family: var(--font-family-roboto), monospace;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.modular-badge--status {
+  background-color: var(--color-neutral-100);
+  color: var(--color-content-Primary);
+  border-color: var(--color-border-Tertiary);
+}
+
+.modular-badge--default {
+  background-color: var(--color-background-Primary);
+  color: var(--color-content-Primary);
+  border-color: var(--color-border-Secondary);
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .modular-badge--primary {
+  background-color: var(--color-primary-White);
+  color: var(--color-primary-Black);
+  border-color: var(--color-primary-White);
+}
+
+[data-theme="dark"] .modular-badge--code,
+[data-theme="dark"] .modular-badge--status {
+  background-color: var(--color-neutral-800);
+  border-color: var(--color-border-Secondary);
+}

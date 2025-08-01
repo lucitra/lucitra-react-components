@@ -1,0 +1,114 @@
+/* StatusIndicator Component Styles */
+
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2xs);
+  background-color: var(--color-background-Primary);
+  border: var(--border-width-sm) solid var(--color-border-Primary);
+  border-radius: var(--radius-sm);
+  font-weight: var(--font-weight-semi-bold);
+  color: var(--color-content-Primary);
+  transition: var(--transition-all);
+}
+
+/* Size variations */
+.status-indicator--xs {
+  padding: var(--spacing-8xs) var(--spacing-6xs);
+  font-size: var(--font-size-6xs);
+}
+
+.status-indicator--sm {
+  padding: var(--spacing-7xs) var(--spacing-5xs);
+  font-size: var(--font-size-5xs);
+}
+
+.status-indicator--md {
+  padding: var(--spacing-6xs) var(--spacing-4xs);
+  font-size: var(--font-size-4xs);
+}
+
+.status-indicator--lg {
+  padding: var(--spacing-5xs) var(--spacing-3xs);
+  font-size: var(--font-size-3xs);
+}
+
+/* Status dot base styles */
+.status-indicator__dot {
+  flex-shrink: 0;
+  transition: var(--transition-all);
+}
+
+.status-indicator--xs .status-indicator__dot {
+  width: var(--spacing-6xs);
+  height: var(--spacing-6xs);
+}
+
+.status-indicator--sm .status-indicator__dot {
+  width: var(--spacing-5xs);
+  height: var(--spacing-5xs);
+}
+
+.status-indicator--md .status-indicator__dot {
+  width: var(--spacing-5xs);
+  height: var(--spacing-5xs);
+}
+
+.status-indicator--lg .status-indicator__dot {
+  width: var(--spacing-4xs);
+  height: var(--spacing-4xs);
+}
+
+/* Status variants */
+.status-indicator--success .status-indicator__dot,
+.status-indicator--healthy .status-indicator__dot,
+.status-indicator--enabled .status-indicator__dot {
+  background-color: var(--color-content-Primary);
+  border-radius: var(--radius-circle);
+}
+
+.status-indicator--warning .status-indicator__dot,
+.status-indicator--moderate .status-indicator__dot,
+.status-indicator--pending .status-indicator__dot {
+  background-color: var(--color-content-Secondary);
+  border-radius: var(--radius-xs);
+}
+
+.status-indicator--error .status-indicator__dot,
+.status-indicator--critical .status-indicator__dot,
+.status-indicator--disabled .status-indicator__dot {
+  background-color: transparent;
+  border: var(--border-width-md) solid var(--color-content-Primary);
+  border-radius: var(--radius-circle);
+}
+
+.status-indicator--info .status-indicator__dot,
+.status-indicator--active .status-indicator__dot {
+  background-color: var(--color-content-Primary);
+  border-radius: var(--radius-xs);
+}
+
+.status-indicator--neutral .status-indicator__dot {
+  background-color: var(--color-content-Tertiary);
+  border-radius: var(--radius-circle);
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .status-indicator {
+  background-color: var(--color-surface-L1);
+  border-color: var(--color-border-Secondary);
+}
+
+[data-theme="dark"] .status-indicator--success .status-indicator__dot,
+[data-theme="dark"] .status-indicator--healthy .status-indicator__dot,
+[data-theme="dark"] .status-indicator--enabled .status-indicator__dot,
+[data-theme="dark"] .status-indicator--info .status-indicator__dot,
+[data-theme="dark"] .status-indicator--active .status-indicator__dot {
+  background-color: var(--color-content-Primary-Inverse);
+}
+
+[data-theme="dark"] .status-indicator--error .status-indicator__dot,
+[data-theme="dark"] .status-indicator--critical .status-indicator__dot,
+[data-theme="dark"] .status-indicator--disabled .status-indicator__dot {
+  border-color: var(--color-content-Primary-Inverse);
+}

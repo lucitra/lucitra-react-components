@@ -1,0 +1,124 @@
+/* ProgressBar Component Styles */
+
+.progress-bar {
+  width: 100%;
+}
+
+/* Label section */
+.progress-bar__label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-8xs);
+  font-size: var(--font-size-4xs);
+  color: var(--color-content-Primary);
+  font-family: var(--font-family-inter);
+}
+
+.progress-bar__label-text {
+  color: var(--color-content-Primary);
+}
+
+.progress-bar__label-value {
+  font-family: var(--font-family-roboto), monospace;
+  font-weight: var(--font-weight-semi-bold);
+  color: var(--color-content-Secondary);
+}
+
+/* Progress container */
+.progress-bar__container {
+  width: 100%;
+  background-color: var(--color-surface-L1);
+  border: var(--border-width-sm) solid var(--color-border-Tertiary);
+  border-radius: var(--radius-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Size variants */
+.progress-bar__container--xs { height: 4px; }
+.progress-bar__container--sm { height: 8px; }
+.progress-bar__container--md { height: 16px; }
+.progress-bar__container--lg { height: 24px; }
+.progress-bar__container--xl { height: 32px; }
+
+/* Progress fill */
+.progress-bar__fill {
+  height: 100%;
+  position: relative;
+  transition: width 0.3s ease;
+}
+
+.progress-bar__fill--no-animation {
+  transition: none;
+}
+
+/* Variant colors */
+.progress-bar__fill--default {
+  background-color: var(--color-primary-Black);
+}
+
+.progress-bar__fill--success {
+  background-color: var(--color-green-500);
+}
+
+.progress-bar__fill--warning {
+  background-color: var(--color-yellow-500);
+}
+
+.progress-bar__fill--error {
+  background-color: var(--color-red-500);
+}
+
+.progress-bar__fill--info {
+  background-color: var(--color-blue-500);
+}
+
+/* Striped pattern */
+.progress-bar__stripes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 4px,
+    rgba(255, 255, 255, 0.3) 4px,
+    rgba(255, 255, 255, 0.3) 8px
+  );
+}
+
+.progress-bar__stripes--animated {
+  animation: progress-stripes 1s linear infinite;
+}
+
+@keyframes progress-stripes {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 0;
+  }
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .progress-bar__container {
+  background-color: var(--color-surface-L2);
+  border-color: var(--color-border-Secondary);
+}
+
+[data-theme="dark"] .progress-bar__fill--default {
+  background-color: var(--color-primary-White);
+}
+
+[data-theme="dark"] .progress-bar__stripes {
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 4px,
+    rgba(0, 0, 0, 0.2) 4px,
+    rgba(0, 0, 0, 0.2) 8px
+  );
+}

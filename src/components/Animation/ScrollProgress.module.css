@@ -1,0 +1,26 @@
+.scrollProgress {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: var(--progress-height);
+  background: var(--progress-background);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.scrollProgress.top {
+  top: 0;
+}
+
+.scrollProgress.bottom {
+  bottom: 0;
+}
+
+.progressBar {
+  height: 100%;
+  width: 100%;
+  background: var(--progress-color);
+  transform: scaleX(var(--progress-value));
+  transform-origin: left;
+  transition: transform 0.1s linear;
+}

@@ -1,0 +1,182 @@
+/* ModularButton Component Styles */
+
+.modular-button {
+  border: none;
+  cursor: pointer;
+  font-weight: var(--font-weight-semi-bold);
+  font-family: var(--font-family-inter);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-7xs);
+  transition: all 0.2s ease;
+  border-radius: var(--radius-sm);
+  position: relative;
+  outline: none;
+}
+
+.modular-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.modular-button--full-width {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Size variants */
+.modular-button--xs {
+  font-size: var(--font-size-4xs);
+  padding: var(--spacing-8xs) var(--spacing-7xs);
+  min-height: var(--spacing-lg);
+}
+
+.modular-button--sm {
+  font-size: var(--font-size-4xs);
+  padding: var(--spacing-7xs) var(--spacing-6xs);
+  min-height: var(--spacing-xl);
+}
+
+.modular-button--md {
+  font-size: var(--font-size-3xs);
+  padding: var(--spacing-7xs) var(--spacing-md);
+  min-height: var(--spacing-2xl);
+}
+
+.modular-button--lg {
+  font-size: var(--font-size-2xs);
+  padding: var(--spacing-6xs) var(--spacing-lg);
+  min-height: var(--spacing-3xl);
+}
+
+/* Variant styles */
+.modular-button--primary {
+  background-color: var(--color-blue-500);
+  color: var(--color-primary-White);
+  border: var(--border-width-md) solid var(--color-blue-500);
+}
+
+.modular-button--primary:hover:not(:disabled) {
+  background-color: var(--color-blue-600);
+  border-color: var(--color-blue-600);
+}
+
+.modular-button--primary:active:not(:disabled) {
+  background-color: var(--color-blue-700);
+  border-color: var(--color-blue-700);
+}
+
+.modular-button--primary.modular-button--active {
+  background-color: var(--color-blue-700);
+  border-color: var(--color-blue-700);
+}
+
+/* Secondary variant */
+.modular-button--secondary {
+  background-color: var(--color-neutral-600);
+  color: var(--color-primary-White);
+  border: var(--border-width-md) solid var(--color-neutral-600);
+}
+
+.modular-button--secondary:hover:not(:disabled) {
+  background-color: var(--color-neutral-700);
+  border-color: var(--color-neutral-700);
+}
+
+.modular-button--secondary:active:not(:disabled) {
+  background-color: var(--color-neutral-800);
+  border-color: var(--color-neutral-800);
+}
+
+.modular-button--secondary.modular-button--active {
+  background-color: var(--color-neutral-700);
+  border-color: var(--color-neutral-700);
+}
+
+/* Outline variant */
+.modular-button--outline {
+  background-color: var(--color-background-Primary);
+  color: var(--color-content-Primary);
+  border: var(--border-width-sm) solid var(--color-border-Secondary);
+}
+
+.modular-button--outline:hover:not(:disabled) {
+  background-color: var(--color-background-Hover);
+  border-color: var(--color-border-Primary);
+}
+
+.modular-button--outline:active:not(:disabled) {
+  background-color: var(--color-background-Pressed);
+  border-color: var(--color-border-Primary);
+}
+
+.modular-button--outline.modular-button--active {
+  background-color: var(--color-primary-Black);
+  color: var(--color-primary-White);
+  border-color: var(--color-primary-Black);
+}
+
+/* Ghost variant */
+.modular-button--ghost {
+  background-color: transparent;
+  color: var(--color-content-Primary);
+  border: var(--border-width-md) solid transparent;
+}
+
+.modular-button--ghost:hover:not(:disabled) {
+  background-color: var(--color-background-Hover);
+}
+
+.modular-button--ghost:active:not(:disabled) {
+  background-color: var(--color-background-Pressed);
+}
+
+/* Tab variant */
+.modular-button--tab {
+  background-color: var(--color-background-Primary);
+  color: var(--color-content-Primary);
+  border: var(--border-width-sm) solid var(--color-border-Tertiary);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+
+.modular-button--tab:hover:not(:disabled) {
+  background-color: var(--color-background-Hover);
+  border-color: var(--color-border-Secondary);
+}
+
+.modular-button--tab.modular-button--active {
+  background-color: var(--color-primary-Black);
+  color: var(--color-primary-White);
+  border-color: var(--color-primary-Black);
+}
+
+/* Link variant */
+.modular-button--link {
+  background-color: transparent;
+  color: var(--color-content-Link);
+  border: none;
+  text-decoration: underline;
+  padding: 0;
+  min-height: auto;
+}
+
+.modular-button--link:hover:not(:disabled) {
+  color: var(--color-content-Link-Hover);
+}
+
+.modular-button--link:active:not(:disabled) {
+  color: var(--color-content-Link-Pressed);
+}
+
+/* Focus states */
+.modular-button:focus-visible {
+  outline: var(--border-width-md) solid var(--color-border-Focus);
+  outline-offset: 2px;
+}
+
+/* Icon spacing */
+.modular-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
