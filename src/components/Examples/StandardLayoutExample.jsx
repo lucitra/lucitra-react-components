@@ -4,9 +4,7 @@ import Button from '../Forms/Button';
 import { Card } from '../DataDisplay/Card';
 import { Text } from '../Typography/Text';
 import { Heading } from '../Typography/Heading';
-import { Grid } from '../Layout/Grid';
-import { Stack } from '../Layout/Stack';
-import { Container } from '../Layout/Container';
+import { Grid, Stack, Container } from '../Layout';
 
 const StandardLayoutExample = () => {
   const Logo = () => (
