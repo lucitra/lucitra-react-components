@@ -2,6 +2,7 @@ import React from "react";
 import HomePage from "./HomePage";
 import LandingPage from "./LandingPage";
 import HubSpotThemeExample from "./HubSpotThemeExample";
+import StandardLayoutExample from "./StandardLayoutExample";
 
 export default {
   title: "Examples/Complete Pages",
@@ -15,6 +16,8 @@ export const HomePageExample = () => <HomePage />;
 export const LandingPageExample = () => <LandingPage />;
 
 export const HubSpotTheme = () => <HubSpotThemeExample />;
+
+export const StandardLayoutPage = () => <StandardLayoutExample />;
 
 // Code preview example showing how to compose pages
 export const CodeExample = () => (

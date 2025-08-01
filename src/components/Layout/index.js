@@ -11,3 +11,6 @@ export { default as Flex, FlexItem } from './Flex'
 
 // Modern Layout Components
 export { PageLayout, PageSection, SectionDivider, ModernContainer } from './ModernLayout'
+
+// Standard Layout Components
+export { StandardPage, StandardPageContainer, StandardHeader, StandardHeroSection } from './StandardLayout'
