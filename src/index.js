@@ -33,6 +33,7 @@ export * from './utils/ssr'
 export { DESIGN_TOKENS } from './design-system/tokens'
 export { BaseButton } from './design-system/components/BaseButton'
 export { Button } from './design-system/components/atoms'
+export * from './design-system'
 
 // Component Categories (for organized imports)
 export * as Navigation from './components/Navigation'
